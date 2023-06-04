@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- vue tree motif de controle -->
+		<record id="account_move_conformity_reason_tree" model="ir.ui.view">
+			<field name="name">account.move.conformity.reason.tree</field>
+			<field name="model">account.move.conformity.reason</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+		<!-- vue formulaire de motif de controle-->
+		<record id="account_move_conformity_reason_form" model="ir.ui.view">
+			<field name="name">account.move.conformity.reason.form</field>
+			<field name="model">account.move.conformity.reason</field>
+			<field name="arch" type="xml">
+				<form>
+				
+					<sheet>
+						<group>
+							<field name="name" />
+							<field name="description"/>
+						</group>
+						
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="activity_ids" widget="mail_activity"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
+				</form>
+			</field>
+		</record>
+		
+	
+	
+	
+	
+		<record model="ir.actions.act_window" id="account_move_conformity_reason_action">
+			<field name="type">ir.actions.act_window</field>
+			<field name="name">Motif de contrôle</field>
+			<field name="res_model">account.move.conformity.reason</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[]</field>
+			<field name="help" type="html">
+				<p>
+					Liste des Motifs de contrôle.
+				</p>
+			</field>
+		</record>
+		
+	  <menuitem id="menu_account_move_conformity_reason"
+        name="Motifs de contrôle"
+        sequence="4"
+        parent="menu_purchase_conventionne_config"
+        action="account_move_conformity_reason_action"/>
+	
+		
+	</data>
+</odoo>

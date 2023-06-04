@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Form -->
+        <record model="ir.ui.view" id="hr_job_inh_form_view">
+            <field name="name">hr.job.form.inh</field>
+            <field name="model">hr.job</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group/field[@name='no_of_recruitment']" position="after">
+                    <field name="delai_traitement_etude_fond"/>
+                    <field name="interne" widget="checkbox"/>
+                </xpath>
+               <!-- <xpath expr="//sheet/div[@name='button_box']" position="before">
+                    <div class="oe_button_box" name="button_box">
+                            <button name="toggle_interne" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="interne" widget="boolean_button" options='{"terminology": "interne"}'/>
+                            </button>
+                        </div>
+                </xpath>-->
+            </field>
+        </record>
+
+        <!-- List -->
+         <record model="ir.ui.view" id="hr_job_inh_tree_view">
+            <field name="name">hr.job.tree.inh</field>
+            <field name="model">hr.job</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="hr.view_hr_job_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='no_of_recruitment']" position="after">
+                    <field name="delai_traitement_etude_fond"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

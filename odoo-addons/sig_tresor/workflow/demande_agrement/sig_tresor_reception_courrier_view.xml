@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- List -->
+        <record id="reception_courrier_tree_view" model="ir.ui.view">
+            <field name="name">sig.tresor.reception.courrier.tree</field>
+            <field name="model">sig.tresor.reception.courrier</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Réception Courrier">
+                    <field name="description"/>
+                    <field name="type_courrier_id"/>
+                    <field name="date_reception"/>
+                    <field name="numero_identification"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="reception_courrier_graph_view" model="ir.ui.view">
+            <field name="name">sig.tresor.reception.courrier.graph</field>
+            <field name="model">sig.tresor.reception.courrier</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <graph string="Demande d'agrément">
+                    <field name="delai"/>
+                    <field name="objectif"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Form -->
+        <record id="reception_courrier_form_view" model="ir.ui.view">
+            <field name="name">sig.tresor.reception.courrier.form</field>
+            <field name="model">sig.tresor.reception.courrier</field>
+            <field name="arch" type="xml">
+                <form string="Réception Courrier">
+                    <header>
+                        <button name="action_enr_dossier" string="Transmettre" type="object"
+                                class="oe_highlight"
+                                states="draft" groups="sig_tresor.courrier_group"/>
+                        <button name="action_trans_dossier_a_directrice" string="Transmettre" type="object"
+                                class="oe_highlight" states="enr_dossier" groups="sig_tresor.secretariat_group"/>
+                        <button name="action_imput_dossier_au_sda" string="Imputer" type="object"
+                                class="oe_highlight" states="trans_dossier_a_directrice"
+                                groups="sig_tresor.direction_group"/>
+                        <button name="action_imput_dossier_au_chief_sae"
+                                string="Imputer" type="object"
+                                class="oe_highlight" states="imput_dossier_au_sda"
+                                groups="sig_tresor.sous_direction_agrement_group"/>
+                        <button name="action_imput_dossier_a_agent_sae" string="Imputer"
+                                type="object"
+                                class="oe_highlight" states="imput_dossier_au_chief_sae"
+                                groups="sig_tresor.autorisation_exercer_group"/>
+
+                        <button name="action_cancelled" string="Annuler" invisible="1" type="object"
+                                class="btn btn-secondary o_form_button_cancel"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <label for="description" class="oe_edit_only"/>
+                        <h1>
+                            <field name="description" class="oe_inline" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </h1>
+                        <field name="user" invisible="1"/>
+                        <field name="nom_courrier" invisible="1"/>
+                        <field name="etape" invisible="1"/>
+                        <field name="nom_complement_dossier" invisible="1"/>
+
+                        <group colspan="4" col="4" attrs="{'invisible':[('etape','!=','recep_enr_dossier')]}">
+                            <field name="type_courrier_id" colspan="2"
+                                   attrs="{'readonly':[('state','!=','draft')], 'required': [('state', '=', 'draft'), ('etape', '=', 'recep_enr_dossier')]}"/>
+                            <field name="date_reception" colspan="2"
+                                   attrs="{'readonly':[('state','!=','draft')], 'required': [('state', '=', 'draft'), ('etape', '=', 'recep_enr_dossier')]}"/>
+                            <field name="numero_identification" colspan="2"
+                                   attrs="{'readonly':[('state','!=','draft')], 'required': [('state', '=', 'draft'), ('etape', '=', 'recep_enr_dossier')]}"/>
+                            <field name="courrier" filename="nom_courrier" colspan="2"
+                                   attrs="{'readonly':[('state','!=','draft')], 'required': [('state', '=', 'draft'), ('etape', '=', 'recep_enr_dossier')]}"/>
+                            <field name="date_reception_secretariat" colspan="2"
+                                   attrs="{'invisible':[('state','!=','enr_dossier')], 'required': [('state', '=', 'enr_dossier'), ('etape', '=', 'recep_enr_dossier')]}"/>
+                            <field name="numero_identification_secretariat" colspan="2"
+                                   attrs="{'invisible':[('state','!=','enr_dossier')], 'required': [('state', '=', 'enr_dossier'), ('etape', '=', 'recep_enr_dossier')]}"/>
+                            <field name="assigne_a" colspan="2"
+                                   attrs="{'invisible':[('state','!=','imput_dossier_au_chief_sae')], 'required': [('state', '=', 'imput_dossier_au_chief_sae'), ('etape', '=', 'recep_enr_dossier')]}"/>
+                        </group>
+
+                        <group colspan="4" col="4" attrs="{'invisible':[('etape','!=','etude_forme')]}">
+                            <field name="type_courrier_complément_dossier_id" colspan="2"
+                                   attrs="{'readonly':[('state','!=','draft')], 'required': [('state', '=', 'draft'), ('etape', '=', 'etude_forme')]}"/>
+                            <field name="date_reception_complement_dossier" colspan="2"
+                                   attrs="{'readonly':[('state','!=','draft')], 'required': [('state', '=', 'draft'), ('etape', '=', 'etude_forme')]}"/>
+                            <field name="numero_identification_complement_dossier" colspan="2"
+                                   attrs="{'readonly':[('state','!=','draft')], 'required': [('state', '=', 'draft'), ('etape', '=', 'etude_forme')]}"/>
+                            <field name="complement_dossier" filename="nom_complement_dossier" colspan="2"
+                                   attrs="{'readonly':[('state','!=','draft')], 'required': [('state', '=', 'draft'), ('etape', '=', 'etude_forme')]}"/>
+                            <field name="date_reception_secretariat_complement_dossier" colspan="2"
+                                   attrs="{'invisible':[('state','!=','enr_dossier')], 'required': [('state', '=', 'enr_dossier'), ('etape', '=', 'etude_forme')]}"/>
+                            <field name="numero_identification_secretariat_complement_dossier" colspan="2"
+                                   attrs="{'invisible':[('state','!=','enr_dossier')], 'required': [('state', '=', 'enr_dossier'), ('etape', '=', 'etude_forme')]}"/>
+                            <field name="assigne_a" colspan="2"
+                                   attrs="{'invisible':[('state','!=','imput_dossier_au_chief_sae')], 'required': [('state', '=', 'imput_dossier_au_chief_sae'), ('etape', '=', 'etude_forme')]}"/>
+                        </group>
+
+                        <group colspan="4" col="4" attrs="{'invisible':[('etape','!=','etude_fond')]}">
+                            <field name="type_courrier_courrier_bceao_id" colspan="2"
+                                   attrs="{'readonly':[('state','!=','draft')], 'required': [('state', '=', 'draft'), ('etape', '=', 'etude_fond')]}"/>
+                            <field name="date_reception_courrier_bceao" colspan="2"
+                                   attrs="{'readonly':[('state','!=','draft')], 'required': [('state', '=', 'draft'), ('etape', '=', 'etude_fond')]}"/>
+                            <field name="numero_identification_courrier_bceao" colspan="2"
+                                   attrs="{'readonly':[('state','!=','draft')], 'required': [('state', '=', 'draft'), ('etape', '=', 'etude_fond')]}"/>
+                            <field name="courrier_bceao" filename="nom_courrier_bceao" colspan="2"
+                                   attrs="{'readonly':[('state','!=','draft')], 'required': [('state', '=', 'draft'), ('etape', '=', 'etude_fond')]}"/>
+                            <field name="date_reception_secretariat_courrier_bceao" colspan="2"
+                                   attrs="{'invisible':[('state','!=','enr_dossier')], 'required': [('state', '=', 'enr_dossier'), ('etape', '=', 'etude_fond')]}"/>
+                            <field name="numero_identification_secretariat_courrier_bceao" colspan="2"
+                                   attrs="{'invisible':[('state','!=','enr_dossier')], 'required': [('state', '=', 'enr_dossier'), ('etape', '=', 'etude_fond')]}"/>
+                            <field name="assigne_a" colspan="2"
+                                   attrs="{'invisible':[('state','!=','imput_dossier_au_chief_sae')], 'required': [('state', '=', 'imput_dossier_au_chief_sae'), ('etape', '=', 'etude_fond')]}"/>
+                        </group>
+
+                        <notebook attrs="{'invisible':[('state','!=','trans_dossier_a_directrice')]}">
+                            <page string="Instruction">
+                                <field name="instruction_directrice" nolabel="1"/>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- crée une action de plu dans le menu action lorsqu'on clique sur les données -->
+        <act_window id="act_recep_courrier_wizard" name="Etude de forme"
+                    src_model="sig.tresor.reception.courrier"
+                    res_model="sig.tresor.verif.conformite.dossier"
+                    key2="client_action_multi" target="new"
+                    view_type="form"
+                    view_mode="tree,form"/> <!-- value="'ir.actions.act_window,' + str(ref('action_etude_forme_trans_courrier_au_demandeur_view'))" key = "action" -->
+
+        <!-- action menu enregistrement du dossier -->
+        <record model="ir.actions.act_window" id="action_enr_dossier_view">
+            <field name="name">Transmettre au Sécretariat</field>
+            <field name="res_model">sig.tresor.reception.courrier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'graph', 'view_id': ref('reception_courrier_graph_view')}),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('reception_courrier_tree_view')})]"/>
+            <field name="domain">[('state','in',['draft','enr_dossier','trans_dossier_a_directrice','imput_dossier_au_sda','imput_dossier_au_chief_sae','imput_dossier_a_agent_sae'])]
+            </field>
+        </record>
+
+        <!-- menu enregistrement du dossier  -->
+        <menuitem name="Transmettre au Sécretariat" id="enr_dossier_menu" sequence="1010"
+                  parent="reception_courrier_menu"
+                  action="action_enr_dossier_view" groups="sig_tresor.courrier_group"/>
+
+        <!-- action menu transmission du dossier à la Directrice -->
+        <record model="ir.actions.act_window" id="trans_dossier_a_directrice_view">
+            <field name="name">Transmettre à la Direction</field>
+            <field name="res_model">sig.tresor.reception.courrier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+                        <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'graph', 'view_id': ref('reception_courrier_graph_view')}),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('reception_courrier_tree_view')})]"/>
+            <!--<field name="domain">[('state','in',['enr_dossier'])]</field>-->
+            <field name="domain">
+                [('state','in',['draft','enr_dossier','trans_dossier_a_directrice','imput_dossier_au_sda','imput_dossier_au_chief_sae','imput_dossier_a_agent_sae'])]
+            </field>
+        </record>
+        <!-- menu Imputation du dossier à la Directrice  -->
+        <menuitem name="Transmettre à la Directrice" id="trans_dossier_a_directrice_menu" sequence="1011"
+                  parent="reception_courrier_menu"
+                  action="trans_dossier_a_directrice_view" groups="sig_tresor.secretariat_group"/>
+
+        <!-- action menu Imputation du dossier au SDA -->
+        <record model="ir.actions.act_window" id="imput_dossier_au_sda_view">
+            <field name="name">Imputer au SDA</field>
+            <field name="res_model">sig.tresor.reception.courrier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+                        <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'graph', 'view_id': ref('reception_courrier_graph_view')}),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('reception_courrier_tree_view')})]"/>
+            <!--<field name="domain">[('state','in',['trans_dossier_a_directrice'])]</field>-->
+            <field name="domain">
+                [('state','in',['draft','enr_dossier','trans_dossier_a_directrice','imput_dossier_au_sda','imput_dossier_au_chief_sae','imput_dossier_a_agent_sae'])]
+            </field>
+        </record>
+        <!-- menu Imputation du dossier au SDA  -->
+        <menuitem name="Imputer au SDA" id="imput_dossier_au_sda_menu" sequence="1012"
+                  parent="reception_courrier_menu"
+                  action="imput_dossier_au_sda_view" groups="sig_tresor.direction_group"/>
+
+        <!-- action menu Imputation du dossier au Chef de Service SAE -->
+        <record model="ir.actions.act_window" id="imput_dossier_au_chief_sae_view">
+            <field name="name">Imputer au Chef du Service SAE</field>
+            <field name="res_model">sig.tresor.reception.courrier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+                        <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'graph', 'view_id': ref('reception_courrier_graph_view')}),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('reception_courrier_tree_view')})]"/>
+            <!--<field name="domain">[('state','in',['imput_dossier_au_sda'])]</field>-->
+            <field name="domain">
+                [('state','in',['draft','enr_dossier','trans_dossier_a_directrice','imput_dossier_au_sda','imput_dossier_au_chief_sae','imput_dossier_a_agent_sae'])]
+            </field>
+        </record>
+        <!-- menu Imputation du dossier au Chef du Service SAE  -->
+        <menuitem name="Imputer au Chef du Service SAE" id="imput_dossier_au_chief_sae_menu"
+                  sequence="1013"
+                  parent="reception_courrier_menu"
+                  action="imput_dossier_au_chief_sae_view" groups="sig_tresor.sous_direction_agrement_group"/>
+
+        <!-- action menu Imputation du dossier à un agent SAE -->
+        <record model="ir.actions.act_window" id="imput_dossier_a_agent_sae_view">
+            <field name="name">Imputer à un agent du Service SAE</field>
+            <field name="res_model">sig.tresor.reception.courrier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+                        <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'graph', 'view_id': ref('reception_courrier_graph_view')}),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('reception_courrier_tree_view')})]"/>
+            <!-- <field name="domain">[('state','=','imput_dossier_au_chief_sae'),('assigne_a','=', uid)]</field>-->
+            <field name="domain">
+                [('state','in',['draft','enr_dossier','trans_dossier_a_directrice','imput_dossier_au_sda','imput_dossier_au_chief_sae','imput_dossier_a_agent_sae'])]
+            </field>
+        </record>
+        <!-- menu Imputation du dossier à un agent SAE  -->
+        <menuitem name="Imputer à un agent du Service SAE" id="imput_dossier_a_agent_sae_menu" sequence="1014"
+                  parent="reception_courrier_menu"
+                  action="imput_dossier_a_agent_sae_view" groups="sig_tresor.autorisation_exercer_group"/>
+    </data>
+</odoo>

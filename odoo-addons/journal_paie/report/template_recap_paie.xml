@@ -1,0 +1,191 @@
+<odoo>
+
+    <record id="paperformat_journal_paie_report" model="report.paperformat">
+        <field name="name">Time Off Summary</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">30</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">20</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <report id="recap_report"
+            model="payroll.recap.report.wizard"
+            string="Report Journal paie"
+            report_type="qweb-pdf"
+            name="journal_paie.payroll_recap_report_view"
+            file="journal_paie_employee"
+            paperformat="paperformat_journal_paie_report"/>
+    />
+
+
+    <template id="external_layout_journal_paie">
+        <t t-if="not o" t-set="o" t-value="doc" />
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+
+        <div class="header row"/>
+        <div class="article o_report_layout_standard">
+            <t t-call="web.address_layout" />
+            <t t-raw="0" />
+        </div>
+        <div class="footer o_standard_footer"/>
+    </template>
+
+
+    <template id="payroll_recap_report_view">
+        <t t-call="web.html_container">
+            <div class="header text-center">
+                <h2  style="margin-bottom: 32px;">
+                    <b>JOURNAL DE PAIE</b>
+                </h2>
+                <h5 class="text-center">
+                    <t t-foreach="res" t-as="r">
+                        <span style="font-size: 17px;text-align: center;Font-Weight: 900;" t-esc="r['title']"/>
+                    </t>
+                </h5>
+            </div>
+
+            <div class="article">
+                <t t-set="total" t-value="0"/>
+                <t t-set="total_brut" t-value="0"/>
+                <t t-set="total_cnss" t-value="0"/>
+                <t t-set="total_cimpo" t-value="0"/>
+                <t t-set="total_irpp" t-value="0"/>
+                <t t-set="total_net" t-value="0"/>
+                <t t-set="total_cnssp" t-value="0"/>
+                <t t-set="total_css" t-value="0"/>
+                <t t-set="total_av" t-value="0"/>
+                <t t-set="total_pret" t-value="0"/>
+                <t t-set="total_net_to_pay" t-value="0"/>
+                <table class="table table-condensed table-bordered" style="width: 100%">
+                    <thead>
+                        <tr style="font-size: 17px;text-align: center;Font-Weight: 900;background: lightgrey;">
+                            <td>N°</td>
+                            <td>CIN</td>
+                            <td>MAT. CNSS</td>
+                            <td>EMPLOYÉ</td>
+                            <td>BASE</td>
+                            <td>BRUT</td>
+                            <td>CNSS</td>
+                            <td>CNSS P</td>
+                            <td>IMPOSABLE</td>
+                            <td>IRPP</td>
+                            <td>CSS</td>
+                            <td>NET</td>
+                            <td>AV</td>
+                            <td>PRÊT</td>
+                            <td>NET À PAYER</td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <t t-foreach="data" t-as="d">
+                            <tr>
+                                <td><span t-esc="d['ligne']"/></td>
+                                <td><span t-esc="d['matricule']"/></td>
+                                <td><span t-if="d['matricule_cnss']" t-esc="d['matricule_cnss']"/></td>
+                                <td class="text-center"><span t-esc="d['nom_prenom']"/></td>
+                                <td style="text-align: right;">
+                                    <span t-esc="d['base']" t-options='{"widget": "float", "precision": 3}'/>
+                                    <t t-set="total" t-value="total+d['base']"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <span t-esc="d['brut']" t-options='{"widget": "float", "precision": 3}'/>
+                                    <t t-set="total_brut" t-value="total_brut+d['brut']"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <span t-esc="d['cnss']" t-options='{"widget": "float", "precision": 3}'/>
+                                    <t t-set="total_cnss" t-value="total_cnss+d['cnss']"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <span t-esc="d['cnss_p']" t-options='{"widget": "float", "precision": 3}'/>
+                                    <t t-set="total_cnssp" t-value="total_cnssp+d['cnss_p']"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <span t-esc="d['salaire_impo']" t-options='{"widget": "float", "precision": 3}'/>
+                                    <t t-set="total_cimpo" t-value="total_cimpo+d['salaire_impo']"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <span t-esc="d['irpp']" t-options='{"widget": "float", "precision": 3}'/>
+                                    <t t-set="total_irpp" t-value="total_irpp+d['irpp']"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <span t-esc="d['css']" t-options='{"widget": "float", "precision": 3}'/>
+                                    <t t-set="total_css" t-value="total_css+d['css']"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <span t-esc="d['net_salary']" t-options='{"widget": "float", "precision": 3}'/>
+                                    <t t-set="total_net" t-value="total_net+d['net_salary']"/>
+                                    <!--                                    <t t-set="total_net" t-value="total_cimpo-total_irpp"/>-->
+                                </td>
+                                <td style="text-align: right;">
+                                    <span t-esc="d['amount_avance']" t-options='{"widget": "float", "precision": 3}'/>
+                                    <t t-set="total_av" t-value="total_av+d['amount_avance']"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <span t-esc="d['amount_loan']" t-options='{"widget": "float", "precision": 3}'/>
+                                    <t t-set="total_pret" t-value="total_pret+d['amount_loan']"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <span t-esc="d['net_salary_to_pay']" t-options='{"widget": "float", "precision": 3}'/>
+                                    <t t-set="total_net_to_pay" t-value="total_net_to_pay+d['net_salary_to_pay']"/>
+                                </td>
+                            </tr>
+
+                        </t>
+
+                        <tr style="font-size: 17px;text-align: right;Font-Weight: 900;background: lightgrey;">
+                            <td colspan="4">TOTAL</td>
+                            <td><span t-esc="total" t-options='{"widget": "float", "precision": 3}'/></td>
+                            <td><span t-esc="total_brut" t-options='{"widget": "float", "precision": 3}'/></td>
+                            <td><span t-esc="total_cnss" t-options='{"widget": "float", "precision": 3}'/></td>
+                            <td><span t-esc="total_cnssp" t-options='{"widget": "float", "precision": 3}'/></td>
+                            <td><span t-esc="total_cimpo" t-options='{"widget": "float", "precision": 3}'/></td>
+                            <td><span t-esc="total_irpp" t-options='{"widget": "float", "precision": 3}'/></td>
+                            <td><span t-esc="total_css" t-options='{"widget": "float", "precision": 3}'/></td>
+                            <td><span t-esc="total_net" t-options='{"widget": "float", "precision": 3}'/></td>
+                            <td><span t-esc="total_av" t-options='{"widget": "float", "precision": 3}'/></td>
+                            <td><span t-esc="total_pret" t-options='{"widget": "float", "precision": 3}'/></td>
+                            <td><span t-esc="total_net_to_pay" t-options='{"widget": "float", "precision": 3}'/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="footer">
+                <div class="row text-center" style="border-top: 1px solid black;">
+                    <div class="col col-3 offset-9 text-right">
+                        <ul class="list-inline mt-2">
+                            <li class="list-inline-item">Page:</li>
+                            <li class="list-inline-item">
+                                <span class="page"/>
+                            </li>
+                            <li class="list-inline-item">/</li>
+                            <li class="list-inline-item">
+                                <span class="topage"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+ 
+<template id="purchase_agreement_report">
+<t t-call="web.html_container">
+
+       <t t-foreach="docs" t-as="o">
+      
+       
+            <div class="page" style="border: 2px solid black;">
+            
+ 				<t t-call="spc_contrat_purchase.external_layout_standard">
+       <t t-set="title">
+        
+           <t t-esc="o.agreement_titre"></t>
+        </t>
+        <t t-set="num">
+        
+           <t t-esc="o.name"></t>
+        </t>
+        <t t-set="origin">
+        
+           <t t-esc="o.origin"></t>
+        </t>
+             
+             <br/> <br/><br/> <br/>
+              
+                <center><strong style="text-align:center;">ENTRE :</strong></center>
+                <br/><br/>
+                <strong>
+                    La Mutuelle de l’Electricité et du Gaz (ci-après dénommé (MEG), dont le siège
+					est sis au 38 rue Kamel Atatûrk – 1001 Tunis ; représentée par son président
+					Monsieur <span t-esc="o.pdg.name"></span> ;
+                </strong>
+                <br/><br/><br/><br/>
+                 <center><strong style="text-align:center;">ET</strong></center>
+                  <br/><br/><br/><br/>
+                  <t t-if="o.type_conventionne=='physique'">
+                   <div><strong>L' <span> <span t-esc="o.categorie_conventione_id.name" /> </span>  </strong> <strong> <span t-esc="o.hr_employee_id.name"></span></strong></div>
+				   <br/>
+				   <div><strong>Matricule n° </strong><strong t-esc="o.matricule"/></div>
+                   </t>
+                    <t t-if="o.type_conventionne!='physique'">
+				    <div><strong>La <span> <span t-esc="o.categorie_conventione_id.name" /> </span> du </strong> <strong> <span t-esc="o.vendor_id.name"></span></strong></div>
+				    <br/>
+				     <div><strong>Représentée par Mr </strong> <strong t-esc="o.contact_id.name"/></div>
+				  <br/>
+				  <div><strong>Sis au  </strong><strong> <span t-esc="o.vendor_id.street"></span></strong></div>
+				  <br/>
+				   <div><strong>Matricule fiscal n° </strong><strong t-esc="o.vendor_id.matricule_fiscale"/></div>
+				  </t>
+				  
+				  
+                  
+               
+               
+                
+               
+                <br/> <br/> <br/><br/> <br/> <br/>
+     	<t t-value="0" t-set="seq" />
+            <t t-foreach="o.article_ids.sorted(key=lambda r: r.sequence, reverse=False)" t-as="line" >
+            <div style="border: 1px solid black;height:3%">
+            
+             <t t-if="line.article_id.type =='article'"><strong >Article <t t-esc='line.sequence'/></strong><strong>:</strong>
+             <t t-value="seq+1" t-set="seq"/>
+             </t>
+             <strong t-esc='line.article_id.name'></strong><t t-if="line.article_id.type !='article'"><strong>:</strong></t>
+          
+             </div>
+             <strong t-raw='line.description'/>
+            
+            </t>
+            
+             
+            <p style="page-break-after: always;"/>
+            <br/><br/>
+            <strong> La présente convention comportant <span t-esc="seq" ></span> articles, hors annexes, est établie en
+		six (6) exemplaires.</strong>
+		<br/><br/>
+            <table  style="width:100%" >
+            <tr><td style="border: 1px solid black;width:50%">
+	      
+				<p style="text-align:center;font-family: Calibri; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 17.6px;">Le Président de La Mutuelle
+de l’Electricité et du Gaz</p>
+				<br/> 
+				<p style="text-align:center;font-family: Calibri; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 17.6px;"> <span t-esc="o.pdg.name"/></p>
+	            <br/> <br/> 
+				<p style="font-weight: Calibri ;text-align:center;font-size:14px">Fait à Tunis le : . . . . . . . . . . . . . . . . . . . . .</p>
+             <br/> <br/>
+           </td>
+          <td style="border: 1px solid black;width:50%;float: right;">
+          <t t-if="o.type_conventionne=='physique'">
+				<p style="text-align:center;font-family: Calibri; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 17.6px;">L' <span t-esc="o.categorie_conventione_id.name" /> </p>
+				<br/> <br/>
+				<p style="text-align:center;font-family: Calibri; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 17.6px;"> <span t-esc="o.hr_employee_id.name"></span></p>
+			</t>
+			<t t-if="o.type_conventionne!='physique'">	
+				<p style="text-align:center;font-family: Calibri; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 17.6px;">La <span t-esc="o.categorie_conventione_id.name" /> </p>
+				<br/> <br/>
+				<p style="text-align:center;font-family: Calibri; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 17.6px;"> <span t-esc="o.vendor_id.name"></span></p>
+				</t>
+                <br/> <br/> 
+         		<p style="font-weight: Calibri ;text-align:center;font-size:14px">Fait à Tunis le : . . . . . . . . . . . . . . . . . . . .</p> 
+         		  <br/> <br/>
+            </td>
+            </tr>
+    	</table> 
+     
+    	
+		</t>
+		
+		 </div>
+		</t>
+		
+		</t>
+</template>
+
+
+
+<template id="external_layout_standard">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+         
+   <div class="header" >
+        <style>
+        .table-header > thead > tr > th {
+			border:1px solid black !important;
+			text-align: center !important;
+			
+			}
+                        
+              .table-header td {
+                         text-align: center !important;
+						border-right:1px solid black !important;
+						line-height:20px !important;
+                        }          
+        
+        </style>
+        <table class="table table-header" >
+	                <thead>
+		                <tr>
+			                <th align="center" width="13%" rowspan="2"><img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 85px;" alt="Logo"/></th>
+			                <th align="center" width="50%" rowspan="2"><h3><strong t-esc='title'></strong></h3></th>
+			                <th align="center"  width="37%"><strong>N°: </strong><strong   t-esc="num"> </strong></th>
+		                </tr>
+		                <tr>
+		                	<th align="center" width="37%"><strong t-esc="origin"></strong></th>
+		                </tr>
+	                </thead>
+                </table>
+       </div>
+        <div class="o_report_layout_standard"  >
+            <t t-call="web.address_layout"/>
+            <t t-raw="0"/>
+        </div>
+     
+        
+    </template>
+
+
+
+    
+   <record id="paperformat_euro" model="report.paperformat">
+	      <field name="name">European A4</field>
+	      <field name="default" eval="True" />
+	      <field name="format">A4</field>
+	      <field name="page_height">0</field>
+	      <field name="page_width">0</field>
+	      <field name="orientation">Portrait</field>
+	      <field name="margin_top">35</field>
+	      <field name="margin_bottom">5</field>
+	      <field name="margin_left">15</field>
+	      <field name="margin_right">15</field>
+	      <field name="header_line" eval="False" />
+	      <field name="header_spacing">25</field>
+	      <field name="dpi">90</field>
+	    </record>
+
+
+ 
+     <report string="Contrat de convention"
+			 id="report_purchase_agreement"
+			 model="purchase.agreement"
+			 report_type="qweb-pdf"
+			 name="spc_contrat_purchase.purchase_agreement_report"
+			 file="spc_contrat_purchase.purchase_agreementt_report"
+			 paperformat="spc_contrat_purchase.paperformat_euro"
+			 print_report_name="'Convention N° %s' % (object.name)"
+			 menu="False" 
+            />
+</odoo>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <data>
+      
+         <record id="view_partner_inherit_form" model="ir.ui.view">
+         <field name="name">res.partner.inherit</field>
+         <field name="model">res.partner</field>
+         <field name="inherit_id" ref="base.view_partner_form" />
+         <field name="arch" type="xml">
+			<xpath expr="//field[@name='vat']" position="before">
+			   <field name="is_medecin" invisible="1" />
+               <field name="type_medecin_id" domain="[('type','=','medecin')]" widget="selection" attrs="{'invisible': [('is_medecin', '=', False)],
+               										   'required':[('is_medecin', '=', True)],}" />
+            </xpath>
+            
+         </field>
+      </record>
+        <record id="action_partner_medecin_form" model="ir.actions.act_window">
+            <field name="name">Médecin</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="domain">[('is_medecin','=',1),
+                                  ('type_conventionne','=','liberale'),
+                                  ('type_partner','=','conventionne')]</field>
+            <field name="context">{'default_is_medecin':1,
+            					  'default_type_conventionne':'liberale',
+            					  'default_type_partner':'conventionne',
+            					  'default_type_medecin':'medecin'}</field>
+            <field name="filter" eval="True"/>
+        </record>
+      
+      <menuitem
+            id="menu_medecin_root"
+            name="Médecin"
+            action="action_partner_medecin_form"
+            parent="contacts.menu_contacts"
+            sequence="1"/>   
+            
+            
+     <record id="action_partner_vacataires_form" model="ir.actions.act_window">
+            <field name="name">Vacataires</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="domain">[('is_vacataires','=',1),
+                                  ('type_conventionne','=','liberale'),
+                                  ('type_partner','=','conventionne')]</field>
+            <field name="context">{'default_is_vacataires':1,
+            					  'default_type_conventionne':'liberale',
+            					  'default_type_partner':'conventionne',
+            					  'default_type_medecin':'vacataire'}</field>
+            <field name="filter" eval="True"/>
+        </record>
+      
+      <menuitem
+            id="menu_vacataires_root"
+            name="Vacataires"
+            action="action_partner_vacataires_form"
+            parent="contacts.menu_contacts"
+            sequence="1"/> 
+            
+            
+       <record id="view_res_partner_filter" model="ir.ui.view">
+        <field name="name">view.res.partner.filter.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="is_medecin"/>
+                <field name="is_vacataires"/>
+                <field name="type_medecin_id" />
+            </field>
+            <filter name="type_company" position="after">
+             <separator/>
+                <filter string="Médecin" name="medecin" domain="[('is_medecin', '=', True)]"/>
+                <filter string="Pharmacie" name="pharmacie" domain="[('type_conventionne', '=','liberale'),('type_partner', '=','conventionne'),('is_medecin','=',False),('is_vacataires', '=', False)]"/>
+                <filter string="Vacataire" name="vacataire" domain="[('is_vacataires', '=', True)]"/>
+               <separator/>  
+            </filter>
+              <filter name="salesperson" position="after">
+             <filter name="type_medecin_id" string="Spécialité"  context="{'group_by' : 'type_medecin_id'}"/>
+             
+             </filter>
+        </field>
+    </record>             
+      
+   </data>
+</odoo>

@@ -1,0 +1,792 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spc_leaves
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0-20210208\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-12 06:28+0000\n"
+"PO-Revision-Date: 2021-03-12 06:28+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spc_leaves
+#: model:mail.template,body_html:spc_leaves.email_template_leave_rejection
+msgid ""
+"\n"
+"            <div style=\"padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777\">\n"
+"                <table cellspacing=\"0\" cellpadding=\"0\" style=\"width:600px;border-collapse:collapse;background:inherit;color:inherit\">\n"
+"                    <tbody><tr>\n"
+"                        <td valign=\"center\" width=\"200\" style=\"padding:10px 10px 10px 5px;font-size: 12px\">\n"
+"                            <img src=\"/logo.png\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" alt=\"${user.company_id.name}\">\n"
+"                        </td>\n"
+"                    </tr></tbody>\n"
+"                </table>\n"
+"            </div>\n"
+"            <div style=\"padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777\">\n"
+"            <p>Cher ${object.employee_id.name},</p>\n"
+"                <p>\n"
+"                   Votre congé est <strong>refusé</strong>. Cordialement.\n"
+"                </p>\n"
+"                <p>\n"
+"                 Pour voir les détails, cliquez sur le lien suivant:\n"
+"                </p>\n"
+"                 % set url_detail = '/web#id=%s&view_type=form&model=hr.leave' % (object.id)\n"
+"\n"
+"                <div style=\"text-align: center; margin-top: 16px;\">\n"
+"                     <a href=\"${url_detail}\" style=\"padding: 5px 10px; font-size: 12px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B; border-radius:3px\">View details</a>\n"
+"                </div>\n"
+"                <p>Meilleures salutations,</p>\n"
+"            </div>\n"
+"            <div style=\"padding:0px;width:600px;margin:auto; margin-top: 10px; background: #fff repeat top /100%;color:#777777\">\n"
+"               \n"
+"                <p style=\"font-size: 11px; margin-top: 10px;\">\n"
+"                    <strong>Envoyé par ${user.company_id.name}</strong>\n"
+"                </p>\n"
+"            </div>"
+msgstr ""
+
+#. module: spc_leaves
+#: model:mail.template,body_html:spc_leaves.email_template_leave_for_approve
+msgid ""
+"\n"
+"           <div style=\"padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777\">\n"
+"                <table cellspacing=\"0\" cellpadding=\"0\" style=\"width:600px;border-collapse:collapse;background:inherit;color:inherit\">\n"
+"                    <tbody><tr>\n"
+"                        <td valign=\"center\" width=\"200\" style=\"padding:10px 10px 10px 5px;font-size: 12px\">\n"
+"                            <img src=\"/logo.png\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" alt=\"${user.company_id.name}\">\n"
+"                        </td>\n"
+"                    </tr></tbody>\n"
+"                </table>\n"
+"            </div>\n"
+"            <div style=\"padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777\">\n"
+"            <p>Cher ${object.employee_id.parent_id.display_name},</p>\n"
+"                <p>\n"
+"                   Vous avez été affecté au congé <strong> ${object.display_name}</strong>. En attente d'approbation.\n"
+"                </p>\n"
+"                <p>\n"
+"                    Pour voir les détails, cliquez sur le lien suivant:\n"
+"                </p>\n"
+"                 % set url_detail = '/web#id=%s&view_type=form&model=hr.leave' % (object.id)\n"
+"\n"
+"                <div style=\"text-align: center; margin-top: 16px;\">\n"
+"                     <a href=\"${url_detail}\" style=\"padding: 5px 10px; font-size: 12px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B; border-radius:3px\">Voir les détails</a>\n"
+"                </div>\n"
+"                <p>Meilleures salutations,</p>\n"
+"            </div>\n"
+"            <div style=\"padding:0px;width:600px;margin:auto; margin-top: 10px; background: #fff repeat top /100%;color:#777777\">\n"
+"               \n"
+"                <p style=\"font-size: 11px; margin-top: 10px;\">\n"
+"                    <strong>Envoyé par ${user.company_id.name}</strong>\n"
+"                </p>\n"
+"            </div>\n"
+"            "
+msgstr ""
+
+#. module: spc_leaves
+#: model:mail.template,body_html:spc_leaves.email_template_leave_approve
+msgid ""
+"\n"
+"    <div style=\"padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777\">\n"
+"        <table cellspacing=\"0\" cellpadding=\"0\" style=\"width:600px;border-collapse:collapse;background:inherit;color:inherit\">\n"
+"            <tbody><tr>\n"
+"                <td valign=\"center\" width=\"200\" style=\"padding:10px 10px 10px 5px;font-size: 12px\">\n"
+"                    <img src=\"/logo.png\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" alt=\"${user.company_id.name}\">\n"
+"                </td>\n"
+"            </tr></tbody>\n"
+"        </table>\n"
+"    </div>\n"
+"    <div style=\"padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777\">\n"
+"    <p>Cher ${object.employee_id.name},</p>\n"
+"        <p>\n"
+"           Votre congé est <strong>approuvé</strong>. On espère que vous reviendrez bientôt.</p>\n"
+"        <p>\n"
+"            Pour voir les détails, cliquez sur le lien suivant:\n"
+"        </p>\n"
+"         % set url_detail = '/web#id=%s&view_type=form&model=hr.leave' % (object.id)\n"
+"\n"
+"        <div style=\"text-align: center; margin-top: 16px;\">\n"
+"             <a href=\"${url_detail}\" style=\"padding: 5px 10px; font-size: 12px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B; border-radius:3px\">View details</a>\n"
+"        </div>\n"
+"        <p>Meilleures salutations,</p>\n"
+"    </div>\n"
+"    <div style=\"padding:0px;width:600px;margin:auto; margin-top: 10px; background: #fff repeat top /100%;color:#777777\">\n"
+"       \n"
+"        <p style=\"font-size: 11px; margin-top: 10px;\">\n"
+"            <strong>Envoyé par ${user.company_id.name}</strong>\n"
+"        </p>\n"
+"    </div>"
+msgstr ""
+
+#. module: spc_leaves
+#: code:addons/spc_leaves/models/hr_leave.py:0
+#, python-format
+msgid "%s : %.2f days"
+msgstr "%s : %.2f jours"
+
+#. module: spc_leaves
+#: code:addons/spc_leaves/models/hr_leave.py:0
+#, python-format
+msgid "%s : %.2f hours"
+msgstr "%s : %.2f heures"
+
+#. module: spc_leaves
+#: code:addons/spc_leaves/models/hr_leave.py:0
+#, python-format
+msgid "%s on %s : %.2f hours"
+msgstr "%s sur %s : %.2f heures"
+
+#. module: spc_leaves
+#: code:addons/spc_leaves/models/hr_leave.py:0
+#, python-format
+msgid "%s on %s: %.2f days"
+msgstr "%s sur %s: %.2f jours"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.update_res_config_settings_view_form_holiday
+msgid ""
+"<span class=\"ml8\">\n"
+"\t\t\t\t\t\tHeures\n"
+"\t\t\t\t\t</span>"
+msgstr ""
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_approve_form
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_form
+msgid "<span class=\"ml8\">Hours</span>"
+msgstr "<span class=\"ml8\">Heures</span>"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_allocation_view_form_manager
+msgid "<span class=\"ml8\">of time off every</span>"
+msgstr "<span class=\"ml8\">chaque</span>"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_allocation_view_form_manager
+msgid "<span>Add</span>"
+msgstr "<span>Ajouter</span>"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation__accrual_method
+msgid "Accrual Method"
+msgstr "Méthode de cumul de solde"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation__interval_number
+msgid "Accrual Period Duration"
+msgstr ""
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation__interval_unit
+msgid "Accrual Period Unit"
+msgstr ""
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_allocation_accruement_view_form
+msgid "Accruement"
+msgstr "Accumulation"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation_accruement__accrued_on
+msgid "Accruement Date"
+msgstr "Date d'accumulation"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation__accruement_ids
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_allocation_accruement_view_tree
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_allocation_view_form
+msgid "Accruements"
+msgstr "Accumulations"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation__unit_per_interval
+msgid "Allocation Unit"
+msgstr ""
+
+#. module: spc_leaves
+#: model:ir.model.fields,help:spc_leaves.field_hr_leave_allocation__number_per_interval
+msgid "Allocation accrued per Accrual Period, measured in Allocation Units"
+msgstr "Allocation accumulée par période d'accumulation"
+
+#. module: spc_leaves
+#: code:addons/spc_leaves/models/hr_leave_allocation.py:0
+#, python-format
+msgid "Allocation of %s : %.2f day(s) to %s"
+msgstr "Allocation de %s: %.2f jour(s) à %s"
+
+#. module: spc_leaves
+#: code:addons/spc_leaves/models/hr_leave_allocation.py:0
+#, python-format
+msgid "Allocation of %s : %.2f hour(s) to %s"
+msgstr "Allocation de %s: %.2f heure(s) à %s"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation__number_per_interval
+msgid "Allocation per Accrual Period"
+msgstr ""
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_approve_form
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_form
+#: model_terms:ir.ui.view,arch_db:spc_leaves.outgoing_authorization_view_approve_tree
+#: model_terms:ir.ui.view,arch_db:spc_leaves.outgoing_authorization_view_tree
+msgid "Approve"
+msgstr "Approuver"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.view_hr_holidays_filter_outgoing
+msgid "Approved Outgoing Authorization"
+msgstr "Les autorisation de sortie approvées"
+
+#. module: spc_leaves
+#: model:ir.model.fields.selection,name:spc_leaves.selection__hr_leave_allocation__accrual_method__period_start
+msgid "At the beginning of the period"
+msgstr "Au début de la période"
+
+#. module: spc_leaves
+#: model:ir.model.fields.selection,name:spc_leaves.selection__hr_leave_allocation__accrual_method__period_end
+msgid "At the end of the period"
+msgstr "À la fin de la période"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_allocation_accruement_view_tree
+msgid "Balance"
+msgstr "Solde"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation__accrual_limit
+msgid "Balance limit"
+msgstr "Limite du solde"
+
+#. module: spc_leaves
+#: model:hr.leave.type,name:spc_leaves.holiday_status_breastfeeding
+msgid "Breastfeeding Leave"
+msgstr "Allaitement"
+
+#. module: spc_leaves
+#: model:hr.leave.type,name:spc_leaves.holiday_status_cl_comp_leave
+msgid "Compensatory Days"
+msgstr "Jours de compensation"
+
+#. module: spc_leaves
+#: model:ir.model,name:spc_leaves.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de config"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_approve_form
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_form
+msgid "Confirm"
+msgstr "Confirmer"
+
+#. module: spc_leaves
+#: model:mail.template,subject:spc_leaves.email_template_leave_approve
+msgid "Congé approuvé - ${object.display_name}"
+msgstr "Congé Approuvé - ${object.display_name}"
+
+#. module: spc_leaves
+#: model_terms:ir.actions.act_window,help:spc_leaves.action_outgoing_to_request
+msgid "Create a new outgoing authorization request"
+msgstr "Créer une nouvelle demande d'autorisation de sortie"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation_accruement__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation_accruement__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: spc_leaves
+#: model:mail.template,subject:spc_leaves.email_template_leave_for_approve
+msgid "Demande de congé pour ${object.employee_id.display_name } "
+msgstr ""
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation_accruement__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_approve_form
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_form
+msgid "Duration"
+msgstr "Durée"
+
+#. module: spc_leaves
+#: model:ir.model.fields,help:spc_leaves.field_hr_leave_allocation__interval_number
+msgid "Duration of a single accrual period, measured in Accrual Period Units"
+msgstr ""
+"Durée d'une seule période d'accumulation, mesurée en unités de période "
+"d'accumulation"
+
+#. module: spc_leaves
+#: code:addons/spc_leaves/models/hr_leave_allocation.py:0
+#, python-format
+msgid "End-of-period accruement"
+msgstr "Fin de la période de cumul"
+
+#. module: spc_leaves
+#: model:ir.ui.menu,name:spc_leaves.hr_meunu_exit_request_outgoing_authorization
+msgid "Exit authorization requests"
+msgstr "Demandes d'autorisations de sortie"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_res_config_settings__nb_hours_authorization_month
+msgid "Exit authorization threshold per day"
+msgstr "Seuil d'autorisation de sortie par jour"
+
+#. module: spc_leaves
+#: model:ir.ui.menu,name:spc_leaves.hr_meunu_to_approve_outing_authorization_all
+msgid "Exit authorizations"
+msgstr "Autorisations de sortie"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_approve_form
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_form
+msgid "From"
+msgstr "De"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation_accruement__id
+msgid "ID"
+msgstr ""
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_allocation_view_form_manager
+msgid "If no value set, runs indefinitely"
+msgstr "Tourne indéfiniment si aucune valeur n'est indiquée"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_approve_form
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_form
+msgid "In"
+msgstr "Dans"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave__unpaid
+#: model:ir.model.fields,field_description:spc_leaves.field_resource_calendar_leaves__unpaid
+msgid "Is Unpaid"
+msgstr "Non-payé"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave__is_outgoing
+msgid "Is outgoing"
+msgstr ""
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave__time_type
+msgid "Kind of Leave"
+msgstr "Type de congé"
+
+#. module: spc_leaves
+#: code:addons/spc_leaves/models/hr_leave_allocation.py:0
+#, python-format
+msgid "La date de début de cumul doit être antérieure à la date de fin"
+msgstr ""
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation_accruement____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation_accruement__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation_accruement__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation_accruement__leave_allocation_id
+msgid "Leave Allocation"
+msgstr "Allocation de congé"
+
+#. module: spc_leaves
+#: model:mail.template,subject:spc_leaves.email_template_leave_rejection
+msgid "Leave Rejected - ${object.display_name}"
+msgstr "Congé Refusé - ${object.display_name}"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.outgoing_authorization_view_approve_tree
+#: model_terms:ir.ui.view,arch_db:spc_leaves.outgoing_authorization_view_tree
+msgid "Leave Requests"
+msgstr "Demandes de congé"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.update_res_config_settings_view_form_holiday
+msgid "Leaves"
+msgstr "Congés"
+
+#. module: spc_leaves
+#: model:ir.model,name:spc_leaves.model_hr_leave_allocation_accruement
+msgid "Leaves Allocation Accruement"
+msgstr "Cumul des allocations de congé"
+
+#. module: spc_leaves
+#: model:hr.leave.type,name:spc_leaves.holiday_status_outing_birthofchild
+msgid "Legal-Birth Of a Child"
+msgstr "Naissance d'un enfant"
+
+#. module: spc_leaves
+#: model:hr.leave.type,name:spc_leaves.holiday_status_outing_circ
+msgid "Legal-Circumcision of a child"
+msgstr "Circoncision d'un enfant\t"
+
+#. module: spc_leaves
+#: model:hr.leave.type,name:spc_leaves.holiday_status_outing_death
+msgid "Legal-Death of a father, mother or son"
+msgstr "Mort d'un père ,mère ou fils"
+
+#. module: spc_leaves
+#: model:hr.leave.type,name:spc_leaves.holiday_status_outing_death2
+msgid ""
+"Legal-Death of brother, sister, grandson or granddaughter, grandfather or "
+"grandmother"
+msgstr ""
+"Mort d'un frère, sœur, petit-fils ou petite-fille, grand-père ou grand-mère"
+
+#. module: spc_leaves
+#: model:hr.leave.type,name:spc_leaves.holiday_status_outing_deathofspouse
+msgid "Legal-Death of spouse"
+msgstr "Mort d'un époux ou épouse"
+
+#. module: spc_leaves
+#: model:hr.leave.type,name:spc_leaves.holiday_status_outing_marriage2
+msgid "Legal-Worker child marriage"
+msgstr "Mariage d'un fils ou d'une fille"
+
+#. module: spc_leaves
+#: model:hr.leave.type,name:spc_leaves.holiday_status_outing_marriage
+msgid "Legal-Worker marriage"
+msgstr "Mariage"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation__limit_accrued_days
+msgid "Limit Number of Days Accrued"
+msgstr "Limiter le nombre de jours accumulés"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation__limit_carryover_days
+msgid "Limit Number of Days to Carryover"
+msgstr "Limiter le nombre de jours à reporter"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation__limit_accumulated_days
+msgid "Limit Total Balance"
+msgstr "Limiter le solde total"
+
+#. module: spc_leaves
+#: model:ir.model.fields,help:spc_leaves.field_hr_leave_allocation__limit_accrued_days
+msgid "Limit total maximum number of days accrued in one accrual period."
+msgstr ""
+"Limiter le nombre total maximal de jours accumulés dans une période "
+"d'accumulation."
+
+#. module: spc_leaves
+#: model:ir.model.fields,help:spc_leaves.field_hr_leave_allocation__limit_accumulated_days
+msgid "Limit total maximum number of days that can be accumulated."
+msgstr "Limite le nombre total maximum de jours pouvant être accumulés."
+
+#. module: spc_leaves
+#: model:ir.model.fields,help:spc_leaves.field_hr_leave_allocation__limit_carryover_days
+msgid ""
+"Limit total maximum number of days to carryover to next accrual period."
+msgstr ""
+"Limiter le nombre total maximal de jours à reporter à la prochaine période "
+"d'accumulation."
+
+#. module: spc_leaves
+#: code:addons/spc_leaves/models/hr_leave_allocation.py:0
+#, python-format
+msgid "Loss due to accrued amount limit"
+msgstr "Perte due à la limite de montant cumulé"
+
+#. module: spc_leaves
+#: code:addons/spc_leaves/models/hr_leave_allocation.py:0
+#, python-format
+msgid "Loss due to accumulation limit"
+msgstr "Perte due à la limite d'accumulation"
+
+#. module: spc_leaves
+#: code:addons/spc_leaves/models/hr_leave_allocation.py:0
+#, python-format
+msgid "Loss due to period carry-over limit"
+msgstr "Perte due à la limite de report de période"
+
+#. module: spc_leaves
+#: model:hr.leave.type,name:spc_leaves.holiday_status_outing_maternity
+msgid "Maternity Leaves"
+msgstr "Maternité"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation__max_accrued_days
+msgid "Max Number of Days Accrued"
+msgstr "Nombre maximum de jours cumulés"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation__max_carryover_days
+msgid "Max Number of Days to Carryover"
+msgstr "Nombre maximal de jours à reporter"
+
+#. module: spc_leaves
+#: model:ir.model.fields,help:spc_leaves.field_hr_leave_allocation__accrual_limit
+msgid "Maximum of allocation for accrual; 0 means no maximum."
+msgstr "Allocation maximum pour le cumul; 0 voulant dire infini."
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.outgoing_authorization_view_approve_tree
+#: model_terms:ir.ui.view,arch_db:spc_leaves.outgoing_authorization_view_tree
+msgid "Mode"
+msgstr ""
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.view_hr_holidays_filter_outgoing
+msgid "My Department Outgoing Authorization"
+msgstr "Les autorisation de sortie de mon département"
+
+#. module: spc_leaves
+#: model:ir.ui.menu,name:spc_leaves.hr_meunu_new_request_outing_authorization
+msgid "New request"
+msgstr "Nouvelle demande"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation_accruement__days_accrued
+msgid "Number of Days"
+msgstr "Nombre de jours"
+
+#. module: spc_leaves
+#: code:addons/spc_leaves/models/hr_leave_allocation.py:0
+#, python-format
+msgid "Only accrual allocations can be recalculated"
+msgstr "Seules les allocations de régularisation peuvent être récalculées"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.view_hr_holidays_filter_outgoing
+msgid "Outgoing"
+msgstr "Sortants"
+
+#. module: spc_leaves
+#: model:ir.actions.act_window,name:spc_leaves.action_outgoing_to_approve
+#: model:ir.actions.act_window,name:spc_leaves.action_outgoing_to_request
+#: model:ir.ui.menu,name:spc_leaves.hr_meunu_outgoing_authorization
+msgid "Outgoing Authorization"
+msgstr "Autorisations de sortie"
+
+#. module: spc_leaves
+#: model:hr.leave.type,name:spc_leaves.holiday_status_outing_authorization
+msgid "Outing Authorization Leaves"
+msgstr "Autorisation de sortie"
+
+#. module: spc_leaves
+#: model:hr.leave.type,name:spc_leaves.holiday_status_cl_legal
+msgid "Paid Leaves"
+msgstr "Congé Payé"
+
+#. module: spc_leaves
+#: model:hr.leave.type,name:spc_leaves.holiday_status_outing_rtt_tn
+msgid "RTT Tn"
+msgstr ""
+
+#. module: spc_leaves
+#: model:hr.leave.type,name:spc_leaves.holiday_status_outing_rtt_tn_last_year
+msgid "RTT Tn 2020"
+msgstr ""
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation_accruement__reason
+msgid "Reason"
+msgstr "Motif"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_approve_form
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_form
+#: model_terms:ir.ui.view,arch_db:spc_leaves.outgoing_authorization_view_approve_tree
+#: model_terms:ir.ui.view,arch_db:spc_leaves.outgoing_authorization_view_tree
+msgid "Refuse"
+msgstr "Refuser"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_approve_form
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_form
+msgid "Reset to Draft"
+msgstr "Remettre en brouillon"
+
+#. module: spc_leaves
+#: model:ir.model,name:spc_leaves.model_resource_calendar_leaves
+msgid "Resource Time Off Detail"
+msgstr "Détails des congés de la ressource"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_allocation_view_form_manager
+msgid "Run Until"
+msgstr "Jusqu'à"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_allocation_view_form_manager
+msgid "Run until"
+msgstr "jusqu'à"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.view_hr_holidays_filter_outgoing
+msgid "Search Leave"
+msgstr "Recherche de congé"
+
+#. module: spc_leaves
+#: model:hr.leave.type,name:spc_leaves.holiday_status_sl_leave
+msgid "Sick Leaves"
+msgstr "Arrêts maladie"
+
+#. module: spc_leaves
+#: code:addons/spc_leaves/models/hr_leave_allocation.py:0
+#, python-format
+msgid "Start-of-period accruement"
+msgstr "Accumulation de début de période"
+
+#. module: spc_leaves
+#: model:ir.model,name:spc_leaves.model_hr_leave
+msgid "Time Off"
+msgstr "Congés"
+
+#. module: spc_leaves
+#: model:ir.model,name:spc_leaves.model_hr_leave_allocation
+msgid "Time Off Allocation"
+msgstr "Allocation de congés"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_resource_calendar_leaves__holiday_status_id
+msgid "Time Off Type"
+msgstr "Type de congés"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_approve_form
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_form
+msgid "To"
+msgstr "Vers"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.view_hr_holidays_filter_outgoing
+msgid "To Approve"
+msgstr "À approuver"
+
+#. module: spc_leaves
+#: model:ir.ui.menu,name:spc_leaves.hr_meunu_to_approve_outing_authorization
+msgid "To approve"
+msgstr "À approuver"
+
+#. module: spc_leaves
+#: model:ir.model.fields,field_description:spc_leaves.field_hr_leave_allocation__max_accumulated_days
+msgid "Total Balance Limit"
+msgstr "Limite de solde total"
+
+#. module: spc_leaves
+#: model:ir.model.fields,help:spc_leaves.field_hr_leave_allocation__max_accrued_days
+msgid "Total maximum number of days accrued in one accrual period."
+msgstr "Nombre total maximum de jours accumulés dans une période de cumul."
+
+#. module: spc_leaves
+#: model:ir.model.fields,help:spc_leaves.field_hr_leave_allocation__max_accumulated_days
+msgid "Total maximum number of days that can be accumulated."
+msgstr "Nombre total maximum de jours pouvant être accumulés."
+
+#. module: spc_leaves
+#: model:ir.model.fields,help:spc_leaves.field_hr_leave_allocation__max_carryover_days
+msgid "Total maximum number of days to carryover to next accrual period."
+msgstr ""
+"Nombre total maximum de jours à reporter à la prochaine période "
+"d'accumulation."
+
+#. module: spc_leaves
+#: model:ir.model.fields,help:spc_leaves.field_hr_leave_allocation__interval_unit
+msgid "Units in which Accrual Period Duration is defined"
+msgstr ""
+"Unités dans lesquelles la durée de la période d'accumulation est définie"
+
+#. module: spc_leaves
+#: model:ir.model.fields,help:spc_leaves.field_hr_leave_allocation__unit_per_interval
+msgid "Units in which Allocation per Accrual Period is defined"
+msgstr ""
+"Unités dans lesquelles l'allocation par période d'accumulation est définie"
+
+#. module: spc_leaves
+#: model:hr.leave.type,name:spc_leaves.holiday_status_unjustify_abs
+msgid "Unjustified absence"
+msgstr "Absence non justifiée"
+
+#. module: spc_leaves
+#: model:hr.leave.type,name:spc_leaves.holiday_status_cl_unpaid
+msgid "Unpaid Leaves"
+msgstr "Congé sans solde"
+
+#. module: spc_leaves
+#: code:addons/spc_leaves/models/hr_leave_allocation.py:0
+#, python-format
+msgid "Usage during accruement period"
+msgstr "Utilisation pendant la période d'accumulation"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_approve_form
+#: model_terms:ir.ui.view,arch_db:spc_leaves.hr_leave_view_outgoing_authorization_manager_form
+#: model_terms:ir.ui.view,arch_db:spc_leaves.outgoing_authorization_view_approve_tree
+#: model_terms:ir.ui.view,arch_db:spc_leaves.outgoing_authorization_view_tree
+msgid "Validate"
+msgstr "Valider"
+
+#. module: spc_leaves
+#: model:ir.model.fields,help:spc_leaves.field_hr_leave__time_type
+msgid ""
+"Whether this should be computed as a holiday or as work time (eg: formation)"
+msgstr ""
+"Ceci devrait être calculé comme un congé ou comme du temps de travail (e.g. "
+"Formation)"
+
+#. module: spc_leaves
+#: model_terms:ir.ui.view,arch_db:spc_leaves.update_res_config_settings_view_form_holiday
+msgid ""
+"define the maximum number of hours \n"
+"                                            of authorization per day \n"
+"                                            in the company"
+msgstr ""
+"définir le nombre maximum d'heures\n"
+"                                            d'autorisation de sortie par jour\n"
+"                                            dans la société"
+
+#. module: spc_leaves
+#: model_terms:ir.actions.act_window,help:spc_leaves.action_outgoing_to_approve
+msgid "exit authorization requests to be approved"
+msgstr "demandes d'autorisations de sortie à approuver"
+
+#. module: hr_holidays
+#: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form
+msgid ""
+"<span attrs=\"{'invisible': [('holiday_type', '!=', 'employee')]}\">\n"
+"                        The employee has a different timezone than yours! Here dates and times are displayed in the employee's timezone\n"
+"                    </span>\n"
+"                    <span attrs=\"{'invisible': [('holiday_type', '!=', 'department')]}\">\n"
+"                        The department's company has a different timezone than yours! Here dates and times are displayed in the company's timezone\n"
+"                    </span>\n"
+"                    <span attrs=\"{'invisible': [('holiday_type', '!=', 'company')]}\">\n"
+"                        The company has a different timezone than yours! Here dates and times are displayed in the company's timezone\n"
+"                    </span>\n"
+"                    ("
+msgstr ""
+"<span attrs=\"{'invisible': [('holiday_type', '!=', 'employee')]}\">\n"
+"                        L'employé a un fuseau horaire différent de vôtre! Ici, les dates et heures sont affichées dans le fuseau horaire de l'employé\n"
+"                    </span>\n"
+"                    <span attrs=\"{'invisible': [('holiday_type', '!=', 'department')]}\">\n"
+"                        Le département de l'entreprise a un fuseau horaire différent de vôtre! Ici, les dates et heures sont affichées dans le fuseau horaire de l'entreprise\n"
+"                    </span>\n"
+"                    <span attrs=\"{'invisible': [('holiday_type', '!=', 'company')]}\">\n"
+"                        La société a un fuseau horaire différent de vôtre! Ici, les dates et heures sont affichées dans le fuseau horaire de l'entreprise\n"
+"                    </span>\n"
+"                    ("

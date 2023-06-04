@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- List -->
+        <record id="saisine_bceao_tree_view" model="ir.ui.view">
+            <field name="name">sig.tresor.saisine.bceao.tree</field>
+            <field name="model">sig.tresor.saisine.bceao</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Saisine de la BCEAO">
+                    <button string="Non"
+                            name="action_avis_bceao_non"
+                            type="object"
+                            class="btn btn-secondary o_button_import"
+                            icon="fa-times"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    /> <!-- icon="fa-times" -->
+                    <button string="Oui"
+                            name="action_avis_bceao_oui"
+                            type="object"
+                            class="oe_highlight"
+                            icon="fa-check"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    ></button>
+                    <field name="reception_courrier_id" string="Dossier SFD"/>
+                    <!--<field name="create_uid" string="Créé par"/>
+                    <field name="create_date" string="Créé le"/>-->
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form -->
+        <record id="saisine_bceao_form_view" model="ir.ui.view">
+            <field name="name">sig.tresor.saisine.bceao.form</field>
+            <field name="model">sig.tresor.saisine.bceao</field>
+            <field name="arch" type="xml">
+                <form string="Saisine de la BCEAO">
+                    <header>
+                        <!--<button name="action_avis_bceao"
+                                string="Avis de la BCEAO"
+                                type="object"
+                                class="oe_highlight" states="draft"
+                                groups="sig_tresor.autorisation_exercer_group"/>-->
+
+                        <!-- actions après traitement saisine de la BCEAO  -->
+                        <button name="action_redac_trans_courrier_au_chief_sae"
+                                string="Transmettre"
+                                type="object"
+                                class="oe_highlight" states="avis_bceao"
+                                groups="sig_tresor.autorisation_exercer_group"/>
+
+                        <button name="action_trans_courrier_au_sda" string="Transmettre"
+                                type="object"
+                                class="oe_highlight" states="redac_trans_courrier_au_chief_sae"
+                                groups="sig_tresor.autorisation_exercer_group"/>
+
+                        <button name="action_trans_courrier_au_directeur" string="Transmettre"
+                                type="object" attrs="{'invisible':[('state', '!=', 'trans_courrier_au_sda')]}"
+                                class="oe_highlight" states="trans_courrier_au_sda"
+                                groups="sig_tresor.sous_direction_agrement_group"/>
+
+                        <button name="action_imput_courrier_au_secretariat" string="Imputer"
+                                type="object"
+                                class="oe_highlight" states="trans_courrier_au_directeur"
+                                groups="sig_tresor.direction_group"/>
+
+                        <button name="action_num_trans_au_service_courrier"
+                                string="Transmettre"
+                                type="object"
+                                class="oe_highlight" states="imput_courrier_au_secretariat"
+                                groups="sig_tresor.secretariat_group"/>
+
+                        <button name="action_recep_notif_au_sda"
+                                string="Notifier SDA"
+                                type="object"
+                                attrs="{'invisible':[('state', '!=', 'num_trans_au_service_courrier'),('is_show_traitement_saisine_bceao_ok','!=',True)]}"
+                                class="oe_highlight" states="num_trans_au_service_courrier"
+                                groups="sig_tresor.courrier_group"/>
+
+                        <button name="action_notif_arrete_au_demandeur"
+                                string="Notifier demandeur"
+                                type="object"
+                                attrs="{'invisible':[('state', '!=', 'recep_notif_au_sda')]}"
+                                class="oe_highlight" states="recep_notif_au_sda"
+                                groups="sig_tresor.sous_direction_agrement_group"/>
+
+                        <button name="action_recep_trans_courrier_notif_au_demandeur"
+                                string="Transmettre"
+                                type="object"
+                                attrs="{'invisible':[('state', '!=', 'num_trans_au_service_courrier'),('is_show_traitement_saisine_bceao_nok','!=',True)]}"
+                                class="oe_highlight" states="num_trans_au_service_courrier"
+                                groups="sig_tresor.courrier_group"/>
+
+                        <button name="action_retour" string="Retourner" type="object" class="oe_highlight"
+                                states="redac_trans_courrier_au_chief_sae,trans_courrier_au_sda,trans_courrier_au_directeur"/>
+
+                         <button name="action_cancelled" string="Annuler" type="object" invisible="1"
+                                class="btn btn-secondary o_form_button_cancel" attrs="{'invisible':[('state','!=','draft')]}"/>
+
+                        <field name="state" statusbar_visible="draft,avis_bceao,redac_trans_courrier_au_chief_sae,trans_courrier_au_sda,trans_courrier_au_directeur,imput_courrier_au_secretariat,num_trans_au_service_courrier,recep_notif_au_sda,notif_arrete_au_demandeur,recep_trans_courrier_notif_au_demandeur"
+                               widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group colspan="4" col="4">
+                            <!-- avis de la bceao -->
+                            <field name="reception_courrier_id" string="Dossier" colspan="2" col="2"
+                                   attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="res_saisine_bceao" colspan="2" col="2"
+                                   attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="date_reception_courrier_bceao" colspan="2" col="2"
+                                   attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="date_retour_bceao" colspan="2" col="2"
+                                   attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="courrier_bceao" colspan="2" col="2"
+                                   attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </group>
+
+                            <field name="res_saisine_bceao" invisible="1"/>
+                            <field name="is_show_traitement_saisine_bceao_ok" invisible="1"/>
+                            <field name="is_show_traitement_saisine_bceao_nok" invisible="1"/>
+
+                            <group string="Avis conforme favorable"
+                                   attrs="{'invisible':[('is_show_traitement_saisine_bceao_ok','!=',True)]}">
+
+                                <!-- chef agent sae -->
+                                <group col="4" colspan="4"
+                                       attrs="{'invisible':[('state','!=','avis_bceao')]}">
+
+                                         <field name="projet_arrete"
+                                           attrs="{'invisible':[('state','!=','avis_bceao')], 'required': [('state', '=', 'avis_bceao'), ('is_show_traitement_saisine_bceao_ok', '=', True)]}"/>
+
+                                          <field name="date_trans_projet_arrete"
+                                           attrs="{'invisible':[('state','!=','avis_bceao')], 'required': [('state', '=', 'avis_bceao'), ('is_show_traitement_saisine_bceao_ok', '=', True)]}"/>
+
+                                </group>
+
+                                <!-- chef service sae -->
+                                <group col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','redac_trans_courrier_au_chief_sae')]}">
+                                    <group>
+                                         <field name="date_trans_projet_arrete_par_chef_sae" col="2" colspan="2"
+                                           attrs="{'invisible':[('state','!=','redac_trans_courrier_au_chief_sae')], 'required': [('state', '=', 'redac_trans_courrier_au_chief_sae'), ('is_show_traitement_saisine_bceao_ok', '=', True)]}"/>
+                                    </group>
+                                    <group></group>
+                                </group>
+
+                                <!-- sous-direction des agréments -->
+                                <group col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','trans_courrier_au_sda')]}">
+                                    <group>
+                                         <field name="date_trans_projet_arrete_par_sda" col="2" colspan="2"
+                                           attrs="{'invisible':[('state','!=','trans_courrier_au_sda')], 'required': [('state', '=', 'trans_courrier_au_sda'), ('is_show_traitement_saisine_bceao_ok', '=', True)]}"/>
+                                    </group>
+                                    <group></group>
+                                </group>
+
+                                <!-- directrice -->
+                                <group col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','trans_courrier_au_directeur')]}">
+                                    <group>
+                                        <field name="date_trans_projet_arrete_par_directrice" col="2" colspan="2"
+                                           attrs="{'invisible':[('state','!=','trans_courrier_au_directeur')], 'required': [('state', '=', 'trans_courrier_au_directeur'), ('is_show_traitement_saisine_bceao_ok', '=', True)]}"/>
+                                    </group>
+                                        <group></group>
+                                </group>
+
+                                <!-- secretariat -->
+                                <group col="4" colspan="4"
+                                       attrs="{'invisible':[('state','!=','imput_courrier_au_secretariat')]}">
+                                    <field name="date_reception_arrete_portant_agrement"
+                                           attrs="{'invisible':[('state','!=','imput_courrier_au_secretariat')], 'required': [('state', '=', 'imput_courrier_au_secretariat'), ('is_show_traitement_saisine_bceao_ok', '=', True)]}"/>
+                                    <field name="numero_arrete_portant_agrement"
+                                           attrs="{'invisible':[('state','!=','imput_courrier_au_secretariat')], 'required': [('state', '=', 'imput_courrier_au_secretariat'), ('is_show_traitement_saisine_bceao_ok', '=', True)]}"/>
+                                </group>
+
+                                <!-- service courrier -->
+                                <group col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','num_trans_au_service_courrier')]}">
+                                    <group>
+                                         <field name="date_reception_arrete_portant_agrement_par_courrier" col="2" colspan="2"
+                                           attrs="{'invisible':[('state','!=','num_trans_au_service_courrier')], 'required': [('state', '=', 'num_trans_au_service_courrier'), ('is_show_traitement_saisine_bceao_ok', '=', True)]}"/>
+                                    </group>
+                                    <group></group>
+                                </group>
+
+                                <!-- sous-direction des agréments -->
+                                <group col="4" colspan="4" attrs="{'invisible':[('state','!=','recep_notif_au_sda')]}">
+                                    <field name="type_courrier_id"
+                                           attrs="{'invisible':[('state','!=','recep_notif_au_sda')], 'required': [('state', '=', 'recep_notif_au_sda'), ('is_show_traitement_saisine_bceao_ok', '=', True)]}"/>
+                                    <field name="date_notif_arrete_au_promoteur"
+                                           attrs="{'invisible':[('state','!=','recep_notif_au_sda')], 'required': [('state', '=', 'recep_notif_au_sda'), ('is_show_traitement_saisine_bceao_ok', '=', True)]}"/>
+                                    <field name="arrete_portant_agrement"
+                                           attrs="{'invisible':[('state','!=','recep_notif_au_sda')], 'required': [('state', '=', 'recep_notif_au_sda'), ('is_show_traitement_saisine_bceao_ok', '=', True)]}"/>
+                                    <field name="date_sign_arrete_au_promoteur"
+                                           attrs="{'invisible':[('state','!=','recep_notif_au_sda')], 'required': [('state', '=', 'recep_notif_au_sda'), ('is_show_traitement_saisine_bceao_ok', '=', True)]}"/>
+                                </group>
+
+                            </group>
+                            <group string="Avis conforme défavorable"
+                                   attrs="{'invisible':[('is_show_traitement_saisine_bceao_nok','!=',True)]}">
+
+                                <!-- chef agent sae -->
+                                <group col="4" colspan="4" attrs="{'invisible':[('state','!=','avis_bceao')]}">
+                                    <field name="projet_courrier_notif_rejet"
+                                           attrs="{'invisible':[('state','!=','avis_bceao')], 'required': [('state', '=', 'avis_bceao'), ('is_show_traitement_saisine_bceao_nok', '=', True)]}"/>
+                                    <field name="date_trans_projet_courrier_notif_rejet"
+                                           attrs="{'invisible':[('state','!=','avis_bceao')], 'required': [('state', '=', 'avis_bceao'), ('is_show_traitement_saisine_bceao_nok', '=', True)]}"/>
+                                </group>
+
+                                <!-- chef service sae -->
+                                <group col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','redac_trans_courrier_au_chief_sae')]}">
+                                    <field name="date_trans_projet_courrier_notif_rejet_par_chef_sae" col="2" colspan="2"
+                                           attrs="{'invisible':[('state','!=','redac_trans_courrier_au_chief_sae')], 'required': [('state', '=', 'redac_trans_courrier_au_chief_sae'), ('is_show_traitement_saisine_bceao_nok', '=', True)]}"/>
+                                </group>
+
+                                <!-- sous-direction des agréments -->
+                                <group col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','trans_courrier_au_sda')]}">
+                                    <field name="date_trans_projet_courrier_notif_rejet_par_sda" col="2" colspan="2"
+                                           attrs="{'invisible':[('state','!=','trans_courrier_au_sda')], 'required': [('state', '=', 'trans_courrier_au_sda'), ('is_show_traitement_saisine_bceao_nok', '=', True)]}"/>
+                                </group>
+
+                                <!-- directrice -->
+                                <group col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','trans_courrier_au_directeur')]}">
+                                    <field name="date_trans_projet_courrier_notif_rejet_par_directrice" col="2" colspan="2"
+                                           attrs="{'invisible':[('state','!=','trans_courrier_au_directeur')], 'required': [('state', '=', 'trans_courrier_au_directeur'), ('is_show_traitement_saisine_bceao_ok', '=', True)]}"/>
+                                </group>
+
+                                <!-- secretariat -->
+                                <group col="4" colspan="4"
+                                       attrs="{'invisible':[('state','!=','imput_courrier_au_secretariat')]}">
+                                    <field name="date_reception_courrier_notif_rejet"
+                                           attrs="{'invisible':[('state','!=','imput_courrier_au_secretariat')], 'required': [('state', '=', 'imput_courrier_au_secretariat'), ('is_show_traitement_saisine_bceao_nok', '=', True)]}"/>
+                                    <field name="numero_courrier_notif_rejet"
+                                           attrs="{'invisible':[('state','!=','imput_courrier_au_secretariat')], 'required': [('state', '=', 'imput_courrier_au_secretariat'), ('is_show_traitement_saisine_bceao_nok', '=', True)]}"/>
+                                </group>
+
+                                <!-- service courrier -->
+                                <group col="4" colspan="4"
+                                       attrs="{'invisible':[('state','!=','num_trans_au_service_courrier')]}">
+                                    <field name="type_courrier_id"
+                                           attrs="{'invisible':[('state','!=','num_trans_au_service_courrier')], 'required': [('state', '=', 'num_trans_au_service_courrier'), ('is_show_traitement_saisine_bceao_nok', '=', True)]}"/>
+                                    <field name="date_notif_courrier_notif_rejet_au_demandeur"
+                                           attrs="{'invisible':[('state','!=','num_trans_au_service_courrier')], 'required': [('state', '=', 'num_trans_au_service_courrier'), ('is_show_traitement_saisine_bceao_nok', '=', True)]}"/>
+                                    <field name="courrier_notif_rejet"
+                                           attrs="{'invisible':[('state','!=','num_trans_au_service_courrier')], 'required': [('state', '=', 'num_trans_au_service_courrier'), ('is_show_traitement_saisine_bceao_nok', '=', True)]}"/>
+                                </group>
+
+                            </group>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- action menu Avis de la BCEAO-->
+        <record model="ir.actions.act_window" id="action_avis_bceao_view">
+            <field name="name">Avis de la BCEAO</field>
+            <field name="res_model">sig.tresor.saisine.bceao</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="saisine_bceao_tree_view"/>
+           <!-- <field name="domain">[('state','in',['draft'])]</field>-->
+             <field name="domain">[('state','in',['draft','avis_bceao','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','recep_notif_au_sda','notif_arrete_au_demandeur','recep_trans_courrier_notif_au_demandeur'])]</field>
+        </record>
+        <!-- menu Avis de la BCEAO -->
+        <menuitem name="Avis de la BCEAO" id="avis_bceao_menu" sequence="1040"
+                  parent="saisine_bceao_menu"
+                  action="action_avis_bceao_view" groups="sig_tresor.autorisation_exercer_group"/>
+
+        <!-- action menu Rédaction et transmission courrier au Chef de Service SAE -->
+        <record model="ir.actions.act_window" id="action_redac_trans_courrier_au_chief_sae_view">
+            <field name="name">Rédaction et transmission courrier au Chef de Service SAE</field>
+            <field name="res_model">sig.tresor.saisine.bceao</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="saisine_bceao_tree_view"/>
+            <!--<field name="domain">[('state','in',['avis_bceao'])]</field>-->
+            <field name="domain">[('state','in',['draft','avis_bceao','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','recep_notif_au_sda','notif_arrete_au_demandeur','recep_trans_courrier_notif_au_demandeur'])]</field>
+        </record>
+        <!-- menu Rédaction et transmission courrier au Chef de Service SAE  -->
+        <menuitem name="Transmettre au Chef du Service SAE"
+                  id="redac_trans_courrier_au_chief_sae_menu" sequence="1042"
+                  parent="saisine_bceao_menu"
+                  action="action_redac_trans_courrier_au_chief_sae_view"
+                  groups="sig_tresor.autorisation_exercer_group"/>
+
+        <!-- action menu Transmission du courrier au SDA -->
+        <record model="ir.actions.act_window" id="action_trans_courrier_au_sda_view">
+            <field name="name">Transmission du courrier au SDA</field>
+            <field name="res_model">sig.tresor.saisine.bceao</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="saisine_bceao_tree_view"/>
+            <!--<field name="domain">[('state','in',['redac_trans_courrier_au_chief_sae'])]</field>-->
+            <field name="domain">[('state','in',['draft','avis_bceao','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','recep_notif_au_sda','notif_arrete_au_demandeur','recep_trans_courrier_notif_au_demandeur'])]</field>
+        </record>
+        <!-- menu Transmission du courrier au SDA  -->
+        <menuitem name="Transmettre au SDA"
+                  id="trans_courrier_au_sda_menu" sequence="1043"
+                  parent="saisine_bceao_menu"
+                  action="action_trans_courrier_au_sda_view"
+                  groups="sig_tresor.autorisation_exercer_group"/>
+
+        <!-- action menu Transmission du courrier au directeur -->
+        <record model="ir.actions.act_window" id="action_trans_courrier_au_directeur_view">
+            <field name="name">Transmission du courrier au directeur</field>
+            <field name="res_model">sig.tresor.saisine.bceao</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="saisine_bceao_tree_view"/>
+            <!--<field name="domain">[('state','in',['trans_courrier_au_sda'])]</field>-->
+            <field name="domain">[('state','in',['draft','avis_bceao','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','recep_notif_au_sda','notif_arrete_au_demandeur','recep_trans_courrier_notif_au_demandeur'])]</field>
+        </record>
+        <!-- menu Transmission du courrier au directeur  -->
+        <menuitem name="Transmettre à la Directrice"
+                  id="trans_courrier_au_directeur_menu" sequence="1044"
+                  parent="saisine_bceao_menu"
+                  action="action_trans_courrier_au_directeur_view"
+                  groups="sig_tresor.sous_direction_agrement_group"/>
+
+
+        <!-- action menu Imputer courrier au sécretariat -->
+        <record model="ir.actions.act_window" id="action_imput_courrier_au_secretariat_view">
+            <field name="name">Imputer courrier au sécretariat</field>
+            <field name="res_model">sig.tresor.saisine.bceao</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="saisine_bceao_tree_view"/>
+            <!--<field name="domain">[('state','in',['trans_courrier_au_directeur'])]</field>-->
+            <field name="domain">[('state','in',['draft','avis_bceao','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','recep_notif_au_sda','notif_arrete_au_demandeur','recep_trans_courrier_notif_au_demandeur'])]</field>
+        </record>
+
+        <!-- menu Imputer courrier au sécretariat  -->
+        <menuitem name="Imputer au Sécretariat"
+                  id="saisine_bceao_imput_courrier_au_secretariat_menu" sequence="1045"
+                  parent="saisine_bceao_menu"
+                  action="action_imput_courrier_au_secretariat_view"
+                  groups="sig_tresor.direction_group"/>
+
+
+        <!-- action menu Numérotation et transmission du courrier au service courrier -->
+        <record model="ir.actions.act_window" id="action_num_trans_au_service_courrier_view">
+            <field name="name">Numérotation et transmission du courrier au service courrier</field>
+            <field name="res_model">sig.tresor.saisine.bceao</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="saisine_bceao_tree_view"/>
+           <!-- <field name="domain">[('state','in',['imput_courrier_au_secretariat'])]</field>-->
+            <field name="domain">[('state','in',['draft','avis_bceao','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','recep_notif_au_sda','notif_arrete_au_demandeur','recep_trans_courrier_notif_au_demandeur'])]</field>
+        </record>
+        <!-- menu Numérotation et transmission du courrier au service courrier  -->
+        <menuitem name="Transmettre au Service Courrier"
+                  id="num_trans_au_service_courrier_menu" sequence="1046"
+                  parent="saisine_bceao_menu"
+                  action="action_num_trans_au_service_courrier_view"
+                  groups="sig_tresor.secretariat_group"/>
+
+        <!-- action menu Réception de l'arrêté signé et notification à SDA -->
+        <record model="ir.actions.act_window" id="action_recep_notif_au_sda_view">
+            <field name="name">Réception de l'arrêté signé et notification à SDA</field>
+            <field name="res_model">sig.tresor.saisine.bceao</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="saisine_bceao_tree_view"/>
+            <!--<field name="domain">
+                [('state','in',['num_trans_au_service_courrier']),('is_show_traitement_saisine_bceao_ok','=',[True])]
+            </field>-->
+            <field name="domain">[('state','in',['draft','avis_bceao','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','recep_notif_au_sda','notif_arrete_au_demandeur','recep_trans_courrier_notif_au_demandeur']),('is_show_traitement_saisine_bceao_ok','=',True)]</field>
+        </record>
+        <!-- menu Réception de l'arrêté signé et notification à SDA -->
+        <menuitem name="Notifier SDA"
+                  id="recep_notif_au_sda_menu" sequence="1047"
+                  parent="saisine_bceao_menu"
+                  action="action_recep_notif_au_sda_view"
+                  groups="sig_tresor.courrier_group"/>
+
+        <!-- action menu Notification de l'arrêté portant agrément au demandeur -->
+        <record model="ir.actions.act_window" id="action_notif_arrete_au_demandeur_view">
+            <field name="name">Notification de l'arrêté portant agrément au demandeur</field>
+            <field name="res_model">sig.tresor.saisine.bceao</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="saisine_bceao_tree_view"/>
+           <!-- <field name="domain">
+                [('state','in',['recep_notif_au_sda']),('is_show_traitement_saisine_bceao_ok','=',[True])]
+            </field>-->
+            <field name="domain">[('state','in',['draft','avis_bceao','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','recep_notif_au_sda','notif_arrete_au_demandeur','recep_trans_courrier_notif_au_demandeur']),('is_show_traitement_saisine_bceao_ok','=',True)]</field>
+        </record>
+        <!-- menu Notification de l'arrêté portant agrément au demandeur -->
+        <menuitem name="Notifier demandeur"
+                  id="notif_arrete_au_demandeur_menu" sequence="1048"
+                  parent="saisine_bceao_menu"
+                  action="action_notif_arrete_au_demandeur_view"
+                  groups="sig_tresor.sous_direction_agrement_group"/>
+
+        <!-- action menu Réception et Transmission du courrier de notif. signé au demandeur -->
+        <record model="ir.actions.act_window" id="action_recep_trans_courrier_notif_au_demandeur_view">
+            <field name="name">Réception et Transmission du courrier de notif. signé au demandeur</field>
+            <field name="res_model">sig.tresor.saisine.bceao</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="saisine_bceao_tree_view"/>
+            <!--<field name="domain">
+                [('state','in',['num_trans_au_service_courrier']),('is_show_traitement_saisine_bceao_nok','=',[True])]
+            </field>-->
+            <field name="domain">[('state','in',['draft','avis_bceao','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','recep_notif_au_sda','notif_arrete_au_demandeur','recep_trans_courrier_notif_au_demandeur']),('is_show_traitement_saisine_bceao_nok','=',True)]</field>
+        </record>
+        <!-- menu Réception et Transmission du courrier de notif. signé au demandeur -->
+        <menuitem name="Transmettre demandeur"
+                  id="recep_trans_courrier_notif_au_demandeur_menu" sequence="1049"
+                  parent="saisine_bceao_menu"
+                  action="action_recep_trans_courrier_notif_au_demandeur_view"
+                  groups="sig_tresor.courrier_group"/>
+
+    </data>
+</odoo>

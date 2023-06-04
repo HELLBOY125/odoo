@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- dirigeant form -->
+        <record id="sig_tresor_dirigeant_form_view" model="ir.ui.view">
+            <field name="name">sig.tresor.dirigeant.form</field>
+            <field name="model">sig.tresor.dirigeant</field>
+            <field name="arch" type="xml">
+                <form string="Dirigeant">
+                    <sheet>
+                        <group col="4">
+                            <field name="nom"/>
+                            <field name="job_id"/>
+                            <field name="email" widget="email"/>
+                            <field name="telephone" widget="phone"/>
+                            <field name="verif_conformite_dossier_id" string="Dossier SFD"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

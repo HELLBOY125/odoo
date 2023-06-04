@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_categorie_purchase_agreement_user,categorie.purchase.agreement,model_categorie_purchase_agreement,,1,1,1,1
+access_purchase_agreement_user,purchase.agreement,model_purchase_agreement,,1,1,1,1
+access_purchase_agreement_article_user,purchase_agreement_article,model_purchase_agreement_article,,1,1,1,1
+access_purchase_agreement_article_line_user,purchase.agreement.article.line,model_purchase_agreement_article_line,,1,1,1,1
+access_signature_agreement_user,signature_agreement,model_signature_agreement,,1,1,1,1
+access_account_ordonnance_user,account_ordonnance,model_account_ordonnance,,1,1,1,1
+access_account_ordonnance_line_user,account_ordonnance_line,model_account_ordonnance_line,,1,1,1,1
+access_account_move_conformity,account_move_conformity,model_account_move_conformity,,1,1,1,1
+access_agreement_resiliation,agreement_resiliation,model_agreement_resiliation,,1,1,1,1
+access_account_move_conformity_reason,account_move_conformity_reason,model_account_move_conformity_reason,,1,1,1,1
+access_process_medecin,process_medecin,model_process_medecin,,1,1,1,1
+access_process_medecin_line,process_medecin_line,model_process_medecin_line,,1,1,1,1
+access_process_medecin_details,process_medecin_details,model_process_medecin_details,,1,1,1,1

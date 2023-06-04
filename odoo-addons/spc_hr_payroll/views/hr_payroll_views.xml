@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="view_hr_payslip_form_inherit" model="ir.ui.view">
+            <field name="name">hr.payslip.tree</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page/field[@name='worked_days_line_ids']" position="after">
+                    <group>
+                        <group>
+                            <field name="number_of_hour_per_month" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="number_of_days_per_month" readonly="1"/>
+                        </group>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='contract_id']" position="replace">
+                    <field name="contract_id"
+                           domain="[('state','=','open'), ('employee_id','=',employee_id),('date_start','&lt;=',date_to),'|',('date_end','&gt;=',date_from),('date_end','=',False)]"
+                           context="{'default_employee_id': employee_id}"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="om_hr_payroll.view_hr_payslip_tree" model="ir.ui.view">
+            <field name="name">hr.payslip.tree</field>
+            <field name="model">hr.payslip</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="state in ('confirm','hr_check','accont_check')" decoration-muted="state == 'cancel'" string="Payslips">
+                    <field name="number"/>
+                    <field name="employee_id"/>
+                    <field name="bank_id"/>
+                    <field name="payslip_run_id"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="state"/>
+                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                    <field name="number_of_hour_per_month" invisible="1"/>
+                    <field name="number_of_days_per_month" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hr_employee_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherit.payroll</field>
+            <field name="model">hr.employee</field>
+            <field name="priority">20</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <data>
+
+                    <xpath expr="//field[@name='identification_id']" position="attributes">
+                        <attribute name="required">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='identification_id']" position="after">
+                        <field name="delivred_date_identification"/>
+                    </xpath>
+                    <xpath expr="//field[@name='marital']" position="attributes">
+                        <attribute name="required">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='mobile_phone']" position="attributes">
+                        <attribute name="required">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='job_id']" position="attributes">
+                        <attribute name="required">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='identification_id']" position="before">
+                        <field name="matricule_cnss"/>
+                    </xpath>
+                    <xpath expr="//field[@name='children']" position="before">
+                        <field name="house_holder"/>
+                        <field name="infirme"/>
+                        <field name="student"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</odoo>

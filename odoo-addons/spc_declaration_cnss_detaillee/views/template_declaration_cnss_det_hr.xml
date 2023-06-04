@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="report.paperformat" id="paperformat_attendance_declaration_empl">
+        <field name="name">paperformat.declaration.emplo.report</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_width">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">10</field>
+        <field name="margin_right">5</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">5</field>
+        <field name="dpi">90</field>
+
+    </record>
+    <report
+            id="action_report_payslip_avantag"
+            model="wizard.declaration.hr"
+            string="Déclaration employer"
+            report_type="qweb-pdf"
+            name="spc_declaration_cnss_detaillee.avantag_report_cnss"
+            file="spc_declaration_cnss_detaillee.avantag_report_cnss"
+            paperformat="paperformat_attendance_declaration_empl"
+    />
+
+    <template id="external_layout_cnss">
+        <t t-if="not o" t-set="o" t-value="doc" />
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+
+        <div class="header row"/>
+        <div class="article o_report_layout_standard">
+            <t t-call="web.address_layout" />
+            <t t-raw="0" />
+        </div>
+        <div class="footer o_standard_footer"/>
+    </template>
+
+    <template id="avantag_report_cnss">
+        <t t-call="web.html_container">
+            <t t-foreach="res" t-as="p">
+                <t t-call="spc_declaration_cnss_detaillee.external_layout_cnss">
+                    <t t-set="total_trimestre_x" t-value="0" />
+
+                    <div class="page">
+                        <t t-set="counter" t-value="0" />
+                           
+                        <t t-if="counter == 12">
+                            <p style="page-break-before:always;"> </p>
+                        </t>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>
+                                        <table style="border:2px solid white;padding:1px;width:100%;">
+                                            <tbody>
+                                                <tr style="text-align:center;">
+                                                    <td style="border: 1px solid white;padding-top:-5px;font-size:12px;">
+                                                        <b>REPUBLIQUE TUNISIENNE</b>
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr style="text-align:center">
+                                                    <td style="border: 1px solid white;padding-top:-5px;font-size:12px;">
+                                                        <b>MINISTERE DES AFFAIRES SOCIALES</b>
+                                                    </td>
+
+
+                                                </tr>
+
+                                                <tr style="text-align:center">
+                                                    <td style="border: 1px solid white;font-size:12px;">
+                                                        CAISSE NATIONALE DE SECURITE SOCIALE
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr style="text-align:center">
+                                                    <td style="border: 1px solid white;font-size:12px;">
+                                                        49 . Av.TAIEB MHIRI - TUNIS- Tel: 71. 796. 744
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td colspan="2">
+                                        <h4 style="text-align:center;font-weight:bold;direction:rtl;font-family:Kufi !important;margin-top: 10px !important; margin-left: 95px; font-size: 18px;">
+                                            DECLARATION TRIMESTRIELLE DES SALARIES ET DES SALAIRES
+                                        </h4>
+                                        <p style="text-align:center;margin-left: 139px; font-size: 16px;">
+                                            doit étre remise à la caisse sous peine de pénalités dans les 15 premiers
+                                            jours qui suivent le trimestre
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <table style="height=30px;" class="table table-bordered mb32">
+                                        <thead>
+                                            <tr>
+                                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;" rowspan="2"><b>N° EMPLOYEUR</b></th>
+                                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;" rowspan="2"><b>CODE D'EXPLOITATION</b></th>
+                                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;" rowspan="2">MATRICULE FISCAL</th>
+                                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;" rowspan="2">BR</th>
+                                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;" rowspan="2">TRIMESTRE</th>
+                                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;" rowspan="2">ANNÉE</th>
+                                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;" rowspan="2">PAGE N°</th>
+                                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;" rowspan="2">NOM ET ADRESSE DE L'EMPLOYEUR</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                                    <span t-esc="p['company_cnss_id']"/>
+                                                </td>
+                                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                                    <span t-esc="p['company_code_exploitation']"/>
+                                                </td>
+                                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                                    <span t-esc="p['company_vat']"/>
+                                                </td>
+                                                <td style="border: 1px solid black;font-size: 14px; text-align: left;">
+                                                    <span t-esc="p['company_br']"/>
+                                                </td>
+                                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                                    <span t-esc="p['x_trimester']"/>
+                                                </td>
+                                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                                    <span t-esc="p['year']"/>
+                                                </td>
+                                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                                    <span t-esc="p['page']"/> / <span t-esc="p['total_page']"/>
+                                                </td>
+                                                <td style="border: 1px solid black;font-size: 14px; text-align: left;">
+                                                    <b>
+                                                        <span t-esc="p['company_name']"/>
+                                                    </b>
+                                                    <br/>
+                                                    <span t-esc="p['company_street']"/>,
+                                                    <span t-esc="p['company_street2']"/>
+                                                    <br/>
+                                                    <span t-esc="p['company_city']"/>,
+                                                    <span t-esc="p['company_zip']"/> -
+                                                    <span t-esc="p['company_country_id']"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </tr>
+                                <tr style="border:2px solid white;padding:1px;width:100%;height=1px;">
+                                    <td/>
+                                </tr>
+                                <tr>
+                                    <table style="height=30px;" class="table table-bordered mb32">
+                                        <thead>
+                                            <tr>
+                                                <td style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;" rowspan="2" width="10"><b>N°</b></td>
+                                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;" rowspan="2" width="120">MATRICULE CNSS</th>
+                                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;" rowspan="2">CIN</th>
+                                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;" rowspan="2" width="350">NOM ET PRÉNOM</th>
+                                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;" rowspan="2" width="250">FONCTION</th>
+                                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;" colspan="3">REMUNERATION MENSUELLE</th>
+                                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;" rowspan="2" width="100">TOTAL GENERAL</th>
+                                            </tr>
+                                            <tr>
+                                                <th style="border: 1px solid black; font-size: 13px; background-color: #e9e6e6;" width="100" >1er mois (TND)</th>
+                                                <th style="border: 1px solid black; font-size: 13px; background-color: #e9e6e6;" width="100" >2éme mois (TND)</th>
+                                                <th style="border: 1px solid black; font-size: 13px; background-color: #e9e6e6;" width="100" >3éme mois (TND)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-set="general_total" t-value="0" />
+                                            <t t-set="general_total_m1" t-value="0" />
+                                            <t t-set="general_total_m2" t-value="0" />
+                                            <t t-set="general_total_m3" t-value="0" />
+                                            
+                                        
+
+
+                                            <t t-foreach="docs" t-as="o">
+                                                <t t-set="counter" t-value="counter + 1" />
+                                                <t t-if = "o['page'] == p['page']">
+                                                    <t t-set="general_total" t-value="general_total+o['total']"/>
+
+                                                    <t t-set="general_total_m2" t-value="general_total_m2+o['m2']"/>
+                                                    <t t-set="general_total_m3" t-value="general_total_m3+o['m3']"/>
+                                                    <t t-set="total_trimestre_x" t-value="total_trimestre_x+general_total" />
+                                                    
+                                                    
+                                                  
+                                                   
+
+                                                    <tr style="font-size: 14px;text-align: center;line-height:1.5px;height=1.5px;">
+                                                        <td style="border: 1px solid black;">
+                                                            <br/>
+                                                            <span t-esc="o['ligne']"/>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            <br/>
+                                                            <span t-esc="o['matricule']"/>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            <br/>
+                                                            <span t-esc="o['cin']"/>
+                                                        </td>
+                                                        <td style="border: 1px solid black; text-align:left;">
+                                                            <br/>
+                                                            <span t-esc="o['nom_prenom']"/>
+                                                        </td>
+                                                        <td style="border: 1px solid black; text-align:left;">
+                                                            <br/>
+                                                            <span t-esc="o['job']"/>
+                                                        </td>
+                                                        <td style="border: 1px solid black;text-align:right;">
+                                                            <br/>
+                                                            <span t-esc="o['m1']" t-options='{"widget": "float", "precision": 3}'/>
+                                                            <t t-set="general_total_m1" t-value="general_total_m1+o['m1']"/>
+                                                        </td>
+                                                        <td style="border: 1px solid black;text-align:right;">
+                                                            <br/>
+                                                            <span t-esc="o['m2']" t-options='{"widget": "float", "precision": 3}'/>
+                                                        </td>
+                                                        <td style="border: 1px solid black;text-align:right;">
+                                                            <br/>
+                                                            <span t-esc="o['m3']" t-options='{"widget": "float", "precision": 3}'/>
+                                                        </td>
+                                                        <td style="border: 1px solid black;text-align:right;">
+                                                            <br/>
+                                                            <span t-esc="o['total']" t-options='{"widget": "float", "precision": 3}'/>
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                            </t>
+                                            <tr>
+                                                <td style="border: 1px solid black;background-color: #e9e6e6; text-align: end;" colspan="5">
+                                                    <b>TOTAL A REPORTER</b></td>
+                                                <td style="border: 1px solid black; background-color: #e9e6e6; text-align:right;">
+                                                    <span t-esc="general_total_m1" t-options='{"widget": "float", "precision": 3}'/>
+                                                </td>
+                                                <td style="border: 1px solid black; background-color: #e9e6e6; text-align:right;">
+                                                    <span t-esc="general_total_m2" t-options='{"widget": "float", "precision": 3}'/>
+                                                </td>
+                                                <td style="border: 1px solid black; background-color: #e9e6e6; text-align:right;">
+                                                    <span t-esc="general_total_m3" t-options='{"widget": "float", "precision": 3}'/>
+                                                </td>
+                                                <td style="border: 1px solid black; background-color: #e9e6e6; text-align:right;">
+                                                    <span t-esc="general_total" t-options='{"widget": "float", "precision": 3}'/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </t>
+            </t>
+            <p style="page-break-before:always;"> </p>
+            <t t-foreach="total_list" t-as="t">
+                <t t-call="spc_declaration_cnss_detaillee.external_layout_cnss">
+                    <div class="page">
+                        <table style="border:2px solid white;padding:1px;width:100%;">
+                            <thead>
+                                <tr>
+                                    <td>
+                                        <table style="border:2px solid white;padding:1px;width:100%;">
+                                            <tbody>
+                                                <tr style="text-align:center;">
+                                                    <td style="border: 1px solid white;padding-top:-5px;font-size:12px;">
+                                                        <b>REPUBLIQUE TUNISIENNE</b>
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr style="text-align:center">
+                                                    <td style="border: 1px solid white;padding-top:-5px;font-size:12px;">
+                                                        <b>MINISTERE DES AFFAIRES SOCIALES</b>
+                                                    </td>
+
+
+                                                </tr>
+
+                                                <tr style="text-align:center">
+                                                    <td style="border: 1px solid white;font-size:12px;">
+                                                        CAISSE NATIONALE DE SECURITE SOCIALE
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr style="text-align:center">
+                                                    <td style="border: 1px solid white;font-size:12px;">
+                                                        49 . Av.TAIEB MHIRI - TUNIS- Tel: 71. 796. 744
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td colspan="2">
+                                        <h4 style="text-align:center;font-weight:bold;direction:rtl;font-family:Kufi !important;margin-top: 10px !important; margin-left: 95px; font-size: 18px;">
+                                            DECLARATION TRIMESTRIELLE DES SALARIES ET DES SALAIRES
+                                        </h4>
+                                        <p style="text-align:center;margin-left: 139px; font-size: 16px;">
+                                            doit étre remise à la caisse sous peine de pénalités dans les 15 premiers
+                                            jours qui suivent le trimestre
+                                        </p>
+                                    </td>
+                                </tr>
+                            </thead>
+                        </table>
+
+                        <br/>
+
+                        <table style="height=30px;" class="table table-bordered mb32">
+                            <tr>
+                                <td style="border: 1px solid black;background-color: #e9e6e6; text-align: end;" colspan="5">
+                                    <b>TOTAL A REPORTER</b></td>
+                                <td style="border: 1px solid black;background-color: #e9e6e6; text-align: end;">
+                                   <span t-esc="t['total_m1']" t-options='{"widget": "float", "precision": 3}'/>
+                                </td>
+                                 <td style="border: 1px solid black;background-color: #e9e6e6; text-align: end;">
+                                    <span t-esc="t['total_m2']" t-options='{"widget": "float", "precision": 3}'/>
+                                 </td>
+                                 <td style="border: 1px solid black;background-color: #e9e6e6; text-align: end;">
+                                    <span t-esc="t['total_m3']" t-options='{"widget": "float", "precision": 3}'/>
+                                </td>
+                                 <td style="border: 1px solid black;background-color: #e9e6e6; text-align: end;">
+                                    <span t-esc="t['total_trimestre_x']" t-options='{"widget": "float", "precision": 3}'/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="ras_report_id"
+            model="account.payment"
+            string="Retenu à la source"
+            report_type="qweb-pdf"
+            name="asc_account_retention.ras_report_template"
+            file="asc_account_retention.ras_report_template"
+        />
+    </data>
+</odoo>

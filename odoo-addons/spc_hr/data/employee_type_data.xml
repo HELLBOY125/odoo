@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="employee_type_detached" model="hr.employee.type">
+            <field name="name">Détaché</field>
+        </record>
+
+        <record id="employee_type_elected" model="hr.employee.type">
+            <field name="name">Élu</field>
+        </record>
+    </data>
+</odoo>

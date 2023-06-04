@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+         <!--
+            List
+         -->
+        <record id="historique_processus_tree_view" model="ir.ui.view">
+            <field name="name">sig.tresor.historique.tree</field>
+            <field name="model">sig.tresor.historique</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Historique Processus" create="false" edit="false">
+                    <field name="wkf_nom" string="Procédure"/>
+                     <field name="wkf_etat" string="Etat"/>
+                    <field name="date_reception"/>
+                    <field name="date_transmission"/>
+                    <field name="delai"/>
+                </tree>
+            </field>
+        </record>
+
+          <record id="historique_processus_action" model="ir.actions.act_window">
+            <field name="name">Historique des processus</field>
+            <field name="res_model">sig.tresor.historique</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="historique_processus_tree_view"/>
+        </record>
+
+
+        <menuitem name="Historique des processus" id="historique_menu"
+                  parent="sig_tresor_root_menu" sequence="1004"
+                  action="historique_processus_action"/>
+
+
+    </data>
+</odoo>

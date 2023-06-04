@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="1">
+
+        <!--        règle permet d'imputer une tâche à agent ou chef de service d'autorisation d'exercer à l'étape de la réception du courrier de demande -->
+        <record model="ir.rule" id="autorisation_exercer_rule">
+            <field name="name">autorisation d'exercer accès aux opérations sur reception de courrier si tâche affectée
+            </field> <!-- le nom de la règle -->
+            <field name="active" eval="1"/> <!-- activer la règle -->
+            <field name="model_id"
+                   ref="model_sig_tresor_reception_courrier"/> <!-- le modèle auquel la règle s'applique -->
+            <field name="domain_force">[('assigne_a','=', user.id)] <!-- ('assigne_a','=', uid) -->
+            </field> <!-- définir les conditions d'enregistrements -->
+            <field name="groups"
+                   eval="[(4, ref('sig_tresor.autorisation_exercer_group'))]"/> <!-- la règle s'applique au groupe  autorisation_exercer_group-->
+            <!-- définir les opérations pour lesquelles la règle s'applique -->
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <!--        règle permet d'imputer une tâche à agent ou chef de service d'autorisation d'exercer à l'étape de la vérif de la conformité du dossier -->
+        <record model="ir.rule" id="autorisation_exercer_verif_conformite_dossier_rule">
+            <field name="name">autorisation d'exercer accès aux opérations sur la vérif de la conformité du dossier si
+                tâche affectée
+            </field> <!-- le nom de la règle -->
+            <field name="active" eval="1"/> <!-- activer la règle -->
+            <field name="model_id"
+                   ref="model_sig_tresor_verif_conformite_dossier"/> <!-- le modèle auquel la règle s'applique -->
+            <field name="domain_force">[('assigne_a','=', user.id)]
+            </field> <!-- définir les conditions d'enregistrements -->
+            <field name="groups"
+                   eval="[(4, ref('sig_tresor.autorisation_exercer_group'))]"/> <!-- la règle s'applique au groupe  autorisation_exercer_group-->
+            <!-- définir les opérations pour lesquelles la règle s'applique -->
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+
+        <!--        règle permet d'imputer une tâche à agent ou chef de service d'autorisation d'exercer à l'étape de l'étude de fond du dossier -->
+        <record model="ir.rule" id="autorisation_exercer_etude_fond_dossier_rule">
+            <field name="name">autorisation d'exercer accès aux opérations sur l'étude de fond du dossier si
+                tâche affectée
+            </field> <!-- le nom de la règle -->
+            <field name="active" eval="1"/> <!-- activer la règle -->
+            <field name="model_id"
+                   ref="model_sig_tresor_etude_fond_dossier"/> <!-- le modèle auquel la règle s'applique -->
+            <field name="domain_force">[('assigne_a','=', user.id)]
+            </field> <!-- définir les conditions d'enregistrements -->
+            <field name="groups"
+                   eval="[(4, ref('sig_tresor.autorisation_exercer_group'))]"/> <!-- la règle s'applique au groupe  autorisation_exercer_group -->
+            <!-- définir les opérations pour lesquelles la règle s'applique -->
+            <field name="perm_read" eval="0"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+
+         <!-- règle permet d'imputer une tâche à agent ou chef de service d'autorisation d'exercer à l'étape de la saisine bceao -->
+        <record model="ir.rule" id="autorisation_exercer_sig_tresor_saisine_bceao_rule">
+            <field name="name">autorisation d'exercer accès aux opérations sur l'étude de fond du dossier si
+                tâche affectée
+            </field> <!-- le nom de la règle -->
+            <field name="active" eval="0"/> <!-- activer la règle -->
+            <field name="model_id"
+                   ref="model_sig_tresor_saisine_bceao"/> <!-- le modèle auquel la règle s'applique -->
+            <field name="domain_force">[('assigne_a','=', user.id)]
+            </field> <!-- définir les conditions d'enregistrements -->
+            <field name="groups"
+                   eval="[(4, ref('sig_tresor.autorisation_exercer_group'))]"/> <!-- la règle s'applique au groupe  autorisation_exercer_group -->
+            <!-- définir les opérations pour lesquelles la règle s'applique -->
+            <field name="perm_read" eval="0"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+    </data>
+</odoo>
+

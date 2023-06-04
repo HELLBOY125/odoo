@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+ 
+<template id="purchase_agreement_resiliation_report">
+<t t-call="web.html_container">
+
+       <t t-foreach="docs" t-as="o">
+      
+       <t t-call="spc_contrat_purchase.external_layout_standard_resiliation">
+            <div class="page" >
+            <style type="text/css">
+
+	span.cls_003{font-family:Times,serif;font-size:14px;color:rgb(0,0,0);font-weight:bold;font-style:gras;text-decoration: none}
+	div.cls_003{font-family:Times,serif;font-size:14px;color:rgb(0,0,0);font-weight:bold;font-style:gras;text-decoration: none}
+	span.cls_006{font-family:Times,serif;font-size:18px;color:rgb(0,0,0);font-weight:bold;font-style:gras;text-decoration: none}
+	div.cls_006{font-family:Times,serif;font-size:18px;color:rgb(0,0,0);font-weight:bold;font-style:gras;text-decoration: none}
+	span.cls_008{font-family:Times,serif;font-size:20px;color:rgb(0,0,0);font-weight:bold;font-style:gras;text-decoration: none}
+	div.cls_008{font-family:Times,serif;font-size:20px;color:rgb(0,0,0);font-weight:bold;font-style:gras;text-decoration: none}
+	span.cls_002{font-family:Times,serif;font-size:10px;color:rgb(0,112,191);font-weight:bold;font-style:gras;text-decoration: none}
+	div.cls_002{font-family:Times,serif;font-size:10px;color:rgb(0,112,191);font-weight:bold;font-style:gras;text-decoration: none}
+
+</style>
+
+<div style="position:absolute;left:56.64px;top:262.04px" class="cls_008"><span class="cls_008"><span t-esc="o.vendor_id.name"/></span></div>
+<div style="position:absolute;left:56.64px;top:367.76px" class="cls_003"><span class="cls_003">Ref:</span><span t-esc="o.name"/></div>
+<div style="position:absolute;left:56.64px;top:383.84px" class="cls_003"><span class="cls_003">Date:</span></div>
+<div style="position:absolute;left:56.64px;top:432.20px" class="cls_003"><span class="cls_003">Objet : Résiliation de convention.</span></div>
+<div style="position:absolute;left:92.04px;top:495.44px" class="cls_003"><span class="cls_003">Monsieur,</span></div>
+<div style="position:absolute;left:92.04px;top:519.32px" class="cls_006"><span class="cls_006">N</span><span class="cls_003">ous vous informons que votre convention avec la <span t-esc="o.partner_id.name"></span></span></div>
+<div style="position:absolute;left:56.64px;top:550.64px" class="cls_003"><span class="cls_003">est résiliée à compter du <span t-esc="o.date_resiliation"/>.</span></div>
+<div style="position:absolute;left:92.04px;top:574.52px" class="cls_006"><span class="cls_006">N</span><span class="cls_003">ous  saisissons  cette  occasion  pour  vous  remercier  des  services</span></div>
+<div style="position:absolute;left:56.64px;top:605.84px" class="cls_003"><span class="cls_003">appréciables rendus à notre société, et à notre personnel durant toute la</span></div>
+<div style="position:absolute;left:56.64px;top:629.96px" class="cls_003"><span class="cls_003">période de votre activité.</span></div>
+<div style="position:absolute;left:92.04px;top:653.84px" class="cls_006"><span class="cls_006">V</span><span class="cls_003">euillez agréer, Monsieur, l’expression de nos sentiments distingués.</span></div>
+<div style="position:absolute;left:300.72px;top:900.28px" class="cls_008"><span class="cls_008">Président de </span><span t-esc="o.partner_id.name"/></div>
+<div style="position:absolute;left:300.56px;top:997.84px" class="cls_008"><span class="cls_008"><span t-esc="o.pdg.name"></span></span></div>
+
+</div>
+
+ 				
+		</t>
+		</t>
+		</t>
+</template>
+<template id="external_layout_standard_resiliation">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+         
+   <div class="header" >
+       <center>
+       <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 150px;" alt="Logo"/>
+       </center>
+       </div>
+       
+        <div class="o_report_layout_standard"  >
+            <t t-call="web.address_layout"/>
+            <t t-raw="0"/>
+        </div>
+        <div class="footer">
+        <style>
+          div.cls_002{font-family:Times,serif;font-size:18px;color:rgb(0,112,191);font-weight:bold;font-style:gras;text-decoration: none}
+        </style>
+        
+        <center>
+	   <div  class="cls_002"><span class="cls_002">       <span t-esc="company.street"/>           </span><span class="cls_002">     <span t-esc="company.email"> </span>       </span>
+		</div>
+        
+        </center>
+        
+       
+</div>
+     
+        
+    </template>
+
+
+
+  <record id="paperformat_euro_resiliation" model="report.paperformat">
+	      <field name="name">European A4</field>
+	      <field name="default" eval="True" />
+	      <field name="format">A4</field>
+	      <field name="page_height">0</field>
+	      <field name="page_width">0</field>
+	      <field name="orientation">Portrait</field>
+	      <field name="margin_top">25</field>
+	      <field name="margin_bottom">20</field>
+	      <field name="margin_left">7</field>
+	      <field name="margin_right">7</field>
+	      <field name="header_line" eval="False" />
+	      <field name="header_spacing">25</field>
+	      <field name="dpi">90</field>
+	    </record>
+    
+  
+
+
+ 
+     <report string="Résiliation de convention"
+			 id="report_purchase_agreement_resiliation"
+			 model="purchase.agreement"
+			 report_type="qweb-pdf"
+			 name="spc_contrat_purchase.purchase_agreement_resiliation_report"
+			 file="spc_contrat_purchase.purchase_agreement_resiliation_report"
+			 paperformat="spc_contrat_purchase.paperformat_euro_resiliation"
+			 print_report_name="'Résiliation de convention N° %s' % (object.name)"
+			 menu="False" 
+            />
+</odoo>

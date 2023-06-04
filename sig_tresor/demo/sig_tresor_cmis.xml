@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="cmis_alfresco" model="sig.tresor.cmis">
+            <field name="name">alfresco</field>
+            <field name="username">admin</field>
+            <field name="password">12345</field>
+            <field name="location">http://164.160.35.13:8080/alfresco/api/-default-/public/cmis/versions/1.1/browser/
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

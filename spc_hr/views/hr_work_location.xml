@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="action_hr_work_location" model="ir.actions.act_window">
+            <field name="name">Lieu de travail</field>
+            <field name="res_model">hr.work.location</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Hr work location menu-->
+        <menuitem id="hr_work_location_id_menu" name="Lieux de travail" action="action_hr_work_location"
+                  sequence="2" parent="hr.menu_human_resources_configuration_employee"/>
+
+        <!--Hr work location form view -->
+        <record model="ir.ui.view" id="hr_work_location_view_form">
+            <field name="name">hr.work.location.form</field>
+            <field name="model">hr.work.location</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!--Hr work location view Visa-->
+        <record model="ir.ui.view" id="hr_work_location_view_tree">
+            <field name="name">hr.work.location.tree</field>
+            <field name="model">hr.work.location</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

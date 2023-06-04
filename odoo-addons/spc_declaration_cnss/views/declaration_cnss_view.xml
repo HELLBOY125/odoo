@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="declaration_cnss_form_view" model="ir.ui.view">
+            <field name="name">declaration cnss form view</field>
+            <field name="model">declaration.cnss</field>
+            <field name="arch" type="xml">
+                <form string="Déclaration CNSS ">
+                    <group>
+                        <group>
+                            <field name="company" options="{'no_open':True,'no_create':True}"/>
+                            <field name="trimestre"/>
+                            <field name="year" options="{'no_open':True,'no_create':True}" readonly="False"/>
+                        </group>
+                        <group>
+                            <field name="file" filename="file_name" readonly="1"/>
+                            <field name="file_name" invisible="1" force_save="1"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="genarate_txt" string="Générer Télédécration CNSS" type="object" class="oe_highlight"/>
+                        Ou
+                        <button special="cancel" string="Annuler" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="action_declaration_cnss" model="ir.actions.act_window">
+            <field name="name">Déclaration CNSS</field>
+            <field name="res_model">declaration.cnss</field>
+            <field name="view_id" ref="declaration_cnss_form_view"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem name="Déclaration CNSS" id="menu_action_declaration_cnss_excel_report_wizard"
+                 parent="om_hr_payroll.menu_hr_payroll_root" sequence="33"/>
+
+        <menuitem name="Fichier Déclaration CNSS"
+                  id="declaration_cnss"
+                  action="action_declaration_cnss"
+                  parent="menu_action_declaration_cnss_excel_report_wizard"/>
+
+    </data>
+
+</odoo>

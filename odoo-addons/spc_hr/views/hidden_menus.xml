@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Create group invisible -->
+        <record id="make_invisible" model="res.groups">
+            <field name="name">Invisible</field>
+        </record>
+
+        <!-- Hide contacts menu -->
+        <!-- <record model="ir.ui.menu" id="contacts.menu_contacts">
+            <field name="groups_id" eval="[(6,0,[ref('make_invisible')])]"/>
+        </record> -->
+
+        <!-- Hide messages menu -->
+        <record model="ir.ui.menu" id="mail.menu_root_discuss">
+            <field name="groups_id" eval="[(6,0,[ref('make_invisible')])]"/>
+        </record>
+
+        <!-- Hide "Directory employees" menu from  -->
+        <menuitem
+                id="hr.menu_hr_employee"
+                name="Employee Directory"
+                action="hr.hr_employee_public_action"
+                parent="hr.menu_hr_root"
+                groups="hr.group_hr_manager"
+                sequence="4"/>
+
+    </data>
+</odoo>

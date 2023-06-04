@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+hr_premium,hr.premium,model_hr_premium,,1,1,1,1
+hr_premium_line,hr.premium.line,model_hr_premium_line,,1,1,1,1
+hr.contrcat.premium.line,hr.contrcat.premium.line,model_hr_contrcat_premium_line,,1,1,1,1
+hr_convention,hr.convention,model_hr_convention,,1,1,1,1
+hr_convention_category,hr.convention.category,model_hr_convention_category,,1,1,1,1
+hr_convention_category_line,hr.convention.category.line,model_hr_convention_category_line,,1,1,1,1
+hr_convention_echelon,hr.convention.echelon,model_hr_convention_echelon,,1,1,1,1

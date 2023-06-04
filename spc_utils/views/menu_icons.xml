@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Add icon to hr_expense's main menu -->
+        <menuitem
+        id="hr_expense.menu_hr_expense_root"
+        name="Expenses"
+        web_icon="spc_utils,static/description/hr_expense.png"/>
+
+        <!-- Add icon to applications's main menu -->
+        <menuitem
+        id="base.menu_management"
+        name="Apps"
+        web_icon="spc_utils,static/description/applications.png"/>
+
+        <!-- Add icon to configuration's main menu -->
+        <menuitem
+        name="Settings"
+        id="base.menu_administration"
+        web_icon="spc_utils,static/description/configuration.png"/>
+
+
+    </data>
+</odoo>

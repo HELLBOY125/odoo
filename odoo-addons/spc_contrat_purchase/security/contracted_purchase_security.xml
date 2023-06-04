@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data noupdate="1">
+
+    <record model="ir.module.category" id="module_category_contracted_purchase">
+        <field name="name">Achat conventionnée</field>
+        <field name="description">Vous aide à gérer vos processus liés aux achats conventionées tels que les conventions, les belletin des soins , etc...</field>
+        <field name="sequence">9</field>
+    </record>
+
+     <record id="group_contracted_purchase_user" model="res.groups">
+        <field name="name">Gestionnaire</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="category_id" ref="module_category_contracted_purchase"/>
+    </record>
+
+    <record id="group_contracted_purchase_manager" model="res.groups">
+        <field name="name">Responsable</field>
+        <field name="category_id" ref="module_category_contracted_purchase"/>
+        <field name="implied_ids" eval="[(4, ref('group_contracted_purchase_user'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+    
+    <record id="base.default_user" model="res.users">
+        <field name="groups_id" eval="[(4,ref('group_contracted_purchase_manager'))]"/>
+    </record>
+</data>
+</odoo>

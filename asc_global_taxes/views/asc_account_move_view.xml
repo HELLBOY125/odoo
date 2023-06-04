@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        
+        <!-- Ajouter Timbre fiscal -->
+        <record id="account_move_global_tax" model="ir.ui.view">
+            <field name="name">account.move.global.tax</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+            <data>
+            	<xpath expr="//field[@name='amount_untaxed']" position="attributes">
+            		<attribute name="class">oe_subtotal_footer_separator</attribute>
+                 </xpath>
+            	<xpath expr="//field[@name='amount_untaxed']" position="before">
+            		<field name="applicate_timbre" />
+                 </xpath>
+	           <xpath expr="//field[@name='invoice_line_ids']/tree" position="attributes">
+	            	<attribute name="decoration-muted" >name == 'Timbre'</attribute>
+	           </xpath>
+            </data>
+            </field>
+        </record>
+        
+</odoo>

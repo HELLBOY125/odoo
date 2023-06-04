@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.actions.act_window" id="action_armateur">
+                <field name="name">Armateur</field>
+                <field name="res_model">res.partner</field>
+<!--                <field name="view_type">form</field>-->
+                <field name="view_mode">kanban,tree,form</field>
+                <field name="view_id" ref="base.action_partner_form"/>
+                <field name="help" type="html">
+	              <p class="oe_view_nocontent_create">
+	                Click to add a contact in your address book.
+	              </p><p>
+	                Odoo helps you easily track all activities related to
+	                a customer; discussions, history of business opportunities,
+	                documents, etc.
+	              </p>
+	            </field>
+            <field name="context">{'is_armateur': True}</field>
+            </record>
+
+         <menuitem id="armateur_menu" name="Armateur" parent="sig_tresor_root_menu" action="action_armateur"/>
+
+
+    </data>
+</odoo>

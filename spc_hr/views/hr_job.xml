@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <data>
+       <!-- Add job_description page in notebook inside job_position view -->
+       <record id="view_hr_job_form_inherit" model="ir.ui.view">
+            <field name="name">hr.job.form.inherited</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//sheet" position="inside">
+                    <notebook>
+                            <page name="job_description" string="Fonction et attributions">
+                                <field name="job_description"/>
+                            </page>
+                    </notebook>
+                </xpath>
+            </field>
+       </record>
+   </data>
+</odoo>

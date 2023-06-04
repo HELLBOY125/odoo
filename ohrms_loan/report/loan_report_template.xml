@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="loan_report_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=lang)" />
+
+            <div class="page">
+                <h2>
+                    <span>Détail du prêt N° </span>
+                    <span t-if="o.name != '/'" t-field="o.name"/>
+                </h2>
+                <div id="informations" class="row mt32 mb32">
+                    <div class="col-auto mw-100 mb-2" t-if="o.employee_id">
+                        <strong>Employé:</strong>
+                        <p class="m-0" t-field="o.employee_id.name"/>
+                    </div>
+                    <div class="col-auto mw-100 mb-2" t-if="o.job_position">
+                        <strong>Fonction:</strong>
+                        <p class="m-0" t-field="o.job_position.name"/>
+                    </div>
+                    <div class="col-auto mw-100 mb-2" t-if="o.payment_date">
+                        <strong>Date:</strong>
+                        <p class="m-0" t-field="o.payment_date"/>
+                    </div>
+                    <div class="col-auto mw-100 mb-2" t-if="o.loan_amount">
+                        <strong>Montant:</strong>
+                        <p class="m-0" t-field="o.loan_amount" t-options='{"widget": "float", "precision": 3}'/>
+                    </div>
+                    <div class="col-auto mw-100 mb-2" t-if="o.installment">
+                        <strong>Nombre des tranches:</strong>
+                        <p class="m-0" t-field="o.installment"/>
+                    </div>
+
+                </div>
+                <table class="table table-sm o_main_table" name="invoice_line_table">
+                    <thead>
+                        <tr>
+                            <t t-set="colspan" t-value="3"/>
+                            <th name="th_date" class="text-left">
+                                <span>Date de paiement</span>
+                            </th>
+                            <th name="th_amount" class="text-left">
+                                <span>Montant</span>
+                            </th>
+                            <th name="th_status" class="text-right">
+                                <span>État</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="loan_tbody">
+                        <t t-set="lines" t-value="o.loan_lines.sorted(key=lambda l: (l.date, -l.id), reverse=False)"/>
+                        <t t-foreach="lines" t-as="line">
+                            <tr>
+                                <td name="date">
+                                    <span t-field="line.date" t-options='{"widget": "date"}'/>
+                                </td>
+
+                                <td name="amount" class="text-right" >
+                                    <span class="text-nowrap" t-field="line.amount"
+                                          t-options='{"widget": "float", "precision": 3}'/>
+                                </td>
+
+                                <td name="paid">
+                                    <span class="text-nowrap" t-field="line.paid"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+
+                <div class="clearfix">
+                        <div id="total" class="row">
+                            <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
+                                <table class="table table-sm" style="page-break-inside: avoid;">
+                                    <tr class="border-black o_subtotal" style="">
+                                        <td><strong>Montant total</strong></td>
+                                        <td class="text-right">
+                                            <span t-field="o.total_amount"
+                                                  t-options='{"widget": "float", "precision": 3}'/>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-black o_total">
+                                        <td><strong>Montant total payé</strong></td>
+                                        <td class="text-right">
+                                            <span class="text-nowrap" t-field="o.total_paid_amount"
+                                                  t-options='{"widget": "float", "precision": 3}'/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="loan_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.employee_id.user_id.partner_id.lang"/>
+                <t t-call="ohrms_loan.loan_report_document" t-lang="lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>

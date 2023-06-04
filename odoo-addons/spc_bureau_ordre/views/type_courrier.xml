@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="type_template_form_view" model="ir.ui.view">
+            <field name="name">BO Form type</field>
+            <field name="model">type.courrier.entrant</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="code_id" />
+                            
+                        </group>
+                        <group>
+                         <field name="is_pharmacie" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+
+        </record>
+
+        <record id="type_template_tree_view" model="ir.ui.view">
+            <field name="name">type.template.type.tree</field>
+            <field name="model">type.courrier.entrant</field>
+            <field name="arch" type="xml">
+                <tree string="Type de courrier">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="type_template_action" model="ir.actions.act_window">
+            <field name="name">Types Courriers Entrants</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">type.courrier.entrant</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_id" ref="type_template_tree_view"/>
+        </record>
+
+        <!-- Type courrier sortant -->
+
+        <record id="type_courrier_sortant_form_view" model="ir.ui.view">
+            <field name="name">Courrier Form type</field>
+            <field name="model">type.courrier.sortant</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="code_sortant" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+
+        </record>
+
+        <record id="type_courrier_sortant_tree_view" model="ir.ui.view">
+            <field name="name">Courrier Tree</field>
+            <field name="model">type.courrier.sortant</field>
+            <field name="arch" type="xml">
+                <tree string="Type de courrier">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="type_sortant_action" model="ir.actions.act_window">
+            <field name="name">Type Courriers Sortants</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">type.courrier.sortant</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_id" ref="type_courrier_sortant_tree_view"/>
+        </record>
+
+
+        <menuitem action="type_sortant_action"  id="menu_type_courrier" name="Type de courriers" parent="courrier_configuration" sequence="3" />
+        <menuitem action="type_template_action"  id="menu_type_template_action" name="Type de courriers entrants" parent="menu_type_courrier" sequence="2" />
+        <menuitem action="type_sortant_action"  id="menu_type_sortant_action" name="Type de courriers sortants" parent="menu_type_courrier" sequence="3" />
+
+    </data>
+</odoo>

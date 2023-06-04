@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  
+    <record model="ir.ui.menu" id="purchase.menu_purchase_root">
+     	 <field name="name">Achats ordinaires</field>
+      </record>
+     <menuitem name="Achats conventionnés"
+            id="menu_purchase_conventionne_root"
+            groups="spc_contrat_purchase.group_contracted_purchase_user,spc_contrat_purchase.group_contracted_purchase_manager"
+            web_icon="spc_contrat_purchase,static/description/icon.png"
+            sequence="30"/>
+      
+       <menuitem id="menu_purchase_agreement_root"
+       			 name="Contrat de convention"
+            	parent="menu_purchase_conventionne_root" 
+            	sequence="1" />
+         <menuitem id="menu_account_ordonnance_root"
+       			 name="Bulletin du soin"
+            	parent="menu_purchase_conventionne_root" 
+            	sequence="2" />
+        
+         <menuitem id="menu_account_ordonnance"
+       			   name="Bulletin du soin"
+            	   parent="menu_account_ordonnance_root" 
+            	   action="account_ordonnance_action"
+            	   sequence="1" /> 
+            	
+           <menuitem id="menu_purchase_conventionne_supplier_name"
+			         name="Fournisseur"
+			         parent="menu_account_ordonnance_root"
+			         action="account.res_partner_action_supplier" 
+			         sequence="2"/> 
+			
+		<menuitem id="menu_account_ordonnance_prise_root"
+       			 name="Prise en charge"
+            	parent="menu_purchase_conventionne_root" 
+            	action="account_ordonnance_prise_action" 
+            	sequence="3" /> 
+			
+			         
+	       <menuitem id="menu_purchase_products_root"
+	       			 name="Articles" 
+	       			 parent="menu_purchase_conventionne_root" 
+	       			 action="purchase.product_normal_action_puchased"
+            	     sequence="4" />
+	   		         
+			            	   	
+            	
+        <menuitem
+        id="menu_purchase_agreement_physique_root"
+        name="Contrat de convention physique"
+        parent="menu_purchase_agreement_root"
+        sequence="1"
+        action="action_purchase_agreement_physique"
+       />
+       
+       
+       
+       <menuitem
+        id="menu_purchase_agreement_liberale_root"
+        name="Contrat de convention libérale"
+        parent="menu_purchase_agreement_root"
+        sequence="2"
+        action="action_purchase_agreement_liberale"
+       />
+       
+       
+       <menuitem
+        id="menu_purchase_agreement_morale_root"
+        name="Contrat de convention morale"
+        parent="menu_purchase_agreement_root"
+        sequence="3"
+        action="action_purchase_agreement_morale"
+       />     	
+            
+      <menuitem id="menu_purchase_conventionne_config"
+      			 name="Configuration" 
+      			 parent="menu_purchase_conventionne_root" 
+      			 sequence="100" 
+      			 groups="purchase.group_purchase_manager"/>       
+  
+   <menuitem id="menu_categorie_purchase_agreement"
+        name="Type de conventionné"
+        sequence="5"
+        parent="menu_purchase_conventionne_config"
+        action="categorie_purchase_agreement_action"/>
+            
+            
+   <menuitem
+        id="menu_purchase_agreement_article"
+        name="Articles du convention"
+        sequence="2"
+        parent="menu_purchase_conventionne_config"
+        action="purchase_agreement_article_action"/>  
+        
+        
+        
+     <menuitem
+        id="menu_agreement_resiliation"
+        name="Motif du résiliation"
+        sequence="3"
+        parent="menu_purchase_conventionne_config"
+        action="agreement_resiliation_action"/> 
+        
+        
+    <menuitem
+            id="menu_res_vacation_config_root"
+            name="Vacation par spécialité"
+            action="spc_process_medecin.res_vacation_config_action"
+             parent="menu_purchase_conventionne_config"
+            sequence="4"/>         
+    
+       <menuitem id="process_medecin_root"
+       			 name="Process médecin"
+            	parent="menu_purchase_conventionne_root" 
+            	sequence="3" />    
+            	
+            	
+      <menuitem
+            id="menu_process_medecin_root"
+            name="Feuille de présence mensuelle"
+            action="spc_contrat_purchase.process_medecin_action"
+             parent="process_medecin_root"
+            sequence="1"/>         	
+        
+   
+            
+            
+                             
+
+</odoo>

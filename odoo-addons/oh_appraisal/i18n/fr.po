@@ -1,0 +1,424 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oh_appraisal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0-20210111\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-15 19:26+0000\n"
+"PO-Revision-Date: 2022-05-15 22:40+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_needaction
+msgid "Action Needed"
+msgstr "Action nécessaire"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal__final_interview
+msgid "After sending survey link,you can schedule final interview date"
+msgstr ""
+"Après avoir envoyé le lien de l'enquête, vous pouvez programmer la date "
+"finale de l'entretien"
+
+#. module: oh_appraisal
+#: model:ir.ui.menu,name:oh_appraisal.menu_hr_appraisal_answers
+#: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_form_view
+msgid "Answers"
+msgstr "Réponses"
+
+#. module: oh_appraisal
+#: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_kanban
+msgid "Answers:"
+msgstr "Réponses:"
+
+#. module: oh_appraisal
+#: model:ir.actions.act_window,name:oh_appraisal.hr_appraisal_action_form
+#: model:ir.model,name:oh_appraisal.model_hr_appraisal
+#: model:ir.module.category,name:oh_appraisal.module_category_hr_appraisal
+#: model:ir.ui.menu,name:oh_appraisal.menu_hr_appraisal
+#: model:ir.ui.menu,name:oh_appraisal.menu_hr_appraisal_root
+msgid "Appraisal"
+msgstr "Évaluation"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__appraisal_deadline
+msgid "Appraisal Deadline"
+msgstr "Date limite d'évaluation"
+
+#. module: oh_appraisal
+#: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_form_view
+msgid "Appraisal Form"
+msgstr "Formulaire d'évaluation"
+
+#. module: oh_appraisal
+#: model:ir.model,name:oh_appraisal.model_hr_appraisal_stages
+msgid "Appraisal Stages"
+msgstr "Étapes d'évaluation"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_survey_user_input__appraisal_id
+msgid "Appriasal id"
+msgstr "ID d'évaluation"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nombre de pièces jointes"
+
+#. module: oh_appraisal
+#: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_form_view
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__check_cancel
+msgid "Check Cancel"
+msgstr "Annulé"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__check_done
+msgid "Check Done"
+msgstr "Terminé"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__check_draft
+msgid "Check Draft"
+msgstr "Brouillon"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__check_sent
+msgid "Check Sent Mail"
+msgstr "Email envoyé"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__hr_colloborator
+msgid "Collaborators"
+msgstr "Collaborateurs"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__hr_colleague
+msgid "Colleague"
+msgstr "Collègues"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__color
+msgid "Color Index"
+msgstr "Index des couleurs"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__tot_comp_survey
+msgid "Count Answers"
+msgstr "Compter les réponses"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__tot_sent_survey
+msgid "Count Sent Questions"
+msgstr "Compter les questions envoyées"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__created_by
+msgid "Created By"
+msgstr "Créé par"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__create_uid
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal_stages__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__create_date
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal_stages__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oh_appraisal
+#: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_kanban
+msgid "Deadline:"
+msgstr "Date limite:"
+
+#. module: oh_appraisal
+#: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_kanban
+msgid "Delete"
+msgstr "Supprimer"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__display_name
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal_stages__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: oh_appraisal
+#: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_form_view
+msgid "Done"
+msgstr "Terminé"
+
+#. module: oh_appraisal
+#: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_kanban
+msgid "Edit"
+msgstr "Modifier"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__emp_id
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__hr_emp
+#: model:res.groups,name:oh_appraisal.group_appraisal_employee
+msgid "Employee"
+msgstr "Employé"
+
+#. module: oh_appraisal
+#: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_form_view
+msgid "Employee's Name"
+msgstr "Nom de l'employé"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__final_evaluation
+#: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_form_view
+msgid "Final Evaluation"
+msgstr "Evaluation finale"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__final_interview
+msgid "Final Interview"
+msgstr "Entretien final"
+
+#. module: oh_appraisal
+#: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_kanban
+msgid "Final Interview:"
+msgstr "Entretien final:"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal_stages__fold
+msgid "Folded in Appraisal Pipeline"
+msgstr "Plié dans le pipeline d'évaluation"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_follower_ids
+msgid "Followers"
+msgstr "Abonnés"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Abonnés (canaux)"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Abonnés (Partenaires)"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__app_period_from
+msgid "From"
+msgstr "Depuis"
+
+#. module: oh_appraisal
+#: model:ir.module.category,description:oh_appraisal.module_category_hr_appraisal
+msgid "Helps to evaluate employees..."
+msgstr "Aide à évaluer les employés..."
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__id
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal_stages__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal__message_needaction
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+"Si cette case est cochée, de nouveaux messages nécessitent votre "
+"attention."
+
+#. module: oh_appraisal
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal__message_has_error
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si coché, certains messages ont une erreur de délivrance."
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_is_follower
+msgid "Is Follower"
+msgstr "Est abonné"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal____last_update
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal_stages____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__write_uid
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal_stages__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__write_date
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal_stages__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Pièce jointe principale"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__hr_manager
+#: model:res.groups,name:oh_appraisal.group_appraisal_manager
+msgid "Manager"
+msgstr "Gestionnaire"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_has_error
+msgid "Message Delivery error"
+msgstr "Erreur de livraison du message"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_ids
+msgid "Messages"
+msgstr "Messages"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal_stages__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Nombre d'actions"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_has_error_counter
+msgid "Number of errors"
+msgstr "Nombre d'erreurs"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Nombre de messages nécessitant une action"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Nombre de messages avec erreur d'envoi"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Nombre de messages non lus"
+
+#. module: oh_appraisal
+#: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_form_view
+msgid "Plan"
+msgstr "Plan"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__response_id
+msgid "Response"
+msgstr "Réponse"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Erreur d'envoi SMS"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__emp_survey_id
+msgid "Select Appraisal Form"
+msgstr "Sélectionnez le formulaire d'évaluation"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__hr_colleague_id
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__hr_colloborator_id
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__hr_manager_id
+#: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_form_view
+msgid "Select Appraisal Reviewer"
+msgstr "Sélectionnez l'examinateur de l'évaluation"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__colleague_survey_id
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__colloborator_survey_id
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__manager_survey_id
+msgid "Select Opinion Form"
+msgstr "Sélectionnez le formulaire d'opinion"
+
+#. module: oh_appraisal
+#: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_kanban
+msgid "Sent Questions:"
+msgstr "Questions envoyées :"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal_stages__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: oh_appraisal
+#: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_form_view
+msgid "Set To Draft"
+msgstr "Remttre en brouillon"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__state
+msgid "Stage"
+msgstr "Étape"
+
+#. module: oh_appraisal
+#: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_form_view
+msgid "Start Appraisal And Send Forms"
+msgstr "Commencer l'évaluation et envoyer les formulaires"
+
+#. module: oh_appraisal
+#: model:ir.model,name:oh_appraisal.model_survey_user_input
+msgid "Survey User Input"
+msgstr "Entrée de l'utilisateur de l'enquête"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal_stages__fold
+msgid ""
+"This stage is folded in the kanban view when there are no records in that "
+"stage to display."
+msgstr ""
+"Cette étape est repliée dans la vue Kanban lorsqu'il n'y a aucun "
+"enregistrement à afficher à cette étape."
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_unread
+msgid "Unread Messages"
+msgstr "Messages non lus"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Compteur de messages non lus"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__website_message_ids
+msgid "Website Messages"
+msgstr "Messagerie du site Web"
+
+#. module: oh_appraisal
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal__website_message_ids
+msgid "Website communication history"
+msgstr "Historique des communications du site Web"
+
+#. module: oh_appraisal
+#: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_kanban
+msgid "oe_kanban_text_red"
+msgstr "oe_kanban_text_red"

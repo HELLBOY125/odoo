@@ -1,0 +1,1242 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spc_contrat_purchase
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-27 13:21+0000\n"
+"PO-Revision-Date: 2021-08-27 13:21+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+
+
+#. module: spc_contrat_purchase
+#: model:ir.actions.report,print_report_name:spc_contrat_purchase.report_purchase_agreement_resiliation
+msgid "'Résiliation de convention N° %s' % (object.name)"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.external_layout_standard_resiliation
+msgid ""
+"<span class=\"cls_002\">       54, Rue Kémal Ataturk - 1080 Tunis - Tunisie"
+"           </span><span class=\"cls_002\">     Mutuelle@steg.com.tn       "
+"</span>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_resiliation_report
+msgid "<span class=\"cls_003\">Date:</span>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_resiliation_report
+msgid "<span class=\"cls_003\">Monsieur,</span>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_resiliation_report
+msgid "<span class=\"cls_003\">Objet : Résiliation de convention.</span>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_resiliation_report
+msgid "<span class=\"cls_003\">Ref:</span>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_resiliation_report
+msgid ""
+"<span class=\"cls_003\">appréciables rendus à notre société, et à notre "
+"personnel durant toute la</span>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_resiliation_report
+msgid ""
+"<span class=\"cls_003\">période de votre activité en qualité d’infirmier "
+"conventionné.</span>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_resiliation_report
+msgid ""
+"<span class=\"cls_006\">N</span><span class=\"cls_003\">ous  saisissons  "
+"cette  occasion  pour  vous  remercier  des  services</span>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_resiliation_report
+msgid ""
+"<span class=\"cls_006\">N</span><span class=\"cls_003\">ous vous informons "
+"que votre convention avec la mutuelle de la STEG</span>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_resiliation_report
+msgid ""
+"<span class=\"cls_006\">V</span><span class=\"cls_003\">euillez agréer, "
+"Monsieur, l’expression de nos sentiments distingués.</span>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_resiliation_report
+msgid "<span class=\"cls_008\"><span> President de mutuelle</span></span>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_report
+msgid "<strong style=\"text-align:center;\">ENTRE :</strong>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_report
+msgid "<strong style=\"text-align:center;\">ET</strong>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.external_layout_standard
+msgid "<strong>Contrat de Convention</strong>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.external_layout_standard
+msgid "<strong>Doc-Cv-Cl-v1.2-270120</strong>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_report
+msgid "<strong>Matricule fiscal n° </strong>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_report
+msgid "<strong>Représentée par Mr </strong>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_report
+msgid "<strong>Sis au  </strong>"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.ui.menu,name:spc_contrat_purchase.menu_purchase_conventionne_root
+msgid "Achats conventionnés"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__adherant_id
+msgid "Adhérent"
+msgstr "Adhérent"
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.actions.act_window,help:spc_contrat_purchase.action_purchase_agreement_liberale
+msgid "Ajout un nouveau contrat de convention Libérale"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.actions.act_window,help:spc_contrat_purchase.action_purchase_agreement_morale
+msgid "Ajout un nouveau contrat de convention morale"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.actions.act_window,help:spc_contrat_purchase.action_purchase_agreement_physique
+msgid "Ajout un nouveau contrat de convention physique"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_move__state_bs__cancel
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_ordonnance__state__cancel
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__purchase_agreement__state__cancel
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.resiliation_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Annuler"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article_line__article_id
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__purchase_agreement_article__type__article
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_report
+msgid "Article"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article__sequence
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article_line__sequence
+msgid "Article N°"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__article_ids
+msgid "Articles de convention"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Articles du Contrat"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.actions.act_window,name:spc_contrat_purchase.purchase_agreement_article_action
+#: model:ir.ui.menu,name:spc_contrat_purchase.menu_purchase_agreement_article
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_article_form
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_article_tree
+msgid "Articles du convention"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__purchase_agreement_article__type__autre
+msgid "Autre"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Autres informations"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_account_move_confirmity_form
+msgid "Avis de contrôle médecin"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_line__bs_id
+msgid "BS"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_move__state_bs__draft
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_move_conformity__state__draft
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_ordonnance__state__draft
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__purchase_agreement__state__draft
+msgid "Brouillon"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move__ordonnace_ids
+msgid "Bulletin de soin"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_invoice_bs
+msgid "Bulletin du soin"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_invoice_bs
+msgid "Bulletin lignes"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: code:addons/spc_contrat_purchase/models/account_invoice.py:0
+#, python-format
+msgid "Cannot create an invoice of type %s with a journal having %s as type."
+msgstr ""
+"Impossible de créer une facture de type %s avec un journal ayant %s comme "
+"type."
+
+#. module: spc_contrat_purchase
+#: model:ir.model.constraint,message:spc_contrat_purchase.constraint_signature_agreement_agreement_user_uniq
+msgid "Ce membre existe déjà !"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Clause du Contrat"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__company_currency_id
+msgid "Company Currency"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_move__state_bs__posted
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_invoice_bs
+msgid "Comptabilisé"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.ui.menu,name:spc_contrat_purchase.menu_purchase_conventionne_config
+msgid "Configuration"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__purchase_agreement__state__confirm
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.resiliation_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_account_move_confirmity_form
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Confirmer"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_move_conformity__status__conforme
+msgid "Conforme"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__contact_id
+msgid "Contact primaire"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__second_contact_id
+msgid "Contact secondaire"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.actions.act_window,name:spc_contrat_purchase.action_purchase_agreement
+#: model:ir.actions.report,name:spc_contrat_purchase.report_purchase_agreement
+#: model:ir.model,name:spc_contrat_purchase.model_purchase_agreement
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move__convention_id
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__convention_id
+#: model:ir.ui.menu,name:spc_contrat_purchase.menu_purchase_agreement_root
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_tree
+msgid "Contrat de convention"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.actions.act_window,name:spc_contrat_purchase.action_purchase_agreement_liberale
+#: model:ir.ui.menu,name:spc_contrat_purchase.menu_purchase_agreement_liberale_root
+msgid "Contrat de convention libérale"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.actions.act_window,name:spc_contrat_purchase.action_purchase_agreement_morale
+#: model:ir.ui.menu,name:spc_contrat_purchase.menu_purchase_agreement_morale_root
+msgid "Contrat de convention morale"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.actions.act_window,name:spc_contrat_purchase.action_purchase_agreement_physique
+#: model:ir.ui.menu,name:spc_contrat_purchase.menu_purchase_agreement_physique_root
+msgid "Contrat de convention physique"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: code:addons/spc_contrat_purchase/models/account_invoice.py:0
+#: model:ir.model,name:spc_contrat_purchase.model_account_move_conformity
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_line__conformity_id
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_move__state__controle
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_move__state_bs__controle
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_ordonnance__state__open
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_invoice_bs
+#, python-format
+msgid "Contrôle médecin"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_signature_agreement__agreement_id
+msgid "Convention"
+msgstr ""
+
+
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Convention en pdf"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_categorie_purchase_agreement__type_conventionne
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__type_conventionne
+msgid "Conventionné"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_conformity__create_uid
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__create_uid
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_categorie_purchase_agreement__create_uid
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__create_uid
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article__create_uid
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article_line__create_uid
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_resiliation_wizard__create_uid
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_signature_agreement__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_conformity__create_date
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__create_date
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_categorie_purchase_agreement__create_date
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__create_date
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article__create_date
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article_line__create_date
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_resiliation_wizard__create_date
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_signature_agreement__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_ordonnance__type__out_refund
+msgid "Customer Credit Note"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_ordonnance__type__out_invoice
+msgid "Customer Invoice"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "D'autre part"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_conformity__date
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__ordonnace_date
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__request_date
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_resiliation_wizard__date_resiliation
+msgid "Date"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__date_start_convention
+msgid "Date de début"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__date_end_convention
+msgid "Date de fin"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_signature_agreement__date_send
+msgid "Date de l'envoi"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__date_resiliation
+msgid "Date de résiliation"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__date_end
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Date limite de signature"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__description
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article__description
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article_line__description
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_invoice_bs
+msgid "Description"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__agreement_desc
+msgid "Description du convention"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__currency_id
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__currency_id
+msgid "Devise"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_invoice_bs
+msgid "Disc.%"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_conformity__display_name
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__display_name
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_categorie_purchase_agreement__display_name
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__display_name
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article__display_name
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article_line__display_name
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_resiliation_wizard__display_name
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_signature_agreement__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Durée de la convention"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__partner_id
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "D’autre part"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__vendor_id
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "D’une part"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Entre les soussignés"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_line__is_controle
+msgid "Envoi vers Contrôle médecin"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move__is_controle
+msgid "Envoi vers controle medecin"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__move_id
+msgid "Facture"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_report
+msgid "Fait à Tunis le : . . . . . . . . . . . . . . . . . . . ."
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_report
+msgid "Fait à Tunis le : . . . . . . . . . . . . . . . . . . . . ."
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_account_move_confirmity_form
+msgid "Fermer"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__message_channel_ids
+msgid "Followers (Channels)"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,help:spc_contrat_purchase.field_purchase_agreement_article_line__sequence
+msgid "Gives the sequence order when displaying a list of articles lines."
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__purchase_agreement__priority__2
+msgid "High"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_conformity__id
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__id
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_categorie_purchase_agreement__id
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__id
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article__id
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article_line__id
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_resiliation_wizard__id
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_signature_agreement__id
+msgid "ID"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,help:spc_contrat_purchase.field_purchase_agreement__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,help:spc_contrat_purchase.field_purchase_agreement__message_needaction
+#: model:ir.model.fields,help:spc_contrat_purchase.field_purchase_agreement__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,help:spc_contrat_purchase.field_purchase_agreement__message_has_error
+#: model:ir.model.fields,help:spc_contrat_purchase.field_purchase_agreement__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__journal_id
+msgid "Journal"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model,name:spc_contrat_purchase.model_account_move
+msgid "Journal Entries"
+msgstr "Pièces comptables"
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_ordonnance__type__entry
+msgid "Journal Entry"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model,name:spc_contrat_purchase.model_account_move_line
+msgid "Journal Item"
+msgstr "Écriture comptable"
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_report
+msgid "La"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_report
+msgid ""
+"La Mutuelle de l’Electricité et du Gaz (ci-après dénommé (MEG), dont le siège\n"
+"\t\t\t\t\test sis au 38 rue Kamel Atatûrk – 1001 Tunis ; représentée par son président\n"
+"\t\t\t\t\tMonsieur"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_report
+msgid "La présente convention comportant"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_conformity____last_update
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance____last_update
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_categorie_purchase_agreement____last_update
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement____last_update
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article____last_update
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article_line____last_update
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_resiliation_wizard____last_update
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_signature_agreement____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_conformity__write_uid
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__write_uid
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_categorie_purchase_agreement__write_uid
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__write_uid
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article__write_uid
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article_line__write_uid
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_resiliation_wizard__write_uid
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_signature_agreement__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_conformity__write_date
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__write_date
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_categorie_purchase_agreement__write_date
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__write_date
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article__write_date
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article_line__write_date
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_resiliation_wizard__write_date
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_signature_agreement__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_report
+msgid ""
+"Le Président de La Mutuelle\n"
+"de l’Electricité et du Gaz"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__categorie_purchase_agreement__type_conventionne__liberale
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__purchase_agreement__type_conventionne__liberale
+msgid "Libérale"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.external_layout_standard
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.external_layout_standard_resiliation
+msgid "Logo"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__purchase_agreement__priority__0
+msgid "Low"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__malade
+msgid "Malade"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__purchase_agreement__priority__1
+msgid "Medium"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_signature_agreement__user_id
+msgid "Membres concernés"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Montant de la convention"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__montant_total
+msgid "Montant du convention"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__categorie_purchase_agreement__type_conventionne__morale
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__purchase_agreement__type_conventionne__morale
+msgid "Morale"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_conformity__motif
+msgid "Motif"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_conformity__move_line_id
+msgid "Move Line"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__médecin
+msgid "Médecin"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_conformity__user_id
+msgid "Médecin de Contrôle"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article__name
+msgid "Name"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_categorie_purchase_agreement__name
+msgid "Nom"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__signature_agreement__signature__non
+msgid "Non"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Non Signé"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_move_conformity__status__no_conforme
+msgid "Non conforme"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_invoice_bs
+msgid "Note"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,help:spc_contrat_purchase.field_purchase_agreement__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,help:spc_contrat_purchase.field_purchase_agreement__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,help:spc_contrat_purchase.field_purchase_agreement__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__num_bs
+msgid "N° B.S"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__name
+msgid "N° Ord"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_signature_agreement__observation
+msgid "Observation"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__signature_agreement__signature__oui
+msgid "Oui"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__categorie_purchase_agreement__type_conventionne__physique
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__purchase_agreement__type_conventionne__physique
+msgid "Physique"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_invoice_bs
+msgid "Piéce jointes"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_conformity__attachment_ids
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__attachment_ids
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__attachment_ids
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_account_move_confirmity_form
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Piéces jointes"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: code:addons/spc_contrat_purchase/models/account_invoice.py:0
+#, python-format
+msgid "Please define an accounting miscellaneous journal in your company"
+msgstr ""
+"Veuillez définir un journal des opérations diverses dans votre entreprise"
+
+#. module: spc_contrat_purchase
+#: code:addons/spc_contrat_purchase/models/account_invoice.py:0
+#, python-format
+msgid "Please define an accounting purchase journal in your company"
+msgstr "Veuillez définir un journal d'achats dans votre entreprise"
+
+#. module: spc_contrat_purchase
+#: code:addons/spc_contrat_purchase/models/account_invoice.py:0
+#, python-format
+msgid "Please define an accounting sale journal in your company"
+msgstr "Veuillez définir un journal de ventes dans votre entreprise"
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_invoice_bs
+msgid "Price"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__priority
+msgid "Priority"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article_line__agreement_id
+msgid "Purchase Agreement"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Purchase Agreement Articles"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_ordonnance__type__in_receipt
+msgid "Purchase Receipt"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__trial_period
+msgid "Période"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_invoice_bs
+msgid "Quantity:"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__disc
+msgid "Remise"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__remise
+msgid "Remise(%)"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__pdg
+msgid "Responsable"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__amount_total
+msgid "Reste"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__purchase_agreement__state__end
+msgid "Réasiliation"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__name
+msgid "Référence"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Résiliation"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.actions.report,name:spc_contrat_purchase.report_purchase_agreement_resiliation
+msgid "Résiliation de convention"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.actions.act_window,name:spc_contrat_purchase.action_resiliation_wizard
+#: model:ir.model,name:spc_contrat_purchase.model_resiliation_wizard
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.resiliation_wizard_form_view
+msgid "Résiliation du convention"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_ordonnance__type__out_receipt
+msgid "Sales Receipt"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_invoice_bs
+msgid "Section"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_signature_agreement__signature
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Signature"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Signature de convention"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model,name:spc_contrat_purchase.model_signature_agreement
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__signature_ids
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Signature du convention"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__purchase_agreement__state__done
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Signé"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__company_id
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__company_id
+msgid "Société"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move__state_bs
+msgid "State Bs"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move__state
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__state
+msgid "Status"
+msgstr "État"
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,help:spc_contrat_purchase.field_purchase_agreement__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_invoice_bs
+msgid "Subtotal"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__sequence
+msgid "Séquence"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__disc_amount
+msgid "T.modérateur"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__amount_tax
+msgid "Tax"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_purchase_agreement_form
+msgid "Terms and Conditions"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__residu_amount
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_invoice_bs
+msgid "Total"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move__type_partner
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__type
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article__type
+msgid "Type"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.actions.act_window,name:spc_contrat_purchase.categorie_purchase_agreement_action
+#: model:ir.model,name:spc_contrat_purchase.model_categorie_purchase_agreement
+#: model:ir.ui.menu,name:spc_contrat_purchase.menu_categorie_purchase_agreement
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_categorie_purchase_agreement_form
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_categorie_purchase_agreement_tree
+msgid "Type de conventionné"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,help:spc_contrat_purchase.field_purchase_agreement__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_invoice_bs
+msgid "Unit Price:"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__amount_untaxed
+msgid "Untaxed Amount"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_invoice_bs
+msgid "UoM"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__user_id
+msgid "Utlisateur"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move__is_controle_valide
+msgid "Validate controle medecin"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_move__state__confirm
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_move__state_bs__confirm
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_move_conformity__state__done
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_ordonnance__state__done
+msgid "Valider"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_invoice_bs
+msgid "Valider contrôle médecin"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_ordonnance__type__in_invoice
+msgid "Vendor Bill"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__account_ordonnance__type__in_refund
+msgid "Vendor Credit Note"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields.selection,name:spc_contrat_purchase.selection__purchase_agreement__priority__3
+msgid "Very High"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,help:spc_contrat_purchase.field_purchase_agreement__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_line__active
+msgid "active"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_report
+msgid ""
+"articles, hors annexes, est établie en\n"
+"\t\tsix (6) exemplaires."
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model,name:spc_contrat_purchase.model_account_ordonnance
+msgid "bulletin  de soins"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_report
+msgid "du"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.purchase_agreement_resiliation_report
+msgid "est résiliée à compter du"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement_article__var_article
+msgid "help"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model_terms:ir.ui.view,arch_db:spc_contrat_purchase.view_invoice_bs
+msgid "lignes de BS"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__bs_ids
+msgid "lignes de facture"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model,name:spc_contrat_purchase.model_purchase_agreement_article
+msgid "purchase.agreement.article"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model,name:spc_contrat_purchase.model_purchase_agreement_article_line
+msgid "purchase.agreement.article.line"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_purchase_agreement__categorie_conventione_id
+msgid "type de conventionné"
+msgstr ""
+
+#. module: spc_contrat_purchase
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_conformity__state
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_conformity__status
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_move_line__status
+#: model:ir.model.fields,field_description:spc_contrat_purchase.field_account_ordonnance__state
+msgid "État"
+msgstr ""
+
+
+#. module: purchase
+#: model:ir.ui.menu,name:purchase.menu_purchase_root
+msgid "Achats ordinaires"
+msgstr "Achats ordinaires"

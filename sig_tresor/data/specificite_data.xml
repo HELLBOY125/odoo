@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		
+		<record id="specificite_caisse_affiliee" model="sig.tresor.mutual.specificity">
+            <field name="mutual_specificity_code">CA</field>
+            <field name="mutual_specificity_name">Caisse affiliée</field>
+        </record>
+        
+       <record id="specificite_union_mutualise" model="sig.tresor.mutual.specificity">
+            <field name="mutual_specificity_code">UM</field>
+            <field name="mutual_specificity_name">Union Mutualiste</field>
+        </record>
+        
+        <record id="specificite_sarl" model="sig.tresor.mutual.specificity">
+            <field name="mutual_specificity_code">SARL</field>
+            <field name="mutual_specificity_name">Société à Responsabilité Limitée (SARL)</field>
+        </record>
+        
+        <record id="specificite_sa" model="sig.tresor.mutual.specificity">
+            <field name="mutual_specificity_code">SA</field>
+            <field name="mutual_specificity_name">Société Anonyme(SA)</field>
+        </record>
+        
+        <record id="specificite_union_faitiere" model="sig.tresor.mutual.specificity">
+            <field name="mutual_specificity_code">FA</field>
+            <field name="mutual_specificity_name">Faîtière</field>
+        </record>
+        
+  		<record id="specificite_caisse_unitaire" model="sig.tresor.mutual.specificity">
+            <field name="mutual_specificity_code">CU</field>
+            <field name="mutual_specificity_name">Caisse unitaire</field>
+        </record>
+     </data>
+</odoo>
+        

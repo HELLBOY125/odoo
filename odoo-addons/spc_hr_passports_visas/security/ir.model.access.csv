@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_spc_hr_passports_visas_hr_passport,spc_hr_passports_visas.hr_passport,model_hr_passport,,1,1,1,1
+access_spc_hr_passports_visas_hr_visa,spc_hr_passports_visas.hr_visa,model_hr_visa,,1,1,1,1
+access_spc_hr_passports_visas_hr_type_visa,spc_hr_passports_visas.hr_type_visa,model_hr_type_visa,,1,1,1,1

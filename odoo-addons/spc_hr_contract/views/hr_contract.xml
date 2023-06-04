@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="update_hr_contract_hr_contract_view_form">
+            <field name="name">Contrats</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+
+<!--                <xpath expr="//field[@name='employee_id']" position="after">-->
+<!--                    <field name="type_id" domain="['|',('company_id', '=' , company_id),('company_id', '=' ,False)]"/>-->
+<!--                </xpath>-->
+
+                <xpath expr="//field[@name='job_id']" position="before">
+                    <field name="department_id" position="move"/>
+                </xpath>
+
+                <xpath expr="//field[@name='date_start']" position="before">
+                    <field name="date_embauche"/>
+                </xpath>
+
+                <xpath expr="//page[@name='other']/group/group" position="attributes">
+                    <attribute name="string"></attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='other']/group/group" position="after">
+                    <group string="">
+                        <field name="date_depart"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='date_depart']" position="before">
+                    <field name="trial_date_end" position="move"/>
+                </xpath>
+
+                <xpath expr="//page[@name='other']/group" position="attributes">
+                    <attribute name="string">Conditions du contrat</attribute>
+                </xpath>
+
+                <!-- hide the span inside "date_end" div to get the correct   -->
+                <xpath expr="//page[@name='other']/group/group/div/span" position="replace"/>
+
+                <xpath expr="//page[@name='information']" position="after">
+                    <page name="job_description" string="Fonction et attributions">
+                        <field name="description_job"/>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+<!--        <record id="hr_contract_type_view_form" model="ir.ui.view">-->
+<!--            <field name="name">hr.contract.type.form</field>-->
+<!--            <field name="model">hr.contract.type</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Contract Type">-->
+<!--                    <sheet>-->
+<!--                        <group col="2">-->
+<!--                            <field name="name"/>-->
+<!--                            <field name="company_id" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True}"/>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="hr_contract_type_view_tree" model="ir.ui.view">-->
+<!--            <field name="name">hr.contract.type.tree</field>-->
+<!--            <field name="model">hr.contract.type</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Contract Type">-->
+<!--                    <field name="sequence" widget="handle"/>-->
+<!--                    <field colspan="4" name="name"/>-->
+<!--                    <field colspan="4" name="company_id"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="hr_contract_type_view_search" model="ir.ui.view">-->
+<!--            <field name="name">hr.contract.type.search</field>-->
+<!--            <field name="model">hr.contract.type</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="Search Contract Type">-->
+<!--                    <field name="name" string="Contract Type"/>-->
+<!--                    <field name="company_id"/>-->
+<!--                    <field name="sequence" string="Sequence"/>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="action_hr_contract_type" model="ir.actions.act_window">-->
+<!--            <field name="name">Contract Types</field>-->
+<!--            <field name="res_model">hr.contract.type</field>-->
+
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="search_view_id" ref="hr_contract_type_view_search"/>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash;         Affiche menu : Types de contrat - hr->config (without activate mode : developer)&ndash;&gt;-->
+<!--        <menuitem-->
+<!--                id="hr_menu_contract_type"-->
+<!--                action="action_hr_contract_type"-->
+<!--                name="Types Contrats"-->
+<!--                parent="hr.menu_human_resources_configuration"-->
+<!--                groups="hr_contract.group_hr_contract_manager"-->
+<!--                sequence="4"/>-->
+
+    </data>
+</odoo>

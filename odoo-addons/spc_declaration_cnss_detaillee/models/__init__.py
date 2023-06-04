@@ -1,0 +1,1 @@
+from .import declaration_cnss_det_hr

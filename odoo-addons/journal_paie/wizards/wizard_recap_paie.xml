@@ -1,0 +1,55 @@
+<odoo>
+    <record model="ir.ui.view" id="payroll_recap_report_wizard">
+        <field name="name">HR Payroll Custom Recap Report</field>
+        <field name="model">payroll.recap.report.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Report Journal Paie">
+                <group>
+                    <field name="criteria" style="width:37%;"/>
+                </group>
+                <group>
+                    <group>
+                        <field name="month" attrs="{'required': [('criteria', 'in', ['mois'])], 'invisible': [('criteria', 'in', ['periode'])]}"/>
+                    </group>
+                    <group>
+                        <field name="year" attrs="{'required': [('criteria', 'in', ['mois'])], 'invisible': [('criteria', 'in', ['periode'])]}"/>
+                    </group>
+                    <group>
+                        <field name="date_start" attrs="{'required': [('criteria', 'in', ['periode'])], 'invisible': [('criteria', 'in', ['mois'])]}"/>
+                    </group>
+                    <group>
+                        <field name="date_end" attrs="{'required': [('criteria', 'in', ['periode'])], 'invisible': [('criteria', 'in', ['mois'])]}"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="struct_id"/>
+                    </group>
+                    <group>
+                        <field name="company_id"/>
+                    </group>
+
+                </group>
+                <footer>
+                    <button name="get_report" string="Valider" type="object" class="oe_highlight"/>
+                    <button string="Fermer" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="action_payroll_recap_report_wizard"
+                name="Payroll Journal Report"
+                res_model="payroll.recap.report.wizard"
+                view_mode="form"
+                target="new"/>
+
+    <menuitem name="Journal de paie"
+              id="menu_payroll_report_wizard"
+              parent="om_hr_payroll.menu_hr_payroll_root" sequence="12"/>
+
+    <menuitem id="journall" name="Rapport journal de paie" action="action_payroll_recap_report_wizard"
+              parent="menu_payroll_report_wizard" sequence="10"/>
+
+</odoo>

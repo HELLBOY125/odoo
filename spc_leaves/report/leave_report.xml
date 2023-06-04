@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<template id="leave_request_report">
+<t t-call="web.html_container">
+       <t t-foreach="docs" t-as="o">
+           <t t-call="web.external_layout">
+            <div class="page">
+            
+            <div class="container">
+            <div>
+            
+            <table class="table table-bordered">
+		            
+		             <thead>
+                    <tr>
+                        <t t-set="colspan" t-value="12"/>
+                        <th align="center">   <img src='/web/binary/company_logo' align="center" style="max-height: 85px;" alt="Logo"/></th>
+                        <th class="text-center" style="padding : 20px;"><strong>Demande de Congé</strong></th>
+                    	<th class="text-left"><strong>Date: <span t-esc="datetime.datetime.now().strftime('%d/%m/%Y')"/></strong><br/><strong> REV : </strong></th>
+                    </tr>
+                </thead>
+                </table>
+            </div>
+            <div class="table table-bordered">
+            <p class="text-right" style="padding: 20px;">Date : <span t-esc="datetime.datetime.now().strftime('%d/%m/%Y')"/></p>
+            <br/>
+           
+  
+            <p class="text-left" style="padding: 5px;">Nom et prénom : <span t-field="o.employee_id.name"/></p>
+            <br/>
+            
+            <p class="text-left" style="padding: 5px;">Matricule : <span t-field="o.employee_id.matricule"/> </p>
+            <br/>
+           
+             <p class="text-left" style="padding: 5px;">Affectation : <span t-field="o.employee_id.department_id.name"/></p>
+            <br/>
+            
+            <p class="text-left" style="padding: 5px;">Qualification : <span t-field="o.employee_id.job_id"/></p>
+            <br/>
+            
+            <p class="text-left" style="padding: 5px;">Motif de congé : <span t-field="o.name"/></p>
+            <br/>
+            
+            <p class="text-left" style="padding: 5px;">Nombre de jours de congé : <span t-field="o.number_of_days_display"/> jours</p>
+            <br/>
+            
+            <p class="text-center" style="padding: 5px;">Du : <span t-field="o.request_date_from"/> Au <span t-field="o.request_date_to"/></p>
+            <br/>
+            
+            <p class="text-left" style="padding: 10px;"><u>Signature de l'employé</u></p>
+            <br/>
+            <br/>
+            </div>
+            <div>
+            
+             <table class="table table-bordered">
+		            
+		           <tr>
+              <th colspan="2" class="text-center">
+  				Autorisation
+				  </th>
+				 </tr>
+				 <tr>
+				 
+				  <td width="400"  height="100"><u>Supérieur Hiérarchique</u><br/>
+				  <p>Nom et prénom : <span t-field="o.employee_id.parent_id.name"/></p>
+				  </td>
+				  <td>
+				 <u>Direction Administrative et Financière</u>
+				  </td>
+				  
+				 </tr>  
+                
+                </table>
+            
+            
+            
+            </div>
+            </div>
+            
+            
+</div>
+</t>
+</t>
+</t>
+</template>
+
+
+
+
+
+
+
+
+
+<!-- view report pour la demande de congé -->
+<report string="Demande de congé"
+        id="report_leave_request_information"
+        model="hr.leave"
+        report_type="qweb-pdf"
+            name="spc_leaves.leave_request_report"
+            file="spc_leaves.leave_request_report"
+            print_report_name="'Demande de congé de %s' % (object.employee_id.name)"
+            />
+</odoo>

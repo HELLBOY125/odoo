@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    	
+    	<record id="view_res_partner_retention_inherit" model="ir.ui.view">
+            <field name="name">res.partner.retention.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//page[@name='accounting']" position="inside">
+            		<group name="retention" string="Retenue à la source">
+            			<group>
+            				<field name="retention_id" />
+            			</group>
+            		</group>
+            	</xpath>
+            </field>
+        </record>
+    
+    </data>
+</odoo>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="courrier_entrant_form_view" model="ir.ui.view">
+			<field name="name">courrier.entrant.form</field>
+			<field name="model">courrier.entrant</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<header>
+					<button string="Soumettre au Responsable BO" name="sous_direction"  type="object" class="oe_highlight"
+							attrs="{'invisible':['|',('courrier_traite','=',True),('state','not in',('service_courrier'))]}"
+							groups="spc_bureau_ordre.group_bo_user,spc_bureau_ordre.group_bo_manager"/>
+
+					<button string="Retour au service courrier" name="retour_service_courrier" states="sous_direction"
+							type="object" class="oe_highlight" groups="spc_bureau_ordre.group_bo_manager"/>
+
+					<button string="Soumettre au Responsable service" name="service"  type="object" class="oe_highlight"
+							attrs="{'invisible':['|',('courrier_traite','=',True),('state','not in',('sous_direction'))]}"
+							groups="spc_bureau_ordre.group_bo_manager"/>
+
+					<button string="Retour au Responsable BO" name="sous_direction" type="object" class="oe_highlight"
+							attrs="{'invisible':['|',('courrier_traite','=',True),('state','not in',('service'))]}" groups="spc_bureau_ordre.group_bo_manager_service,spc_bureau_ordre.group_bo_manager"/>
+
+					<button string="Soumettre au Agent service" name="imputer_agent" type="object" class="oe_highlight"
+							attrs="{'invisible':['|',('courrier_traite','=',True),('state','not in',('service'))]}" groups="spc_bureau_ordre.group_bo_manager_service,spc_bureau_ordre.group_bo_manager"/>
+
+					<button string="Traiter" name="action_courrier_traite" type="object" class="oe_highlight"
+							attrs="{'invisible':['|',('courrier_traite','=',True),('state','not in',('agent'))]}" 
+							groups="spc_bureau_ordre.group_bo_user_service,spc_bureau_ordre.group_bo_manager"/>
+
+<!--					<button string="Traiter" name="action_courrier_traite_directeur" type="object" class="oe_highlight"-->
+<!--							attrs="{'invisible':['|',('courrier_traite','=',True),('state','!=','directeur')]}"-->
+<!--							groups="spc_bureau_ordre.group_bo_manager"/>-->
+
+<!--					<button string="Imputer" name="imputer_agent"  type="object" class="oe_highlight"-->
+<!--							attrs="{'invisible':['|',('courrier_traite','=',True),('state','not in',('service'))]}"/>-->
+
+					<field name="state" widget="statusbar"
+						   statusbar_visible="service_courrier,sous_direction,service,agent,traiter"/>
+				</header>
+				<sheet>
+				  <widget name="web_ribbon" title="Traité" bg_color="bg-success" attrs="{'invisible': [('state', '!=', 'traiter')]}"/>
+				  
+					<group>
+						<field name="name" attrs="{'invisible': [('state', 'in','service_courrier')]}"/>
+					</group>
+					<group id="entete">
+						<group>
+							<field name="reference_courrier_exp" attrs="{'readonly': [('state', '!=','service_courrier')]}"/>
+							<field name="type_id" attrs="{'readonly': [('state', '!=','service_courrier')]}"/>
+							<field name="date_courrier" attrs="{'readonly': [('state', '!=','service_courrier')]}"/>
+							<field name="agent" groups="spc_bureau_ordre.group_bo_manager_service,spc_bureau_ordre.group_bo_manager" attrs="{'invisible':[('state','!=','service')],'required':[('state','=','service')],'readonly': [('state', '!=','service')]}"/>
+						</group>
+						<group>
+							<field name="department_id" options="{'no_create_edit':True}" groups="spc_bureau_ordre.group_bo_manager"
+							 attrs="{'required': [('state', '=','sous_direction')],'readonly': [('state','not in',('service_courrier','sous_direction'))]}"/>
+							<field name="mode_send_id" options="{'no_create_edit':True}" attrs="{'readonly': [('state', '!=','service_courrier')]}"/>
+							<field name="urgent_id" attrs="{'readonly': [('state', '!=','service_courrier')]}" options="{'no_create_edit':True}"/>
+						</group>
+					</group>
+					<!-- ajouter pour rétrait d'agrémet -->
+					<group name="motif" attrs="{'invisible':[('state','not in','sous_direction')]}">
+						<group>
+							<field name="motif" attrs="{'invisible':[('type_id','not in',%(spc_bureau_ordre.courrier_type_retrait_agrement)d)],'required':[('type_id','=',%(spc_bureau_ordre.courrier_type_retrait_agrement)d)]}"/>
+						</group>
+						<group>
+						</group>
+					</group>
+					<!-- ajouter pour ordre de mission de contrôle sur place-->
+
+					<group>
+						<field name="is_imput_saved"  invisible='1'/>
+					</group>
+					<notebook name="notebook">
+						<page string="Courrier">
+							<group>
+								<group>
+									<field name="bon_livraison" widget="radio" options="{'horizontal': true}" string="Avec bon de livraison ?" attrs="{'readonly':[('state','=','traiter')]}"/>
+									<field name="nb_doc_reçus" attrs="{'readonly':[('state','=','traiter')]}"/>
+								</group>
+							</group>
+							<field name="attachement_ids" widget="many2many_binary" attrs="{'readonly':[('state','=','traiter')]}"/>
+						</page>
+						<page string="Expéditeur">
+							<group>
+								<group>
+									<field name="contact_id" string="Contact" attrs="{'readonly':[('state','=','traiter')]}"/>
+								</group>
+							
+								<group>
+									<field name="steg_department_id" attrs="{'readonly':[('state','=','traiter')]}"/>
+								</group>
+							</group>
+						</page>
+						<page string="Destinataire">
+							<field name="user_ids" attrs="{'readonly':[('state','=','traiter')]}"/>
+							
+						</page>
+						<page string="Traitement Courriers" attrs="{'invisible':[('state','!=','traiter')]}">
+							<group>
+								<field name="courrier_traite" readonly="1" />
+								<field name="date_traitement" readonly="1" />
+							</group>
+						</page>
+						<page name="notes_ce" string="Notes">
+							<group>
+								<field name="notes" nolabel="1" attrs="{'readonly':[('state','=','traiter')]}"/>
+							</group>
+						</page>
+					</notebook>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers"/>
+					<field name="message_ids" widget="mail_thread"/>
+				</div>
+			</field>
+		</record>
+
+		<record id="courrier_entrant_tree_view" model="ir.ui.view">
+			<field name="name">courrier.entrant.tree</field>
+			<field name="model">courrier.entrant</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree default_order="date_courrier desc" decoration-success="state == 'directeur'">
+					<field name="name" width="10"/>
+					<field name="reference_courrier_exp" width="5"/>
+					<field name="type_id" width="5"/>
+					<field name="date_courrier" width="10"/>
+					<field name="write_date" string="Date de transmission" width="10"/>
+					<field name="nb_doc_reçus" width="5"/>
+					<field name="notes" width="35"/>
+					<field name="state" width="10"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_courrier_entrant_form" model="ir.actions.act_window">
+			<field name="name">Courriers entrants</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">courrier.entrant</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Search view : courriers entrants -->
+		<record id="view_courrier_entrant_search" model="ir.ui.view">
+			<field name="name">courrier.entrant.search</field>
+			<field name="model">courrier.entrant</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name"/>
+					<field name="contact_id"/>
+				</search>
+			</field>
+		</record>
+		<!-- End Search view : courriers entrants -->
+
+
+
+		<menuitem action="action_courrier_entrant_form" id="menu_courrier_entrant" name='Courriers entrants' sequence="20" parent='menu_courrier'/>
+
+	</data>
+</odoo>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mode_template_form_view" model="ir.ui.view">
+            <field name="name">mode.template.form</field>
+            <field name="model">courrier.mode</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="mode_template_tree_view" model="ir.ui.view">
+            <field name="name">mode.template.tree</field>
+            <field name="model">courrier.mode</field>
+            <field name="arch" type="xml">
+                <tree string="Mode">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="mode_template_action" model="ir.actions.act_window">
+            <field name="name">Mode d'envoi et de réception</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">courrier.mode</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_id" ref="mode_template_tree_view"/>
+
+        </record>
+
+        <menuitem action="mode_template_action"  id="menu_mode_template_action" parent="courrier_configuration" sequence="3" />
+
+    </data>
+</odoo>

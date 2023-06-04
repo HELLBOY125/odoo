@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="wizard_declaration_cnss_dett" model="ir.ui.view">
+            <field name="name">les declarations des CNSS</field>
+            <field name="model">wizard.declaration.cnss.det</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="company_id" string="Societe" options="{'no_open':True,'no_create':True}"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="x_trimester"/>
+                        </group>
+                        <group>
+                            <field name="year" options="{'no_open':True,'no_create':True}" readonly="False"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button type="object" name="print_report" string="Générer Déclaration CNSS" class="oe_highlight"/>
+                        Ou
+                        <button special="cancel" string="Annuler" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <act_window id="wizard_action_dec_emplo"
+                    name="Rapport declaration CNSS"
+                    res_model="wizard.declaration.cnss.det"
+                    view_mode="form"
+                    target="new"/>
+
+        <menuitem id="declaration_report"
+                  sequence="5"
+                  parent="spc_declaration_cnss.menu_action_declaration_cnss_excel_report_wizard"
+                  name="Rapport declaration CNSS"
+                  action="wizard_action_dec_emplo"/>
+    </data>
+</odoo>

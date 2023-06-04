@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Update private adress partner -->
+        <record model="ir.ui.view" id="view_partner_form_status">
+            <field name="name">res.partner.form.private</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                  <xpath expr="//field[@name='category_id']" position="before">
+               <field name="status_adherant"  widget="radio" options="{'horizontal': true}" attrs="{'invisible': ['|',('type_partner', '!=', 'conventionne'),('type_conventionne','!=','physique')]}"/>
+               </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

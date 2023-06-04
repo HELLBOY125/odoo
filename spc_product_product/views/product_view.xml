@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_product_type_form_view" model="ir.ui.view">
+        <field name="name">product.product.type.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <field name="type" position="replace">
+          
+           <label   for="type" />
+           <div>
+               <field name="type" required="1" nolabel="1"/> <span attrs="{'invisible': [('type', '!=', 'service')]}" > / </span> 
+                <field name="nature_product" nolabel="1" widget="radio" options="{'horizontal': true}"
+                attrs="{'required':[('type', '=', 'service')], 'invisible': [('type', '!=', 'service')]}" />
+               
+            </div>
+            </field>
+            <field name="company_id" position="before">
+            <field name="code_pct" attrs="{'invisible': ['|',('nature_product', '!=', 'medicament'),('type', '!=', 'service')]}" />
+            <field name="name_commercial" attrs="{'invisible': ['|',('nature_product', '!=', 'medicament'),('type', '!=', 'service')]}" />
+            <field name="price_public" attrs="{'invisible': ['|',('nature_product', '!=', 'medicament'),('type', '!=', 'service')]}" />
+            <field name="dci" attrs="{'invisible': ['|',('nature_product', '!=', 'medicament'),('type', '!=', 'service')]}" />
+            <field name="code_act" attrs="{'invisible': ['|',('nature_product', '!=', 'actes'),('type', '!=', 'service')]}" />
+            <field name="name_act" attrs="{'invisible': ['|',('nature_product', '!=', 'actes'),('type', '!=', 'service')]}" />
+            <field name="key" attrs="{'invisible': ['|',('nature_product', '!=', 'actes'),('type', '!=', 'service')]}" />
+            </field>
+        </field>
+    </record>
+
+    <record id="product_template_only_type_form_view" model="ir.ui.view">
+        <field name="name">product.template.type</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="arch" type="xml">
+        <field name="type" position="replace">
+
+           <label   for="type" />
+           <div>
+               <field name="type" required="1" nolabel="1"/> <span attrs="{'invisible': [('type', '!=', 'service')]}" > / </span>
+                <field name="nature_product" nolabel="1" widget="radio" options="{'horizontal': true}"
+                attrs="{'required':[('type', '=', 'service')], 'invisible': [('type', '!=', 'service')]}" />
+
+            </div>
+            </field>
+            <field name="company_id" position="before">
+            <field name="code_pct" attrs="{'invisible': [('nature_product', '!=', 'medicament')]}" />
+            <field name="name_commercial" attrs="{'invisible': [('nature_product', '!=', 'medicament')]}" />
+            <field name="price_public" attrs="{'invisible': [('nature_product', '!=', 'medicament')]}" />
+            <field name="dci" attrs="{'invisible': [('nature_product', '!=', 'medicament')]}" />
+            <field name="code_act" attrs="{'invisible': ['|',('nature_product', '!=', 'actes'),('type', '!=', 'service')]}" />
+            <field name="name_act" attrs="{'invisible': ['|',('nature_product', '!=', 'actes'),('type', '!=', 'service')]}" />
+            <field name="key" attrs="{'invisible': ['|',('nature_product', '!=', 'actes'),('type', '!=', 'service')]}" />
+            </field>
+
+        </field>
+    </record>
+
+
+     <record id="view_product_template_filter" model="ir.ui.view">
+        <field name="name">view.product.template.filter.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <field name="categ_id" position="after">
+                <field name="nature_product"/>
+            </field>
+            <filter name="consumable" position="after">
+                <filter string="Fournitures" name="type_fourniture" domain="[('nature_product', '=', 'fourniture')]"/>
+                <filter string="Médicaments" name="type_medicament" domain="[('nature_product', '=', 'medicament')]"/>
+                <filter string="Actes" name="type_actes" domain="[('nature_product', '=', 'actes')]"/>
+            </filter>
+              <filter name="categ_id" position="after">
+             <filter name="nature" string="Nature" domain="[]" context="{'group_by' : 'nature_product'}"/>
+             </filter>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,34 @@
+.o_main_navbar {
+  /*  position: relative;*/
+    height: 46px;
+    border-bottom: 1px solid #f38e00;
+    background-color: #f38e00;
+    color: white;
+    /*position: fixed !important;*/
+    width: 100%;
+    z-index: 1000;
+}
+
+.o_main_navbar > ul > li > a:hover, .o_main_navbar > ul > li > label:hover {
+    background-color: #3da326;
+}
+
+.o_main_navbar > a:hover, .o_main_navbar > a:focus, .o_main_navbar > button:hover, .o_main_navbar > button:focus {
+    background-color: #3da326;
+    color: inherit;
+}
+
+.o_main_navbar .show .dropdown-toggle {
+    background-color: #3da326;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+    color: #212529;
+    text-decoration: none;
+    background-color: rgba(61, 163, 38, 0.33);
+}
+
+.sfd{
+    padding-right: 300px;
+}
+

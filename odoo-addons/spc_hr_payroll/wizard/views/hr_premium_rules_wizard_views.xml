@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="hr_premuim_rules_wizard">
+            <field name="name">hr.premuim.rules.wizard</field>
+            <field name="model">hr.premuim.rules.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report Journal Paie">
+                        <group>
+                            <field name="struct_id"/>
+                        </group>
+                    <footer>
+                        <button name="add_prime_into_struct" string="Valider" type="object" class="oe_highlight"/>
+                        <button string="Annuler" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_hr_premuim_rules_wizard"
+                    name="Paramétrages des primes"
+                    res_model="hr.premuim.rules.wizard"
+                    view_mode="form"
+                    target="new"/>
+    </data>
+</odoo>

@@ -1,0 +1,185 @@
+.o_main_navbar > ul > li > a:hover, .o_main_navbar > ul > li > label:hover {
+   /* background-color: #31821e;*/ /* fond vert*/
+	background-color: #f38e00;/* fond orange*/
+	/*background: linear-gradient(to bottom, #c07000, #F38E00);*/ // 2 color
+}
+
+.o_main_navbar {
+    position: relative;
+    height: 46px;
+    border-bottom: 1px solid #f38e00;
+    background-color: #F38E00;
+    color: white;
+}
+
+.o_main_navbar .show .dropdown-toggle {
+    background-color: #f38e00;
+}
+
+.o_main_navbar > ul > li.o_extra_menu_items.show > ul > li > a {
+    background-color: #f38e00;
+    color: white;
+    border-bottom: 1px solid #e2e2e0;
+}
+
+.dropdown-item:hover {
+    color: #fff;
+    background-color: #f38e00;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+     color: #fff;
+    background-color: #f38e00;
+}
+.dropdown-item:hover, .dropdown-item:focus {
+    color: #fff;
+    background-color: #f38e00;
+}
+
+.o_main_navbar > a:hover, .o_main_navbar > a:focus, .o_main_navbar > button:hover, .o_main_navbar > button:focus {
+    background-color: #c07000;
+    color: inherit;
+}
+
+.o_main_navbar > ul > li > a:hover, .o_main_navbar > ul > li > label:hover {
+    background-color: #c07000;
+}
+
+/*.o_menu_apps .dropdown-menu.show {
+    background-size: cover;
+    background-image: url("/static/src/img/background.png");
+}*/
+
+.bg-100 {
+    background-color: #f38e00 !important;
+    color: #070707;
+}
+
+.card-body {
+    background-color: #fff;
+}
+
+.btn-primary {
+    color: #FFFFFF;
+    background-color: #f38e00;
+    border-color: #f38e00;
+}
+
+.btn-primary:hover {
+    color: #FFFFFF;
+    background-color: #c07000;
+    border-color: #c07000;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+    color: #FFFFFF;
+    background-color: #c07000;
+    border-color: #c07000;
+}
+
+a {
+    color: #3da326;
+}
+
+a:hover {
+    color: #3da326;
+}
+
+.btn-link {
+    color: #3da326;
+}
+
+.btn-link:hover {
+    color: #3da326;
+}
+
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled {
+    color: #f38e00;
+}
+
+.o_form_view .o_form_uri {
+    color: #3da326;
+}
+
+.mk_apps_sidebar_panel .mk_apps_sidebar .mk_apps_sidebar_menu > li:hover > a {
+    background: #3da326;
+    color: #fff;
+}
+
+.o_searchview .o_searchview_facet {
+    border: 1px solid #f38e00;
+    background: #f38e00;
+    color: #fff;
+}
+
+.o_searchview .o_searchview_facet .o_searchview_facet_label {
+    background-color: #f38e00;
+}
+
+.o_searchview .o_searchview_facet .o_facet_remove {
+    color: #fff;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #3da326;
+    border-color: #3da326;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-primary.dropdown-toggle:focus {
+
+    box-shadow: 0 0 0 0.2rem #3da326;
+
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+
+    color: #fff;
+    background-color: #3da326;
+    border-color: #3da326;
+
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #f38e00;
+    border-color: #f38e00;
+}
+
+element {
+
+}
+.btn-info:not(:disabled):not(.disabled):active:focus, .btn-info:not(:disabled):not(.disabled).active:focus, .show > .btn-info.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem #f38e00;
+}
+
+.btn-info:not(:disabled):not(.disabled):active, .btn-info:not(:disabled):not(.disabled).active, .show > .btn-info.dropdown-toggle {
+    color: #fff;
+    background-color: #f38e00;
+    border-color: #f38e00;
+}
+
+.o_menu_apps .dropdown-menu.show .o-app-icon {
+    border-radius: 50%;
+}
+
+.o_base_settings .o_setting_container .settings_tab .selected {
+    background-color: #c07000;
+    box-shadow: inset 3px 0 0 #fff;
+}
+
+.o_base_settings .o_setting_container .settings_tab {
+    background: #f38e00;
+}
+
+.o_base_settings .o_setting_container .settings_tab .tab {
+    color: #fff;
+}
+
+/*.btn-secondary {
+    border-color: #f38e00;
+}
+.btn-secondary {
+    color: #fff;
+    background-color: #f38e00;
+    border-color: #fff;
+}*/

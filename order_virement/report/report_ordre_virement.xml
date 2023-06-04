@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Dahech Haithem-->
+
+<odoo>
+    <record model="report.paperformat" id="paperformat_attendance_declaration_empl">
+        <field name="name">paperformat.declaration.emplo.report</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_width">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">30</field>
+        <field name="margin_right">5</field>
+        <field name="margin_bottom">15</field>
+        <field name="margin_left">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">15</field>
+        <field name="dpi">90</field>
+
+    </record>
+    <report
+            id="action_report_report_ordre_virement"
+            model="order.virement"
+            string="Ordre Virement"
+            report_type="qweb-pdf"
+            name="order_virement.report_ordre_virement"
+            file="order_virement.report_ordre_virement"
+            paperformat="paperformat_attendance_declaration_empl"
+    />
+    <!--<template id="external_layout_standard_inherit_declaration2" inherit_id="web.external_layout_background">-->
+    <!--<div class="header o_background_header" position="replace">-->
+    <!--</div>-->
+    <!--<div class="footer o_background_footer" position="replace">-->
+    <!--</div>-->
+    <!--</template>-->
+    <template id="report_ordre_virement">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+
+                <div class="page">
+                <br/><br/><br/>
+                    <div class="right" style="text-align:justify;font-weight: 900;">
+                        <div style="text-align:right;!important">
+                                <tr style="font-size: 14px ;font-weight: 900;text-align:right;!important">
+
+                                    <td style=";font-size: 12px;"><strong>Sociéte :<![CDATA[
+                            &nbsp;
+&nbsp;
+
+
+]]>                        </strong></td>
+                                    <td style="font-size: 12px;text-align: center;"><span
+                                            t-esc="docs[0]['company']"/></td>
+                                </tr>
+
+                        </div>
+                        <div style="text-align:right;">
+                                <tr style="font-size: 14px;font-weight: 900;text-align: right;">
+                                    <td style="font-size: 12px;"><strong>Compte Émetteur :
+                                    </strong></td>
+                                    <td style="font-size: 12px;text-align: center;"><span
+                                            t-esc="docs[0]['x_num_emmeteur']"/></td>
+                                </tr>
+                        </div>
+                        <div  style="text-align:right;">
+                                <tr style="font-size: 14px;font-weight: 900;text-align: right;">
+                                    <td><strong>Date Virement :<![CDATA[
+&nbsp;
+]]>
+                                    </strong></td>
+                                    <td style="font-size: 12px;text-align: center;"><span
+                                            t-esc="docs[0]['x_date_virement']"/></td>
+                                </tr>
+                        </div>
+
+                    </div>
+                  
+                    <br/>
+                    <h2 class="text-center"><b>Ordres de Virement</b></h2>
+                    <table class="table-bordered " style="WIDTH:100%">
+                        <thead>
+                            <tr style="font-size: 14px;font-weight: 900;text-align: center;background: lightgrey;">
+                                <th>Nom et prénom</th>
+                                <th>RIB</th>
+                                <th>Montant</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="docs" t-as="o" style="font-size: 12px;text-align: center;">
+                                <td><span t-esc="o['nom_prenom']"></span></td>
+                                <td><span t-esc="o['rib']"></span></td>
+                                <td><span t-esc="o['montant']"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+         </t>
+    </template>
+</odoo>

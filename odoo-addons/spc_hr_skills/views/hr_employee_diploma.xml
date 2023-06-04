@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_hr_employee_diploma" model="ir.actions.act_window">
+            <field name="name">Diplômes</field>
+            <field name="res_model">hr.employee.diploma</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- employee diploma menu-->
+        <menuitem id="hr_employee_diploma_menu" name="Diplômes"
+                  action="action_hr_employee_diploma" sequence="2" parent="hr_skills.menu_human_resources_configuration_resume"/>
+
+        <!--employee diploma form view -->
+        <record model="ir.ui.view" id="hr_employee_diploma_view_form">
+            <field name="name">employee.diploma.form</field>
+            <field name="model">hr.employee.diploma</field>
+            <field name="arch" type="xml">
+                <form string="Diplômes">
+                    <sheet>
+                        <group>
+                            <group colspan="2">
+                                <field name="name"/>
+                                <field name="title"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <!--tree view employee diploma-->
+        <record model="ir.ui.view" id="hr_employee_diploma_view_tree">
+            <field name="name">employee.diploma.tree</field>
+            <field name="model">hr.employee.diploma</field>
+            <field name="arch" type="xml">
+                <tree string="liste des diplômes">
+                    <field name="name"/>
+                    <field name="title"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

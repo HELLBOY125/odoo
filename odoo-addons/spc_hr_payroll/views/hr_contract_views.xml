@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Contract View -->
+
+    <record id="hr_contract_form_payroll_inherit" model="ir.ui.view">
+        <field name="name">hr.contract.view.additional.allowance</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//page[@name='information']" position="after">
+                    <page name="ind_premium" string="Indemnité et Primes">
+                            <group>
+                                <group name="prime_group_1">
+                                    <field name="premium_caisse"/>
+                                    <field name="premium_panier"/>
+                                </group>
+                                <group name="prime_group_2">
+                                    <field name="premium_transport"/>
+                                    <field name="premium_presence"/>
+                                    <field name="complement_premium"/>
+                                </group>
+                            </group>
+                        </page>
+                    <page name="premium_line" string="Liste des primes">
+                        <field name="hr_premium_line_ids">
+                            <tree editable="bottom">
+                                <field name="premium_line_id"/>
+                                <field name="premium_id"/>
+                                <field name="code"/>
+                                <field name="cotisable"/>
+                                <field name="imposable"/>
+                                <field name="absence"/>
+                                <field name="percentage"/>
+                                <field name="amount"/>
+                                <field name="contract_id"/>
+                            </tree>
+                            <form>
+                                <sheet>
+                                    <group>
+                                        <group>
+                                            <field name="premium_line_id"/>
+                                            <field name="premium_id"/>
+                                            <field name="code"/>
+                                            <field name="cotisable"/>
+                                            <field name="imposable"/>
+                                        </group>
+                                        <group>
+                                            <field name="absence"/>
+                                            <field name="percentage"/>
+                                            <field name="amount"/>
+                                            <field name="contract_id" readonly="True"/>
+                                        </group>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+                <xpath expr="//page[@name='information']/group" position="before">
+                    <group string="Convention collective">
+                        <group>
+                            <field name="category_id"/>
+                            <field name="echelon_id"/>
+                        </group>
+                        <group>
+
+                            <label for="percent"/>
+                            <div class="o_row">
+                                <field name="percent" nolabel="1"/><span> % </span>
+                            </div>
+
+                            <label for="convention_wage"/>
+                            <div class="o_row" name="convention_wage">
+                                <field name="convention_wage" nolabel="1"/>
+                                <span>/ Mois</span>
+                            </div>
+                        </group>
+                    </group>
+                </xpath>
+            </data>
+        </field>
+    </record>
+    
+    
+    </odoo>

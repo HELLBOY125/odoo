@@ -1,0 +1,83 @@
+<odoo>
+    <data>
+        <!-- Update bank view -->
+        <record id="update_form_bank_account_view" model="ir.ui.view">
+            <field name="name">res.partner.acc.bank.update</field>
+            <field name="model">res.partner.bank</field>
+            <field name="inherit_id" ref="base.view_partner_bank_form"/>
+            <field name="arch" type="xml">
+
+                <!-- Hide "Partner id" from "Form view" (Titulaire de compte) -->
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <!-- Hide "Acc holder name" from "Form view" (Titulaire de compte) -->
+                <xpath expr="//field[@name='acc_holder_name']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <!-- Add "employee id" after "partner id" field -->
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="employee_id"/>
+                </xpath>
+
+                <!-- Add "created_date" after "bank id" field -->
+                <xpath expr="//field[@name='bank_id']" position="after">
+                    <field name="created_date"/>
+                </xpath>
+
+                <!-- Add "active account" after "created_date" field -->
+                <xpath expr="//field[@name='created_date']" position="after">
+                    <field name="active_account"/>
+                </xpath>
+
+                <!-- Add "active account" after "created_date" field -->
+                <xpath expr="//field[@name='active_account']" position="after">
+                    <field name="number_active_account" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//form/sheet" position="after">
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </xpath>
+
+                <xpath expr="//field[@name='acc_number']" position="attributes">
+                    <attribute name="tracking">True</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Update bank tree -->
+        <record id="update_tree_bank_account_view" model="ir.ui.view">
+            <field name="name">res.partner.acc.bank.update.tree</field>
+            <field name="model">res.partner.bank</field>
+            <field name="inherit_id" ref="base.view_partner_bank_tree"/>
+            <field name="arch" type="xml">
+
+                <!-- Hide "Partner id" from "Tree view" (Titulaire de compte) -->
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <!-- Add "employee id" after "partner id" field -->
+                <xpath expr="//field[@name='acc_number']" position="before">
+                    <field name="employee_id"/>
+                </xpath>
+
+                <!-- Add "created_date" after "bank name" field -->
+                <xpath expr="//field[@name='bank_name']" position="after">
+                    <field name="created_date"/>
+                </xpath>
+
+                <!-- Add "active account" after "created_date" field -->
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="active_account"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

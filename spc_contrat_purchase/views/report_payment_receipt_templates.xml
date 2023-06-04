@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="account.report_payment_receipt_document">
+		<t t-call="web.external_layout">
+			<t t-set="o" t-value="o.with_context(lang=lang)" />
+			<div class="page">
+				<h3>
+					<strong>
+						Payment Receipt:
+						<span t-field="o.name" />
+					</strong>
+				</h3>
+				<br/>
+				<center>
+				   <h3>Monsieur le Directeur Général de l' <strong t-esc="o.journal_id.bank_id.name"/></h3>
+				   <h3>Par le débit de notre compte n° <strong t-esc="o.journal_id.bank_account_id.acc_number"/> veuillez </h3>
+				   <h3>effectuer le virement suivant : </h3> 
+				</center>
+				
+				<div class="row mt64">
+					<div class="col-6" t-if="o.payment_date">
+						<strong>Payment Date: </strong>
+						<span t-field="o.payment_date" />
+						
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6" t-if="o.partner_type">
+						<t t-if="o.partner_type == 'customer'">
+							<strong>Customer: </strong>
+						</t>
+						<t t-if="o.partner_type == 'supplier'">
+							<strong>Vendor: </strong>
+						</t>
+						<span t-field="o.partner_id" />
+						<br/>
+					    <strong>BANQUE: </strong>
+						<t t-if="o.partner_id.bank_ids">
+							<span t-esc="o.partner_id.bank_ids[0].bank_id.name" />
+					    </t>
+					<br/>
+						<strong>RIB: </strong>
+						<t t-if="o.partner_id.bank_ids">
+							<span t-esc="o.partner_id.bank_ids[0].acc_number" />
+					    </t>
+					</div>
+					<div class="col-6" t-if="o.payment_method_id">
+						<strong>Payment Method: </strong>
+						<span t-field="o.payment_method_id.name" />
+					  
+				</div>
+				</div>
+				<div class="row mb64">
+					 <div class="col-6" t-if="o.amount">
+						<strong>Payment Amount: </strong>
+						<t t-if="o.amount_after_retention">
+							<span t-esc="o.amount_after_retention"
+							      t-options="{'widget': 'monetary', 'display_currency': o.currency_id}" />
+						</t> 
+					</div> 
+					<div class="col-6" t-if="o.communication">
+						<strong>Memo: </strong>
+						<span t-field="o.communication" />
+					</div>
+				</div>
+				<table class="table table-sm">
+					<thead>
+						<tr>
+							<th>
+								<span>Invoice Date</span>
+							</th>
+							<th>
+								<span>Invoice Number</span>
+							</th>
+							<th>
+								<span>Reference</span>
+							</th>
+							<th class="text-right">
+								<span>Montant brut</span>
+							</th>
+							<!-- <th class="text-right">
+								<span>Amount Paid</span>
+							</th>
+							<th class="text-right">
+								<span>Balance</span>
+							</th> -->
+						</tr>
+					</thead>
+					<tbody>
+						<tr t-foreach="o.reconciled_invoice_ids" t-as="inv">
+							<td>
+								<span t-field="inv.invoice_date" />
+							</td>
+							<td>
+								<span t-field="inv.name" />
+							</td>
+							<td>
+								<span t-field="inv.ref" />
+							</td>
+							<td class="text-right">
+								<span t-field="inv.amount_total" />
+							</td>
+							<!-- <td class="text-right">
+								<span t-esc="o._get_invoice_payment_amount(inv)"
+									t-options="{'widget': 'monetary', 'display_currency': inv.currency_id}" />
+							</td>
+							<td class="text-right">
+								<span t-field="inv.amount_residual" />
+							</td> -->
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="clearfix" name="so_total_summary">
+					<div id="total" class="row" name="total">
+						<div
+							t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+							<table class="table table-sm">
+								<tr class="border-black o_subtotal" style="">
+									<td >
+										<strong>RS</strong>
+									</td>
+									<td  class="text-right">
+								  <t t-if="o.amount_retention">
+										 <span t-esc="o.amount_retention"
+											   t-options="{'widget': 'monetary', 'display_currency': o.currency_id}" />
+								     </t> 	 	 
+									</td>
+									
+								</tr>
+								
+								<tr class="border-black o_total">
+									<td >
+										<strong>Net</strong>
+									</td>
+									<td  class="text-right">
+									 <t t-if="o.amount_after_retention">
+										<span t-esc="o.amount_after_retention"
+							               t-options="{'widget': 'monetary', 'display_currency': o.currency_id}" />
+									</t>  
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</t>
+	</template>
+
+	
+</odoo>

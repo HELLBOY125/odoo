@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Add icon to employee's main menu -->
+        <menuitem
+                id="hr.menu_hr_root"
+                name="Employees"
+                web_icon="spc_hr,static/description/icon.png"/>
+
+        <!--Add "comptes bancaires" menu to hr config-->
+        <menuitem id="menu_hr_list_bank_accounts" name="Comptes bancaires"
+                  parent="hr.menu_human_resources_configuration"
+                  sequence="12"/>
+        <menuitem id="menu_hr_banks" name="Banques"
+                  action="base.action_res_bank_form"
+                  parent="menu_hr_list_bank_accounts"
+                  sequence="1"/>
+        <menuitem id="menu_hr_bank_accounts" name="Comptes bancaires"
+                  action="base.action_res_partner_bank_account_form"
+                  parent="menu_hr_list_bank_accounts"
+                  sequence="2"/>
+
+        <!-- Update bank account  -->
+        <record id="action_hr_employee_bank_account_form" model="ir.actions.act_window">
+            <field name="name">Comptes bancaires</field>
+            <field name="res_model">res.partner.bank</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('employee_id', '=', default_employee_id)]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer un nouveau compte bancaire
+                </p>
+            </field>
+        </record>
+
+        <!-- Upddate hr view -->
+        <record model="ir.ui.view" id="update_hr_view_employee_form">
+            <field name="name">employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <!-- Put matricule field before mobile phone field-->
+                <xpath expr="//field[@name='mobile_phone']" position="before">
+                    <field name="matricule"/>
+                </xpath>
+
+                <!-- Add related field company's country to synchronise with phone fields  -->
+                <xpath expr="//field[@name='matricule']" position="before">
+                    <field name="company_country_id" invisible="True"/>
+                </xpath>
+
+                <!-- add control in parent_id field "current employee != parent_it" -->
+                <xpath expr="//field[@name='parent_id']" position="attributes">
+                    <attribute name="domain">[('id', '!=', active_id)]</attribute>
+                </xpath>
+
+                <!-- add control in address_home_id field to show only employee's adresses -->
+                <xpath expr="//field[@name='address_home_id']" position="replace">
+                    <field name="address_home_id" context="{'show_address': 1,
+                                                            'default_type': 'private',
+                                                            'default_employee_id': active_id,
+                                                            'form_view_ref': 'base.res_partner_view_form_private'}"
+                           options='{"always_reload": True, "highlight_first_line": True}'/>
+                </xpath>
+
+                <xpath expr="//field[@name='address_home_id']" position="attributes">
+                    <attribute name="domain">[('employee_id', '=', active_id)]</attribute>
+                </xpath>
+
+                <!-- add employee_type_id field after parent_id field -->
+                <xpath expr="//field[@name='parent_id']" position="after">
+                    <field name="employee_type_id"/>
+                </xpath>
+
+                <!-- add linked company field after employee_type_id field -->
+                <xpath expr="//field[@name='employee_type_id']" position="after">
+                    <field name="linked_company"/>
+                </xpath>
+
+                <!--  Move "work location" field after "company" field -->
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="work_location" position="move"/>
+                </xpath>
+
+                <!--  Move "job title" field after "poste" field      -->
+                <xpath expr="//field[@name='job_id']" position="after">
+                    <field name="job_title" position="move"/>
+                </xpath>
+                <xpath expr="//field[@name='job_id']" position="attributes">
+                    <attribute name="required">False</attribute>
+
+                </xpath>
+
+                <!-- Add widget phone to some field phone -->
+                <xpath expr="//field[@name='mobile_phone']" position="replace">
+                    <field name="mobile_phone" widget="phone_intl"
+                           options="{'country_field': 'company_country_id', 'sync_country': True, 'allow_dropdown': True, 'separate_dial_code': True, 'initial_country_code': 'tn'}"/>
+                </xpath>
+                <xpath expr="//field[@name='work_phone']" position="replace">
+                    <field name="work_phone" widget="phone_intl" required="False"
+                           options="{'country_field': 'company_country_id', 'sync_country': True, 'allow_dropdown': True, 'separate_dial_code': True, 'initial_country_code': 'tn'}"/>
+                </xpath>
+                <xpath expr="//field[@name='emergency_phone']" position="replace">
+                    <field name="emergency_phone" widget="phone_intl"
+                           options="{'country_field': 'company_country_id', 'sync_country': True, 'allow_dropdown': True, 'separate_dial_code': True, 'initial_country_code': 'tn'}"/>
+                </xpath>
+                <xpath expr="//field[@name='phone']" position="replace">
+                    <field name="phone" string="Téléphone" widget="phone_intl" required="False"
+                           options="{'country_field': 'company_country_id', 'sync_country': True, 'allow_dropdown': True, 'separate_dial_code': True, 'initial_country_code': 'tn'}"/>
+                </xpath>
+                <xpath expr="//field[@name='km_home_work']" position="before">
+                    <field name="mobile" widget="phone_intl"
+                           options="{'country_field': 'company_country_id', 'sync_country': True, 'allow_dropdown': True, 'separate_dial_code': True, 'initial_country_code': 'tn'}"/>
+                </xpath>
+
+                <!-- Make personnel phone number readonly -->
+                <xpath expr="//field[@name='phone']" position="attributes">
+                    <attribute name="readonly">True</attribute>
+                </xpath>
+
+                <!-- Make personnel mobile number readonly -->
+                <xpath expr="//field[@name='mobile']" position="attributes">
+                    <attribute name="readonly">True</attribute>
+                </xpath>
+
+                <!-- Hide education group -->
+                <xpath expr="//page[@name='personal_information']/group/group[7]" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <!-- Hide "bank accound" field -->
+                <xpath expr="//field[@name='bank_account_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <!--  Move "Military service" field after "country of birth"   -->
+                <xpath expr="//field[@name='country_of_birth']" position="after">
+                    <field name="military_service" widget="radio" options="{'horizontal': true}"/>
+                </xpath>
+
+                <!--  Add group "Social security" under "Emergency" group -->
+                <xpath expr="//group[6]" position="after">
+                    <group string="Sécurité sociale">
+                        <field name="num_securite_sociale"/>
+                    </group>
+                    <group string="Permis de conduire">
+                        <field name="num_permis_conduire"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//page[@name='public']/div/div/group[4]" position="replace">
+                    <group string="Planifier">
+                        <field name="resource_calendar_id" required="1"/>
+                        <field name="tz"/>
+                    </group>
+                </xpath>
+
+
+
+                <!--  Lower case (place_of_birth) -->
+                <!--                 <xpath expr="//field[@name='place_of_birth']" position="attributes">
+                                    <attribute name="string">Lieu de naissance</attribute>
+                                </xpath>
+                 -->
+                <!--  Lower case (country_of_birth) -->
+                <xpath expr="//field[@name='country_of_birth']" position="attributes">
+                    <attribute name="string">Pays de naissance</attribute>
+                </xpath>
+
+                <!-- Hide "Location" group -->
+                <xpath expr="//page[@name='public']/div/div/group" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <!-- Hide spouse birthdate -->
+                <xpath expr="//page[@name='personal_information']/group/group/field[@name='spouse_birthdate']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <!-- Change label (spouse_complete_name) -->
+                <xpath expr="//page[@name='personal_information']/group/group/field[@name='spouse_complete_name']" position="attributes">
+                    <attribute name="string">Nom complet du partenaire</attribute>
+                </xpath>
+
+                <!-- Change label work_phone -->
+                <xpath expr="//field[@name='work_phone']" position="attributes">
+                    <attribute name="string">Téléphone pro</attribute>
+                </xpath>
+
+                <!-- Change label mobile_phone -->
+                <xpath expr="//field[@name='mobile_phone']" position="attributes">
+                    <attribute name="string">Mobile pro</attribute>
+                </xpath>
+
+                <!-- Change label work_email-->
+                <xpath expr="//field[@name='work_email']" position="attributes">
+                    <attribute name="string">Email pro</attribute>
+                </xpath>
+
+                <!-- Change fields work_location by a parametrable field -->
+                <xpath expr="//field[@name='work_location']" position="replace">
+                    <field name="work_location_id"/>
+                </xpath>
+
+                <!-- Make user_id fields required -->
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="required">True</attribute>
+                </xpath>
+
+                <!-- Add delivred date for identification empployee -->
+                <xpath expr="//field[@name='identification_id']" position="after">
+                    <field name="delivred_date_identification"/>
+                </xpath>
+
+                <xpath expr="//field[@name='identification_id']" position="attributes">
+                    <attribute name="required">False</attribute>
+                </xpath>
+
+                <!-- Add national_fund after num securite sociale -->
+                <xpath expr="//field[@name='num_securite_sociale']" position="after">
+                    <field name="national_fund" widget="radio" options="{'horizontal': true}"/>
+                </xpath>
+                <!-- Add matricule cnss after national_fund-->
+                <xpath expr="//field[@name='national_fund']" position="after">
+
+                    <field name="matricule_cnss" string="Matricule CNSS" attrs="{'invisible': [('national_fund','!=','cnss')]}"/>
+                </xpath>
+                <!-- Add matricule cnrps after national_fund-->
+                <xpath expr="//field[@name='national_fund']" position="after">
+
+                    <field name="matricule_cnss" string="Matricule CNRPS" attrs="{'invisible': [('national_fund','!=','cnrps')]}"/>
+                </xpath>
+                <!-- change label matricule cnss by condition national_fund-->
+                <!--
+                 -->
+
+                <!-- change attribute km home work to float -->
+                <xpath expr="//field[@name='km_home_work']" position="replace">
+                    <field name="new_km_home_work"/>
+                </xpath>
+                <!-- Hide "palce_of_birth" field -->
+                <xpath expr="//field[@name='place_of_birth']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <!-- add field state_id place of birth ater birthday -->
+                <xpath expr="//field[@name='birthday']" position="after">
+                    <field name="state_id"/>
+                </xpath>
+                <!-- add field householder ater marital -->
+<!--                <xpath expr="//field[@name='marital']" position="after">-->
+<!--                    <field name="householder" widget="radio" options="{'horizontal': true}"/>-->
+<!--                </xpath>-->
+                <!-- Hide num_securite_sociale -->
+                <xpath expr="//field[@name='num_securite_sociale']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <!-- add page "Bénificiares" -->
+                <xpath expr="//page[@name='hr_settings']" position="before">
+                    <page name="benificiares" string="Bénificiares">
+                        <field name="partner_ids" context="{'default_parent_id':user_partner_id}">
+                            <kanban>
+                                <field name="id"/>
+                                <field name="color"/>
+                                <field name="name"/>
+                                <field name="type_partner" required="1" widget="radio" options="{'horizontal': true}"/>
+                                <field name="title"/>
+                                <field name="type"/>
+                                <field name="email"/>
+                                <field name="parent_id"/>
+                                <field name="is_company"/>
+                                <field name="function"/>
+                                <field name="phone"/>
+                                <field name="street"/>
+                                <field name="street2"/>
+                                <field name="zip"/>
+                                <field name="city"/>
+                                <field name="country_id"/>
+                                <field name="mobile"/>
+                                <field name="state_id"/>
+                                <field name="image_128"/>
+                                <field name="lang"/>
+                                <!-- fields in form x2many view to diminish requests -->
+                                <field name="comment"/>
+                                <field name="display_name"/>
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <t t-set="color" t-value="kanban_color(record.color.raw_value)"/>
+                                        <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
+                                            <div class="o_kanban_image">
+                                                <img alt="" t-if="record.image_128.raw_value" t-att-src="kanban_image('res.partner', 'image_128', record.id.raw_value)"/>
+                                                <t t-if="!record.image_128.raw_value">
+                                                    <img alt="Delivery" t-if="record.type.raw_value === 'delivery'" t-att-src='_s + "/base/static/img/truck.png"'/>
+                                                    <img alt="Invoice" t-if="record.type.raw_value === 'invoice'" t-att-src='_s + "/base/static/img/money.png"'/>
+                                                    <t t-if="record.type.raw_value !== 'invoice' &amp;&amp; record.type.raw_value !== 'delivery'">
+                                                        <img alt="Logo" t-if="record.is_company.raw_value === true" t-att-src='_s + "/base/static/img/company_image.png"'/>
+                                                        <img alt="Avatar" t-if="record.is_company.raw_value === false" t-att-src='_s + "/base/static/img/avatar_grey.png"'/>
+                                                    </t>
+                                                </t>
+                                            </div>
+                                            <div class="oe_kanban_details">
+                                                <field name="name"/>
+                                                <div t-if="record.function.raw_value"><field name="function"/></div>
+                                                <div t-if="record.email.raw_value"><field name="email" widget="email"/></div>
+                                                <div t-if="record.type.raw_value != 'contact'">
+                                                    <div>
+                                                        <field name="zip"/>
+                                                        <field name="city"/>
+                                                    </div>
+                                                    <field t-if="record.state_id.raw_value" name="state_id"/>
+                                                    <field name="country_id"/>
+                                                </div>
+                                                <div t-if="record.phone.raw_value">Phone: <field name="phone" widget="phone"/></div>
+                                                <div t-if="record.mobile.raw_value">Mobile: <field name="mobile" widget="phone"/></div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                            <form string="Contact / Address">
+                                <sheet>
+                                    <!-- parent_id and type fields needed in attrs in base_address_city module which overwrites
+                                    _fields_view_get() of partner. It would be better to put those fields there but the web client
+                                    dosen't support when a field is displayed several times in the same view.-->
+                                    <field name="type" required="1" widget="radio" options="{'horizontal': true}"/>
+                                    <field name="parent_id" invisible="1"/>
+                                    <hr/>
+                                    <group col="12">
+                                        <group colspan="5">
+                                            <field name="type_partner"/>
+                                            <field name="name" string="Contact Name" attrs="{'required' : [('type', '=', 'contact')]}"/>
+                                            <field name="title" placeholder="e.g. Mr."
+                                                   attrs="{'invisible': [('type','!=', 'contact')]}"/>
+                                            <field name="function" placeholder="e.g. Sales Director"
+                                                   attrs="{'invisible': [('type','!=', 'contact')]}"/>
+                                            <label for="street" string="Address" attrs="{'invisible': [('type','=', 'contact')]}"/>
+                                            <div attrs="{'invisible': [('type','=', 'contact')]}">
+                                                <div class="o_address_format" name="div_address">
+                                                    <field name="street" placeholder="Street..." class="o_address_street"/>
+                                                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                                    <field name="city" placeholder="City" class="o_address_city"/>
+                                                    <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}' context="{'country_id': country_id, 'zip': zip}"/>
+                                                    <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                                    <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                                                </div>
+                                            </div>
+                                            <field name="comment" placeholder="Internal notes..."/>
+                                        </group>
+                                        <group colspan="5">
+                                            <field name="email" widget="email"/>
+                                            <field name="phone" widget="phone"/>
+                                            <field name="mobile" widget="phone"/>
+                                            <field name="company_id" invisible="1"/>
+                                        </group>
+                                        <group colspan="1">
+                                            <field name="image_1920" widget="image" class="oe_avatar" nolabel="1" options="{'image_preview': 'image_128'}"/>
+                                        </group>
+                                    </group>
+                                    <field name="lang" invisible="True"/>
+                                    <field name="user_id" invisible="True"/>
+                                </sheet>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+
+                <!-- Add bank accounts to employee -->
+                <xpath expr="//page[@name='personal_information']" position="inside">
+                    <separator string="Comptes bancaires" colspan="2"/>
+                    <field name="bank_account_ids" style="width:100%%" context="{'default_employee_id': active_id}" nolabel="1">
+                        <tree editable="bottom">
+                            <field name="employee_id" invisible="1" required="1" readonly="True" force_save="1" width="5"/>
+                            <field name="bank_id" width="15"/>
+                            <field name="acc_number" width="50"/>
+                            <field name="created_date" width="25"/>
+                            <field name="active_account" width="5"/>
+                            <field name="number_active_account" invisible="1"/>
+                        </tree>
+                    </field>
+                    <button type="action"
+                            class="oe_highlight oe_right"
+                            name="%(action_hr_employee_bank_account_form)d"
+                            context="{'search_default_employee_id': active_id, 'default_employee_id': active_id,
+                            'form_view_ref': 'base.view_partner_bank_form'}"
+                            string="Editer les comptes bancaires"
+                            colspan="2"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Readonly field "coach_id" for group_hr_user -->
+        <record id="view_employee_readonly_fields_based_group_hr_user" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherited.readonly.fields.hr_user</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="groups_id" eval="[(6, 0, [ref('hr.group_hr_user')])]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='coach_id']" position="attributes">
+                    <attribute name="readonly">True</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Readonly field "coach_id" for group_hr_manager -->
+        <record id="view_employee_readonly_fields_based_group_hr_manager" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherited.readonly.fields.hr_manager</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="groups_id" eval="[(6, 0, [ref('hr.group_hr_manager')])]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='coach_id']" position="attributes">
+                    <attribute name="readonly">False</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

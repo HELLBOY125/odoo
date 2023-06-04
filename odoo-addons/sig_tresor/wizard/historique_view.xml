@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="view_historique" model="ir.ui.view">
+            <field name="name">Historique Processus</field>
+            <field name="model">sig.tresor.historique</field>
+            <field name="arch" type="xml">
+                <form string="Historique Processus">
+                    <group>
+                        <group>
+                            <field name="wkf_nom"/>
+                            <field name="wkf_etat"/>
+                        </group>
+                        <group></group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="date_reception"/>
+                            <field name="date_transmission"/>
+                            <field name="delai"/>
+                        </group>
+                        <group></group>
+                    </group>
+
+                    <footer>
+                        <button name="action_historiser" string="Enregistrer" type="object" class="btn btn-primary"/>
+                        <button string="Annuler" class="btn btn-secondary o_form_button_cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+         <record id="historique_action" model="ir.actions.act_window">
+            <field name="name">historique</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sig.tresor.historique</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_historique"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

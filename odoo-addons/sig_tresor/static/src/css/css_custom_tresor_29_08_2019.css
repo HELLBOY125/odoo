@@ -1,0 +1,661 @@
+.o_main_navbar {
+
+  /*  position: relative;*/
+    height: 46px;
+    border-bottom: 1px solid #f38e00;
+    background-color: #f38e00;
+    color: white;
+    position: fixed !important;
+    width: 100%;
+    z-index: 1000;
+
+}
+
+/*.o_control_panel{
+    background-color: dimgray;
+}
+
+.o_mail_thread{
+    background-color: lightslategray;
+}
+*/
+.o_control_panel{
+   padding-left: 48px
+}
+html .o_web_client .o_content{
+    margin-left: 47px;
+}
+.o_main_navbar > ul > li > a:hover, .o_main_navbar > ul > li > label:hover {
+    background-color: #3da326;
+}
+
+.o_main_navbar > ul > li > a:active, .o_main_navbar > ul > li > label:active {
+    background-color: #3da326 !important;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #3da326;
+    border-color: #3da326;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #f38e00;
+    border-color: #f38e00;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #f38e00;
+    border-color: #f38e00;
+}
+
+.o_main_navbar > a:hover, .o_main_navbar > a:focus, .o_main_navbar > button:hover, .o_main_navbar > button:focus {
+    background-color: #3da326;
+    color: inherit;
+}
+
+.o_main_navbar .show .dropdown-toggle {
+    background-color: #3da326;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+    color: #212529;
+    text-decoration: none;
+    background-color: rgba(61, 163, 38, 0.33);
+}
+
+.o_form_view .o_form_uri {
+    display: inline-block;
+    color: #3da326;
+}
+
+.o_form_view .o_form_uri:hover {
+    color: #f38e00;
+}
+
+.o_form_view .o_horizontal_separator {
+    color: #f38e00;
+    font-weight: bold;
+}
+
+.btn-secondary {
+    color: #3da326;
+    background-color: #fff;
+    border-color: #dedede;
+}
+
+.o_searchview {
+    color: #3da326;
+}
+
+.o_list_view thead {
+    background-color: rgba(61, 163, 38, 0.25098039215686274);
+}
+
+.o_list_view thead > tr > th {
+    border-left: 1px solid #fff;
+}
+
+.btn-link {
+    font-weight: 400;
+    color: #f38e00;
+    background-color: transparent;
+}
+
+.o_searchview .o_searchview_facet {
+    border: 1px solid #f38e00;
+    background: #e2e2e0;
+}
+
+.o_searchview .o_searchview_facet .o_searchview_facet_label {
+    background-color: #f38e00;
+}
+
+
+.btn-primary {
+    color: #FFFFFF;
+    background-color: #3da326 !important;
+    border-color: #3da326 !important;
+}
+
+.bg-100 {
+    background-color: #f38e00 !important;
+    color: #212529;
+}
+
+.btn-primary a:hover {
+    color: #fff;
+    background-color: #f38e00;
+    border-color: #f38e00;
+}
+
+/*.card-body
+{
+	background: #fff !important;
+    border-radius: 20px 20px 0px 0px !important;
+}*/
+.breadcrumb-item a {
+    color: #f38e00 !important;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+
+.breadcrumb-item a:hover {
+    color: #3da326 !important;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+
+.o_form_view .oe_button_box .oe_stat_button .o_button_icon {
+    display: inline-block;
+    width: 37px;
+    padding: 0px 3px;
+    text-align: center;
+    vertical-align: middle;
+    color: #3da326 !important;
+    font-size: 24px;
+}
+
+.text-danger, .oe_import .oe_import_error_report .oe_import_report.text-error {
+    color: #f38e00 !important;
+}
+
+.text-success {
+    color: #3da326 !important;
+}
+
+.btn-info {
+    color: #3da326 !important;
+    background-color: transparent !important;
+    border-color: #f38e00 !important;
+}
+
+
+.btn-info:hover {
+    color: #fff !important;
+    background-color: #3da326 !important;
+    border-color: #3da326 !important;
+}
+
+.a {
+    color: #3da326 !important;
+}
+
+.o_loading {
+    background-color: #3da326 !important;
+}
+
+.btn-secondary:hover {
+    color: #f38e00;
+    background-color: #fff;
+    border-color: #dedede;
+}
+
+.btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active, .show > .btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: #3da326;
+    border-color: #dfdfdf;
+}
+
+.o_nocontent_help a {
+    color: #3da326;
+}
+
+.o_nocontent_help a:hover {
+    color: #f38e00;
+}
+
+.modal-title {
+
+    color: #f38e00;
+}
+
+.d-flex.mt-2.o_web_settings_dashboard_pills a {
+    color: #f38e00 !important;
+}
+
+.d-flex.mt-2.o_web_settings_dashboard_pills a:hover {
+    color: #3da326 !important;
+}
+
+.o_web_settings_dashboard_access_rights {
+    color: #f38e00 !important;
+}
+
+.o_web_settings_dashboard_access_rights:hover {
+    color: #3da326 !important;
+}
+
+i.fa.fa-suitcase.fa-4x.text-muted {
+    color: #f38e00 !important;
+}
+
+i.fa.fa-suitcase.fa-4x.text-muted:hover {
+    color: #3da326 !important;
+}
+
+i.fa.fa-cog.fa-4x.text-muted.o_browse_apps {
+    color: #f38e00 !important;
+}
+
+i.fa.fa-cog.fa-4x.text-muted.o_browse_apps:hover {
+    color: #3da326 !important;
+}
+
+i.fa.fa-globe.fa-4x.text-muted {
+    color: #f38e00 !important;
+}
+
+i.fa.fa-globe.fa-4x.text-muted:hover {
+    color: #3da326 !important;
+}
+
+.btn-primary:hover {
+    background: #f38e00 !important;
+}
+
+i.fa.fa-twitter-square.fa-4x.tw_share {
+    color: #f38e00 !important;
+}
+
+i.fa.fa-twitter-square.fa-4x.tw_share:hover {
+    color: #3da326 !important;
+}
+
+i.fa.fa-facebook-square.fa-4x.fb_share {
+    color: #f38e00 !important
+}
+
+i.fa.fa-facebook-square.fa-4x.fb_share:hover {
+    color: #3da326 !important
+}
+
+i.fa.fa-linkedin-square.fa-4x.li_share {
+    color: #f38e00 !important
+}
+
+i.fa.fa-linkedin-square.fa-4x.li_share:hover {
+    color: #3da326 !important
+}
+
+.o_mail_systray_item .o_notification_counter {
+    margin-top: -0.8rem;
+    margin-right: 0;
+    margin-left: -0.6rem;
+    background: #3da326 !important;
+    color: white;
+    vertical-align: super;
+    font-size: 0.7em;
+}
+
+.o_tooltip::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    bottom: -2px;
+    right: -2px;
+    border-color: #f38e00;
+    border-radius: 50%;
+    transition: margin 133ms ease 0ms, border-radius 200ms linear 0s;
+    background: radial-gradient(#f38e00, #f38e00);
+}
+
+.o_required_modifier.o_input, .o_required_modifier .o_input {
+    background-color: rgba(61, 163, 38, 0.3686274509803922) !important;
+}
+
+.nav-item a {
+    color: #3da326 !important
+}
+
+.o_thread_window .o_thread_window_header {
+
+    border-bottom: 1px solid #3da326 !important;
+    background-color: #3da326 !important;
+}
+
+.mt16 .btn-link {
+    color: #3da326 !important;
+}
+
+.mt16 .btn-link:hover {
+    color: #f38e00 !important;
+}
+
+.o_base_settings .o_setting_container .settings_tab {
+
+    background: rgba(61, 163, 38, 0.7411764705882353) !important;
+}
+
+.o_base_settings .o_setting_container .settings_tab .selected {
+    box-shadow: inset 3px 0 0 #fff;
+}
+
+.oe_link {
+    color: #3da326 !important;
+}
+
+.oe_link:hover {
+    color: #f38e00 !important;
+}
+
+.o_mail_discuss .o_mail_discuss_sidebar {
+    background: rgba(61, 163, 38, 0.7411764705882353) !important;
+    color: #dee2e6;
+}
+
+.o_mail_discuss .o_mail_discuss_sidebar {
+    color: #fff;
+}
+
+.o_mail_discuss .o_mail_discuss_sidebar .o_mail_sidebar_title h4 {
+    color: #fff !important;
+}
+
+.o_mail_discuss .o_mail_discuss_sidebar .o_mail_discuss_item.o_active {
+    box-shadow: inset 3px 0 0 #fff !important;
+}
+
+.o_mail_discuss .o_mail_discuss_sidebar .o_mail_sidebar_title .o_add {
+    cursor: pointer;
+    opacity: 1 !important;
+    color: #fff !important;
+}
+
+button.fa.fa-external-link.btn.btn-secondary.o_external_button {
+    color: #f38e00 !important;
+}
+
+.ui-state-focus {
+    background-color: #3da326 !important;
+}
+
+.o_tooltip.top::before {
+    position: absolute;
+    top: auto;
+    left: 2px;
+    bottom: -8px;
+    right: auto;
+    border-width: 10px 10px 0 10px;
+    border-top-color: #3da326 !important;
+}
+
+.o_mail_hash {
+    color: #fff !important;
+    opacity: 1 !important;
+}
+
+.o_field_x2many_list_row_add {
+    color: #f38e00;
+}
+
+.o_field_x2many_list_row_add:hover {
+    color: #3da326;
+}
+
+.o_tooltip active {
+    border-color: #3da326 !important;
+}
+
+.o_tooltip {
+    box-sizing: content-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    bottom: auto;
+    right: auto;
+    opacity: 0;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #3da326 !important;
+    border-radius: 50%;
+    padding: 0;
+    z-index: 1070;
+    background-color: #7C7BAD;
+    box-shadow: 0 2px 2px 1px rgba(150, 150, 150, 0.3);
+    transition: width 133ms ease 0ms, height 133ms ease 0ms, margin 133ms ease 0ms, border-radius 133ms ease 66ms;
+}
+
+.btn-link {
+    font-weight: 400;
+    color: #3da326;
+    background-color: transparent;
+}
+
+.btn-link:hover {
+    font-weight: 400;
+    color: #f38e00;
+    background-color: transparent;
+}
+
+.o_mail_systray_item .o_mail_systray_dropdown .o_mail_systray_dropdown_top .o_filter_button:hover, .o_mail_systray_item .o_mail_systray_dropdown .o_mail_systray_dropdown_top .o_filter_button.active {
+    color: #3da326 !important;
+}
+
+.o_searchview .o_searchview_input_container .o_searchview_facet .o_facet_values {
+
+    background: #fff !important;
+}
+
+.o_field_widget.o_field_image .o_form_image_controls {
+    position: absolute;
+    top: 0;
+    left: auto;
+    bottom: auto;
+    right: 0;
+    width: 100%;
+    color: white;
+    background-color: #3da326 !important;
+    opacity: 0;
+    transition: opacity ease 400ms;
+}
+
+
+.card-body {
+    background: rgba(255, 255, 255, 0.72) !important;
+    border-radius: 20px 20px 20px 20px !important;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #3da326 !important;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #FFFFFF;
+    border-color: #21fffb;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 160, 157, 0.25);
+}
+
+.border-top {
+    border-top: 1px solid #3da326 !important;
+}
+
+.justify-content-between.mt-2.d-flex.small a {
+    color: #000;
+}
+
+a.border-right.pr-2.mr-1 {
+    color: #000;
+}
+
+.text-center.small.mt-4.pt-3.border-top a {
+    color: #000;
+}
+
+.text-center {
+    text-align: center !important;
+    border-radius: 10px 10px 10px 10px !important;
+}
+
+input#login.form-control {
+    background-color: #fff !important;
+}
+
+.text-center img {
+    border-radius: 15px !important;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #FFFFFF;
+    border-color: #fff !important;
+    outline: 0;
+    box-shadow: none !important;
+}
+
+i.fa.fa-share-alt.fa-4x.text-muted {
+    color: #f38e00 !important;
+}
+
+
+i.fa.fa-share-alt.fa-4x.text-muted:hover {
+    color: #3da326 !important;
+}
+.o_field_widget .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled {
+    color: #fff;
+    font-size: 11px;
+    background-color: #e9ecef;
+    cursor: default;
+}
+
+.datepicker .table-sm > tbody > tr > td.active, .datepicker .table-sm > tbody > tr > td .active {
+    background-color: #f38e00 !important;
+    border-radius: 100px;
+}
+
+.bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover {
+    background-color: #3da326 !important;
+    color: #fff;
+   /* text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);*/
+}
+
+.datepicker .table-sm > thead > tr:first-child th:hover {
+    color: white;
+    background-color: #f38e00 !important;
+}
+.datepicker .table-sm > thead > tr:first-child th {
+    color: white;
+    background-color:#3da326 !important;
+}
+
+img.img-fluid.d-block.mx-auto {
+    border-radius: 15px;
+    margin: 15px;
+}
+.list-group-item.d-flex.align-items-center a {
+    color: #000;
+}
+
+.o_form_statusbar .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled
+{
+    color: #fff !important;
+}
+button.btn.o_arrow_button.btn-primary.disabled {
+    background: #3da326 !important;
+    color: #fff !important;
+}
+.o_menu_apps .dropdown-menu {
+   /* position: absolute;*/
+    top: 46px !important;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    float: left;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 1.08333333rem;
+    color: #4c4c4c;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #dee2e6;
+    border-radius: 0px;
+    position: fixed !important;
+    height: 610px;
+}
+
+body .o_main {
+    position: absolute !important;
+    width: 91% !important;
+    float: right !important;
+    right: 0px !important;
+    float: left !important;
+    top: 50px !important;
+    }
+
+.dropdown-item:hover, .dropdown-item:focus {
+    color: #fff !important;
+    text-decoration: none;
+    background-color: #3da326;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #fff !important;
+    text-decoration: none;
+    background-color: #3da326 !important;
+}
+.o_menu_apps .dropdown-menu.show {
+    display: none;
+}
+.dropdown-item {
+    position: relative;
+    color: #4c4c4c;
+    border-bottom: 1px solid #ced4da !important;
+}
+
+/*.table-responsive {
+    top: 90px;
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    position: relative;
+}
+
+html .o_web_client > .o_main .o_main_content .o_control_panel {
+    width: 100%;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    flex: 0 0 auto;
+    position: fixed;
+    top: 46px;
+    z-index: 100;
+}
+*/
+
+.sfd{
+    padding-right: 300px;
+}
+
+/*
+.o_req{
+color: #dc3545;
+}*/
+
+/*** Ce code pour faire scroller le menu de la Barre de gauche ***/
+
+
+.dropdown-item.o_app {
+
+    word-wrap: break-word !important;
+    width: 160px !important;
+    overflow-y: scroll !important;
+
+}
+
+/*** Ce code rendre le background du menu principal active en couleur VERTE ***/
+/*.o_main_navbar > ul > li > a:focus, .o_main_navbar > ul > li > a:active, .o_main_navbar > ul > li > a:focus:active {*/
+/*    outline: none;*/
+/*    background: #3da326 !important;*/
+/*}*/
+

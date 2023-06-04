@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="update_hr_res_config_settings_view" model="ir.ui.view">
+            <field name="name">hr.res.config.settings</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="70"/>
+            <field name="inherit_id" ref="hr.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-key='hr']/div[1]" position="inside">
+<!--                    <div class="col-12 col-lg-6 o_setting_box" title="Passeports et Visas">-->
+<!--                        <div class="o_setting_right_pane">-->
+<!--                            <span class="o_form_label">Passeports et Visas</span>-->
+<!--                            <div class="content-group" name="hr_passports_visas_management">-->
+<!--                                <div class="o_setting_right_pane">-->
+<!--                                    <field name="module_spc_hr_passports_visas"/>-->
+<!--                                </div>-->
+<!--                                <div class="o_setting_right_pane">-->
+<!--                                    <div class="text-muted">-->
+<!--                                        Ajouter des passeports et visas pour les employés.-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="col-12 col-lg-6 o_setting_box" title="Gestion des passeports et des Visas">
+                            <div class="o_setting_left_pane">
+                                <field name="module_spc_hr_passports_visas"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_spc_hr_passports_visas"/>
+                                <div class="text-muted">
+                                    Afficher l'ensemble des passeports et des visas d'un employé
+                                </div>
+                            </div>
+                        </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

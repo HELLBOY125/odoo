@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!--
+            séquence location
+        -->
+
+        <!-- séquence sig.tresor.district -->
+        <record id="seq_district" model="ir.sequence">
+            <field name="name">district</field>
+            <field name="code">sig.tresor.district</field>
+            <field name="prefix">D</field>
+            <field name="padding">1</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <!-- séquence sig.tresor.region -->
+        <record id="seq_region" model="ir.sequence">
+            <field name="name">region</field>
+            <field name="code">sig.tresor.region</field>
+            <field name="prefix">R</field>
+            <field name="padding">1</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <!-- séquence sig.tresor.departement -->
+        <record id="seq_departement" model="ir.sequence">
+            <field name="name">departement</field>
+            <field name="code">sig.tresor.departement</field>
+            <field name="prefix">DP</field>
+            <field name="padding">1</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <!-- séquence sig.tresor.commune -->
+        <record id="seq_commune" model="ir.sequence">
+            <field name="name">commune</field>
+            <field name="code">sig.tresor.commune</field>
+            <field name="prefix">SP</field>
+            <field name="padding">1</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <!-- séquence sig.tresor.village -->
+        <record id="seq_village" model="ir.sequence">
+            <field name="name">village</field>
+            <field name="code">sig.tresor.village</field>
+            <field name="prefix">VIL</field>
+            <field name="padding">1</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+
+         <!-- séquence sig.tresor.type.indicateur -->
+        <record id="seq_type_indicateur" model="ir.sequence">
+            <field name="name">type.indicateur</field>
+            <field name="code">sig.tresor.type.indicateur</field>
+            <field name="prefix">TIND</field>
+            <field name="padding">2</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+         <!-- séquence sig.tresor.indicateur -->
+        <record id="seq_indicateur" model="ir.sequence">
+            <field name="name">indicateur</field>
+            <field name="code">sig.tresor.indicateur</field>
+            <field name="prefix">IND</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+          <!-- séquence sig.tresor.activite -->
+        <record id="seq_activite" model="ir.sequence">
+            <field name="name">activite</field>
+            <field name="code">sig.tresor.activite</field>
+            <field name="prefix">ACT</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <!--&lt;!&ndash;
+            séquence demande d'agrément
+        &ndash;&gt;
+        &lt;!&ndash; séquence sig.tresor.reception.courrier &ndash;&gt;
+        <record id="seq_reception_courrier" model="ir.sequence">
+            <field name="name">enr et réception courrier</field>
+            <field name="code">sig.tresor.reception.courrier</field>
+            <field name="suffix">/%(y)s</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        &lt;!&ndash; séquence sig.tresor.verif.conformite.dossier &ndash;&gt;
+        <record id="seq_verif_conformite_dossier" model="ir.sequence">
+            <field name="name">Vérif de conformité du dossier</field>
+            <field name="code">sig.tresor.verif.conformite.dossier</field>
+            <field name="suffix">/%(y)s</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        &lt;!&ndash; séquence sig.tresor.etude.fond.dossier &ndash;&gt;
+        <record id="seq_etude_fond_dossier" model="ir.sequence">
+            <field name="name">etude de fond dossier</field>
+            <field name="code">sig.tresor.etude.fond.dossier</field>
+            <field name="suffix">/%(y)s</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        &lt;!&ndash; séquence sig.tresor.saisine.bceao &ndash;&gt;
+        <record id="seq_saisine_bceao" model="ir.sequence">
+            <field name="name">saisine bceao</field>
+            <field name="code">sig.tresor.saisine.bceao</field>
+            <field name="suffix">/%(y)s</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>-->
+
+    </data>
+</odoo>

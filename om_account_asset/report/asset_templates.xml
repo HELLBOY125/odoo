@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        
+
+      
+        <template id="report_simple_code_barre">
+            <div style="width: 32%; display: inline-table; height: 10rem;">
+                <table class="table table-bordered mb-0" style="border: 2px solid black;">
+                    <tr>
+                        <th class="table-active text-left" style="height: 4rem;">
+                            <strong t-field="asset.name"/>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="text-center align-middle" style="height: 6rem;">
+                            <t t-if="asset.code_barre">
+                                <img alt="Barcode" t-if="len(asset.code_barre) == 13" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', quote_plus(asset.code_barre or ''), 600, 150)" style="width:100%;height:4rem;"/>
+                                <img alt="Barcode" t-elif="len(asset.code_barre) == 8" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN8', quote_plus(asset.code_barre or ''), 600, 150)" style="width:100%;height:4rem;"/>
+                                <img alt="Barcode" t-else="" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', quote_plus(asset.code_barre or ''), 600, 150)" style="width:100%;height:4rem"/>
+                                <span t-field="asset.code_barre"/>
+                            </t>
+                            <t t-else=""><span class="text-muted">No code_barre available</span></t>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </template>
+
+        <template id="report_assetcode_barre">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <t t-foreach="docs" t-as="asset">
+                        <t t-call="om_account_asset.report_simple_code_barre">
+                            <t t-set="asset" t-value="asset"/>
+                        </t>
+                    </t>
+                </div>
+            </t>
+        </template>
+        
+        
+        
+             <report
+            id="report_asset_code_barre"
+            string="Immobilisation Code-Barre (PDF)"
+            model="account.asset.asset"
+            report_type="qweb-pdf"
+            name="om_account_asset.report_assetcode_barre"
+            file="om_account_asset.report_assetcode_barre"
+            print_report_name="'Immobilisation Code-Barre - %s' % (object.name)"
+        />
+        
+    </data>
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="action_hr_type_visa" model="ir.actions.act_window">
+            <field name="name">Type Visas</field>
+            <field name="res_model">hr.type.visa</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Type visa menu-->
+        <menuitem id="type_visa_menu_id" name="Types Visas" action="action_hr_type_visa" sequence="3" parent="passportsand_visas_menu_id"/>
+
+        <!--Type visa form view -->
+        <record model="ir.ui.view" id="hr_type_visa_view_form">
+            <field name="name">type.visa.form</field>
+            <field name="model">hr.type.visa</field>
+            <field name="arch" type="xml">
+                <form string="Type Visa">
+                    <sheet>
+                        <group>
+                            <separator string="Type Visa :" colspan="2"/>
+                            <group colspan="2" col="2">
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!--tree view type Visa-->
+        <record model="ir.ui.view" id="hr_type_visa_view_tree">
+            <field name="name">type.visa.tree</field>
+            <field name="model">hr.type.visa</field>
+            <field name="arch" type="xml">
+                <tree string="Type Visa list">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

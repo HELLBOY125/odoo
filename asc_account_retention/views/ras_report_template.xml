@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="external_layout_ras">
+        <t t-if="not o" t-set="o" t-value="doc" />
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+
+        <div class="header row"/>
+        <div class="article o_report_layout_standard">
+            <t t-call="web.address_layout" />
+            <t t-raw="0" />
+        </div>
+        <div class="footer o_standard_footer"/>
+    </template>
+
+    <template id="ras_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h6>
+                            <strong>N°:
+                                <span t-field="o.name"/>
+                            </strong>
+                        </h6>
+                        <br/>
+                        <h3 align="center">
+                            <strong>
+                                CERTIFICAT DE RETENUE D’IMPOT SUR
+                            </strong>
+                        </h3>
+                        <h3 align="center">
+                            <strong>
+                                LE REVENU OU SUR LES SOCIETES
+                            </strong>
+                        </h3>
+                        <br/>
+
+                        <div>
+                            A/ ORGANISME PAYEUR :
+                            <br/>
+                            Nom ou Raison Sociale : <span  t-field="o.company_id"/>
+                            <br/>
+                            <span>Activité :</span>
+                            <br/>
+                            <span>Adresse :
+                                <span t-if="o.company_id.street" t-field="o.company_id.street">,</span>
+                                <span t-if="o.company_id.street2" t-field="o.company_id.street2">,</span>
+                                <span t-if="o.company_id.city" t-field="o.company_id.city">,</span>
+                                <span t-if="o.company_id.state_id" t-field="o.company_id.state_id">,</span>
+                                <span t-if="o.company_id.zip" t-field="o.company_id.zip">,</span>
+                                <span t-if="o.company_id.country_id" t-field="o.company_id.country_id"/>
+                            </span>
+
+                            <br/>
+                        </div>
+
+                        <table class="table table-bordered mb32">
+                            <thead>
+                                <tr>
+                                    <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Matricule Fiscal</b></th>
+                                    <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Code TVA</b></th>
+                                    <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Catégorie</b></th>
+                                    <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b> N° Etablissement</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-if="o.company_id.vat">
+                                    <td style="border: 1px solid black;font-size: 14px; text-align: center;">
+                                        <span t-if="o.company_id.vat.find('/') != -1">
+                                            <t t-esc="o.company_id.vat.split('/')[0]"/>
+                                        </span>
+                                    </td>
+                                    <td style="border: 1px solid black;font-size: 14px; text-align: center;">
+                                        <span t-if="o.company_id.vat.find('/') != -1">
+                                            <t t-esc="o.company_id.vat.split('/')[1]"/>
+                                        </span>
+                                    </td>
+                                    <td style="border: 1px solid black;font-size: 14px; text-align: center;">
+                                        <span t-if="o.company_id.vat.find('/') != -1">
+                                            <t t-esc="o.company_id.vat.split('/')[2]"/>
+                                        </span>
+                                    </td>
+                                    <td style="border: 1px solid black;font-size: 14px; text-align: center;">
+                                        <span t-if="o.company_id.vat.find('/') != -1">
+                                            <t t-esc="o.company_id.vat.split('/')[3]"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-bordered mb32">
+                            <thead>
+                                <tr>
+                                    <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Retenues Sur</b></th>
+                                    <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Montant Brut</b></th>
+                                    <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Retenue</b></th>
+                                    <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Montant Net</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="border: 1px solid black;font-size: 14px; text-align: center;">
+
+                                    </td>
+                                    <td style="border: 1px solid black;font-size: 14px; text-align: center;">
+                                    </td>
+                                    <td style="border: 1px solid black;font-size: 14px; text-align: center;">
+                                    </td>
+                                    <td style="border: 1px solid black;font-size: 14px; text-align: center;">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <div>
+                            <span>B/ DESIGNATION DU BENEFICIAIE :</span>
+                            <br/>
+                            Nom ou Raison Sociale:<span  t-field="o.partner_id"/>
+                            <br/>
+                            <span>Adresse :
+                                <span  t-field="o.partner_id.street"/>,
+                                <span  t-field="o.partner_id.street2"/>,
+                                <span  t-field="o.partner_id.city"/>,
+                                <span  t-field="o.partner_id.state_id"/>,
+                                <span  t-field="o.partner_id.zip"/>,
+                                <span  t-field="o.partner_id.country_id"/>
+                            </span>
+                            <br/>
+                        </div>
+
+                        <table class="table table-bordered mb32">
+                            <thead>
+                                <tr>
+                                    <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Matricule Fiscal</b></th>
+                                    <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Code TVA</b></th>
+                                    <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Catégorie</b></th>
+                                    <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b> N° Etablissement</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-if="o.partner_id.vat">
+                                    <td style="border: 1px solid black;font-size: 14px; text-align: center;">
+                                        <span t-if="o.partner_id.vat.find('/') != -1">
+                                            <t t-esc="o.partner_id.vat.split('/')[0]"/>
+                                        </span>
+                                    </td>
+                                    <td style="border: 1px solid black;font-size: 14px; text-align: center;">
+                                        <span t-if="o.partner_id.vat.find('/') != -1">
+                                            <t t-esc="o.partner_id.vat.split('/')[1]"/>
+                                        </span>
+                                    </td>
+                                    <td style="border: 1px solid black;font-size: 14px; text-align: center;">
+                                        <span t-if="o.partner_id.vat.find('/') != -1">
+                                            <t t-esc="o.partner_id.vat.split('/')[2]"/>
+                                        </span>
+                                    </td>
+                                    <td style="border: 1px solid black;font-size: 14px; text-align: center;">
+                                        <span t-if="o.partner_id.vat.find('/') != -1">
+                                            <t t-esc="o.partner_id.vat.split('/')[3]"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <div>
+                            <span>Bon Commande N° :</span>
+                            <br/>
+                        </div>
+
+
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

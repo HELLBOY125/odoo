@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- legal form list -->
+        <record id="sig_tresor_legal_form_tree_view" model="ir.ui.view">
+            <field name="name">sig.tresor.legal.form.tree</field>
+            <field name="model">sig.tresor.legal.form</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Forme Juridique">
+                    <field name="legal_form_code"/>
+                    <field name="legal_form_name"/>
+                    <field name="legal_form_abbreviation"/>
+                    <field name="legal_form_description" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- legal form form -->
+        <record id="sig_tresor_legal_form_form_view" model="ir.ui.view">
+            <field name="name">sig.tresor.legal.form.form</field>
+            <field name="model">sig.tresor.legal.form</field>
+            <field name="arch" type="xml">
+                <form string="Forme Juridique">
+
+                    <sheet>
+                        <!-- permit to  to group the elements on the form, here we 2 subgroups so a group of 2 columns -->
+                        <group>
+                            <group>
+                                <field name="legal_form_code"/>
+                                <field name="legal_form_name"/>
+                                <field name="legal_form_abbreviation" invisible="1"/>
+                                <field name="is_required_no_rccm" widget="checkbox"/>
+                                <field name="legal_form_description" row="5" invisible="1"/>
+                            </group>
+                            <group></group>
+                        </group>
+
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_legal_form">
+            <field name="name">Forme Juridique</field>
+            <field name="res_model">sig.tresor.legal.form</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="sig_tresor_legal_form_tree_view"/>
+        </record>
+
+        <menuitem name="Forme Juridique" id="legal_form_menu" sequence="10010"
+                  parent="specific_menu"
+                  action="action_legal_form"/>
+
+
+        <!-- mutual specificity list -->
+        <record id="sig_tresor_mutual_specificity_tree_view" model="ir.ui.view">
+            <field name="name">sig.tresor.mutual.specificity.tree</field>
+            <field name="model">sig.tresor.mutual.specificity</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Spécificité Mutuelle">
+                    <field name="legal_form_id"/>
+                    <field name="mutual_specificity_code"/>
+                    <field name="mutual_specificity_name"/>
+                    <field name="mutual_specificity_description" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- mutual specificity form -->
+        <record id="sig_tresor_mutual_specificity_form_view" model="ir.ui.view">
+            <field name="name">sig.tresor.mutual.specificity.form</field>
+            <field name="model">sig.tresor.mutual.specificity</field>
+            <field name="arch" type="xml">
+                <form string="Spécificité Mutuelle">
+
+                    <sheet>
+                        <!-- permit to  to group the elements on the form, here we 2 subgroups so a group of 2 columns -->
+
+                        <group>
+                            <group>
+                                <field name="mutual_specificity_code"/>
+                                 <field name="mutual_specificity_name"/>
+                                <field name="legal_form_id"/>
+                                <field name="mutual_specificity_description" invisible="1"/>
+                            </group>
+                            <group></group>
+
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_mutual_specificity">
+            <field name="name">Spécificité</field>
+            <field name="res_model">sig.tresor.mutual.specificity</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="sig_tresor_mutual_specificity_tree_view"/>
+        </record>
+
+        <menuitem name="Spécificité Mutuelle" id="mutual_specificity_menu" sequence="10011"
+                  parent="specific_menu"
+                  action="action_mutual_specificity"/>
+
+        <!-- type courrier list -->
+        <record id="sig_tresor_type_courrier_tree_view" model="ir.ui.view">
+            <field name="name">sig.tresor.type.courrier.tree</field>
+            <field name="model">sig.tresor.type.courrier</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Type Courrier">
+                    <field name="type_courrier_name"/>
+                    <field name="type_courrier_state"/>
+                    <field name="type_courrier_description" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- type courrier form -->
+        <record id="sig_tresor_type_courrier_form_view" model="ir.ui.view">
+            <field name="name">sig.tresor.type.courrier.form</field>
+            <field name="model">sig.tresor.type.courrier</field>
+            <field name="arch" type="xml">
+                <form string="Type Courrier">
+
+                    <sheet>
+                        <!-- permit to  to group the elements on the form, here we 2 subgroups so a group of 2 columns -->
+
+                        <group>
+                            <group>
+                            <field name="type_courrier_name"/>
+                             <field name="type_courrier_state"/>
+                            <field name="type_courrier_description" invisible="1"/>
+                        </group>
+                            <group></group>
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- type courrier action-->
+        <record model="ir.actions.act_window" id="action_type_courrier">
+            <field name="name">Type Courrier</field>
+            <field name="res_model">sig.tresor.type.courrier</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="sig_tresor_type_courrier_tree_view"/>
+        </record>
+
+        <!--  type courrier menu-->
+        <menuitem name="Type Courrier" id="type_courrier_menu" sequence="10012"
+                  parent="specific_menu"
+                  action="action_type_courrier"/>
+
+    </data>
+</odoo>

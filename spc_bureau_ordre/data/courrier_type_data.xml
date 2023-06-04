@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data  noupdate="1">
+
+        <!-- Courriers entrants -->
+        <record id="courrier_type_demande_agrement" model="type.courrier.entrant">
+            <field name="name">Demande d'agrement</field>
+            <field name="code_id">DA</field>
+        </record>
+
+        <record id="courrier_type_sfd" model="type.courrier.entrant">
+            <field name="name">SFD</field>
+            <field name="code_id">SFD</field>
+        </record>
+
+        <record id="courrier_type_retrait_agrement" model="type.courrier.entrant">
+            <field name="name">Rétrait d'agrement</field>
+            <field name="code_id">RA</field>
+        </record>
+
+        <record id="courrier_type_courrier_bceao" model="type.courrier.entrant">
+            <field name="name">Courrier BCEAO</field>
+            <field name="code_id">CBCEAD</field>
+        </record>
+
+        <record id="courrier_type_rapport_sdsg" model="type.courrier.entrant">
+            <field name="name">Rapport SDSG</field>
+            <field name="code_id">RSDSG</field>
+        </record>
+
+        <record id="courrier_type_controle_interne" model="type.courrier.entrant">
+            <field name="name">Rapport de contrôle interne</field>
+            <field name="code_id">RCI</field>
+        </record>
+
+        <record id="courrier_type_autorisations_diverses" model="type.courrier.entrant">
+            <field name="name">Demande d'autorisations diverses</field>
+            <field name="code_id">DAD</field>
+        </record>
+
+        <record id="courrier_type_ordre_mission_controle_sur_place" model="type.courrier.entrant">
+            <field name="name">Ordre de mission de contrôle sur place</field>
+            <field name="code_id">OMCP</field>
+        </record>
+
+        <record model="type.courrier.entrant" id="spc_bureau_ordre.facture_type">
+            <field name="name">Facture</field>
+            <field name="code_id">Fac</field>
+        </record>
+
+        <record model="type.courrier.entrant" id="spc_bureau_ordre.demande_emploi">
+            <field name="name">Demande d'emploi</field>
+            <field name="code_id">DE</field>
+        </record>
+
+        <record model="type.courrier.entrant" id="spc_bureau_ordre.demande_information">
+            <field name="name">Demande d'information</field>
+            <field name="code_id">DI</field>
+        </record>
+
+        <record model="type.courrier.entrant" id="type_other">
+            <field name="name">Autres</field>
+            <field name="code_id">Aut</field>
+        </record>
+
+        <!-- Courriers sortants -->
+        <record id="courrier_type_recepisse" model="type.courrier.sortant">
+            <field name="name">Récépissé</field>
+            <field name="code_sortant">Rec</field>
+        </record>
+
+        <record id="courrier_type_note_observation" model="type.courrier.sortant">
+            <field name="name">Note d'observation</field>
+            <field name="code_sortant">NO</field>
+        </record>
+
+        <record id="courrier_type_note_transmission" model="type.courrier.sortant">
+            <field name="name">Note transmission</field>
+            <field name="code_sortant">NT</field>
+        </record>
+
+        <record id="courrier_type_note_information" model="type.courrier.sortant">
+            <field name="name">Note d'information</field>
+            <field name="code_sortant">NI</field>
+        </record>
+
+        <record id="courrier_type_arrete_portant_agrement" model="type.courrier.sortant">
+            <field name="name">Arrêté portant agrément</field>
+            <field name="code_sortant">APA</field>
+        </record>
+
+        <record id="courrier_type_note_rejet_definitif" model="type.courrier.sortant">
+            <field name="name">Note de rejet définitif</field>
+            <field name="code_sortant">NRD</field>
+        </record>
+
+        <record id="courrier_type_synthse_courrier_controle_sur_piece" model="type.courrier.sortant">
+            <field name="name">Synthèse de rapport et autres courriers de contrôle sur pièce </field>
+            <field name="code_sortant">SRCCP</field>
+        </record>
+
+        <record id="courrier_type_doc_pre_mission_controle_sur_place" model="type.courrier.sortant">
+            <field name="name">documents relatif aux mission de contrôle sur place </field>
+            <field name="code_sortant">SRMCP</field>
+        </record>
+
+        <record id="courrier_type_doc_post_mission_controle_sur_place" model="type.courrier.sortant">
+            <field name="name">documents relatif aux retour de mission de contrôle sur place </field>
+            <field name="code_sortant">DRRMCP</field>
+        </record>
+
+        <record id="courrier_type_autorisations_diverses" model="type.courrier.sortant">
+            <field name="name">Divers</field>
+            <field name="code_sortant">Div</field>
+        </record>
+
+    </data>
+</odoo>
+        

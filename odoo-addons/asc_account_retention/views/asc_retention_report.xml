@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="external_layout_ras">
+        <t t-if="not o" t-set="o" t-value="doc" />
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+
+        <div class="header row"/>
+        <div class="article o_report_layout_standard">
+            <t t-call="web.address_layout" />
+            <t t-raw="0" />
+        </div>
+        <div class="footer o_standard_footer"/>
+    </template>
+
+    <template id="asc_retention_report">
+        <t t-call="web.html_container">
+            <t t-call="asc_account_retention.external_layout_ras">
+                <t t-set="doc" t-value="doc" />
+
+                <div class="header row">
+                	<t t-set="address">
+			            <div t-field="doc.partner_id"
+			                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+			        </t>
+                </div>
+                <div class="page">
+
+                    <h6><strong>N°:
+                        <!--					<span t-field="o.name"/>-->
+                    </strong></h6>
+                    <br/>
+                    <h3 align="center">
+                        <strong>
+                            CERTIFICAT DE RETENUE D’IMPOT SUR LE REVENU OU SUR LES SOCIETES
+                        </strong>
+                    </h3>
+                    <br/>
+
+                    <div>
+                        <span>A/ ORGANISME</span>
+                        <br/>
+                        <span>Nom ou Raison Sociale:</span>
+                        <br/>
+                        <span>Activité :</span>
+                        <br/>
+                        <span>Adresse :</span>
+                        <br/>
+                    </div>
+
+                    <table class="table table-bordered mb32">
+                        <thead>
+                            <tr>
+                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Matricule Fiscal</b></th>
+                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Code TVA</b></th>
+                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Catégorie</b></th>
+                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b> N° Etablissement</b></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                    <!--                                    <span t-esc="p['company_cnss_id']"/>-->
+                                </td>
+                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                    <!--                                    <span t-esc="p['company_cnss_id']"/>-->
+                                </td>
+                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                    <!--                                    <span t-esc="p['company_cnss_id']"/>-->
+                                </td>
+                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                    <!--                                    <span t-esc="p['company_cnss_id']"/>-->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="table table-bordered mb32">
+                        <thead>
+                            <tr>
+                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Retenues Sur</b></th>
+                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Montant Brut</b></th>
+                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Retenue</b></th>
+                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Montant Net</b></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                    <!--                                    <span t-esc="p['company_cnss_id']"/>-->
+                                </td>
+                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                    <!--                                    <span t-esc="p['company_cnss_id']"/>-->
+                                </td>
+                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                    <!--                                    <span t-esc="p['company_cnss_id']"/>-->
+                                </td>
+                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                    <!--                                    <span t-esc="p['company_cnss_id']"/>-->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <div>
+                        <span>B/ DESIGNATION DU BENEFICIAIE :</span>
+                        <br/>
+                        <span>Nom ou Raison Sociale:</span>
+                        <br/>
+                        <span>Adresse :</span>
+                        <br/>
+                    </div>
+
+                    <table class="table table-bordered mb32">
+                        <thead>
+                            <tr>
+                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Matricule Fiscal</b></th>
+                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Code TVA</b></th>
+                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b>Catégorie</b></th>
+                                <th style="border: 1px solid black; font-size: 14px; background-color: #e9e6e6;"><b> N° Etablissement</b></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                    <!--                                    <span t-esc="p['company_cnss_id']"/>-->
+                                </td>
+                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                    <!--                                    <span t-esc="p['company_cnss_id']"/>-->
+                                </td>
+                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                    <!--                                    <span t-esc="p['company_cnss_id']"/>-->
+                                </td>
+                                <td style="border: 1px solid black;font-size: 14px; text-align: right;">
+                                    <!--                                    <span t-esc="p['company_cnss_id']"/>-->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <div>
+                        <span>Bon Commande N° :</span>
+                        <br/>
+                    </div>
+
+
+
+                </div>
+                <div class="footer o_standard_footer">
+
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

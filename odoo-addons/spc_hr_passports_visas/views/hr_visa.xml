@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="action_hr_visa" model="ir.actions.act_window">
+            <field name="name">Visas</field>
+            <field name="res_model">hr.visa</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--visa menu-->
+        <menuitem id="visa_menu_id" name="Visas" action="action_hr_visa" sequence="2" parent="passportsand_visas_menu_id"/>
+
+        <!--visa form view -->
+        <record model="ir.ui.view" id="hr_visa_view_form">
+            <field name="name">visa.form</field>
+            <field name="model">hr.visa</field>
+            <field name="arch" type="xml">
+                <form string="Visa request form">
+                    <sheet>
+                        <field name="show_state" invisible="1"/>
+                        <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('show_state', '=', False), ('state', '=', 'valide')]}">
+                            <field name="state"/>
+                        </div>
+                        <div class="badge-pill badge-success float-right" attrs="{'invisible': ['|', ('show_state', '=', False), ('state', '=', 'expired')]}">
+                            <field name="state"/>
+                        </div>
+                        <group>
+                            <separator string="Visa :" colspan="2"/>
+                            <group colspan="2" col="2">
+                                <field name="employee_id" />
+                                <field name="passport_id" domain="[('state','=','valide'),('employee_id','=',employee_id)]"
+                                       options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                <field name="name"/>
+                                <field name="type_visa_id"/>
+                                <field name="country_id"/>
+                                <field name="date_debut"/>
+                                <field name="date_fin"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <!--tree view Visa-->
+        <record model="ir.ui.view" id="hr_visa_view_tree">
+            <field name="name">visa.tree</field>
+            <field name="model">hr.visa</field>
+            <field name="arch" type="xml">
+                <tree string="Visa list">
+                    <field name="employee_id" string="Titulaire du passeport"/>
+                    <field name="passport_id"/>
+                    <field name="name"/>
+                    <field name="country_id"/>
+                    <field name="type_visa_id"/>
+                    <field name="date_debut"/>
+                    <field name="date_fin"/>
+                    <field name="state" widget="colored_state"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

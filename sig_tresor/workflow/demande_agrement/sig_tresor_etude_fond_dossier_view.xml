@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- List -->
+        <record id="etude_fond_dossier_tree_view" model="ir.ui.view">
+            <field name="name">sig.tresor.etude.fond.dossier.tree</field>
+            <field name="model">sig.tresor.etude.fond.dossier</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Etude de fond du dossier">
+                    <button string="Non"
+                            name="action_etude_fond_non"
+                            type="object"
+                            class="btn btn-secondary o_button_import"
+                            icon="fa-times"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    /> <!-- icon="fa-times" -->
+                    <button string="Oui"
+                            name="action_etude_fond_oui"
+                            type="object"
+                            class="oe_highlight"
+                            icon="fa-check"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    ></button>
+                    <field name="reception_courrier_id" string="Dossier SFD"/>
+                    <!--<field name="create_uid" string="Créé par"/>
+                    <field name="create_date" string="Créé le"/>-->
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form -->
+        <record id="etude_fond_dossier_form_view" model="ir.ui.view">
+            <field name="name">sig.tresor.etude.fond.dossier.form</field>
+            <field name="model">sig.tresor.etude.fond.dossier</field>
+            <field name="arch" type="xml">
+                <form string="Etude de fond du dossier">
+                    <header>
+                        <!--<button name="action_etude_fond"
+                                string="Etude de fond"
+                                type="object"
+                                class="oe_highlight" states="draft"
+                                groups="sig_tresor.autorisation_exercer_group"/>-->
+
+                        <!-- actions après traitement etude de fond du dossier  -->
+                        <button name="action_redac_trans_courrier_au_chief_sae"
+                                string="Transmettre"
+                                type="object"
+                                class="oe_highlight" states="etude_fond"
+                                groups="sig_tresor.autorisation_exercer_group"/>
+                        <button name="action_trans_courrier_au_sda" string="Transmettre"
+                                type="object"
+                                class="oe_highlight" states="redac_trans_courrier_au_chief_sae"
+                                groups="sig_tresor.autorisation_exercer_group"/>
+                        <button name="action_trans_courrier_au_directeur" string="Transmettre"
+                                type="object"
+                                class="oe_highlight" states="trans_courrier_au_sda"
+                                groups="sig_tresor.sous_direction_agrement_group"/>
+
+                        <button name="action_imput_courrier_au_secretariat" string="Imputer"
+                                type="object"
+                                class="oe_highlight" states="trans_courrier_au_directeur"
+                                groups="sig_tresor.direction_group"/>
+
+                        <button name="action_num_trans_au_service_courrier"
+                                string="Transmettre"
+                                type="object"
+                                class="oe_highlight" states="imput_courrier_au_secretariat"
+                                groups="sig_tresor.secretariat_group"/>
+
+                        <button name="action_trans_courrier_a_bceao_ou_demandeur"
+                                string="Transmettre"
+                                type="object"
+                                attrs="{'invisible':[('state', '!=', 'num_trans_au_service_courrier')]}"
+                                class="oe_highlight" states="num_trans_au_service_courrier"
+                                groups="sig_tresor.courrier_group"/> <!-- ,('is_show_traitement_etude_fond_ok','!=',True) -->
+
+                        <!-- <button name="action_trans_courrier_a_bceao_ou_demandeur"
+                                 string="Transmettre"
+                                 type="object"
+                                 attrs="{'invisible':[('state', '!=', 'num_trans_au_service_courrier'),('is_show_traitement_etude_fond_nok','!=',True)]}"
+                                 class="oe_highlight" states="num_trans_au_service_courrier"
+                                 groups="sig_tresor.courrier_group"/>-->
+
+                         <button name="action_retour" string="Retourner" type="object" class="oe_highlight"
+                                states="redac_trans_courrier_au_chief_sae,trans_courrier_au_sda,trans_courrier_au_directeur"/>
+
+                        <button name="action_cancelled" string="Annuler" type="object" invisible="1"
+                                class="btn btn-secondary o_form_button_cancel" attrs="{'invisible':[('state','!=','draft')]}"/>
+
+                        <field name="state" statusbar_visible="draft,etude_fond,redac_trans_courrier_au_chief_sae,trans_courrier_au_sda,trans_courrier_au_directeur,imput_courrier_au_secretariat,num_trans_au_service_courrier,trans_courrier_a_bceao_ou_demandeur"
+                               widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <field name="res_etude_fond_dossier" invisible="1"/>
+                            <field name="is_show_traitement_etude_fond_ok" invisible="1"/>
+                            <field name="is_show_traitement_etude_fond_nok" invisible="1"/>
+                            <field name="is_show_traitement_etude_fond" invisible="1"/>
+                        <group colspan="4" col="4">
+                            <field name="reception_courrier_id" string="Dossier" colspan="2" col="2"
+                                   domain="[('etude_fond_dossier_id','=',False)]"
+                                   attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="res_etude_fond_dossier" colspan="2" col="2"
+                                   attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </group>
+
+                            <group string="Traitement Etude de fond"
+                                   attrs="{'invisible':[('is_show_traitement_etude_fond','!=',True)]}">
+
+                                <!-- agent sae -->
+                                <group col="2" colspan="2" attrs="{'invisible':[('state','=','draft')]}">
+                                    <group>
+                                        <field name="type_courrier_id"
+                                               attrs="{'readonly':[('state','!=','etude_fond')], 'required': [('state', '=', 'etude_fond')]}"/>
+                                        <field name="date_trans_note_trans_synt_avis"
+                                               attrs="{'readonly':[('state','!=','etude_fond')], 'required': [('state', '=', 'etude_fond')]}"/>
+
+                                    </group>
+                                    <group>
+                                        <field name="note_trans_synt_avis"
+                                               attrs="{'required': [('state', '=', 'etude_fond')]}"/>
+                                        <field name="note_trans_bceao_1"
+                                               attrs="{'required': [('state', '=', 'etude_fond')]}"/>
+                                        <field name="note_trans_bceao_2"
+                                               attrs="{'required': [('state', '=', 'etude_fond')]}"/>
+                                    </group>
+                                </group>
+
+                                <!-- chef service sae -->
+                                <group col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','redac_trans_courrier_au_chief_sae')]}">
+                                    <group>
+                                        <field name="date_trans_note_trans_synt_avis_par_chef_sae"
+                                               attrs="{'invisible':[('state','!=','redac_trans_courrier_au_chief_sae')], 'required': [('state', '=', 'redac_trans_courrier_au_chief_sae')]}"/>
+                                    </group>
+                                    <group></group>
+                                </group>
+
+                                <!-- sous-direction des agréments -->
+                                <group col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','trans_courrier_au_sda')]}">
+                                    <group>
+                                    <field name="date_trans_note_trans_synt_avis_par_sda"
+                                           attrs="{'invisible':[('state','!=','trans_courrier_au_sda')], 'required': [('state', '=', 'trans_courrier_au_sda')]}"/>
+                                    </group>
+                                      <group></group>
+                                </group>
+                                <!-- direction -->
+                                <group col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','trans_courrier_au_directeur')]}">
+                                    <group>
+                                    <field name="date_trans_note_trans_synt_avis_par_directrice" col="2" colspan="2"
+                                           attrs="{'invisible':[('state','!=','trans_courrier_au_directeur')], 'required': [('state', '=', 'trans_courrier_au_directeur')]}"/>
+                                    </group>
+                                    <group></group>
+                                </group>
+
+                                <!-- secretariat -->
+                                <group col="4" colspan="4"
+                                       attrs="{'invisible':[('state','!=','imput_courrier_au_secretariat')]}">
+                                    <field name="date_reception_note_trans_bceao"
+                                           attrs="{'invisible':[('state','!=','imput_courrier_au_secretariat')], 'required': [('state', '=', 'imput_courrier_au_secretariat')]}"/>
+                                    <field name="numero_note_trans_synt_avis"
+                                           attrs="{'invisible':[('state','!=','imput_courrier_au_secretariat')], 'required': [('state', '=', 'imput_courrier_au_secretariat')]}"/>
+                                    <field name="numero_note_trans_bceao_1"
+                                           attrs="{'invisible':[('state','!=','imput_courrier_au_secretariat')], 'required': [('state', '=', 'imput_courrier_au_secretariat')]}"/>
+                                    <field name="numero_note_trans_bceao_2"
+                                           attrs="{'invisible':[('state','!=','imput_courrier_au_secretariat')], 'required': [('state', '=', 'imput_courrier_au_secretariat')]}"/>
+
+                                </group>
+
+                                <!-- service courrier -->
+                                <group col="4" colspan="4"
+                                       attrs="{'invisible':[('state','!=','num_trans_au_service_courrier')]}">
+                                    <field name="date_reception_dossier_bceao"
+                                           attrs="{'invisible':[('state','!=','num_trans_au_service_courrier')], 'required': [('state', '=', 'num_trans_au_service_courrier')]}"/>
+                                    <field name="date_trans_dossier_bceao"
+                                           attrs="{'invisible':[('state','!=','num_trans_au_service_courrier')], 'required': [('state', '=', 'num_trans_au_service_courrier')]}"/>
+
+                                </group>
+
+                            </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- action menu Résultats Satisfaisants ? -->
+        <record model="ir.actions.act_window" id="action_etude_fond_view">
+            <field name="name">Etude de fond</field>
+            <field name="res_model">sig.tresor.etude.fond.dossier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="etude_fond_dossier_tree_view"/>
+           <!-- <field name="domain">[('state','in',['draft'])]</field>-->
+            <field name="domain">[('state','in',['draft','etude_fond','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','trans_courrier_a_bceao_ou_demandeur'])]</field>
+        </record>
+        <!-- menu Résultats Satisfaisants ?  -->
+        <menuitem name="Etude de fond" id="etude_fond_dossier_menu" sequence="1030"
+                  parent="etude_fond_menu"
+                  action="action_etude_fond_view" groups="sig_tresor.autorisation_exercer_group"/>
+
+        <!-- action menu Rédaction et transmission courrier au Chef de Service SAE -->
+        <record model="ir.actions.act_window" id="action_etude_fond_redac_trans_courrier_au_chief_sae_view">
+            <field name="name">Transmettre courrier au Chef de Service SAE</field>
+            <field name="res_model">sig.tresor.etude.fond.dossier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="etude_fond_dossier_tree_view"/>
+           <!-- <field name="domain">[('state','in',['etude_fond'])]</field>-->
+            <field name="domain">[('state','in',['draft','etude_fond','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','trans_courrier_a_bceao_ou_demandeur'])]</field>
+        </record>
+        <!-- menu Rédaction et transmission courrier au Chef de Service SAE  -->
+        <menuitem name="Transmettre au Chef du Service SAE"
+                  id="etude_fond_redac_trans_courrier_au_chief_sae_menu" sequence="1031"
+                  parent="etude_fond_menu"
+                  action="action_etude_fond_redac_trans_courrier_au_chief_sae_view"
+                  groups="sig_tresor.autorisation_exercer_group"/>
+
+        <!-- action menu Imputation du courrier au SDA -->
+        <record model="ir.actions.act_window" id="action_etude_fond_trans_courrier_au_sda_view">
+            <field name="name">Transmettre courrier au SDA</field>
+            <field name="res_model">sig.tresor.etude.fond.dossier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="etude_fond_dossier_tree_view"/>
+            <!--<field name="domain">[('state','in',['redac_trans_courrier_au_chief_sae']),('assigne_a','=', uid)]</field> -->
+            <field name="domain">[('state','in',['draft','etude_fond','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','trans_courrier_a_bceao_ou_demandeur'])]</field>
+        </record>
+        <!-- menu Imputation du courrier au SDA  -->
+        <menuitem name="Transmettre au SDA"
+                  id="etude_fond_trans_courrier_au_sda_menu" sequence="1032"
+                  parent="etude_fond_menu"
+                  action="action_etude_fond_trans_courrier_au_sda_view"
+                  groups="sig_tresor.autorisation_exercer_group"/>
+
+        <!-- action menu Imputation du courrier au directeur -->
+        <record model="ir.actions.act_window" id="action_etude_fond_trans_courrier_au_directeur_view">
+            <field name="name">Transmettre courrier à la Directrice</field>
+            <field name="res_model">sig.tresor.etude.fond.dossier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="etude_fond_dossier_tree_view"/>
+            <!--<field name="domain">[('state','in',['trans_courrier_au_sda'])]</field>-->
+            <field name="domain">[('state','in',['draft','etude_fond','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','trans_courrier_a_bceao_ou_demandeur'])]</field>
+        </record>
+        <!-- menu Imputation du courrier au directeur  -->
+        <menuitem name="Transmettre à la Directrice"
+                  id="etude_fond_trans_courrier_au_directeur_menu" sequence="1033"
+                  parent="etude_fond_menu"
+                  action="action_etude_fond_trans_courrier_au_directeur_view"
+                  groups="sig_tresor.sous_direction_agrement_group"/>
+
+
+        <!-- action menu Imputer courrier au sécretariat -->
+        <record model="ir.actions.act_window" id="action_etude_fond_imput_courrier_au_secretariat_view">
+            <field name="name">Imputer courrier au sécretariat</field>
+            <field name="res_model">sig.tresor.etude.fond.dossier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="etude_fond_dossier_tree_view"/>
+            <!--<field name="domain">[('state','in',['trans_courrier_au_directeur'])]</field>-->
+            <field name="domain">[('state','in',['draft','etude_fond','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','trans_courrier_a_bceao_ou_demandeur'])]</field>
+        </record>
+
+        <!-- menu Imputer courrier au sécretariat  -->
+        <menuitem name="Imputer au Sécretariat"
+                  id="etude_fond_imput_courrier_au_secretariat_menu" sequence="1034"
+                  parent="etude_fond_menu"
+                  action="action_etude_fond_imput_courrier_au_secretariat_view"
+                  groups="sig_tresor.direction_group"/>
+
+        <!-- action menu Numérotation et transmission du courrier au service courrier -->
+        <record model="ir.actions.act_window" id="action_etude_fond_num_trans_au_service_courrier_view">
+            <field name="name">Transmettre courrier au service courrier</field>
+            <field name="res_model">sig.tresor.etude.fond.dossier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="etude_fond_dossier_tree_view"/>
+           <!-- <field name="domain">[('state','in',['imput_courrier_au_secretariat'])]</field>-->
+            <field name="domain">[('state','in',['draft','etude_fond','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','trans_courrier_a_bceao_ou_demandeur'])]</field>
+        </record>
+
+        <!-- menu Numérotation et transmission du courrier au service courrier  -->
+        <menuitem name="Transmettre au Service Courrier"
+                  id="etude_fond_num_trans_au_service_courrier_menu" sequence="1035"
+                  parent="etude_fond_menu"
+                  action="action_etude_fond_num_trans_au_service_courrier_view"
+                  groups="sig_tresor.secretariat_group"/>
+
+
+        <!-- action menu Transmision du courrier au demandeur ou bceao -->
+        <record model="ir.actions.act_window" id="action_etude_fond_trans_courrier_a_bceao_ou_demandeur_view">
+            <field name="name">Transmettre courrier</field>
+            <field name="res_model">sig.tresor.etude.fond.dossier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="etude_fond_dossier_tree_view"/>
+           <!-- <field name="domain">[('state','in',['num_trans_au_service_courrier'])]</field>-->
+            <field name="domain">[('state','in',['draft','etude_fond','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','trans_courrier_a_bceao_ou_demandeur'])]</field>
+        </record>
+        <!-- menu Transmision du courrier au demandeur  -->
+        <menuitem name="Transmettre courrier"
+                  id="trans_courrier_a_bceao_ou_demandeur_menu" sequence="1036"
+                  parent="etude_fond_menu"
+                  action="action_etude_fond_trans_courrier_a_bceao_ou_demandeur_view"
+                  groups="sig_tresor.courrier_group"/>
+
+    </data>
+</odoo>

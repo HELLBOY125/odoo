@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="ov_order_virement_form_view" model="ir.ui.view">
+                <field name="name">ov.order.virement.form.view</field>
+                <field name="model">order.virement</field>
+                <field name="arch" type="xml">
+                <form string="Liste Des Ordres de Virement Bancaire ">
+                    <group>
+
+                            <field name="company" string="Societe" options="{'no_open':True,'no_create':True}"/>
+                    </group>
+                    <group>
+                                <field name="date_deb" string="Date debut"/>
+                                <field name="date_fin" string="Date fin"/>
+                        <field name="lot" />
+                        <field name="motif" />
+                        <field name="x_num_emmeteur" domain="[('company_id',  '=', company)]"/>
+                        <field name="x_date_virement"/>
+                    </group>
+
+
+
+                    <footer>
+                        <button name="genarate_excel_report" string="Fichier XLS" type="object" class="oe_highlight"/>
+                        Ou
+                        <button name="genarate_txt" string="Fichier TXT" type="object" class="oe_highlight"/>
+                        Ou
+                        <button name="print_report" string="Fichier PDF" type="object" class="oe_highlight"/>
+                        Ou
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+<!--                        or-->
+<!--                        <button special="supp" string="supp" type="object" class="oe_highlight"/>-->
+                    </footer>
+                </form>
+
+
+            </field>
+        </record>
+         <record id="action_order_virement_excel_report" model="ir.actions.act_window">
+            <field name="name">Order de Virement</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">order.virement</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+		<menuitem
+            action="action_order_virement_excel_report"
+            id="menu_action_ov_order_virement__excel_report_wizard"
+            parent="om_hr_payroll.menu_hr_payroll_root" sequence="40"/>
+
+        <record id="wizard_excel_report" model="ir.ui.view">
+			<field name="name">wizard.excel.report</field>
+			<field name="model">wizard.excel.report</field>
+			<field name="arch" type="xml">
+				<form string="Overdue Excel Report">
+					<group>
+						<field name="name" invisible="1"/>
+						<h1>
+							<field name="report" filename="name"/>
+						</h1>
+					</group>
+					<footer>
+						<button special="cancel" string="_Close" class="oe_link"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+    </data>
+</odoo>

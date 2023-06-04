@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 VEONE License AGPL-3.0 . -->
+<odoo>
+
+    <record model="ir.ui.view" id="cmis_backend_form_view">
+        <field name="name">cmis.backend.form (in cmis)</field>
+        <field name="model">cmis.backend</field>
+        <field name="arch" type="xml">
+            <form string="CMIS Backend">
+                <sheet>
+                    <label for="name" class="oe_edit_only" />
+                    <h1>
+                        <field name="name" class="oe_inline" />
+                    </h1>
+                    <group name="cmis" string="Configuration Cmis">
+                        <group colspan="4" col="4">
+                            <field name="location" placeholder="e.g. http://164.160.35.13:8080/alfresco/api/-default-/public/cmis/versions/1.1/browser/" colspan="4" string="URL"/>
+                            <field name="username" placeholder="Nom d'utilisateur" colspan="2" string="Nom d'utilisateur" />
+                            <field name="password" placeholder="Mot de passe" colspan="2" password="True" string="Mot de passe"/>
+                        </group>
+                    </group>
+                    <group name="directory_conf" string="Configuration du répertoire">
+                        <group colspan="4" col="4">
+                            <newline />
+                            <field name="initial_directory_write" string="Répertoire d'écriture par défaut" />
+                            <button name="check_directory_of_write" type="object" class="oe_highlight" string="Tester le répertoire" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="cmis_backend_search_view">
+        <field name="name">cmis.backend.search (in cmis)</field>
+        <field name="model">cmis.backend</field>
+        <field name="arch" type="xml">
+            <search string="CMIS">
+                <field name="name" string="Nom"/>
+                <field name="location" string="URL"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="cmis_backend_tree_view">
+        <field name="name">cmis.backend.tree (in cmis)</field>
+        <field name="model">cmis.backend</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" widget="handle"/>
+                <field name="location"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="cmis_backend_act_window">
+        <field name="name">CMIS</field>
+        <field name="res_model">cmis.backend</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <!--<menuitem id="cmis_root_menu"
+              name="CMIS"
+              parent="base.menu_administration"/>-->
+
+    <menuitem id="cmis_backend_menu"
+              name="CMIS"
+              parent="base.menu_administration"
+              action="cmis_backend_act_window"
+              sequence="16"/>
+
+</odoo>

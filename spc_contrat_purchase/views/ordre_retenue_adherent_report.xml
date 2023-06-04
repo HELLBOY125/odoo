@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+ 
+<template id="ordre_retenue_adherent_report">
+<t t-call="web.html_container">
+       <t t-foreach="docs" t-as="o">
+           <t t-call="spc_contrat_purchase.stock_external_layout_standard">
+           
+       <t t-set="title1">
+        
+           <t>SERVICE DES PRESTATIONS  </t>
+        </t>
+        <t t-set="title2">
+        
+           <t>UNITÉ PRESTATIONS MÉDICALES INTERNES </t>
+        </t>
+        <t t-set="title3">
+        
+           <t>Doc-Ord-Ret-Adhérent  </t>
+        </t>
+        <t t-set="name">
+           <t t-esc="o.name"/>
+        </t> 
+        
+       
+            <div class="page">
+            <style>
+               .table-bordered > thead > tr > th {
+			border:1px solid black !important;
+			text-align: left !important;
+			
+			}
+                        
+              .table-bordered td {
+                         text-align: left !important;
+						border:1px solid black !important;
+						line-height:20px !important;
+                        } 
+                
+            
+            </style>
+            <br/><br/>
+            <strong>Date :  <t t-esc="datetime.datetime.now().strftime('%d/%m/%Y')" /></strong>
+            <br/>
+            <strong>Etablis par :  <t t-esc="user.name" /></strong>
+             <br/>
+            <strong>Réf-Fac : <t t-esc="o.ref_account"/></strong>
+            <br/>
+            <strong>Nom Pharmacie : <t t-esc="o.partner_id.name"/></strong>
+            <br/>
+            <h1> ORDRE DE RETENUE ADHÉRENT</h1>
+          
+            <hr style="height:3px;border-width:0;color:black;background-color:black;"/>
+            
+            <strong>Nous vous prions de prendre en charge les ordres de retenus suivants</strong>
+            <br/><br/>
+            <table class="table table-bordered">
+            <thead>
+               <tr >
+              
+               <th>ID BRFM</th>
+               <th>MATRICULE</th>
+               <th>BENEFICAIRE</th>
+               <th>MÉDECIN TRAITANT</th>
+               <th>Montant à retenir</th>
+               <th>Motifs</th>
+               <th>Médicaments</th>
+               <th>Qté/Jr</th>
+               <th>Date de consultation</th>
+               <tr>
+                
+               </tr>
+              
+               </tr>
+            </thead>
+           <tbody>
+           <t t-set="total" t-value="0" />
+             <t t-set="lines"
+	            t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)" />
+
+			<t t-foreach="lines" t-as="line">
+			<t t-if="line.retenue=='adherent'">
+			 <tr>
+			  <td><span t-esc="line.ordonnace_line_id.ordonnance_id.name"></span></td>
+               <td><span t-esc="line.ordonnace_line_id.adherant_id.ref"></span></td>
+               <td><span t-esc="line.ordonnace_line_id.ordonnance_id.adherant_child_id.name"></span></td>
+               <td><span t-esc="line.ordonnace_line_id.ordonnance_id.médecin.name"></span></td>
+              
+              <td>
+              <t t-if="line.status=='conforme'">
+                   <t t-if="line.discount !=0">
+				     <span t-esc="(((line.price_unit*(line.old_quantity-line.conformity_id.quantity)) * (100-line.discount)) / 100.0)" 
+				     t-options="{'widget': 'monetary', 'display_currency': o.currency_id}" />
+	                  <t t-set="total" t-value="total + (((line.price_unit*(line.old_quantity-line.conformity_id.quantity)) * (100-line.discount)) / 100.0)" />
+    				</t>
+					<t t-if="line.discount ==0">
+						<span t-esc="(line.price_unit*(line.old_quantity-line.quantity))" 
+						t-options="{'widget': 'monetary', 'display_currency': o.currency_id}" />
+					    <t t-set="total" t-value="total + (line.price_unit*(line.old_quantity-line.conformity_id.quantity))" />
+					</t>
+		      </t>
+		      <t t-if="line.status=='no_conforme'">
+                   <t t-if="line.discount !=0">
+				     <span t-esc="((line.price_unit*line.quantity * (100-line.discount)) / 100.0)" 
+				     t-options="{'widget': 'monetary', 'display_currency': o.currency_id}" />
+	                  <t t-set="total" t-value="total + ((line.price_unit*line.quantity * (100-line.discount)) / 100.0)" />
+    				</t>
+					<t t-if="line.discount ==0">
+						<span t-esc="line.price_unit*line.quantity" 
+						t-options="{'widget': 'monetary', 'display_currency': o.currency_id}" />
+					    <t t-set="total" t-value="total + (line.price_unit*line.quantity)" />
+					</t>
+		      </t>				
+				</td>
+               <td><span t-esc="line.conformity_id.motif.name" ></span></td>
+               <td><span t-esc="line.name" ></span></td>
+              <td>
+       <t t-if="line.status=='conforme'">
+      	 <span t-esc="line.old_quantity-line.conformity_id.quantity" />
+      	 </t>
+      	 <t t-if="line.status=='no_conforme'">
+      	 <span t-esc="line.quantity" />
+      	 </t>
+     </td>  
+               <td><span t-esc="line.ordonnace_line_id.ordonnance_id.ordonnace_date.strftime('%d/%m/%Y')" ></span></td>
+			 </tr>
+			 </t>
+			 </t>
+            <tr>
+			 <td colspan="4"></td>
+			 <td><strong>Total :</strong><strong t-esc="total" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}" /> </td>
+			 <td colspan="4"></td>
+			 </tr>
+            
+            </tbody>
+                
+            </table>
+            
+ 												
+            
+            
+</div> 
+</t>
+</t>
+</t>
+</template>
+
+
+
+
+
+
+<template id="stock_external_layout_standard">
+         <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+         
+        <div class="header" >
+        <style>
+        .table-header > thead > tr > th {
+			border:1px solid black !important;
+			text-align: center !important;
+			
+			}
+                        
+              .table-header td {
+                         text-align: center !important;
+						border-right:1px solid black !important;
+                        }          
+        
+        </style>
+        <table class="table table-header" >
+                <thead>
+                <tr>
+                <th align="center" width="33%" rowspan="3"><img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 105px;" alt="Logo"/></th>
+                <th align="center" width="67%" colspan="2"><strong t-if="title1" t-esc="title1" /></th>
+                
+              
+                </tr>
+                <tr>
+                
+                <th align="center" width="67%" colspan="2"><strong t-if="title2" t-esc="title2" /></th>
+                
+                
+                </tr>
+                <tr>
+                
+                <th align="center" width="47%"><strong t-if="title3" t-esc="title3" /></th>
+                <th align="center" width="20%"><strong >Ph-20:<t t-esc="name" /></strong></th>
+                
+                </tr>
+                </thead>
+                
+                </table>
+       
+        </div>
+
+        <div class="article o_report_layout_standard"  >
+            <t t-call="web.address_layout"/>
+            <t t-raw="0"/>
+        </div>
+
+        <div class="footer o_standard_footer">
+            <div class="text-center" >
+            
+
+                <div t-if="report_type == 'pdf'" class="text-muted text-left">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+                <center><h2>Unité Prestations Médicales Internes</h2> </center>
+            </div>
+        </div>
+    </template>
+   <record id="paperformat_adherent_euro" model="report.paperformat">
+	      <field name="name">European A4</field>
+	      <field name="default" eval="True" />
+	      <field name="format">A4</field>
+	      <field name="page_height">0</field>
+	      <field name="page_width">0</field>
+	      <field name="orientation">Landscape</field>
+	      <field name="margin_top">30</field>
+	      <field name="margin_bottom">25</field>
+	      <field name="margin_left">5</field>
+	      <field name="margin_right">5</field>
+	      <field name="header_line" eval="False" />
+	      <field name="header_spacing">25</field>
+	      <field name="dpi">90</field>
+	    </record>
+
+
+ 
+     <report string="Ordre de retenue adhérent"
+			 id="report_retenue_adherent"
+			 model="account.move"
+			 report_type="qweb-pdf"
+			 name="spc_contrat_purchase.ordre_retenue_adherent_report"
+			 file="spc_contrat_purchase.ordre_retenue_adherent_report"
+			 paperformat="spc_contrat_purchase.paperformat_adherent_euro"
+			 print_report_name="'Ordre de retenue adhérent %s' % (object.name)"
+			 menu="True" 
+            />
+</odoo>

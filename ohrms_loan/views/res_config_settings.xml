@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="employee_res_config_settings_view_update" model="ir.ui.view">
+            <field name="name">res.config.settings.view.update</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="100"/>
+            <field name="inherit_id" ref="hr.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-string='Employees']/h2" position="before">
+                    <h2>Plafond du prêt</h2>
+                    <div class="row mt16 o_settings_container" name="customer_setting_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="loan_percent" class="text-muted"/>
+                                <br/>
+                                <field name="loan_percent"/> %
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

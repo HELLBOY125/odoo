@@ -1,0 +1,4 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_res_partner_medecin_user,res_partner_medecin,model_res_partner_medecin,,1,1,1,1
+access_res_vacation_config_user,res_vacation_config,model_res_vacation_config,,1,1,1,1
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="action_hr_employee_type" model="ir.actions.act_window">
+            <field name="name">Types de l'employé</field>
+            <field name="res_model">hr.employee.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Hr Employee Type menu-->
+        <menuitem id="hr_employee_type_menu_id" name="Types d'employé" action="action_hr_employee_type"
+                  sequence="9" parent="hr.menu_human_resources_configuration"/>
+
+        <!--Hr Employee Type form view -->
+        <record model="ir.ui.view" id="hr_employee_type_view_form">
+            <field name="name">hr.employee.type.form</field>
+            <field name="model">hr.employee.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group colspan="2" col="2">
+                                <field name="name"/>
+                                <field name="description"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!--Hr Employee Type view Visa-->
+        <record model="ir.ui.view" id="hr_employee_type_view_tree">
+            <field name="name">hr.employee.type.tree</field>
+            <field name="model">hr.employee.type</field>
+            <field name="arch" type="xml">
+                <tree string="Types d'employés">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

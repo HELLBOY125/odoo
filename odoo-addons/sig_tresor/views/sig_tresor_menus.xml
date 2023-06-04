@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem web_icon="sig_tresor,static/description/configuration.png" id="sig_tresor_root_menu" name="Sig Configuration" sequence="100"/>
+
+        <!--<menuitem name="Configuration" id="configuration_menu" sequence="100" parent="sig_tresor_root_menu"
+                  groups="sig_tresor.manager_group"/>  -->
+
+        <menuitem name="Spécifiques" id="specific_menu" sequence="1001"
+                  parent="sig_tresor_root_menu" groups="sig_tresor.manager_group"/>
+                  
+        <menuitem name="Localisations" id="location_menu" sequence="1002"
+                  parent="sig_tresor_root_menu" groups="sig_tresor.manager_group"/>
+         <menuitem name="Indicateurs" id="indicateurs_menu" sequence="1003"
+                  parent="sig_tresor_root_menu" groups="sig_tresor.manager_group"/>
+
+        <menuitem name="Gestion" id="management_menu" sequence="1" parent="sig_tresor_root_menu"/>
+        
+        <menuitem name="Demande d'agrément" id="wkf_agreement_menu" sequence="10"
+                  parent="management_menu"/>
+                  
+        <menuitem name="Réception et enregistrement" id="reception_courrier_menu" sequence="101"
+                  parent="wkf_agreement_menu"/>
+                  
+        <menuitem name="Etude de forme" id="verif_conformite_dossier_menu" sequence="102"
+                  parent="wkf_agreement_menu"/>
+                  
+        <menuitem name="Etude de fond" id="etude_fond_menu" sequence="103"
+                  parent="wkf_agreement_menu"/>
+                  
+        <menuitem name="Saisine de la BCEAO" id="saisine_bceao_menu" sequence="104"
+                  parent="wkf_agreement_menu"/>
+
+        <menuitem name="Documentation" id="documentation_menu" sequence="2" parent="sig_tresor_root_menu"/>
+
+        <menuitem name="Rapports" id="raport_menu" sequence="3" parent="sig_tresor_root_menu"/>
+
+    </data>
+</odoo>

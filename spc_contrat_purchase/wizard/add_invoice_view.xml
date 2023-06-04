@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       
+
+        
+        
+         <record id="add_invoice_wizard_form_view" model="ir.ui.view">
+            <field name="name">add.invoice.wizard.form</field>
+             <field name="name">Facture globale</field>
+            <field name="model">add.invoice.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Facture globale">
+                    <group>
+                        <field name="ref_invoice" readonly="1" />
+                        <field name="type_process" invisible="1" />
+                        <field name="partner_id" options="{'no_create': True}"  required="1" />
+                        <field name="total" readonly="1"  attrs="{'invisible' : [('type_process', '!=','bs')]}"/>
+                        <field name="amount_total"  required="1" />
+                        <field name="is_different" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button name="validate" string="Confirmer" type="object" class="btn-danger" attrs="{'invisible':['|',('is_different','!=',False),('type_process', '!=','bs')]}"
+                        confirm="Le montant total de la facture fournisseur est différent du montant total saisi !!" />
+                        
+                        <button name="validate" string="Confirmer" type="object" class="btn-success" attrs="{'invisible':['|',('is_different','=',False),('type_process', '!=','bs')]}" />
+                        <button name="validate" string="Confirmer" type="object" class="btn-success" attrs="{'invisible':[('type_process', '=','bs')]}" />
+                        
+                        <button string="Annuler" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+      <act_window
+            name="Ajouter une facture"
+            res_model="add.invoice.wizard"
+            binding_model="account.ordonnance"
+            binding_views="list"
+            view_mode="form"
+            target="new"
+            id="action_add_invoice_wizard" />
+      
+    </data>
+</odoo>

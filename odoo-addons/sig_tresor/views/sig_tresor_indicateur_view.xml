@@ -1,0 +1,239 @@
+<odoo>
+    <data>
+
+        <!-- Type indicateur -->
+        <record id="type_indicateur_tree_view" model="ir.ui.view">
+            <field name="name">sig.tresor.type.indicateur.tree</field>
+            <field name="model">sig.tresor.type.indicateur</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Type indicateur">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="abbreviation"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="type_indicateur_form_view" model="ir.ui.view">
+            <field name="name">sig.tresor.type.indicateur.form</field>
+            <field name="model">sig.tresor.type.indicateur</field>
+            <field name="arch" type="xml">
+                <form string="Type indicateur">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="code" style="text-transform: uppercase;" invisible="1"/>
+                                <field name="name" style="text-transform: uppercase;"/>
+                                <field name="abbreviation" style="text-transform: uppercase;"/>
+                            </group>
+                            <group></group>
+                        </group>
+                        <notebook>
+                            <page string="Activités">
+                                <field name="act_ids">
+                                    <tree>
+                                        <field name="code"/>
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_type_indicateur">
+            <field name="name">type.indicateur</field>
+            <field name="res_model">sig.tresor.type.indicateur</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Créer un nouveau type indicateur
+                </p>
+            </field>
+            <field name="view_id" ref="type_indicateur_tree_view"/>
+        </record>
+
+        <record id="view_type_indicateur_filter" model="ir.ui.view">
+            <field name="name">sig.tresor.type.indicateur.search</field>
+            <field name="model">sig.tresor.type.indicateur</field>
+            <field name="arch" type="xml">
+                <search string="Type indicateur">
+                    <field name="code" string="Code"/>
+                    <field name="name" string="Nom"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="open_module_tree_type_indicateur" model="ir.actions.act_window">
+            <field name="name">type.indicateur</field>
+            <field name="res_model">sig.tresor.type.indicateur</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_type_indicateur_filter"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer un nouveau type indicateur
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Type indicateur" id="type_indicateur_menu" sequence="10030"
+                  parent="indicateurs_menu"
+                  action="open_module_tree_type_indicateur"/>
+
+        <!-- Activité -->
+        <record id="activite_tree_view" model="ir.ui.view">
+            <field name="name">sig.tresor.activite.tree</field>
+            <field name="model">sig.tresor.activite</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Activité">
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="activite_form_view" model="ir.ui.view">
+            <field name="name">sig.tresor.activite.form</field>
+            <field name="model">sig.tresor.activite</field>
+            <field name="arch" type="xml">
+                <form string="Activité">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="code" style="text-transform: uppercase;" invisible="1"/>
+                                <field name="name"/>
+                            </group>
+                            <group></group>
+                        </group>
+                        <notebook>
+                            <page string="Indicateurs">
+                                <field name="ind_ids">
+                                    <tree>
+                                        <field name="code"/>
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_activite">
+            <field name="name">activite</field>
+            <field name="res_model">sig.tresor.activite</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Créer un nouveau type indicateur
+                </p>
+            </field>
+            <field name="view_id" ref="activite_tree_view"/>
+        </record>
+
+        <record id="view_activite_filter" model="ir.ui.view">
+            <field name="name">sig.tresor.activite.search</field>
+            <field name="model">sig.tresor.activite</field>
+            <field name="arch" type="xml">
+                <search string="Activité">
+                    <field name="code" string="Code"/>
+                    <field name="name" string="Nom"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="open_module_tree_activite" model="ir.actions.act_window">
+            <field name="name">activite</field>
+            <field name="res_model">sig.tresor.activite</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_activite_filter"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer un nouveau type indicateur
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Activité" id="activite_menu" sequence="10031"
+                  parent="indicateurs_menu"
+                  action="open_module_tree_activite"/>
+
+
+
+        <!-- Indicateur -->
+        <record id="indicateur_tree_view" model="ir.ui.view">
+            <field name="name">sig.tresor.indicateur.tree</field>
+            <field name="model">sig.tresor.indicateur</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Indicateur">
+                    <field name="type_ind_id"/>
+                    <field name="act_id"/>
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="abbreviation"/>
+                    <field name="data_source"/>
+                    <field name="model_id"/>
+                    <field name="field_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="indicateur_form_view" model="ir.ui.view">
+            <field name="name">sig.tresor.indicateur.form</field>
+            <field name="model">sig.tresor.indicateur</field>
+            <field name="arch" type="xml">
+                <form string="Région">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="code" style="text-transform: uppercase;" invisible="1"/>
+                            <field name="type_ind_id"/>
+                            <field name="act_id"/>
+                            <field name="abbreviation"/>
+                            <field name="data_source"/>
+                            <field name="model_id"/>
+                            <field name="model"/>
+                            <field name="field_id"/>
+                            <field name="calcul_mode"/>
+                            <field name="frequence"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_indicateur">
+            <field name="name">Indicateur</field>
+            <field name="res_model">sig.tresor.indicateur</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Créer un nouvel indicateur
+                </p>
+            </field>
+            <field name="view_id" ref="indicateur_tree_view"/>
+        </record>
+
+        <menuitem name="Indicateur" id="indicateur_menu" sequence="10032"
+                  parent="indicateurs_menu"
+                  action="action_indicateur"/>
+
+
+    </data>
+</odoo>

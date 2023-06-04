@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- notification étape étude de forme du dossier  au demandeur-->
+        <record id="verif_conformite_dossier_au_demandeur_notif" model="mail.template">
+            <field name="name">Notif etude de forme au demandeur</field>
+            <field name="email_from">${(user.company_id.email or'')|safe }</field>
+            <field name="email_to">${(object.email or '')|safe}</field>
+            <field name="email_cc"></field>
+            <field name="subject">Demande d'agrément : ${(object.denomination or '')|safe }</field>
+            <field name="model_id" ref="model_sig_tresor_verif_conformite_dossier"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${user.company_id.lang}</field>
+            <field name="body_html"><![CDATA[
+            <p>Bonjour,</p>
+            <br/>
+            <p>Votre demande d'agrément a bien été enregistré et se trouve à présent à l'étape de la vérification de la forme </p>
+            <br/>
+            <p>Cordialement.</p>
+            ]]></field>
+        </record>
+
+        <!-- notification étape étude de fond du dossier au demandeur-->
+        <record id="etude_de_fond_dossier_au_demandeur_notif" model="mail.template">
+            <field name="name">Notif etude de fond au demandeur</field>
+            <field name="email_from">${(user.company_id.email or'')|safe }</field>
+            <field name="email_to">${(object.reception_courrier_id.verif_conformite_dossier_id.email or '')|safe}</field>
+            <field name="email_cc"></field>
+            <field name="subject">Demande d'agrément : ${(object.reception_courrier_id.verif_conformite_dossier_id.denomination or '')|safe }</field>
+            <field name="model_id" ref="model_sig_tresor_etude_fond_dossier"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${user.company_id.lang}</field>
+            <field name="body_html"><![CDATA[
+            <p>Bonjour,</p>
+            <br/>
+            <p>Votre demande d'agrément se trouve à l'étape de l'étude de fond </p>
+            <br/>
+            <p>Cordialement.</p>
+            ]]></field>
+        </record>
+
+         <!-- notification étape saisine de la bceao au demandeur-->
+        <record id="saisine_bceao_au_demandeur_notif" model="mail.template">
+            <field name="name">Notif saisine bceao au demandeur</field>
+            <field name="email_from">${(user.company_id.email or'')|safe }</field>
+            <field name="email_to">${(object.reception_courrier_id.verif_conformite_dossier_id.email or '')|safe}</field>
+            <field name="email_cc"></field>
+            <field name="subject">Demande d'agrément : ${(object.reception_courrier_id.verif_conformite_dossier_id.denomination or '')|safe }</field>
+            <field name="model_id" ref="model_sig_tresor_saisine_bceao"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${user.company_id.lang}</field>
+            <field name="body_html"><![CDATA[
+            <p>Bonjour,</p>
+            <br/>
+            <p>Votre demande d'agrément se trouve à l'étape de la saisine de la BCEAO</p>
+            <br/>
+            <p>Cordialement.</p>
+            ]]></field>
+        </record>
+
+        <!-- notification agrément accordé -->
+        <record id="accord_agrement_au_demandeur_notif" model="mail.template">
+            <field name="name">Notif accord agrément au demandeur</field>
+            <field name="email_from">${(user.company_id.email or'')|safe }</field>
+            <field name="email_to">${(object.reception_courrier_id.verif_conformite_dossier_id.email or '')|safe}</field>
+            <field name="email_cc"></field>
+            <field name="subject">Demande d'agrément : ${(object.reception_courrier_id.verif_conformite_dossier_id.denomination or '')|safe }</field>
+            <field name="model_id" ref="model_sig_tresor_saisine_bceao"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${user.company_id.lang}</field>
+            <field name="body_html"><![CDATA[
+            <p>Bonjour,</p>
+            <br/>
+            <p>Votre demande d'agrément a été accordé</p>
+            <br/>
+            <p>Cordialement.</p>
+            ]]></field>
+        </record>
+
+         <!-- notification agrément rejeté -->
+        <record id="rejet_agrement_au_demandeur_notif" model="mail.template">
+            <field name="name">Notif accord agrément au demandeur</field>
+            <field name="email_from">${(user.company_id.email or'')|safe }</field>
+            <field name="email_to">${(object.reception_courrier_id.verif_conformite_dossier_id.email or '')|safe}</field>
+            <field name="email_cc"></field>
+            <field name="subject">Demande d'agrément : ${(object.reception_courrier_id.verif_conformite_dossier_id.denomination or '')|safe }</field>
+            <field name="model_id" ref="model_sig_tresor_saisine_bceao"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${user.company_id.lang}</field>
+            <field name="body_html"><![CDATA[
+            <p>Bonjour,</p>
+            <br/>
+            <p>Votre demande d'agrément a été rejeté</p>
+            <br/>
+            <p>Cordialement.</p>
+            ]]></field>
+        </record>
+
+
+         <!-- notification next validator réception et enregistrement dossier-->
+        <record id="next_validator_recep_enr_dossier_notif" model="mail.template">
+            <field name="name">Notification SIG TRESOR</field>
+            <field name="email_from">${(user.company_id.email or'')|safe }</field>
+            <field name="email_to">${(object.email_next_validate or '')|safe}</field>
+            <field name="email_cc"></field>
+            <field name="subject">Notification SIG TRESOR : ${(object.name_next_validate or '')|safe }</field>
+            <field name="model_id" ref="model_sig_tresor_reception_courrier"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${user.company_id.lang}</field>
+            <field name="body_html"><![CDATA[
+            <p>Bonjour,</p>
+            <br/>
+            <p>La demande d'agrément à l'étape de la réception et validation du dossier se trouve à votre niveau</p>
+            <br/>
+            <p>Cordialement.</p>
+            ]]></field>
+        </record>
+
+
+        <!-- notification next validator etude de forme du dossier-->
+        <record id="next_validator_etude_forme_dossier_notif" model="mail.template">
+            <field name="name">Notification SIG TRESOR</field>
+            <field name="email_from">${(user.company_id.email or'')|safe }</field>
+            <field name="email_to">${(object.email_next_validate or '')|safe}</field>
+            <field name="email_cc"></field>
+            <field name="subject">Notification SIG TRESOR : ${(object.name_next_validate or '')|safe }</field>
+            <field name="model_id" ref="model_sig_tresor_verif_conformite_dossier"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${user.company_id.lang}</field>
+            <field name="body_html"><![CDATA[
+            <p>Bonjour,</p>
+            <br/>
+            <p>Vous avez des dossiers de demande d'agrément à l'étape de l'étude de forme en attente</p>
+            <br/>
+            <p>Cordialement.</p>
+            ]]></field>
+        </record>
+
+        <!-- notification next validator etude de fond du dossier-->
+        <record id="next_validator_etude_fond_dossier_notif" model="mail.template">
+            <field name="name">Notification SIG TRESOR</field>
+            <field name="email_from">${(user.company_id.email or'')|safe }</field>
+            <field name="email_to">${(object.email_next_validate or '')|safe}</field>
+            <field name="email_cc"></field>
+            <field name="subject">Notification SIG TRESOR : ${(object.name_next_validate or '')|safe }</field>
+            <field name="model_id" ref="model_sig_tresor_etude_fond_dossier"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${user.company_id.lang}</field>
+            <field name="body_html"><![CDATA[
+            <p>Bonjour,</p>
+            <br/>
+            <p> Vous avez des dossiers de demande d'agrément à l'étape de l'étude de fond en attente</p>
+            <br/>
+            <p>Cordialement.</p>
+            ]]></field>
+        </record>
+
+        <!-- notification next validator saisine du dossier-->
+        <record id="next_validator_saisine_dossier_notif" model="mail.template">
+            <field name="name">Notification SIG TRESOR</field>
+            <field name="email_from">${(user.company_id.email or'')|safe }</field>
+            <field name="email_to">${(object.email_next_validate or '')|safe}</field>
+            <field name="email_cc"></field>
+            <field name="subject">Notification SIG TRESOR : ${(object.name_next_validate or '')|safe }</field>
+            <field name="model_id" ref="model_sig_tresor_saisine_bceao"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${user.company_id.lang}</field>
+            <field name="body_html"><![CDATA[
+            <p>Bonjour,</p>
+            <br/>
+            <p>Vous avez des dossiers de demande d'agrément à l'étape de la saisine de la BCEAO en attente</p>
+            <br/>
+            <p>Cordialement.</p>
+            ]]></field>
+        </record>
+
+    </data>
+</odoo>

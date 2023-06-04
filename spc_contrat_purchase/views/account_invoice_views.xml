@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_invoice_bs">
+        <field name="name">account.move.supplier.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <field name="state" position="replace">
+                <field name="state" widget="statusbar" statusbar_visible="draft,posted" attrs="{'invisible': [('ordonnace_ids','!=',[]),('is_process_medecin','=',False)]}"/>
+                <field name="state_bs" widget="statusbar" statusbar_visible="draft,controle,confirm,posted" attrs="{'invisible': ['|','|',('type', '!=', 'in_invoice'),('ordonnace_ids','=',[]),('is_process_medecin','!=',False)]}"/>
+            </field>
+            <xpath expr="//header/button[@name='action_post']" position="replace">
+                 <button name="action_post" string="Comptabilisé" 
+                 class="oe_highlight" type="object" groups="account.group_account_invoice"
+                  attrs="{'invisible': ['|',('state','!=','draft'),('is_process_medecin','=',False),('ordonnace_ids','!=',[]),
+                                        ('state', '!=', 'conform')]}"/>
+                
+
+            </xpath>
+
+           
+           
+
+            <xpath expr="//header" position="inside">
+                <button name="action_envoie_controle" string="Contrôle médecin" class="oe_highlight"
+                        type="object" groups="account.group_account_invoice"
+                        attrs="{'invisible': ['|','|',('state', '!=', 'draft'),
+                        									('type', '!=', 'in_invoice'),
+                        									('ordonnace_ids','=',[])]}"/>
+                <button name="action_done_controle" string="Valider contrôle médecin" class="oe_highlight"
+                        type="object" groups="account.group_account_invoice"
+                        attrs="{'invisible': ['|','|','|',('state', '!=', 'controle'),('type', '!=', 'in_invoice'),('type_partner','!=','conventionne'),('is_process_medecin','!=',False)]}"/>
+                        
+                <button name="action_controle_conformity" string="Contrôle du conformité" class="oe_highlight" states="confirm"
+                        type="object" groups="account.group_account_invoice" />       
+<!--              
+   <button name="action_controle_conformity" string="Contrôle du conformité" class="oe_highlight"
+                        type="object" groups="account.group_account_invoice" attrs="{'invisible': ['|',('state', '!=', 'confirm'),('is_egal','!=',False)]}" confirm="Vous êtes sur le point de contrôle du conformité,le montant total de facture n'est pas conforme au montant total fournisseur,êtes-vous sûr ?"/>
+                <button name="action_controle_conformity" string="Contrôle du conformité" class="oe_highlight"
+                        type="object" groups="account.group_account_invoice" attrs="{'invisible': ['|',('state', '!=', 'confirm'),('is_egal','=',False)]}" confirm="Vous êtes sur le point de contrôle du conformité,le montant total de facture est conforme au montant total fournisseur,êtes-vous sûr ?"/> -->
+           
+            </xpath>
+            <field name="ref" position="replace">
+               <field name="ref" invisible="1" />
+                <field name="type_partner" invisible="1" />
+               
+                <field name="is_controle" invisible="1"/>
+                <field name="is_controle_valide" invisible="1"/>
+                <field name="is_process_medecin" invisible="1"/>
+                <field name="is_egal" invisible="1" />
+                <field name="is_prise_en_charge" invisible="1" />
+            </field>
+            <xpath expr="//field[@name='ref']" position="after" >
+              <field name="ref_account" attrs="{'readonly':[('state','!=','draft')],
+              									'invisible': [('type', '!=', 'in_invoice')]}"/>
+              
+               <field name="convention_id" attrs="{'invisible': ['|',('type', '!=', 'in_invoice'),('ordonnace_ids','=',[])]}"/>
+                <field name="feuille_presence_id"  readonly="1" attrs="{'invisible': [('is_process_medecin','=',False)]}"/>
+                <field name="period" readonly="1" attrs="{'invisible': [('is_process_medecin','=',False)]}"/>
+              <field name="courrier_entrant_id" options="{'no_create': True}" domain="[('type_id.is_pharmacie','=',True)]" attrs="{'readonly':[('state','not in',('draft','controle'))],
+              											'invisible': ['|','|',('type', '!=', 'in_invoice'),('ordonnace_ids','=',[]),('is_process_medecin','!=',False)]}"/>
+              <field name="invoice_total" attrs="{'readonly':[('state','=','posted')],
+              									'invisible': ['|','|',('type', '!=', 'in_invoice'),('ordonnace_ids','=',[]),('is_process_medecin','!=',False)]}"/>
+             
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='account_id']" position="before">
+
+                <field  name="bs_id" options="{'no_create': True,'no_open':True}"  force_save="1" domain="[('id','in',parent.ordonnace_ids)]"
+                        attrs="{'required':[('parent.type', '=', 'in_invoice'),('parent.ordonnace_ids','!=',[]),('parent.is_process_medecin','=',False)],'invisible': ['|','|',('parent.type', '!=', 'in_invoice'),('parent.ordonnace_ids','=',[]),
+                        									('parent.is_process_medecin','!=',False)]}" optional="hide"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='quantity']" position="after">
+                <field name="old_quantity" invisible="1" />
+
+            </xpath>
+             <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">
+                <field name="old_quantity" readonly="1" optional="hide" attrs="{'invisible':['|','|','|',('parent.state', '=', 'draft'),
+										('parent.type', '!=', 'in_invoice'),
+					                    ('parent.type_partner','!=','conventionne'),('parent.is_process_medecin','!=',False)]}"/>
+
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='account_id']" position="before">
+                <field  name="bs_id"  invisible="1" />
+                <field name="status" readonly="1" optional="hide"/>
+                <field name="retenue" readonly="1" optional="hide"/>
+            </xpath>
+             <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='discount']" position="replace">
+               <field name="discount" string="Charge Adhé.%"  optional="show"/>
+               </xpath>
+            
+            
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='always_set_currency_id']" position="after">
+                <field name="is_controle" invisible="1" />
+                <field name="status" readonly="1" optional="hide"/>
+                <button name="button_open" icon="fa-external-link"
+                        title="Contrôle médecin" style="color:blue" class="btn-lg"
+                        attrs="{'invisible':['|','|','|',('parent.state', '=', 'draft'),
+										('parent.type', '!=', 'in_invoice'),
+					                    ('parent.ordonnace_ids','=',[]),('parent.is_process_medecin','!=',False)]}"
+                        string="Contrôle médecin" type="object" help="Contrôle médecin" />
+
+
+            </xpath>
+            <xpath expr="//page[@id='invoice_tab']" position="after">
+                <page string="Bulletin du soin" attrs="{'invisible': ['|','|','|',('type', '!=', 'in_invoice'),('ordonnace_ids','=',[]),('is_process_medecin','!=',False),('is_prise_en_charge','!=',False)]}">
+                    <field name="ordonnace_ids" attrs="{'readonly': [('state', '!=','draft')]}">
+                    </field>
+                </page>
+                <page string="Prise en charge" attrs="{'invisible': ['|','|','|',('type', '!=', 'in_invoice'),('ordonnace_ids','=',[]),('is_process_medecin','!=',False),('is_prise_en_charge','=',False)]}">
+                    <field name="ordonnace_ids" attrs="{'readonly': [('state', '!=','draft')]}" context="{'tree_view_ref': 'spc_contrat_purchase.view_account_ordonnance_prise_tree','form_view_ref': 'spc_contrat_purchase.view_account_ordonnance_prise_form'}">
+                    
+                    </field>
+                </page>
+            </xpath>
+
+            
+
+        </field>
+    </record>
+
+
+    <record id="view_account_move_confirmity_form" model="ir.ui.view">
+        <field name="name">account.move.conformity.form</field>
+        <field name="name">account.move.conformity</field>
+        <field name="model">account.move.conformity</field>
+        <field name="arch" type="xml">
+            <form string="Avis de contrôle médecin">
+                <header>
+                    <button name="button_draft" string="Réinitialiser" type="object" attrs="{'invisible' : ['|',('state', '!=','done'),('parent_state','!=','controle')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done" />
+                </header>
+                <group>
+                    <field name="date" readonly="1" />
+                    <field name="user_id"  required="1" attrs="{'readonly': [('state', '!=','draft')]}" readonly="True"/>
+                    <field name="quantity" required="1" attrs="{'readonly': [('state', '!=','draft')]}"  />
+                    <field name="status" required="1" attrs="{'readonly': [('state', '!=','draft')]}"/>
+                    <field name="motif" attrs="{'required':[('status','=','no_conforme'),('type_process','=','bs')],'readonly': [('state', '!=','draft')]}" />
+                    <field name="retenue" attrs="{'invisible':[('type_process','!=','bs')],'required':[('status','=','no_conforme'),('type_process','=','bs')],'readonly': [('state', '!=','draft')]}" />
+                    <field name="ordonnance_line_id" invisible="1" />
+                    <field name="parent_state"  invisible="1" />
+                    <field name="move_line_id" invisible="1" />
+                    <field name="type_process" invisible="1" />
+                </group>
+                <group>
+
+                </group>
+                <group  string="Piéces jointes">
+                    <field name="attachment_ids"  widget="many2many_binary" attrs="{'readonly': [('state', '!=','draft')]}"/>
+                </group>
+                <footer>
+                    <button name="validate" string="Confirmer" type="object" class="btn-primary" attrs="{'invisible': [('state', '!=','draft')]}"/>
+                    <button string="Fermer" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_account_move_filter" model="ir.ui.view">
+        <field name="name">view.account.move.filter.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+         <filter name="invoice_date" position="before">
+           <separator/>  
+                    <filter name="ordonnace_ids" string="Facture pharmacie conventionnée" domain="[('ordonnace_ids','!=',[])]"/>
+                     <filter name="is_prise_en_charge" string="Facture clinique conventionnée" domain="[('is_prise_en_charge','=',True)]"/>
+                    <filter name="is_process_medecin" string="Note d'honoraires" domain="[('is_process_medecin','=',True)]"/>
+                    <filter name="ordinnaire" string="Facture Ordinnaire" domain="[('ordonnace_ids','=',[]),('is_process_medecin','=',False)]"/>
+          <separator/>  
+        </filter>
+        </field>
+        </record>
+
+
+
+</odoo>

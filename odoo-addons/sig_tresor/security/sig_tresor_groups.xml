@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 VEONE
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <data>
+        <!-- define principal group -->
+        <record id="sig_tresor_group" model="ir.module.category">
+            <field name="name">Sig Tresor</field>
+<!--            <field name="description">User access level for Sig Tresor</field>-->
+<!--            <field name="sequence">3</field>-->
+        </record>
+
+        <!-- define differents groups -->
+
+        <record id="courrier_group" model="res.groups">
+            <field name="name">COURRIER</field>
+            <field name="category_id"
+                   ref="sig_tresor_group"/>
+<!--            <field name="description">groupe permettant de gérer les actions relatives au service courrier</field>-->
+            <!--field name="implied_ids"
+                   eval="[(4, ref('base.group_user'))]"/-->
+
+<!--            <field name="sequence">4</field>-->
+        </record>
+
+        <!-- define second group: group direction-->
+        <record id="direction_group" model="res.groups">
+            <field name="name">DIRECTION</field>
+            <field name="category_id"
+                   ref="sig_tresor_group"/>
+<!--            <field name="description">groupe permettant de gérer les actions relatives à la direction</field>-->
+<!--            <field name="sequence">5</field>-->
+        </record>
+
+        <!-- define three group: group secretariat-->
+        <record id="secretariat_group" model="res.groups">
+            <field name="name">SECRETARIAT</field>
+            <field name="category_id"
+                   ref="sig_tresor_group"/>
+<!--            <field name="description">groupe permettant de gérer les actions relatives au secretariat</field>-->
+<!--            <field name="sequence">6</field>-->
+        </record>
+
+        <!-- define four group: group sous_direction_agrement-->
+        <record id="sous_direction_agrement_group" model="res.groups">
+            <field name="name">SOUS-DIRECTION DES AGREMENTS (SDA)</field>
+            <field name="category_id"
+                   ref="sig_tresor_group"/>
+<!--            <field name="description">groupe permettant de gérer les actions relatives à la Sous-Direction des Agréments-->
+<!--                (SDA)-->
+<!--            </field>-->
+<!--            <field name="sequence">7</field>-->
+        </record>
+
+        <!-- define five group: group autorisation_exercer-->
+        <!--<record id="autorisation_exercer_group" model="res.groups">
+            <field name="name">AUTORISATION D'EXERCER (SAE)</field>
+            <field name="category_id"
+                   ref="sig_tresor_group"/>
+            <field name="description">groupe permettant de gérer les actions relatives au Service Autorisation Exercer
+                (SAE)
+            </field>
+            <field name="sequence">8</field>
+        </record>-->
+
+        <!-- define five group: group agent_autorisation_exercer-->
+        <record id="agent_autorisation_exercer_group" model="res.groups">
+            <field name="name">AGENT AUTORISATION D'EXERCER (SAE)</field>
+            <field name="category_id"
+                   ref="sig_tresor_group"/>
+<!--            <field name="description">groupe permettant de gérer les actions relatives aux Agents du Service-->
+<!--                Autorisation Exercer-->
+<!--                (SAE)-->
+<!--            </field>-->
+<!--            <field name="sequence">9</field>-->
+        </record>
+
+        <!-- define five group: group chef_autorisation_exercer-->
+        <record id="chef_autorisation_exercer_group" model="res.groups">
+            <field name="name">CHEF AUTORISATION D'EXERCER (SAE)</field>
+            <field name="category_id"
+                   ref="sig_tresor_group"/>
+<!--            <field name="description">groupe permettant de gérer les actions relatives au Chef du Service Autorisation-->
+<!--                Exercer-->
+<!--                (SAE)-->
+<!--            </field>-->
+            <field name="implied_ids"
+                   eval="[(4, ref('sig_tresor.agent_autorisation_exercer_group'))]"/>
+
+<!--            <field name="sequence">10</field>-->
+        </record>
+
+        <!-- define five group: group agent_sdsg_group-->
+         <record id="agent_sdsg_group" model="res.groups">
+             <field name="name">AGENT SDSG</field>
+             <field name="category_id"
+                    ref="sig_tresor_group"/>
+<!--             <field name="description">groupe permettant de gérer les actions relatives à agent SDSG</field>-->
+<!--             <field name="sequence">11</field>-->
+         </record>
+
+        <!-- define five group: group chef_sdsg_group-->
+        <record id="sdsg_group" model="res.groups">
+            <field name="name">SDSG</field>
+            <field name="category_id"
+                   ref="sig_tresor_group"/>
+<!--            <field name="description">groupe permettant de gérer les actions relatives au SDSG</field>-->
+<!--            <field name="sequence">12</field>-->
+        </record>
+		
+		<record id="chef_control_sur_place_group" model="res.groups">
+            <field name="name">Chef Contrôle sur place</field>
+            <field name="category_id" ref="sig_tresor_group"/>
+<!--            <field name="description">groupe permettant de gérer les actions relatives chef Contrôle sur place</field>-->
+             <field name="implied_ids"
+                   eval="[(4, ref('sig_tresor.agent_sdsg_group'))]"/>
+<!--            <field name="sequence">19</field>-->
+        </record>
+        
+        <record id="chef_control_sur_piece_group" model="res.groups">
+            <field name="name">Chef Contrôle sur pièce</field>
+            <field name="category_id" ref="sig_tresor_group"/>
+<!--            <field name="description">groupe permettant de gérer les actions relatives chef Contrôle sur pièce</field>-->
+             <field name="implied_ids"
+                   eval="[(4, ref('sig_tresor.agent_sdsg_group'))]"/>
+<!--            <field name="sequence">18</field>-->
+        </record>
+        
+        <!-- define group manager: super user sig tresor -->
+        <record id="manager_group" model="res.groups">
+            <field name="name">MANAGER</field>
+            <field name="category_id"
+                   ref="sig_tresor_group"/>
+<!--            <field name="description">groupe permettant de gérer tous les aspects du module du système de gestion-->
+<!--                intégré-->
+<!--            </field>-->
+            <field name="implied_ids"
+                   eval="[(4, ref('sig_tresor.courrier_group')), (4, ref('sig_tresor.direction_group')), (4, ref('sig_tresor.secretariat_group')), (4, ref('sig_tresor.sous_direction_agrement_group')), (4, ref('sig_tresor.agent_autorisation_exercer_group')), (4, ref('sig_tresor.chef_autorisation_exercer_group')), (4, ref('sig_tresor.agent_sdsg_group')), (4, ref('sig_tresor.chef_control_sur_piece_group')),(4, ref('sig_tresor.chef_control_sur_place_group')), (4, ref('sig_tresor.sdsg_group'))]"/>
+
+        </record>
+
+        <!--
+       grous relatifs au module demande d'autorisation d'exercer
+ -->
+        <record id="agent_src_group" model="res.groups">
+            <field name="name">AGENT SRC</field>
+            <field name="category_id" ref="sig_tresor_group"/>
+<!--            <field name="description">groupe permettant de gérer les actions relatives agents SRC</field>-->
+<!--            <field name="sequence">15</field>-->
+        </record>
+
+        <record id="chef_src_group" model="res.groups">
+            <field name="name">CHEF SRC</field>
+            <field name="category_id" ref="sig_tresor_group"/>
+<!--            <field name="description">groupe permettant de gérer les actions relatives chef SRC</field>-->
+<!--            <field name="sequence">16</field>-->
+        </record>
+
+        <!--
+           grous relatifs au module de contrôle interne et contrôle sur place
+     -->
+        <record id="agent_sdsg_group" model="res.groups">
+            <field name="name">Agent SDSG</field>
+            <field name="category_id" ref="sig_tresor_group"/>
+<!--            <field name="description">groupe permettant de gérer les actions relatives Agents SDSG</field>-->
+<!--            <field name="sequence">17</field>-->
+        </record>
+
+
+    </data>
+</odoo>

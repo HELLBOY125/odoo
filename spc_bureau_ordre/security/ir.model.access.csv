@@ -1,0 +1,48 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_admin_urgence,admin.courrier.urgence,model_courrier_urgence,group_bo_manager,1,1,1,1
+access_user_urgence,user.courrier.urgence,model_courrier_urgence,group_bo_user,1,0,0,0
+access_manager_service_urgence,user.courrier.urgence,model_courrier_urgence,group_bo_manager_service,1,0,0,0
+access_user_service_urgence,user.courrier.urgence,model_courrier_urgence,group_bo_user_service,1,0,0,0
+
+access_admin_courrier_sortant,admin.courrier.sortant,model_courrier_sortant,group_bo_manager,1,1,1,1
+access_user_courrier_sortant,user.courrier.sortant,model_courrier_sortant,group_bo_user,1,1,0,0
+access_manager_service_courrier_sortant,user.courrier.sortant,model_courrier_sortant,group_bo_manager_service,1,1,1,1
+access_user_service_courrier_sortant,user.courrier.sortant,model_courrier_sortant,group_bo_user_service,1,1,1,1
+
+access_admin_courrier_entrant,admin.ourrier.entrant,model_courrier_entrant,group_bo_manager,1,1,1,1
+access_user_courrier_entrant,user.courrier.entrant,model_courrier_entrant,group_bo_user,1,1,1,1
+access_manager_service_courrier_entrant,user.courrier.entrant,model_courrier_entrant,group_bo_manager_service,1,1,0,0
+access_user_service_courrier_entrant,user.courrier.entrant,model_courrier_entrant,group_bo_user_service,1,1,0,0
+
+access_admin_type_courrier_entrant,admin.type.courrier.entrant,model_type_courrier_entrant,group_bo_manager,1,1,1,1
+access_user_type_courrier_entrant,user.type.courrier.entrant,model_type_courrier_entrant,group_bo_user,1,0,0,0
+access_manager_service_type_courrier_entrant,user.type.courrier.entrant,model_type_courrier_entrant,group_bo_manager_service,1,0,0,0
+access_user_service_type_courrier_entrant,user.type.courrier.entrant,model_type_courrier_entrant,group_bo_user_service,1,0,0,0
+
+access_admin_courrier_mode,admin.courrier.mode,model_courrier_mode,group_bo_manager,1,1,1,1
+access_user_courrier_mode,user.courrier.mode,model_courrier_mode,group_bo_user,1,0,0,0
+access_manager_service_courrier_mode,user.courrier.mode,model_courrier_mode,group_bo_manager_service,1,0,0,0
+access_user_service_courrier_mode,user.courrier.mode,model_courrier_mode,group_bo_user_service,1,0,0,0
+
+access_admin_type_courrier_sortant,admin.type.courrier.sortant,model_type_courrier_sortant,group_bo_manager,1,1,1,1
+access_user_type_courrier_sortant,user.type.courrier.sortant,model_type_courrier_sortant,group_bo_user,1,0,0,0
+access_manager_service_type_courrier_sortant,user.type.courrier.sortant,model_type_courrier_sortant,group_bo_manager_service,1,0,0,0
+access_user_service_type_courrier_sortant,user.type.courrier.sortant,model_type_courrier_sortant,group_bo_user_service,1,0,0,0
+
+access_admin_steg_department,admin.steg.department,model_steg_department,group_bo_manager,1,1,1,1
+access_user_steg_department,user.steg.department,model_steg_department,group_bo_user,1,0,0,0
+access_manager_service_steg_department,user.steg.department,model_steg_department,group_bo_manager_service,1,0,0,0
+access_user_service_steg_department,user.steg.department,model_steg_department,group_bo_user_service,1,0,0,0
+
+"bo_admin_access_res_users_all","res_users bo","base.model_res_users",group_bo_manager,1,1,1,1
+"bo_user_access_res_users_all","res_users bo","base.model_res_users",group_bo_user,1,1,1,0
+"bo_manager_service_access_res_users_all","res_users bo","base.model_res_users",group_bo_manager_service,1,1,1,0
+"bo_user_service_access_res_users_all","res_users bo","base.model_res_users",group_bo_user_service,1,1,1,0
+
+"base.access_res_partner_title_group_user","res_partner_title group_partner_manager","base.model_res_partner_title","group_bo_manager",1,1,1,1
+"base.access_res_partner_title_group_partner_manager","res_partner_title group_user","base.model_res_partner_title",group_bo_user,1,0,0,0
+"group_bo_manager_service_res_partner_title","res_partner_title group_user","base.model_res_partner_title",group_bo_manager_service,1,0,0,0
+"group_bo_user_service_res_partner_title","res_partner_title group_user","base.model_res_partner_title",group_bo_user_service,1,0,0,0
+
+
+

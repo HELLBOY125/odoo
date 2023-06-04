@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+		<record id="type_medecin_data_generaliste" model="res.partner.medecin">
+			<field name="name">Médecin généraliste</field>
+			<field name="type">medecin</field>
+		</record>
+        <record id="type_medecin_data_specialise" model="res.partner.medecin">
+			<field name="name">Médecin Spécialiste</field>
+			<field name="type">medecin</field>
+		</record>
+		<record id="type_medecin_data_professeur" model="res.partner.medecin">
+			<field name="name">Médecin Professeur </field>
+			<field name="type">medecin</field>
+		</record>
+	   <record id="type_medecin_data_vacataire" model="res.partner.medecin">
+			<field name="name">Vacataires </field>
+			<field name="type">vacataire</field>
+		</record>
+	    
+	</data>
+</odoo>

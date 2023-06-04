@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <menuitem  id="menu_assets_management" 
+     			name="Immobilisation"
+     			web_icon="om_account_asset,static/description/icon.png"
+     			sequence="50"
+     			groups="account.group_account_manager"/>
+    
+         <menuitem id="menu_assets" 
+    		name="Immobilisation" 
+    		parent="menu_assets_management"
+    		sequence="1"/>
+        
+
+     <menuitem parent="menu_assets"
+    		 id="menu_action_account_asset_asset_form" 
+    		 action="action_account_asset_asset_form" 
+    		 sequence="1" 
+    		 groups="account.group_account_manager"/>
+    		 
+    		 
+		 
+    		 
+
+   
+   
+   	 
+    		 
+    		 
+    <!-- Configuration -->
+     <menuitem id="menu_assets_config" 
+    		name="Configuration" 
+    		parent="menu_assets_management"
+    		groups="account.group_account_manager"
+    		sequence="100"/>
+
+    		
+    <menuitem 
+              id="menu_action_account_asset_asset_list_normal_purchase"
+              action="action_account_asset_asset_list_normal_purchase"
+              parent="menu_assets_config"
+    			sequence="1"/>
+    				
+     
+	        
+	 
+  
+            
+   
+         
+         
+          
+                                
+        <menuitem name="Rapport Immobilisation"
+              action="action_asset_asset_report"
+              id="menu_action_asset_asset_report"
+              parent="menu_assets_management"
+              sequence="50"/>                         
+              
+       <menuitem name="Generate Assets Entries"
+              action="action_asset_depreciation_confirmation_wizard"
+              id="menu_asset_depreciation_confirmation_wizard"
+              parent="account.menu_finance_entries_generate_entries"
+              sequence="111"
+              groups="account.group_account_manager"/>  
+              
+                      
+</odoo>

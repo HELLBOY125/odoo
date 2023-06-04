@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_contract_cdi_cdd">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <xpath expr="//div[@class='header']" position="replace">
+                    <!-- Header for first page -->
+                    <!--                    <div class="header first-page">-->
+                    <!--                        <div>-->
+                    <!--                            <img t-att-src="'/spc_hr_contract/static/src/img/spec_groupe.png'" style="height:100px;width:200;"/>-->
+                    <!--                            <img t-att-src="image_data_uri(doc.company_id.logo)" class="float-right"/>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+
+                    <!-- Header for all pages expect first page -->
+                    <div class="header">
+                        <div>
+                            <img t-att-src="'/spc_hr_contract/static/src/img/spec_groupe.png'" style="height:100px;width:200;"/>
+                            <img t-att-src="'/spc_hr_contract/static/src/img/spec_consulting.png'" class="float-right"/>
+                        </div>
+                        <span class="not-first-page">CONTRAT DE TRAVAIL</span>
+                    </div>
+                </xpath>
+
+                <t t-call="web.external_layout">
+<!--                    <div class="page" t-if="(doc.type_id.id in [1,2] and doc.company_id.country_id.id == 'base.tn')">-->
+                    <div class="page" t-if="doc.type_id.id in [1,2] and doc.company_id.country_id.id == 221">
+                        <style>
+                            @font-face {
+                            font-family: cool_font;
+                            }
+                            div.justify{text-align: justify;
+                            }
+                        </style>
+
+                        <div t-if="doc.type_id.id == 1" style="text-align:center;">
+                            <h4><b><u>CONTRAT DE TRAVAIL</u><br/>
+                                <u>À DURÉE INDETERMINÉE</u></b></h4>
+                        </div>
+
+                        <div t-if="doc.type_id.id == 2" style="text-align:center;">
+                            <h4><b><u>CONTRAT DE TRAVAIL</u><br/>
+                                <u>À DURÉE DETERMINÉE</u></b></h4>
+                        </div>
+
+                        <br/>
+                        <p>
+                            <b><h6>ENTRE LES SOUSSIGNÉS :</h6></b>
+                        </p>
+                        <div style="justify">
+                            <table style="background-color:#F3F3F3;">
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;"><span style="color:blue"><b>L'employeur :</b> </span></a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.company_id.name"><b><span t-field="doc.company_id.name" style="color:blue"/> <span style="color:blue">SARL</span></b></t>
+                                        <!--                                        <t t-if="not doc.company_id">......................................................... </t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Siège social :</a>
+                                    </td>
+                                    <td width="400">
+                                        <!--                                        <t t-if="not doc.company_id.street"> ........................ </t>-->
+                                        <t t-if="doc.company_id.street"><span t-field="doc.company_id.street"/> </t>
+                                        <t t-if="doc.company_id.street2"><span t-field="doc.company_id.street2"/> </t>
+                                        <t t-if="doc.company_id.city"><span t-field="doc.company_id.city"/> </t>
+                                        <t t-if="doc.company_id.state_id.name"><span t-field="doc.company_id.state_id.name"/> </t>
+                                        <t t-if="doc.company_id.zip"><span t-field="doc.company_id.zip"/> </t>
+                                        <t t-if="doc.company_id.country_id.name"><span t-field="doc.company_id.country_id.name"/></t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">N° Registre de Commerce :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.company_id.company_registry"><span t-field="doc.company_id.company_registry"/> </t>
+                                        <!--                                        <t t-if="not doc.company_id.company_registry">................... </t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Identifiant Fiscal :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.company_id.vat"><span t-field="doc.company_id.vat"/></t>
+                                        <!--                                        <t t-if="not doc.company_id.vat">................... </t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Matricule CNSS :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.company_id.matricule_cnss"><span t-field="doc.company_id.matricule_cnss"/></t>
+                                        <!--                                        <t t-if="not doc.company_id.matricule_cnss">................... </t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Matricule CAVIS :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.company_id.matricule_cavis"><span t-field="doc.company_id.matricule_cavis"/> </t>
+                                        <!--                                        <t t-if="not doc.company_id.matricule_cavis">................... </t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Matricule CNRPS :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.company_id.matricule_cnrps"><span t-field="doc.company_id.matricule_cnrps"/> </t>
+                                        <!--                                        <t t-if="not doc.company_id.matricule_cnrps">................... </t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Téléphone :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.company_id.phone"> <span t-field="doc.company_id.phone"/> </t>
+                                        <!--                                        <t t-if="not doc.company_id.phone">................... </t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Fax :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.company_id.fax"> <span t-field="doc.company_id.fax"/> </t>
+                                        <!--                                        <t t-if="not doc.company_id.fax">................... </t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Email :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.company_id.email"> <span t-field="doc.company_id.email"/> </t>
+                                        <!--                                        <t t-if="not doc.company_id.email">................... </t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Site web :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.company_id.website"> <span t-field="doc.company_id.website"/> </t>
+                                        <!--                                        <t t-if="not doc.company_id.website">................... </t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Représenté par :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.company_id.responsible_id.name">
+                                            <span t-if="doc.company_id.responsible_id.gender == 'male'">
+                                                Mr.
+                                            </span>
+                                            <span t-if="doc.company_id.responsible_id.gender == 'female'">
+                                                Mme.
+                                            </span>
+                                            <span t-field="doc.company_id.responsible_id.name"/> </t>
+                                        <!--                                        <t t-if="not doc.company_id.responsible_id">................... </t> en qualité de Gérant-->
+
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <br/>
+                            <p>
+                                <b>Ayant tous pouvoirs à l'effet des présentes désigné « l’employeur » ou « SPECTRUM » <br/>
+                                    d'une part,</b>
+                            </p>
+                            <p> <b>ET,</b></p>
+
+                            <table style="background-color:#F3F3F3;">
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;"><span style="color:blue"><b>Identité : </b></span></a>
+                                    </td>
+                                    <td width="400">
+                                        <b>
+                                            <span style="color:blue">
+                                                <span t-if="doc.employee_id.gender == 'male'">
+                                                    M.
+                                                </span>
+                                                <span t-if="doc.employee_id.gender == 'female'">
+                                                    Mme.
+                                                </span>
+                                                <t t-if="doc.employee_id.name"><span t-field="doc.employee_id.name"/></t>
+                                            </span>
+                                        </b>
+                                        <!--                                        <t t-if="not doc.employee_id.name">................... </t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Né le :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.employee_id.birthday"><span t-field="doc.employee_id.birthday"/></t>
+                                        <!--                                        <t t-if="not doc.employee_id.birthday">../../....</t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Titulaire de la CIN N°:</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.employee_id.identification_id"><span t-field="doc.employee_id.identification_id"/></t>
+                                        <!--                                        <t t-if="not doc.employee_id.identification_id">................... </t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Délivrée le :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.employee_id.delivred_date_identification"><span t-field="doc.employee_id.delivred_date_identification"/></t>
+                                        <!--                                        <t t-if="not doc.employee_id.delivred_date_identification">../../....</t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Demeurant à :</a>
+                                    </td>
+                                    <td width="400">
+                                        <!--                                        <t t-if="not doc.employee_id.address_home_id"> ........................ </t>-->
+                                        <t t-if="doc.employee_id.address_home_id.street"><span t-field="doc.employee_id.address_home_id.street"/> </t>
+                                        <t t-if="doc.employee_id.address_home_id.street2"><span t-field="doc.employee_id.address_home_id.street2"/> </t>
+                                        <t t-if="doc.employee_id.address_home_id.city"><span t-field="doc.employee_id.address_home_id.city"/> </t>
+                                        <t t-if="doc.employee_id.address_home_id.state_id.name"><span t-field="doc.employee_id.address_home_id.state_id.name"/> </t>
+                                        <t t-if="doc.employee_id.address_home_id.zip"><span t-field="doc.employee_id.address_home_id.zip"/> </t>
+                                        <t t-if="doc.employee_id.address_home_id.country_id.name"><span t-field="doc.employee_id.address_home_id.country_id.name"/></t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Nationalité :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.employee_id.country_id.name"><span t-field="doc.employee_id.country_id.name"/></t>
+                                        <!--                                        <t t-if="not doc.employee_id.country_id.name">................... </t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Téléphone :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.employee_id.mobile"><span t-field="doc.employee_id.mobile"/></t>
+                                        <!--                                        <t t-if="not doc.employee_id.mobile">................... </t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Email :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.employee_id.private_email"><span t-field="doc.employee_id.private_email"/></t>
+                                        <!--                                        <t t-if="not doc.employee_id.private_email">................... </t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">RIB / RIP :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-foreach="doc.employee_id.bank_account_ids" t-as="bank">
+                                            <t t-if="bank.active_account == True">
+                                                <span t-field="bank.acc_number"/></t>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Matricule CNSS :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.employee_id.matricule_cnss"><span t-field="doc.employee_id.matricule_cnss"/></t>
+                                        <!--                                        <t t-if="not doc.employee_id.matricule_cnss">................... </t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Matricule CAVIS :</a>
+                                    </td>
+                                    <td width="400">
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Matricule CNRPS :</a>
+                                    </td>
+                                    <td width="400">
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="400">
+                                        <a style="padding-left: 15px;">Matricule Interne :</a>
+                                    </td>
+                                    <td width="400">
+                                        <t t-if="doc.employee_id.matricule"><span t-field="doc.employee_id.matricule"/></t>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <br/>
+                            <p>
+                                <b> Désigné « l’employé » d’autre <br/>
+                                    part,</b>
+                            </p>
+
+                            <p> Il a été arrêté et convenu ce qui suit : </p>
+                        </div>
+
+                        <!--                        <p style="page-break-after:always;">   </p>-->
+                        <div class="justify">
+                            <b><u>1 : ENGAGEMENT</u></b>
+                            <p>SPECTRUM, par les présentes, engage aux termes du présent contrat de travail
+                                <span t-if="doc.employee_id.gender == 'male'">
+                                    M.
+                                </span>
+                                <span t-if="doc.employee_id.gender == 'female'">
+                                    Mme.
+                                </span>
+                                <t t-if="doc.employee_id.name"><span t-field="doc.employee_id.name"/></t>
+                                <t t-if="not doc.employee_id.name">................... </t>
+                                qui l’accepte de travailler en qualité de
+                                « <t t-if="doc.job_id"><span t-field="doc.job_id.name"/></t>
+                                <t t-if="not doc.job_id">...................................... </t>».</p>
+
+                            <b><u>ARTICLE 2 : CONVENTION COLLECTIVE</u></b>
+                            <p>
+                                Le présent contrat sera régi par la Convention collective sectorielle de l’électricité et de
+                                l’électronique : "72-100 Conseil en systèmes informatiques"
+                            </p>
+
+                            <b><u>ARTICLE 3 : DURÉE </u></b>
+                            <p>
+                                Le présent contrat est conclu pour une période indéterminée, et ce à partir du
+                                <t t-if="doc.date_start"><span t-field="doc.date_start"/></t>
+                                <t t-if="not doc.date_start">../../....</t>.
+                                Toutefois, il peut être mis fin à ce contrat de façon anticipé et d’un commun accord entre les
+                                deux parties.  <br/>
+                                La partie qui souhaite la résiliation du présent contrat, doit informer expressément l’autre partie
+                                trois mois à l’avance par lettre recommandée avec accusé de réception de sa décision.
+                            </p>
+
+                            <b><u>ARTICLE 4 – FONCTION ET ATTRIBUTIONS</u></b>
+                            <p>
+                                Les fonctions et responsabilités essentielles de l’employé consisteront en : <br/>
+                                <t t-if="doc.description_job"><span t-field="doc.description_job"/></t>
+                                <t t-if="not doc.description_job">....................................................................................................................................................................................................................</t>
+                            </p>
+                            <p>
+                                Et plus généralement, accomplir toute mission entrant dans le cadre de ses fonctions ou que lui
+                                confierait l’Employeur. <br/>
+                                Le Salarié rendra compte à son supérieur hiérarchique ou fonctionnel ou à toute personne
+                                désignée par ceux-ci et exercera ses fonctions selon leurs instructions sous leur contrôle et leur
+                                supervision. <br/>
+                                Ces fonctions et responsabilités ont un caractère évolutif et sont donc susceptibles d’être
+                                adaptées compte tenu de l’évolution de l’Employeur, du niveau hiérarchique, des formations et
+                                des compétences requises. <br/>
+                            </p>
+
+                            <b><u>ARTICLE 5 : RÉGIME DE TRAVAIL ET CONGÉS PAYÉS</u></b>
+                            <p>
+                                L’employé sera soumis au régime de travail de <b> 48 Heures par semaine </b> et bénéficiera d’un
+                                <b>congé payé de 25 jours ouvrables par année </b> de service pendant toute la période
+                                contractuelle. <br/>
+                                Ce congé sera pris en accord avec SPECTRUM et selon les règles internes définies par
+                                l’entreprise. <br/>
+                                L’employé pourra reporter ses congés d’une année sur l’autre avec l’accord de la direction, avec
+                                un cumul qui ne dépasse pas deux années consécutives.
+                            </p>
+
+                            <b><u>ARTICLE 6 : RÉMUNÉRATION</u></b>
+                            <p>
+                                L’employé percevra une rémunération mensuelle fixe nette de
+                                <t t-if="doc.wage"><span t-field="doc.wage"/></t>
+                                <t t-if="not doc.wage">.......... (000) Dinars.</t> Ia dite
+                                rémunération sera révisé conformément à la loi tunisienne et en fonction des résultats obtenus
+                                par l’employé dans l’accomplissement de son travail.
+                            </p>
+
+                            <b><u>ARTICLE 7 – INDEMNISATION DE FRAIS :</u></b>
+                            <p>
+                                Les frais engagés par « l’employé » à l'occasion de l'exercice de ses fonctions lui seront
+                                remboursés, sous réserve d'accord préalable de SPECTRUM et sur justificatifs.
+                            </p>
+
+                            <b><u>ARTICLE 8 : RÉGIME D’AFFILIATION</u></b>
+                            <p>
+                                L’employé bénéficiera de l’affiliation à la caisse nationale de la sécurité sociale.
+                            </p>
+
+                            <b><u>ARTICLE 9 : LOI APPLICABLE</u></b>
+                            <p>
+                                Le présent contrat sera régi et interprété selon les lois de la république tunisienne
+                            </p>
+
+                            <b><u>ARTICLE 10 : CONDITIONS GENERALES DE TRAVAIL </u></b>
+                            <p>
+                                L'employé sera tenu de respecter les règles disciplinaires en vigueur chez l'employeur. <br/>
+                                L'employé ne saurait ignorer, par ailleurs, ni la portée des règles déontologiques relatives à
+                                l'indépendance et au secret professionnel, ni l'intérêt de l'obligation de discrétion. <br/>
+                                L'employé devra faire connaître à l'employeur sans délai toute modification postérieure à son
+                                engagement qui pourrait intervenir dans son état civil, sa situation de famille, son adresse.
+                            </p>
+
+                            <b><u>ARTICLE 11 : ATTRIBUTION DU MATERIEL</u></b>
+                            <p>
+                                L'employé bénéficiera d'un matériel (informatique, bureautique, technique, de locomotion, ... etc.). Il est strictement interdit à l'employé d'utiliser ou d'affecter le matériel fourni dans des
+                                activités hors celles de l'employeur ni toute autre destination non approuvée par l'employeur. <br/>
+                                L'employé sera entièrement responsable de la détérioration, de la perte ou du vol de son
+                                matériel. Le montant de réparation ou la valeur du matériel en cas de perte ou de vol sera déduit
+                                de son salaire sans que ce montant ne soit inférieur au montant à porter dans la liste du matériel
+                                fourni à l'employé annexée au présent contrat.
+                            </p>
+
+                            <b><u>ARTICLE 12 : LIEU DE TRAVAIL</u></b>
+                            <p>
+                                L'employé exercera ses fonctions dans les locaux de l'employeur sis à l'adresse mentionnée dans
+                                le présent contrat. <br/>
+                                En fonction des nécessités du service et des besoins de la clientèle, l'employé sera amené à
+                                effectuer des déplacements. <br/>
+                                Sur accord écrit de SPECTRUM, il est possible d’effectuer une partie du travail à distance. Pour
+                                les jours travaillés à distance l'employé ne percevra pas des tickets restaurants. L’employé
+                                garantie sa disposition d’un environnement de travail adéquat à domicile et s’engage à effectuer
+                                le temps présence nécessaire dans les locaux de l’entreprise
+                            </p>
+
+                            <b><u>ARTICLE 13 : EXCLUSIVITÉ ET SECRET PROFESSIONNEL</u></b>
+                            <p>Pendant toute la durée du présent contrat,
+                                <span>
+                                    <span t-if="doc.employee_id.gender == 'male'">
+                                        M.
+                                    </span>
+                                    <span t-if="doc.employee_id.gender == 'female'">
+                                        Mme.
+                                    </span>
+                                    <t t-if="doc.employee_id.name"><span t-field="doc.employee_id.name"/></t>
+                                </span>
+                                <t t-if="not doc.employee_id.name">...................</t>,
+                                est tenu d’exercer ses fonctions
+                                au mieux des intérêts de la société avec assiduité et en conformité avec les exigences
+                                d’employeur et les diligences légales ou professionnelles de la profession. <br/>
+                                SPECTRUM se réserve le droit de rompre le présent contrat pour faute grave ou incapacité
+                                professionnelle.</p>
+
+                            <b><u>ARTICLE 14 – OBLIGATION ET FIDELITÉ</u></b>
+                            <p>
+                                L’employé s’engage formellement : <br/>
+                                <ul>
+                                    <li>
+                                        A travailler exclusivement pour la société SPECTRUM et à n'exercer aucune activité
+                                        professionnelle rémunérée, salariée ou non, même non concurrente de celle de la société,
+                                        sauf accord écrit au préalable de SPECTRUM. Cette interdiction ne vise toutefois pas les
+                                        groupements et associations à but non lucratif dont l'employé serait membre et pour
+                                        lesquels il assumerait un travail bénévole.
+                                    </li>
+                                    <li>
+                                        A se conformer aux instructions qui lui seront données par les personnes sous les ordres
+                                        desquelles il est placé.
+                                    </li>
+                                    <li>
+                                        A observer le secret professionnel et à ne faire, sans l’autorisation écrite de ses chefs,
+                                        aucune communication écrite ou verbale à des tiers sur les questions se rattachant aux
+                                        travaux pour lesquels il est engagé.
+                                    </li>
+                                    <li>
+                                        A prendre soin du matériel qui lui sera confié
+                                    </li>
+                                    <li>
+                                        Et d’une façon générale à respecter les lois et règlements généraux ou particuliers en
+                                        vigueur.
+                                    </li>
+                                </ul>
+                            </p>
+
+                            <b><u>ARTICLE 15 – DISCRETION ET FIDELITÉ</u></b>
+                            <p>
+                                <ul>
+                                    <li>
+                                        L’employé s'engage à observer la plus grande discrétion sur toutes les informations,
+                                        connaissances et techniques qu'elle aurait connues à l'occasion de son travail dans
+                                        l'entreprise.
+                                    </li>
+                                    <li>
+                                        L’employé s'engage à observer la discrétion la plus stricte sur les informations se
+                                        rapportant aux activités de la société auxquelles elle aura accès à l'occasion et dans le
+                                        cadre de ses fonctions.
+                                    </li>
+                                    <li>
+                                        L’employé sera lié par la même obligation vis-à-vis de tout renseignement ou document
+                                        dont elle aura pris connaissance chez des clients de la société.
+                                    </li>
+                                    <li>
+                                        L’employé ne pourra, sans accord écrit de la direction, publier aucune étude sous
+                                        quelque forme que ce soit portant sur des travaux ou des informations couvertes par
+                                        l'obligation de confidentialité.
+                                    </li>
+                                </ul>
+                                Ces obligations de discrétion et de confidentialité jouent tant à l’égard des tiers que des salariés
+                                de l’entreprise, s’appliqueront pendant toute la durée du contrat de travail et se prolongeront
+                                après la rupture de celui-ci, pour quelque motif que ce soit.
+                            </p>
+
+                            <p/>
+                            <b><u>Article 16 – PROPRIÉTÉ INTELLECTUELLE</u></b>
+                            <p>
+                                Il est expressément convenu que toutes les créations originales crées par le Salarié dans le cadre
+                                de ses fonctions, protégeables au titre du droit d’auteur, sont, par nature, des œuvres collectives,
+                                puisqu’elles sont initiées par et sous la direction de la Société, formalisées sous son contrôle
+                                et/ou avec l’aide des collègues de travail ou des collaborateurs, et ce, dans le seul but d’être
+                                exploitées par la Société.  <br/>
+                                En conséquence, sont automatiquement cédés à la Société les droits de propriété intellectuelle
+                                sur les créations originales réalisées par l’employé dans le cadre de ses fonctions, étant expressément entendu, que le fait que
+                                la Société soit investie ab initio de ces droits constitue un élément essentiel et déterminant du contrat de travail, et que la
+                                présente clause vaut pour toutes les créations originales de l’employé (ci-après « les Créations »), passées et futures, dès lors
+                                qu’elles ont été réalisées dans le cadre de ses fonctions. <br/>
+                                Compte tenu de la nature collective des Créations, l’employé consent expressément que son nom
+                                ne soit pas mentionné et reconnait qu’aucune rémunération, prime ou contrepartie financière ne
+                                lui sera octroyée pour les Créations, ce qu’il accepte expressément. <br/>
+                                Tous dépôts des Créations, notamment de code source, sera effectué par la Société en son nom
+                                propre, pour son compte et à ses faits
+                            </p>
+
+                            <b><u>Article 17. BREVET</u></b>
+                            <p>
+                                L’employé devra informer immédiatement la Société de toute invention, même faite en dehors
+                                de l’exécution de son contrat de travail. <br/>
+                                Tous les travaux, études, recherches effectués pour le compte de la Société dans le cadre du
+                                Contrat de travail seront la seule propriété de la Société, l’employé ayant une mission inventive
+                                ou des fonctions d’études et de recherches. En tant que titulaire des droits de propriété
+                                industrielle, la Société effectuera les formalités de dépôts de brevet ou de prise de tout autre
+                                titre qui s’avéreraient nécessaires. <br/>
+                                L’employé sera toutefois mentionné sur les demandes et certificats de description, sauf
+                                opposition de sa part, sans que cette mention ne lui donne de titularité sur les droits de
+                                propriété industrielle. <br/>
+                                L’invention non brevetable ou l’innovation émanant du Salarié et utilisée par la Société pourra
+                                donner lieu à l’attribution de primes.  <br/>
+                                Les inventions effectuées par le Salarié en dehors de son travail demeureront la propriété de
+                                celui-ci sauf si elles ont été faites dans le cours de l’exécution de ses fonctions, dans le domaine
+                                des activités de l’entreprise ou grâce à la connaissance ou à l’utilisation de techniques, moyens
+                                ou données procurés par elle. <br/>
+                                La Société pourra en ce cas revendiquer la propriété ou la jouissance de l’invention du Salarié,
+                                mais devra verser un juste prix en contrepartie de cette invention.
+                            </p>
+
+                            <b><u>Article 18. NON CONCURRENCE</u></b>
+                            <p>
+                                A la cessation du contrat quel qu’en soit la cause ou l’auteur, l’employé s’engage à n’exercer à son
+                                compte ou au service d’une autre personne physique ou morale, aucune activité susceptible de
+                                concurrencer celle de l’employeur. Elle s’engage à ne s’intéresser directement ou indirectement
+                                à aucune affaire ou entreprise ayant des activités concurrentes à celle de la société, c'est-à-dire
+                                l’édition de progiciels dans le domaine de la gestion de l’information en entreprise et plus
+                                particulièrement : portail, gestion du contenu - workflows, collaboration, CMS et ECM. <br/>
+                                L’employé s’engage à ne pas solliciter ou démarcher, directement ou indirectement, les salariés,
+                                ou dirigeants de la société à d’autres fins que le développement de la société, notamment aux
+                                fins de les inciter à quitter la société ou à s’en détourner, la société se réserve la possibilité de
+                                réduire la durée d’application de la présente clause ou de renoncer au bénéfice de la présente
+                                clause en informant l’employée , par tout moyen écrit , et au plus tard 30 jours ouvrables, après
+                                son dernier jour de travail. <br/>
+                                Cet engagement est limité au territoire de la France et de la Tunisie et à une durée de 24 mois
+                                après la cessation du contrat de travail.
+                            </p>
+
+                            <b><u>ARTICLE 19 : FIN DU CONTRAT AVEC RAISON</u></b>
+                            <p>
+                                Nonobstant toute disposition contraire du présent contrat, l'employeur peut mettre fin au
+                                contrat de travail de l'employé pour l'une des raisons suivantes : <br/>
+                                <ul>
+                                    <li>
+                                        L'employé commet un crime ou pose tout acte impliquant une turpitude morale, ou une
+                                        infraction pouvant conduire à l'emprisonnement
+                                    </li>
+                                    <li>
+                                        L'employé commet un vol, une fraude, une malversation ou une falsification des
+                                        informations figurant sur son formulaire de demande d'emploi ou des informations de
+                                        l'employeur
+                                    </li>
+                                    <li>
+                                        L'employé divulgue illégalement les informations confidentielles ou personnelles de
+                                        l'employeur
+                                    </li>
+                                    <li>
+                                        L'employé pose un acte portant préjudice à la réputation et aux affaires de l'employeur,
+                                    </li>
+                                    <li>
+                                        L'employé n'arrive pas à remplir les obligations de performances prévues par
+                                        l'employeur, même après été mis en garde écrite et en cas d'incapacité de l'employé à
+                                        corriger ses erreurs ou carences.
+                                    </li>
+                                    <li>
+                                        L'employé viole le présent contrat, sans correction de la violation au plus tard quinze
+                                        (15) jours après notification écrite d'une telle violation à lui adresser
+                                    </li>
+                                    <li>
+                                        Une mauvaise conduite équivalant à une incompétence grossière
+                                    </li>
+                                    <li>
+                                        Un absentéisme chronique et sans raison,
+                                    </li>
+                                    <li>
+                                        Une appropriation illégale des opportunités d'affaires de l'employeur
+                                    </li>
+                                    <li>
+                                        Une mauvaise conduite en relation avec les responsabilités de l'employé ou toute
+                                        violation des lois et règlements dans les locaux de l'employeur ou auxquels l'employeur est
+                                        sujet
+                                    </li>
+                                </ul>
+                            </p>
+
+                            <br/><br/>
+
+                            <p>Fait à Tunis, le (<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/>)</p>
+                            <br/>
+                            <div>
+                                <table class="table table-bordered" style="border-color:black;">
+                                    <tr>
+                                        <td width="400" height="200">
+                                            Pour L’employeur <br/>
+                                            <t t-if="doc.company_id.responsible_id.name">
+                                                <span t-if="doc.company_id.responsible_id.gender == 'male'">
+                                                    M.
+                                                </span>
+                                                <span t-if="doc.company_id.responsible_id.gender == 'female'">
+                                                    Mme.
+                                                </span>
+                                                <span t-field="doc.company_id.responsible_id.name"/> </t>
+                                            <t t-if="not doc.company_id.responsible_id">................... </t> en qualité de Gérant
+                                            <br/>
+                                            Gérant
+                                        </td>
+                                        <td width="400" height="200">
+                                            L’employé  <br/>
+                                            <span t-if="doc.employee_id.gender == 'male'">
+                                                M.
+                                            </span>
+                                            <span t-if="doc.employee_id.gender == 'female'">
+                                                Mme.
+                                            </span>
+                                            <t t-if="doc.employee_id.name"><span t-field="doc.employee_id.name"/></t>
+                                            <t t-if="not doc.employee_id.name">................... </t>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- My footer -->
+                        <div class="footer o_standard_footer">
+                            <div t-if="report_type == 'pdf'" class="float-right">
+                                <div><b><span class="page not-first-page"/></b></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

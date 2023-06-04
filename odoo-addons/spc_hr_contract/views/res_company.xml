@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <data>
+        <record model="ir.ui.view" id="update_base_view_company_form">
+            <field name="name">Config : Sociétés</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <!-- Add widget to phone -->
+                <xpath expr="//field[@name='phone']" position="attributes">
+                    <attribute name="widget">phone_intl</attribute>
+                </xpath>
+
+                <!-- Add N° Fax -->
+                <xpath expr="//field[@name='phone']" position="after">
+                    <field name="fax" widget="phone_intl"/>
+                </xpath>
+
+                <!-- Add Responsible company -->
+                <xpath expr="//field[@name='vat']" position="before">
+                    <field name="responsible_id"/>
+                </xpath>
+
+                <!-- Add matricule cnss -->
+                <xpath expr="//field[@name='company_registry']" position="after">
+                    <field name="matricule_cnss"/>
+                </xpath>
+
+                <!-- Add matricule cavis -->
+                <xpath expr="//field[@name='matricule_cnss']" position="after">
+                    <field name="matricule_cavis"/>
+                </xpath>
+
+                <!-- Add matricule cnrps -->
+                <xpath expr="//field[@name='matricule_cavis']" position="after">
+                    <field name="matricule_cnrps"/>
+                </xpath>
+
+
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- List -->
+        <record id="verif_conformite_dossier_tree_view" model="ir.ui.view">
+            <field name="name">sig.tresor.verif.conformite.dossier.tree</field>
+            <field name="model">sig.tresor.verif.conformite.dossier</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Vérification de la conformité du dossier">
+                    <button string="Non"
+                            name="action_dossier_conforme_non"
+                            type="object"
+                            class="btn btn-secondary o_button_import"
+                            icon="fa-times"
+                            attrs="{'invisible': [('state', '!=', 'enr_info')]}"
+                    /> <!-- icon="fa-times" -->
+                    <button string="Oui"
+                            name="action_dossier_conforme_oui"
+                            type="object"
+                            class="oe_highlight"
+                            icon="fa-check"
+                            attrs="{'invisible': [('state', '!=', 'enr_info')]}"
+                    ></button><!-- icon="fa-check" oe_button oe_form_button  ces classs enlvent le text du bouton-->
+                    <!--<field name="identifiant"/>
+                    <field name="denomination"/>
+                    <field name="sfd"/>
+                    <field name="legal_form_id"/>-->
+                    <field name="reception_courrier_id" string="Dossier SFD"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form -->
+        <record id="verif_conformite_dossier_form_view" model="ir.ui.view">
+            <field name="name">sig.tresor.verif.conformite.dossier.form</field>
+            <field name="model">sig.tresor.verif.conformite.dossier</field>
+            <field name="arch" type="xml">
+                <form string="Vérification de la conformité du dossier">
+                    <header>
+                        <button name="action_enr_info" string="Enregistrer SFD"
+                                type="object"
+                                class="oe_highlight"
+                                states="draft" groups="sig_tresor.autorisation_exercer_group"/>
+                        <!-- actions après traitement dossier complet et conforme-->
+                        <button name="action_redac_trans_courrier_au_chief_sae"
+                                string="Transmettre"
+                                type="object"
+                                class="oe_highlight" states="dossier_conforme"
+                                groups="sig_tresor.autorisation_exercer_group"/>
+
+                        <button name="action_trans_courrier_au_sda" string="Transmettre"
+                                type="object"
+                                class="oe_highlight" states="redac_trans_courrier_au_chief_sae"
+                                groups="sig_tresor.autorisation_exercer_group"/>
+
+                        <button name="action_trans_courrier_au_directeur" string="Transmettre"
+                                type="object"
+                                class="oe_highlight" states="trans_courrier_au_sda"
+                                groups="sig_tresor.sous_direction_agrement_group"/>
+
+                        <button name="action_imput_courrier_au_secretariat" string="Imputer"
+                                type="object"
+                                class="oe_highlight" states="trans_courrier_au_directeur"
+                                groups="sig_tresor.direction_group"/>
+
+                        <button name="action_num_trans_au_service_courrier"
+                                string="Transmettre"
+                                type="object"
+                                class="oe_highlight" states="imput_courrier_au_secretariat"
+                                groups="sig_tresor.secretariat_group"/>
+
+                        <button name="action_trans_courrier_au_demandeur" string="Transmettre"
+                                type="object"
+                                class="oe_highlight" states="num_trans_au_service_courrier"
+                                groups="sig_tresor.courrier_group"/>
+
+                        <button name="action_retour" string="Retourner" type="object" class="oe_highlight"
+                                states="redac_trans_courrier_au_chief_sae,trans_courrier_au_sda,trans_courrier_au_directeur"/>
+
+                        <button name="action_cancelled" string="Annuler" type="object" invisible="1"
+                                class="btn btn-secondary o_form_button_cancel" attrs="{'invisible':[('state','!=','draft')]}"/>
+
+<!--                        <button name="show_sig_tresor_dirigeant_form_view" string="Créer Dirigeant" type="object" status="draft" />-->
+
+                        <field name="state" statusbar_visible="draft,enr_info,redac_trans_courrier_au_chief_sae,trans_courrier_au_sda,trans_courrier_au_directeur,imput_courrier_au_secretariat,num_trans_au_service_courrier,trans_courrier_au_demandeur"
+                               widget="statusbar"/> <!-- statusbar_visible="draft,enr_info,redac_trans_courrier_au_chief_sae,trans_courrier_au_sda,trans_courrier_au_directeur,imput_courrier_au_secretariat,num_trans_au_service_courrier,trans_courrier_au_demandeur" -->
+                    </header>
+                    <sheet>
+                        <!-- <group>
+                             <group>
+                                 <field name="reception_courrier_id" string="Dossier"
+                                        attrs="{'readonly':[('state','!=','draft')]}"/>
+                             </group>
+                             <group>
+                             </group>
+                         </group>-->
+
+                        <div class="oe_title">
+                             <label for="sfd" class="oe_edit_only"/>
+                            <h2>
+                                <field name="sfd" placeholder="Nom du SFD" class="oe_inline sfd" attrs="{'readonly':[('state','!=','draft')]}" style="text-transform: uppercase;"/>
+                            </h2>
+                        </div>
+
+                        <group>
+                            <group string="Informations générales">
+                                <field name="is_show_no_rccm" attrs="{'invisible':1}"/>
+                                <field name="identifiant" options='{"fg_color": "red"}' style="text-transform: uppercase;"
+                                       attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="denomination" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="legal_form_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="no_rccm"
+                                       attrs="{'invisible': [('is_show_no_rccm', '=', False)], 'readonly':[('state','!=','draft')]}"/> <!-- ,{'readonly':[('state','!=','draft')]} -->
+                                <field name="mutual_specificity_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="type" widget="radio" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            </group>
+                            <group string="Localisation (Siége) / Situation Géographique">
+                                <field name="district_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="region_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="departement_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="commune_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="village_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            </group>
+                            <group string="Informations de contacts">
+                                <field name="bp" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="mobile" widget="phone" type="tel"
+                                       attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="tel" type="tel" widget="phone"
+                                       attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="site_internet" widget="url" attrs="{'readonly':[('state','!=','draft')]}"
+                                       placeholder="http://www.mon-domaine.com"/>
+                                <field name="email" widget="email" attrs="{'readonly':[('state','!=','draft')]}"
+                                       placeholder="mon-mail@mon-domaine.com"/>
+                            </group>
+                        </group>
+
+                        <field name="res_verif_conformite_dossier" invisible="1"/>
+                        <field name="is_show_traitement_dossier_conforme" invisible="1"/>
+                        <field name="is_show_traitement_dossier_non_conforme" invisible="1"/>
+                        <group string="Traitement dossier conforme"
+                               attrs="{'invisible':[('is_show_traitement_dossier_conforme','!=',True)]}">
+
+                            <!-- chef agent sae -->
+                            <group col="4" colspan="4" attrs="{'invisible':[('state','!=','dossier_conforme')]}">
+                                <field name="projet_recepisse" col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','dossier_conforme')], 'required': [('state', '=', 'dossier_conforme'), ('is_show_traitement_dossier_conforme', '=', True)]}"/>
+                                <field name="date_trans_projet_recepisse" col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','dossier_conforme')], 'required': [('state', '=', 'dossier_conforme'), ('is_show_traitement_dossier_conforme', '=', True)]}"/>
+                            </group>
+
+                            <!-- chef service sae -->
+                            <group col="2" colspan="2"
+                                   attrs="{'invisible':[('state','!=','redac_trans_courrier_au_chief_sae')]}">
+                                <group>
+                                    <field name="date_trans_projet_recepisse_par_chef_sae" col="2" colspan="2"
+                                           attrs="{'invisible':[('state','!=','redac_trans_courrier_au_chief_sae')], 'required': [('state', '=', 'redac_trans_courrier_au_chief_sae'), ('is_show_traitement_dossier_conforme', '=', True)]}"/>
+                                </group>
+                                <group></group>
+                            </group>
+
+                            <!-- sous-direcetion agréments -->
+                            <group col="2" colspan="2" attrs="{'invisible':[('state','!=','trans_courrier_au_sda')]}">
+                                <group>
+                                    <field name="date_trans_projet_recepisse_par_sda" col="2" colspan="2"
+                                           attrs="{'invisible':[('state','!=','trans_courrier_au_sda')], 'required': [('state', '=', 'trans_courrier_au_sda'), ('is_show_traitement_dossier_conforme', '=', True)]}"/>
+
+                                </group>
+                                <group></group>
+                            </group>
+
+                            <!-- direction -->
+                            <group col="2" colspan="2"
+                                   attrs="{'invisible':[('state','!=','trans_courrier_au_directeur')]}">
+                                <group>
+                                    <field name="date_trans_projet_recepisse_par_directrice" col="2" colspan="2"
+                                           attrs="{'invisible':[('state','!=','trans_courrier_au_directeur')], 'required': [('state', '=', 'trans_courrier_au_directeur'), ('is_show_traitement_dossier_conforme', '=', True)]}"/>
+                                </group>
+                                <group></group>
+                            </group>
+
+                            <!-- secretariat -->
+                            <group col="4" colspan="4"
+                                   attrs="{'invisible':[('state','!=','imput_courrier_au_secretariat')]}">
+                                <field name="date_entree_processus" col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','imput_courrier_au_secretariat')], 'required': [('state', '=', 'imput_courrier_au_secretariat'), ('is_show_traitement_dossier_conforme', '=', True)]}"/>
+                                <field name="numero_recepisse" col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','imput_courrier_au_secretariat')], 'required': [('state', '=', 'imput_courrier_au_secretariat'), ('is_show_traitement_dossier_conforme', '=', True)]}"/>
+                            </group>
+                            <!-- service courrier -->
+                            <group col="4" colspan="4"
+                                   attrs="{'invisible':[('state','!=','num_trans_au_service_courrier')]}">
+                                <field name="type_courrier_id" col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','num_trans_au_service_courrier')], 'required': [('state', '=', 'num_trans_au_service_courrier'), ('is_show_traitement_dossier_conforme', '=', True)]}"/>
+                                <field name="date_notif_recepisse_au_demandeur" col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','num_trans_au_service_courrier')], 'required': [('state', '=', 'num_trans_au_service_courrier'), ('is_show_traitement_dossier_conforme', '=', True)]}"/>
+                                <field name="recepisse" col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','num_trans_au_service_courrier')], 'required': [('state', '=', 'num_trans_au_service_courrier'), ('is_show_traitement_dossier_conforme', '=', True)]}"/>
+                            </group>
+
+                        </group>
+                        <group string="Traitement dossier non conforme"
+                               attrs="{'invisible':[('is_show_traitement_dossier_non_conforme','!=',True)]}">
+
+                            <!-- chef agent sae -->
+                            <group col="4" colspan="4" attrs="{'invisible':[('state','!=','dossier_conforme')]}">
+                                <field name="projet_courrier_notif_non_conformite" col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','dossier_conforme')], 'required': [('state', '=', 'dossier_conforme'), ('is_show_traitement_dossier_non_conforme', '=', True)]}"/>
+                                <field name="date_trans_projet_courrier_notif_non_conformite" col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','dossier_conforme')], 'required': [('state', '=', 'dossier_conforme'), ('is_show_traitement_dossier_non_conforme', '=', True)]}"/>
+                            </group>
+
+                            <!-- chef service sae -->
+                            <group col="2" colspan="2"
+                                   attrs="{'invisible':[('state','!=','redac_trans_courrier_au_chief_sae')]}">
+                                <group>
+                                    <field name="date_trans_projet_courrier_notif_non_conformite_par_chef_sae" col="2"
+                                           colspan="2"
+                                           attrs="{'invisible':[('state','!=','redac_trans_courrier_au_chief_sae')], 'required': [('state', '=', 'redac_trans_courrier_au_chief_sae'), ('is_show_traitement_dossier_non_conforme', '=', True)]}"/>
+                                </group>
+                                <group></group>
+                            </group>
+
+                            <!-- sous-direction agréments -->
+                            <group col="2" colspan="2" attrs="{'invisible':[('state','!=','trans_courrier_au_sda')]}">
+                                <group>
+                                    <field name="date_trans_projet_courrier_notif_non_conformite_par_sda" col="2"
+                                           colspan="2"
+                                           attrs="{'invisible':[('state','!=','trans_courrier_au_sda')], 'required': [('state', '=', 'trans_courrier_au_sda'), ('is_show_traitement_dossier_non_conforme', '=', True)]}"/>
+
+                                </group>
+                                <group></group>
+                            </group>
+
+                            <!-- direction -->
+                            <group col="2" colspan="2"
+                                   attrs="{'invisible':[('state','!=','trans_courrier_au_directeur')]}">
+
+                                <group>
+                                    <field name="date_trans_projet_courrier_notif_non_conformite_par_dir" col="2"
+                                           colspan="2"
+                                           attrs="{'invisible':[('state','!=','trans_courrier_au_directeur')], 'required': [('state', '=', 'trans_courrier_au_directeur'), ('is_show_traitement_dossier_non_conforme', '=', True)]}"/>
+                                </group>
+                                <group></group>
+                            </group>
+
+                            <!-- secretariat -->
+                            <group col="4" colspan="4"
+                                   attrs="{'invisible':[('state','!=','imput_courrier_au_secretariat')]}">
+                                <field name="date_reception_note_observation" col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','imput_courrier_au_secretariat')], 'required': [('state', '=', 'imput_courrier_au_secretariat'), ('is_show_traitement_dossier_non_conforme', '=', True)]}"/>
+                                <field name="numero_note_observation" col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','imput_courrier_au_secretariat')], 'required': [('state', '=', 'imput_courrier_au_secretariat'), ('is_show_traitement_dossier_non_conforme', '=', True)]}"/>
+                            </group>
+
+                            <!-- service courrier -->
+                            <group col="4" colspan="4"
+                                   attrs="{'invisible':[('state','!=','num_trans_au_service_courrier')]}">
+                                <field name="type_courrier_id" col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','num_trans_au_service_courrier')], 'required': [('state', '=', 'num_trans_au_service_courrier'), ('is_show_traitement_dossier_non_conforme', '=', True)]}"/>
+                                <field name="date_notif_note_observation_au_demandeur" col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','num_trans_au_service_courrier')], 'required': [('state', '=', 'num_trans_au_service_courrier'), ('is_show_traitement_dossier_non_conforme', '=', True)]}"/>
+                                <field name="note_observation" col="2" colspan="2"
+                                       attrs="{'invisible':[('state','!=','num_trans_au_service_courrier')], 'required': [('state', '=', 'num_trans_au_service_courrier'), ('is_show_traitement_dossier_non_conforme', '=', True)]}"/>
+                            </group>
+
+                        </group>
+
+                        <notebook attrs="{'invisible':[('state','!=','draft')]}">
+                            <page string="Dirigeants">
+                                <field name="dirigeant_ids">
+                                    <tree>
+                                        <field name="nom"/>
+                                        <field name="email"/>
+                                        <field name="telephone"/>
+                                        <field name="job_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+
+                        <separator/>
+                        <footer>
+                            <group>
+                                <group>
+
+                                </group>
+                                <group>
+
+                                </group>
+
+                            </group>
+                        </footer>
+
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- action menu Enregistrement des informations -->
+        <record model="ir.actions.act_window" id="action_enr_info_view">
+            <field name="name">Enregistrer SFD</field>
+            <field name="res_model">sig.tresor.verif.conformite.dossier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="verif_conformite_dossier_tree_view"/>
+            <!--<field name="domain">[('state','in',['draft'])]</field>-->
+            <field name="domain">[('state','in',['draft','enr_info','dossier_conforme','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','trans_courrier_au_demandeur'])]</field>
+        </record>
+        <!-- menu Enregistrement des informations  -->
+        <menuitem name="Enregistrer SFD" id="enr_info_menu" sequence="1020"
+                  parent="verif_conformite_dossier_menu"
+                  action="action_enr_info_view" groups="sig_tresor.autorisation_exercer_group"/>
+
+
+        <!-- action menu Dossier Conforme ? -->
+        <record model="ir.actions.act_window" id="action_dossier_conforme_view">
+            <field name="name">Etude de forme</field>
+            <field name="res_model">sig.tresor.verif.conformite.dossier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="verif_conformite_dossier_tree_view"/>
+            <!--<field name="domain">[('state','in',['enr_info'])]</field>-->
+            <field name="domain">[('state','in',['draft','enr_info','dossier_conforme','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','trans_courrier_au_demandeur'])]</field>
+        </record>
+        <!-- menu Dossier Conforme ?  -->
+        <menuitem name="Etude de forme" id="dossier_conforme_menu" sequence="1021"
+                  parent="verif_conformite_dossier_menu"
+                  action="action_dossier_conforme_view" groups="sig_tresor.autorisation_exercer_group"/>
+
+        <!-- action menu Rédaction et imputation courrier au Chef de Service SAE -->
+        <record model="ir.actions.act_window" id="action_etude_forme_redac_trans_courrier_au_chief_sae_view">
+            <field name="name">Transmettre courrier au Chef de Service SAE</field>
+            <field name="res_model">sig.tresor.verif.conformite.dossier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="verif_conformite_dossier_tree_view"/>
+           <!-- <field name="domain">[('state','=','dossier_conforme'),('assigne_a','=', uid)]</field>-->
+            <field name="domain">[('state','in',['draft','enr_info','dossier_conforme','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','trans_courrier_au_demandeur'])]</field>
+        </record>
+        <!-- menu Rédaction et imputation courrier au Chef de Service SAE  -->
+        <menuitem name="Transmettre au Chef du Service SAE"
+                  id="etude_forme_redac_trans_courrier_au_chief_sae_menu" sequence="1022"
+                  parent="verif_conformite_dossier_menu"
+                  action="action_etude_forme_redac_trans_courrier_au_chief_sae_view"
+                  groups="sig_tresor.autorisation_exercer_group"/>
+
+        <!-- action menu Imputation du courrier au SDA -->
+        <record model="ir.actions.act_window" id="action_etude_forme_trans_courrier_au_sda_view">
+            <field name="name">Transmettre courrier au SDA</field>
+            <field name="res_model">sig.tresor.verif.conformite.dossier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="verif_conformite_dossier_tree_view"/>
+            <!--<field name="domain">[('state','=','redac_trans_courrier_au_chief_sae'),('assigne_a','=', uid)]</field>-->
+            <field name="domain">[('state','in',['draft','enr_info','dossier_conforme','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','trans_courrier_au_demandeur'])]</field>
+        </record>
+        <!-- menu Imputation du courrier au SDA  -->
+        <menuitem name="Transmettre au SDA"
+                  id="etude_forme_trans_courrier_au_sda_menu" sequence="1023"
+                  parent="verif_conformite_dossier_menu"
+                  action="action_etude_forme_trans_courrier_au_sda_view"
+                  groups="sig_tresor.autorisation_exercer_group"/>
+
+        <!-- action menu Imputation du courrier au directeur -->
+        <record model="ir.actions.act_window" id="action_etude_forme_trans_courrier_au_directeur_view">
+            <field name="name">Transmettre courrier à la Directrice</field>
+            <field name="res_model">sig.tresor.verif.conformite.dossier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="verif_conformite_dossier_tree_view"/>
+            <!--<field name="domain">[('state','in',['trans_courrier_au_sda'])]</field>-->
+            <field name="domain">[('state','in',['draft','enr_info','dossier_conforme','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','trans_courrier_au_demandeur'])]</field>
+        </record>
+        <!-- menu Imputation du courrier au directeur  -->
+        <menuitem name="Transmettre à la Directrice"
+                  id="etude_forme_trans_courrier_au_directeur_menu" sequence="1024"
+                  parent="verif_conformite_dossier_menu"
+                  action="action_etude_forme_trans_courrier_au_directeur_view"
+                  groups="sig_tresor.sous_direction_agrement_group"/>
+
+        <!-- action menu Imputer courrier au sécretariat -->
+        <record model="ir.actions.act_window" id="action_etude_forme_imput_courrier_au_secretariat_view">
+            <field name="name">Imputer courrier au sécretariat</field>
+            <field name="res_model">sig.tresor.verif.conformite.dossier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="verif_conformite_dossier_tree_view"/>
+            <!--<field name="domain">[('state','in',['trans_courrier_au_directeur'])]</field>-->
+            <field name="domain">[('state','in',['draft','enr_info','dossier_conforme','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','trans_courrier_au_demandeur'])]</field>
+        </record>
+
+        <!-- menu Imputer courrier au sécretariat  -->
+        <menuitem name="Imputer au Sécretariat"
+                  id="etude_forme_imput_courrier_au_secretariat_menu" sequence="1025"
+                  parent="verif_conformite_dossier_menu"
+                  action="action_etude_forme_imput_courrier_au_secretariat_view"
+                  groups="sig_tresor.direction_group"/>
+
+        <!-- action menu Numérotation et imputation du courrier au service courrier -->
+        <record model="ir.actions.act_window" id="action_etude_forme_num_trans_au_service_courrier_view">
+            <field name="name">Transmettre courrier au service courrier</field>
+            <field name="res_model">sig.tresor.verif.conformite.dossier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="verif_conformite_dossier_tree_view"/>
+            <!--<field name="domain">[('state','in',['imput_courrier_au_secretariat'])]</field>-->
+            <field name="domain">[('state','in',['draft','enr_info','dossier_conforme','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','trans_courrier_au_demandeur'])]</field>
+        </record>
+
+        <!-- menu Numérotation et imputation du courrier au service courrier  -->
+        <menuitem name="Transmettre au Service Courrier"
+                  id="etude_forme_num_trans_au_service_courrier_menu" sequence="1026"
+                  parent="verif_conformite_dossier_menu"
+                  action="action_etude_forme_num_trans_au_service_courrier_view"
+                  groups="sig_tresor.secretariat_group"/>
+
+        <!-- action menu Transmision du courrier au demandeur -->
+        <record model="ir.actions.act_window" id="action_etude_forme_trans_courrier_au_demandeur_view">
+            <field name="name">Transmettre courrier au demandeur</field>
+            <field name="res_model">sig.tresor.verif.conformite.dossier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="verif_conformite_dossier_tree_view"/>
+            <!--<field name="domain">[('state','in',['num_trans_au_service_courrier'])]</field>-->
+            <field name="domain">[('state','in',['draft','enr_info','dossier_conforme','redac_trans_courrier_au_chief_sae','trans_courrier_au_sda','trans_courrier_au_directeur','imput_courrier_au_secretariat','num_trans_au_service_courrier','trans_courrier_au_demandeur'])]</field>
+        </record>
+        <!-- menu Transmision du courrier au demandeur  -->
+        <menuitem name="Transmettre au demandeur"
+                  id="etude_forme_trans_courrier_au_demandeur_menu" sequence="1027"
+                  parent="verif_conformite_dossier_menu"
+                  action="action_etude_forme_trans_courrier_au_demandeur_view"
+                  groups="sig_tresor.courrier_group"/>
+
+    </data>
+</odoo>

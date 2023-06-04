@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="contract_type_cdi" model="hr.contract.type">
+            <field name="name">CDI</field>
+        </record>
+
+        <record id="contract_type_cdd" model="hr.contract.type">
+            <field name="name">CDD</field>
+        </record>
+
+        <record id="contract_type_civp" model="hr.contract.type">
+            <field name="name">CIVP</field>
+        </record>
+    </data>
+</odoo>

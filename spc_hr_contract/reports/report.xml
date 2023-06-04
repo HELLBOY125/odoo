@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Paper format -->
+	<record id="paperformat_euro" model="report.paperformat">
+		<field name="name">European A4</field>
+		<field name="default" eval="True" />
+		<field name="format">A4</field>
+		<field name="page_height">0</field>
+		<field name="page_width">0</field>
+		<field name="orientation">Portrait</field>
+		<field name="margin_top">45</field>
+		<field name="margin_bottom">20</field>
+		<field name="margin_left">20</field>
+		<field name="margin_right">20</field>
+		<field name="header_line" eval="False" />
+		<field name="header_spacing">40</field>
+		<field name="dpi">90</field>
+	</record>
+
+	<report
+			id="report_employee_contract_cdi_cdd"
+			model="hr.contract"
+			string="Imprimer le contrat"
+			report_type="qweb-pdf"
+			name="spc_hr_contract.report_contract_cdi_cdd"
+			file="spc_hr_contract.report_contract_cdi_cdd"
+			paperformat="paperformat_euro"
+	/>
+</odoo>
+

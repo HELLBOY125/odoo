@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <delete model="account.fiscal.position.template" search="[('chart_template_id','=',ref('l10n_tn_pcg_chart_template'))]"/>
+
+
+    <!-- = = = = = = = = = = = = = = = -->
+    <!-- Fiscal Position Templates     -->
+    <!-- = = = = = = = = = = = = = = = -->
+
+		<!-- Position Fiscale de la Tunisie -->
+        <record id="fiscal_position_template_assujetti" model="account.fiscal.position.template">
+            <field name="sequence">2</field>
+            <field name="name">Assujetti</field>
+            <field name="chart_template_id" ref="l10n_tn_pcg_chart_template"/>
+            <field name="auto_apply" eval="True" />
+            <field name="country_group_id" ref="base.europe"></field>
+            <field name="vat_required" eval="True" />
+        </record>
+        <record id="fiscal_position_template_exonore" model="account.fiscal.position.template">
+            <field name="sequence">3</field>
+            <field name="name">Exonoré</field>
+            <field name="chart_template_id" ref="l10n_tn_pcg_chart_template"/>
+            <field name="auto_apply" eval="True" />
+        </record>
+
+    <!-- = = = = = = = = = = = = = = = -->
+    <!-- Fiscal Position Tax Templates -->
+    <!-- = = = = = = = = = = = = = = = -->
+
+<!-- Par défaut, les produits doivent être paramétrés pour utiliser les taxes, paramétrées pour des numéro de comptes (nationaux) -->
+
+<!-- ventes -->
+<!-- Assujetti -->
+        <record id="fp_tax_template_assujetti_19" model="account.fiscal.position.tax.template">
+            <field name="position_id" ref="fiscal_position_template_assujetti" />
+            <field name="tax_src_id" ref="tva_19" />
+            <field name="tax_dest_id" ref="tva_19" />
+        </record>
+        <record id="fp_tax_template_assujetti_13" model="account.fiscal.position.tax.template">
+            <field name="position_id" ref="fiscal_position_template_assujetti" />
+            <field name="tax_src_id" ref="tva_13" />
+            <field name="tax_dest_id" ref="tva_13" />
+        </record>
+        <record id="fp_tax_template_assujetti_7" model="account.fiscal.position.tax.template">
+            <field name="position_id" ref="fiscal_position_template_assujetti" />
+            <field name="tax_src_id" ref="tva_7" />
+            <field name="tax_dest_id" ref="tva_7" />
+        </record>
+        <record id="fp_tax_template_assujetti_achat_19" model="account.fiscal.position.tax.template">
+            <field name="position_id" ref="fiscal_position_template_assujetti" />
+            <field name="tax_src_id" ref="tva_achat_19" />
+            <field name="tax_dest_id" ref="tva_achat_19" />
+        </record>
+        <record id="fp_tax_template_assujetti_achat_13" model="account.fiscal.position.tax.template">
+            <field name="position_id" ref="fiscal_position_template_assujetti" />
+            <field name="tax_src_id" ref="tva_achat_13" />
+            <field name="tax_dest_id" ref="tva_achat_13" />
+        </record>
+        <record id="fp_tax_template_assujetti_achat_7" model="account.fiscal.position.tax.template">
+            <field name="position_id" ref="fiscal_position_template_assujetti" />
+            <field name="tax_src_id" ref="tva_achat_7" />
+            <field name="tax_dest_id" ref="tva_achat_7" />
+        </record>
+        
+<!-- Exonoré -->
+        <record id="fp_tax_template_exonore_19" model="account.fiscal.position.tax.template">
+            <field name="position_id" ref="fiscal_position_template_exonore" />
+            <field name="tax_src_id" ref="tva_19" />
+            <field name="tax_dest_id" ref="tva_0" />
+        </record>
+        <record id="fp_tax_template_exonore_13" model="account.fiscal.position.tax.template">
+            <field name="position_id" ref="fiscal_position_template_exonore" />
+            <field name="tax_src_id" ref="tva_13" />
+            <field name="tax_dest_id" ref="tva_0" />
+        </record>
+        <record id="fp_tax_template_exonore_7" model="account.fiscal.position.tax.template">
+            <field name="position_id" ref="fiscal_position_template_exonore" />
+            <field name="tax_src_id" ref="tva_7" />
+            <field name="tax_dest_id" ref="tva_0" />
+        </record>
+        <record id="fp_tax_template_exonore_achat_19" model="account.fiscal.position.tax.template">
+            <field name="position_id" ref="fiscal_position_template_exonore" />
+            <field name="tax_src_id" ref="tva_achat_19" />
+            <field name="tax_dest_id" ref="tva_achat_0" />
+        </record>
+        <record id="fp_tax_template_exonore_achat_13" model="account.fiscal.position.tax.template">
+            <field name="position_id" ref="fiscal_position_template_exonore" />
+            <field name="tax_src_id" ref="tva_achat_13" />
+            <field name="tax_dest_id" ref="tva_achat_0" />
+        </record>
+        <record id="fp_tax_template_exonore_achat_7" model="account.fiscal.position.tax.template">
+            <field name="position_id" ref="fiscal_position_template_exonore" />
+            <field name="tax_src_id" ref="tva_achat_7" />
+            <field name="tax_dest_id" ref="tva_achat_0" />
+        </record>
+</odoo>

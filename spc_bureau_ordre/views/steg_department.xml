@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="action_steg_department" model="ir.actions.act_window">
+            <field name="name">Départements STEG</field>
+            <field name="res_model">steg.department</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- STEG departments menu-->
+        <menuitem id="steg_department_menu_id" name="Départements STEG" action="action_steg_department" sequence="5" parent="courrier_configuration"/>
+
+        <!-- STEG departments form view -->
+        <record model="ir.ui.view" id="steg_department_view_form">
+            <field name="name">steg.department.form</field>
+            <field name="model">steg.department</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <!--tree view steg department-->
+        <record model="ir.ui.view" id="steg_department_view_tree">
+            <field name="name">steg.department.tree</field>
+            <field name="model">steg.department</field>
+            <field name="arch" type="xml">
+                <tree string="Départements STEG">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

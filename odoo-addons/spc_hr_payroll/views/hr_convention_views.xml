@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_hr_convention_form" model="ir.ui.view">
+            <field name="name">hr.convention</field>
+            <field name="model">hr.convention</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                            <label for="code" class="oe_edit_only"/>
+                            <field name="code"/>
+                        </div>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hr_convention_form" model="ir.actions.act_window">
+            <field name="name">Liste des conventions</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.convention</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_hr_convention_form"
+                  id="menu_hr_convention"
+                  name='Conventions'
+                  parent="om_hr_payroll.menu_hr_payroll_configuration"/>
+
+        <record id="view_hr_convention_category_form" model="ir.ui.view">
+            <field name="name">hr.convention.category</field>
+            <field name="model">hr.convention.category</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                            <label for="code" class="oe_edit_only"/>
+                            <field name="code"/>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="convention_id"/>
+                                <field name="start_date"/>
+                            </group>
+                            <group>
+                                <field name="type"/>
+                                <field name="company_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Détails">
+                                <field name="line_ids" editable="bottom">
+                                    <tree>
+                                        <field name="category_id" invisible="1"/>
+                                        <field name="echelon_id"/>
+                                        <field name="amount"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hr_convention_category_form" model="ir.actions.act_window">
+            <field name="name">Catégories</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.convention.category</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_hr_convention_category_form"
+                  id="menu_hr_hr_convention_category"
+                  name='Liste des catégories'
+                  parent="om_hr_payroll.menu_hr_payroll_configuration"/>
+
+        <record id="view_hr_convention_category_line_form" model="ir.ui.view">
+            <field name="name">hr.convention.category.line</field>
+            <field name="model">hr.convention.category.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="category_id" invisible="1"/>
+                            <field name="echelon_id"/>
+                        </group>
+                        <group>
+                            <field name="amount"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hr_convention_echelon_form" model="ir.ui.view">
+            <field name="name">hr.convention.echelon</field>
+            <field name="model">hr.convention.echelon</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                            <label for="code" class="oe_edit_only"/>
+                            <field name="code"/>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="category_id"/>
+                                <field name="company_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hr_convention_echelon_form" model="ir.actions.act_window">
+            <field name="name">Échelons</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.convention.echelon</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_hr_convention_echelon_form"
+                  id="menu_hr_convention_echelon_form"
+                  name='Liste des échelons'
+                  parent="om_hr_payroll.menu_hr_payroll_configuration"/>
+
+
+
+    </data>
+</odoo>

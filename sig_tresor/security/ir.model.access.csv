@@ -1,0 +1,69 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_sig_tresor_reception_courrier_autorisation_exercer_group","sig_tresor_reception_courrier autorisation_exercer_group","model_sig_tresor_reception_courrier",sig_tresor.agent_autorisation_exercer_group,1,1,0,0
+"access_sig_tresor_reception_courrier_autorisation_exercer_group","sig_tresor_reception_courrier autorisation_exercer_group","model_sig_tresor_reception_courrier",sig_tresor.chef_autorisation_exercer_group,1,1,0,0
+"access_sig_tresor_reception_courrier_secretariat_group","sig_tresor_reception_courrier secretariat_group","model_sig_tresor_reception_courrier",sig_tresor.secretariat_group,1,1,0,0
+"access_sig_tresor_reception_courrier_sous_direction_agrement_group","sig_tresor_reception_courrier sous_direction_agrement_group","model_sig_tresor_reception_courrier",sig_tresor.sous_direction_agrement_group,1,1,0,0
+"access_sig_tresor_reception_courrier_direction_group","sig_tresor_reception_courrier direction_group","model_sig_tresor_reception_courrier",sig_tresor.direction_group,1,1,0,0
+"access_sig_tresor_reception_courrier_courrier_group","sig_tresor_reception_courrier courrier_group","model_sig_tresor_reception_courrier",sig_tresor.courrier_group,1,1,1,1
+
+"access_sig_tresor_verif_conformite_dossier_autorisation_exercer_group","sig_tresor_verif_conformite_dossier autorisation_exercer_group","model_sig_tresor_verif_conformite_dossier",sig_tresor.agent_autorisation_exercer_group,1,1,1,1
+"access_sig_tresor_verif_conformite_dossier_autorisation_exercer_group","sig_tresor_verif_conformite_dossier autorisation_exercer_group","model_sig_tresor_verif_conformite_dossier",sig_tresor.chef_autorisation_exercer_group,1,1,1,1
+"access_sig_tresor_verif_conformite_dossier_secretariat_group","sig_tresor_verif_conformite_dossier secretariat_group","model_sig_tresor_verif_conformite_dossier",sig_tresor.secretariat_group,1,1,0,0
+"access_sig_tresor_verif_conformite_dossier_sous_direction_agrement_group","sig_tresor_verif_conformite_dossier sous_direction_agrement_group","model_sig_tresor_verif_conformite_dossier",sig_tresor.sous_direction_agrement_group,1,1,0,0
+"access_sig_tresor_verif_conformite_dossier_direction_group","sig_tresor_verif_conformite_dossier direction_group","model_sig_tresor_verif_conformite_dossier",sig_tresor.direction_group,1,1,0,0
+"access_sig_tresor_verif_conformite_dossier_courrier_group","sig_tresor_verif_conformite_dossier courrier_group","model_sig_tresor_verif_conformite_dossier",sig_tresor.courrier_group,1,1,0,0
+
+"access_sig_tresor_dirigeant_autorisation_exercer_group","sig_tresor_dirigeant autorisation_exercer_group","model_sig_tresor_dirigeant",sig_tresor.agent_autorisation_exercer_group,1,1,1,1
+"access_sig_tresor_dirigeant_autorisation_exercer_group","sig_tresor_dirigeant autorisation_exercer_group","model_sig_tresor_dirigeant",sig_tresor.chef_autorisation_exercer_group,1,1,1,1
+"access_sig_tresor_dirigeant_secretariat_group","sig_tresor_dirigeant secretariat_group","model_sig_tresor_dirigeant",sig_tresor.secretariat_group,1,0,0,0
+"access_sig_tresor_dirigeant_sous_direction_agrement_group","sig_tresor_dirigeant sous_direction_agrement_group","model_sig_tresor_dirigeant",sig_tresor.sous_direction_agrement_group,1,0,0,0
+"access_sig_tresor_dirigeant_direction_group","sig_tresor_dirigeant direction_group","model_sig_tresor_dirigeant",sig_tresor.direction_group,1,0,0,0
+"access_sig_tresor_dirigeant_courrier_group","sig_tresor_dirigeant courrier_group","model_sig_tresor_dirigeant",sig_tresor.courrier_group,1,0,0,0
+
+"access_sig_tresor_etude_fond_dossier_autorisation_exercer_group","sig_tresor_etude_fond_dossier autorisation_exercer_group","model_sig_tresor_etude_fond_dossier",sig_tresor.agent_autorisation_exercer_group,1,1,1,1
+"access_sig_tresor_etude_fond_dossier_autorisation_exercer_group","sig_tresor_etude_fond_dossier autorisation_exercer_group","model_sig_tresor_etude_fond_dossier",sig_tresor.chef_autorisation_exercer_group,1,1,1,1
+"access_sig_tresor_etude_fond_dossier_secretariat_group","sig_tresor_etude_fond_dossier secretariat_group","model_sig_tresor_etude_fond_dossier",sig_tresor.secretariat_group,1,1,0,0
+"access_sig_tresor_etude_fond_dossier_sous_direction_agrement_group","sig_tresor_etude_fond_dossier sous_direction_agrement_group","model_sig_tresor_etude_fond_dossier",sig_tresor.sous_direction_agrement_group,1,1,0,0
+"access_sig_tresor_etude_fond_dossier_direction_group","sig_tresor_etude_fond_dossier direction_group","model_sig_tresor_etude_fond_dossier",sig_tresor.direction_group,1,1,0,0
+"access_sig_tresor_etude_fond_dossier_courrier_group","sig_tresor_etude_fond_dossier courrier_group","model_sig_tresor_etude_fond_dossier",sig_tresor.courrier_group,1,1,1,0
+
+"access_sig_tresor_saisine_bceao_autorisation_exercer_group","sig_tresor_saisine_bceao autorisation_exercer_group","model_sig_tresor_saisine_bceao",sig_tresor.agent_autorisation_exercer_group,1,1,1,1
+"access_sig_tresor_saisine_bceao_autorisation_exercer_group","sig_tresor_saisine_bceao autorisation_exercer_group","model_sig_tresor_saisine_bceao",sig_tresor.chef_autorisation_exercer_group,1,1,1,1
+"access_sig_tresor_saisine_bceao_secretariat_group","sig_tresor_saisine_bceao secretariat_group","model_sig_tresor_saisine_bceao",sig_tresor.secretariat_group,1,1,0,0
+"access_sig_tresor_saisine_bceao_sous_direction_agrement_group","sig_tresor_saisine_bceao sous_direction_agrement_group","model_sig_tresor_saisine_bceao",sig_tresor.sous_direction_agrement_group,1,1,0,0
+"access_sig_tresor_saisine_bceao_direction_group","sig_tresor_saisine_bceao direction_group","model_sig_tresor_saisine_bceao",sig_tresor.direction_group,1,1,0,0
+"access_sig_tresor_saisine_bceao_courrier_group","sig_tresor_saisine_bceao courrier_group","model_sig_tresor_saisine_bceao",sig_tresor.courrier_group,1,1,1,0
+
+"access_sig_tresor_type_courrier_all","sig_tresor_type_courrier all","model_sig_tresor_type_courrier",,1,0,0,0
+"access_sig_tresor_legal_form_all","sig_tresor_legal_form all","model_sig_tresor_legal_form",,1,0,0,0
+"access_sig_tresor_mutual_specificity_all","sig_tresor_mutual_specificity all","model_sig_tresor_mutual_specificity",,1,0,0,0
+"access_sig_tresor_district_all","sig_tresor_district all","model_sig_tresor_district",,1,0,0,0
+"access_sig_tresor_village_all","sig_tresor_village all","model_sig_tresor_village",,1,0,1,0
+"access_sig_tresor_region_all","sig_tresor_region all","model_sig_tresor_region",,1,0,1,0
+"access_sig_tresor_departement_all","sig_tresor_departement all","model_sig_tresor_departement",,1,0,1,0
+"access_sig_tresor_commune_all","sig_tresor_commune all","model_sig_tresor_commune",,1,0,1,0
+
+"access_sig_tresor_type_indicateur_all","sig_tresor_type_indicateur all","model_sig_tresor_type_indicateur",,1,0,1,0
+"access_sig_tresor_indicateur_all","sig_tresor_indicateur all","model_sig_tresor_indicateur",,1,0,1,0
+"access_sig_tresor_activite_all","sig_tresor_activite all","model_sig_tresor_activite",,1,0,1,0
+"access_sig_tresor_commentaire_all","sig_tresor_commentaire all","model_sig_tresor_commentaire",,1,1,1,1
+
+"access_sig_tresor_type_courrier_manager_group","sig_tresor_type_courrier manager_group","model_sig_tresor_type_courrier",sig_tresor.manager_group,1,1,1,1
+"access_sig_tresor_legal_form_manager_group","sig_tresor_legal_form manager_group","model_sig_tresor_legal_form",sig_tresor.manager_group,1,1,1,1
+"access_sig_tresor_mutual_specificity_manager_group","sig_tresor_mutual_specificity manager_group","model_sig_tresor_mutual_specificity",sig_tresor.manager_group,1,1,1,1
+"access_sig_tresor_type_courrier_manager_group","sig_tresor_type_courrier manager_group","model_sig_tresor_type_courrier",sig_tresor.manager_group,1,1,1,1
+"access_sig_tresor_district_manager_group","sig_tresor_district manager_group","model_sig_tresor_district",sig_tresor.manager_group,1,1,1,1
+"access_sig_tresor_region_manager_group","sig_tresor_region manager_group","model_sig_tresor_region",sig_tresor.manager_group,1,1,1,1
+"access_sig_tresor_departement_manager_group","sig_tresor_departement manager_group","model_sig_tresor_departement",sig_tresor.manager_group,1,1,1,1
+"access_sig_tresor_commune_manager_group","sig_tresor_commune manager_group","model_sig_tresor_commune",sig_tresor.manager_group,1,1,1,1
+"access_sig_tresor_village_manager_group","sig_tresor_village manager_group","model_sig_tresor_village",sig_tresor.manager_group,1,1,1,1
+
+"access_sig_tresor_type_indicateur_manager_group","sig_tresor_type_indicateur manager_group","model_sig_tresor_type_indicateur",sig_tresor.manager_group,1,1,1,1
+"access_sig_tresor_indicateur_manager_group","sig_tresor_indicateur manager_group","model_sig_tresor_indicateur",sig_tresor.manager_group,1,1,1,1
+"access_sig_tresor_activite_manager_group","sig_tresor_activite manager_group","model_sig_tresor_activite",sig_tresor.manager_group,1,1,1,1
+
+
+"access_cmis_backend_all","cmis_backend all","model_cmis_backend",,1,1,1,1
+"access_sig_tresor_historique_all","sig_tresor_historique all","model_sig_tresor_historique",,1,1,1,1
+
+"access_res_users_all","res_users all","model_res_users",,1,1,1,1

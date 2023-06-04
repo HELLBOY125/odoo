@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+     <!-- tarif par vacation  -->
+
+ 
+   
+    <record model="ir.ui.view" id="view_res_vacation_config_tree">
+        <field name="name">res.vacation.config.tree</field>
+        <field name="model">res.vacation.config</field>
+        <field name="arch" type="xml">
+            <tree string="Vacation par spécialité">
+                 <field name="type_medecin_id" />
+                 <field name="number_vacation_limite" />
+                  <field name="tarif" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_res_partner_kanban" model="ir.ui.view">
+        <field name="name">res.vacation.config.kanban</field>
+        <field name="model">res.vacation.config</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="type_medecin_id" />
+                <field name="number_vacation_limite" />
+                <field name="tarif" />
+                <templates>
+                    <t t-name="kanban-box">
+                    <div t-attf-class="oe_kanban_global_click">
+                            <div class="o_kanban_record_top ">
+                                <div class="o_kanban_record_headings mt4">
+                                    <strong class="o_kanban_record_title"><field name="type_medecin_id"/></strong>
+                                    <strong class="o_kanban_record_title"><field name="number_vacation_limite"/></strong>
+                                    <strong class="o_kanban_record_title"><field name="tarif"/></strong>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="view_res_partner_form">
+        <field name="name">res.vacation.config.form</field>
+        <field name="model">res.vacation.config</field>
+        <field name="arch" type="xml">
+            <form string="Vacation par spécialité">
+	            <sheet>
+	                <group>
+	                  <group> 
+			              <field name="type_medecin_id" widget="selection" required="1"/>
+		                  <field name="number_vacation_limite" required="1"/>
+		                  <field name="tarif" required="1"/>
+	                    </group>
+	                     </group> 
+	            </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="res_vacation_config_action" model="ir.actions.act_window">
+        <field name="name">Vacation par spécialité</field>
+        <field name="res_model">res.vacation.config</field>
+        <field name="context">{}</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+    
+ 
+            
+            
+                  
+
+    </data>
+</odoo>
+    
+    
+  
+

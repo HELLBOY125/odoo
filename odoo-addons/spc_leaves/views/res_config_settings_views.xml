@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="update_res_config_settings_view_form_holiday" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.leaves</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="70"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-key='hr']" position="inside">
+                    <!--New block setting of leaves module-->
+<!--                     <div class="app_settings_block" data-string="Leaves" string="Leaves" data-key="hr_holidays">
+ -->                        <!--outing authorization leaves setting-->
+                        <h2>Leaves</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <label for="nb_hours_authorization_month"/>
+                                    <div class="row">
+                                        <div class="text-muted col-lg-8">
+                                            define the maximum number of hours 
+                                            of authorization per day 
+                                            in the company
+                                        </div>
+                                    </div>
+                                    <field name="nb_hours_authorization_month" required="1"/>
+                                    <span class="ml8">
+						Heures
+					</span>
+                                </div>
+                              
+                              
+                              
+                              
+                              
+                              
+                                
+                            </div>
+       
+                       
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+
+</odoo>

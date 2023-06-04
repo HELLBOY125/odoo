@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_manager_hr_employee_type,spc_hr.hr_employee_type,model_hr_employee_type,hr.group_hr_manager,1,1,1,1
+access_hr_user_hr_employee_type,spc_hr.hr_employee_type,model_hr_employee_type,hr.group_hr_user,1,0,0,0
+access_hr_manager_hr_work_location,spc_hr.hr_work_location,model_hr_work_location,hr.group_hr_manager,1,1,1,1
+access_hr_user_hr_work_location,spc_hr.hr_work_location,model_hr_work_location,hr.group_hr_user,1,0,0,0
+hr.access_hr_employee_user,hr.employee user,model_hr_employee,hr.group_hr_user,1,1,0,0
+access_hr_employee_manager,spc_hr.employee manager,model_hr_employee,hr.group_hr_manager,1,1,1,1
+hr.access_hr_employee_public_user,hr.employee_public,hr.model_hr_employee_public,hr.group_hr_manager,1,0,0,0
+access_hr_employee_public_users,hr.employee_public,hr.model_hr_employee_public,hr.group_hr_user,1,0,0,0
+hr.access_hr_department_user,hr.department.user,hr.model_hr_department,hr.group_hr_user,1,0,0,0
+access_hr_department_employee,hr.department.employee,hr.model_hr_department,hr.group_hr_manager,1,1,1,1
+access_hr_job_manager,hr.job manager,hr.model_hr_job,hr.group_hr_manager,1,1,1,1
+hr.access_hr_job_user,hr.job user,hr.model_hr_job,hr.group_hr_user,1,0,0,0
+access_res_country_hr_user,base.res_country group_user,base.model_res_country,hr.group_hr_user,1,0,0,0
+access_res_country_hr_manager,base.res_country group_manager,base.model_res_country,hr.group_hr_manager,1,1,1,1
+"base.access_res_country_group_user","base.res_country group_user","base.model_res_country","base.group_partner_manager",1,0,0,0
+

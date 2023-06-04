@@ -1,0 +1,211 @@
+<odoo>
+    <data noupdate="1">
+    
+        <delete model ="hr.leave.type" id = "hr_holidays.holiday_status_cl"/>
+        <delete model ="hr.leave.type" id = "hr_holidays.holiday_status_sl"/>
+        <delete model ="hr.leave.type" id = "hr_holidays.holiday_status_comp"/>
+        <delete model ="hr.leave.type" id = "hr_holidays.holiday_status_unpaid"/>
+       <!--    Legal Leave -->
+        <record id="holiday_status_cl_legal" model="hr.leave.type"> 
+            
+            <field name="name">Paid Leaves</field>
+            <field name="allocation_type">fixed</field>
+            <field name="validation_type">both</field>
+            <field name="request_unit">day</field>
+            <field name="color_name">violet</field>
+            <field name="validity_start" eval="time.strftime('%Y-01-01')"/>
+<!--             <field name="leave_notif_subtype_id" eval="ref('mt_leave')"/>
+ -->            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+        
+        <!--Unpaid Leaves -->
+        <record id="holiday_status_cl_unpaid" model="hr.leave.type">
+            
+            <field name="name">Unpaid Leaves</field>
+            <field name="allocation_type">fixed_allocation</field>
+            <field name="validation_type">both</field>
+            <field name="request_unit">day</field>
+            <field name="color_name">violet</field>
+            <field name="validity_start" eval="time.strftime('%Y-01-01')"/>
+<!--             <field name="leave_notif_subtype_id" eval="ref('mt_leave')"/>
+ -->            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+          <!--Compensatory Days -->
+        <record id="holiday_status_cl_comp_leave" model="hr.leave.type">
+            
+            <field name="name">Compensatory Days</field>
+            <field name="allocation_type">fixed_allocation</field>
+            <field name="validation_type">manager</field>
+            <field name="request_unit">day</field>
+            <field name="color_name">violet</field>
+            <field name="validity_start" eval="time.strftime('%Y-01-01')"/>
+<!--             <field name="leave_notif_subtype_id" eval="ref('mt_leave')"/>
+ -->            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+        
+          <!-- Sick leaves -->
+        <record id="holiday_status_sl_leave" model="hr.leave.type">
+            <field name="name">Sick Leaves</field>
+            <field name="allocation_type">fixed_allocation</field>
+            <field name="validation_type">hr</field>
+            
+            <field name="color_name">red</field>
+            <field name="validity_start" eval="time.strftime('%Y-01-01')"/>
+<!--             <field name="leave_notif_subtype_id" eval="ref('mt_leave_sick')"/>
+ -->            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+        
+        
+        <!--Outing Authorization Leave -->
+        <record id="holiday_status_outing_authorization" model="hr.leave.type">
+            
+            <field name="name">Outing Authorization Leaves</field>
+            <field name="allocation_type">fixed</field>
+            <field name="validation_type">both</field>
+            <field name="request_unit">hour</field>
+            <field name="color_name">violet</field>
+            <field name="validity_start" eval="time.strftime('%Y-01-01')"/>
+<!--             <field name="leave_notif_subtype_id" eval="ref('mt_leave')"/>
+ -->            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+          
+        
+                <!--Breastfeeding Leave -->
+       
+         <record id="holiday_status_breastfeeding" model="hr.leave.type">
+            <field name="name">Breastfeeding Leave</field>
+            <field name="allocation_type">fixed</field>
+            <field name="validation_type">both</field>            
+            <field name="color_name">red</field>
+            <field name="request_unit">hour</field>
+            <field name="validity_start" eval="False"/>
+<!--             <field name="leave_notif_subtype_id" eval="ref('mt_leave_sick')"/>
+ -->            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+             
+              <!--        Circumcision of a child-->
+     
+         <record id="holiday_status_outing_circ" model="hr.leave.type">
+            <field name="name">Legal-Circumcision of a child</field>
+            <field name="allocation_type">fixed</field>
+            <field name="validation_type">hr</field>            
+            <field name="color_name">red</field>
+            <field name="request_unit">day</field>
+            <field name="validity_start" eval="False"/>
+<!--             <field name="leave_notif_subtype_id" eval="ref('mt_leave_sick')"/>
+ -->            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+          <!--RTT TN -->
+  <record id="holiday_status_outing_rtt_tn" model="hr.leave.type">
+            <field name="name">RTT Tn</field>
+            <field name="allocation_type">fixed</field>
+            <field name="validation_type">hr</field>            
+            <field name="color_name">red</field>
+            <field name="request_unit">day</field>
+            <field name="validity_start" eval="time.strftime('%Y-01-01')"/>
+            <field name="validity_stop" eval="time.strftime('%Y-12-31')"/>
+<!--             <field name="leave_notif_subtype_id" eval="ref('mt_leave_sick')"/>
+ -->            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+          <!--RTT TN 2020 -->
+  <record id="holiday_status_outing_rtt_tn_last_year" model="hr.leave.type">
+            <field name="name">RTT Tn 2020</field>
+            <field name="allocation_type">fixed</field>
+            <field name="validation_type">hr</field>            
+            <field name="color_name">red</field>
+            <field name="request_unit">day</field>
+            <field name="validity_start" eval="time.strftime('2020-01-01')"/>
+            <field name="validity_stop" eval="time.strftime('2020-12-31')"/>
+<!--             <field name="leave_notif_subtype_id" eval="ref('mt_leave_sick')"/>
+ -->            <field name="responsible_id" ref="base.user_admin"/>
+        </record>       
+         <!--Birth Of a Child -->
+<record id="holiday_status_outing_birthofchild" model="hr.leave.type">
+            <field name="name">Legal-Birth Of a Child</field>
+            <field name="allocation_type">fixed</field>
+            <field name="validation_type">hr</field>            
+            <field name="color_name">lavender</field>
+            <field name="request_unit">day</field>
+           <field name="validity_start" eval="False"/>
+<!--             <field name="leave_notif_subtype_id" eval="ref('mt_leave_sick')"/>
+ -->            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+          <!--Outing Maternity leaves -->
+<record id="holiday_status_outing_maternity" model="hr.leave.type">
+            <field name="name">Maternity Leaves</field>
+            <field name="allocation_type">fixed</field>
+            <field name="validation_type">both</field>            
+            <field name="color_name">blue</field>
+            <field name="request_unit">day</field>
+           <field name="validity_start" eval="False"/>
+<!--             <field name="leave_notif_subtype_id" eval="ref('mt_leave_sick')"/>
+ -->            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+               <!--Death of spouse -->
+        <record id="holiday_status_outing_deathofspouse" model="hr.leave.type">
+            <field name="name">Legal-Death of spouse</field>
+            <field name="allocation_type">fixed</field>
+            <field name="validation_type">no_validation</field>            
+            <field name="color_name">magenta</field>
+            <field name="request_unit">day</field>
+           <field name="validity_start" eval="False"/>
+<!--             <field name="leave_notif_subtype_id" eval="ref('mt_leave_sick')"/>
+ -->            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+                        <!--Death of a father, mother or son -->
+        <record id="holiday_status_outing_death" model="hr.leave.type">
+            <field name="name">Legal-Death of a father, mother or son</field>
+            <field name="allocation_type">fixed</field>
+            <field name="validation_type">no_validation</field>            
+            <field name="color_name">black</field>
+            <field name="request_unit">day</field>
+           <field name="validity_start" eval="False"/>
+<!--             <field name="leave_notif_subtype_id" eval="ref('mt_leave_sick')"/>
+ -->            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+                 <!--Death of brother, sister, grandson or granddaughter, grandfather or grandmother-->
+         <record id="holiday_status_outing_death2" model="hr.leave.type">
+            <field name="name">Legal-Death of brother, sister, grandson or granddaughter, grandfather or grandmother</field>
+            <field name="allocation_type">fixed</field>
+            <field name="validation_type">no_validation</field>            
+            <field name="color_name">wheat</field>
+            <field name="request_unit">day</field>
+           <field name="validity_start" eval="False"/>
+<!--             <field name="leave_notif_subtype_id" eval="ref('mt_leave_sick')"/>
+ -->            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+                <!--        Legal-Worker marriage-->
+        <record id="holiday_status_outing_marriage" model="hr.leave.type">
+            <field name="name">Legal-Worker marriage</field>
+            <field name="allocation_type">fixed</field>
+            <field name="validation_type">both</field>            
+            <field name="color_name">red</field>
+            <field name="request_unit">day</field>
+           <field name="validity_start" eval="False"/>
+<!--             <field name="leave_notif_subtype_id" eval="ref('mt_leave_sick')"/>
+ -->            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+                 <!--        Worker child marriage-->
+         <record id="holiday_status_outing_marriage2" model="hr.leave.type">
+            <field name="name">Legal-Worker child marriage</field>
+            <field name="allocation_type">fixed</field>
+            <field name="validation_type">both</field>            
+            <field name="color_name">black</field>
+            <field name="request_unit">day</field>
+           <field name="validity_start" eval="False"/>
+<!--             <field name="leave_notif_subtype_id" eval="ref('mt_leave_sick')"/>
+ -->            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+                         <!--        Unjustified absence-->
+          <record id="holiday_status_unjustify_abs" model="hr.leave.type">
+            <field name="name">Unjustified absence</field>
+            <field name="allocation_type">no</field>
+            <field name="validation_type">no_validation</field>            
+            <field name="color_name">black</field>
+            <field name="request_unit">day</field>
+           <field name="validity_start" eval="False"/>
+<!--             <field name="leave_notif_subtype_id" eval="ref('mt_leave_sick')"/>
+ -->            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="certificat_retenue_templates_document">
+        <t t-call="web.html_container">
+        	<t t-set="o" t-value="o.with_context(lang=lang)" />
+            	<t t-if="o.partner_type == 'supplier' and o.payment_type == 'outbound'">
+                	<t t-set="matricule_fiscale" t-value="o.company_id.vat"/>
+                	<t t-set="nom" t-value="o.company_id.name"/>
+            	
+            <t t-call="asc_account_retention.ret_external_layout_standard">
+                <div class="page" style="font-size: 16px; min-height: auto; font-weight: bold;">
+                    <style>
+                        .table-vide td
+                        {
+                        border: 1px solid black;
+                        }
+
+                        .table-header > thead > tr > th {
+                        border:1px solid black !important;
+                        text-align: center !important;
+
+                        }
+
+                        .table-header td {
+                        text-align: center !important;
+                        border:1px solid black !important;
+                        line-height:12px !important;
+                        }
+                        ul{
+                        list-style-type: none;
+                        }
+
+
+                        ul{
+                        list-style-type: none;
+                        }
+
+                    </style>
+                    <br/>
+                    <div>
+                        <center>
+                            <table>
+                                <tr>
+                                    <td>Retenue effectuée le : </td>
+                                    <td>
+                                        <span t-field="o.payment_date"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>ou pendant</td>
+                                </tr>
+                            </table>
+                        </center>
+                    </div>
+
+                    <div class="oe_structure"/>
+                    <br/>
+
+                    <div class="row" style="border: 1px solid black; background-color: #FFFFFF !important;">
+                        <div style="width:50%;text-align:left;padding:1%;">
+                            <div style="padding:1px;">
+                                <strong>A. _ PERSONNE OU ORGANISME PAYEUR</strong>
+                                <span/>
+
+                            </div>
+                            <div style="padding:1px;">
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+
+                            </div>
+                            <div style="padding:1px;">
+                                <p>
+                                    Dénomination de la personne ou de l'organisme payeur :
+                                </p>
+                                <p>
+                                    Adresse :
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div id="total" style="width:50%;text-align:center;padding:1%;">
+                            <div style="padding:1px;">
+                                <p>IDENTIFIANT</p>
+                            </div>
+                            <div style="width:90%;text-align:center;padding:1px;margin:0px;">
+                                <table class="table table-header">
+                                    <tr>
+                                        <td>
+                                            <p>Matricule fiscale</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span>
+                                                <t t-esc="matricule_fiscale"/>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style="padding:1px;">
+                                <p>
+                                    <t t-esc="nom"/>
+                                </p>
+                            </div>
+                            <div style="padding:1px;">
+                                <span t-field="o.company_id.street" /> <span t-field="o.company_id.street2" /> <span t-field="o.company_id.zip"/> <pan t-field="o.company_id.city" /> <span t-field="o.company_id.country_id.name" />
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <div class="row" style="border: 1px solid black; background-color: #FFFFFF !important;">
+                        <table style="heigt=99%" class="table table-header">
+                            <thead>
+                                <tr>
+                                    <td style="width:60%,text-align:left;" name="th_index">
+                                        <strong style="text-align: left ;">B. _ RETENUES EFFECTUEES SUR :</strong>
+                                    </td>
+                                    <td name="th_mb">
+                                        <strong>MONTANT BRUT</strong>
+                                    </td>
+                                    <td name="th_ret">
+                                        <strong>RETENUE</strong>
+                                    </td>
+                                    <td name="th_net">
+                                        <strong>MONTANT NET</strong>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-left">
+                                    	<span class="text-left" style="text-align: left ;">- Honoraires, commissions, courtages, vacations et loyers </span>
+                                    </td>
+                                    <td>
+                                    	<t t-if="o.account_retention_id.categories == 'categ1'"><span class="text-right" t-field="o.amount_base_retention"/></t>
+                                    </td>
+                                    <td> 
+                                    	<t t-if="o.account_retention_id.categories == 'categ1'"><span class="text-right" t-field="o.amount_retention"/></t>
+                                    </td>
+                                    <td>
+                                    	<t t-if="o.account_retention_id.categories == 'categ1'"><span class="text-right" t-field="o.amount_after_retention"/></t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                	<td class="text-left">
+                                		<span class="text-left" style="text-align: left ;">- Honoraires personnes morales</span>
+                                	</td>
+                                    <td>
+                                    	<t t-if="o.account_retention_id.categories == 'categ2'"><span class="text-right" t-field="o.amount_base_retention"/></t>
+                                    </td>
+                                    <td>
+                                    	<t t-if="o.account_retention_id.categories == 'categ2'"><span class="text-right" t-field="o.amount_retention"/></t>
+                                    </td>
+                                    <td><t t-if="o.account_retention_id.categories == 'categ2'"><span class="text-right" t-field="o.amount_after_retention"/></t></td>
+                                </tr>
+                                <tr>
+                                	<td class="text-left">- Marchés</td>
+                                    <td><t t-if="o.account_retention_id.categories == 'categ3'"><span class="text-right" t-field="o.amount_base_retention"/></t></td>
+                                    <td><t t-if="o.account_retention_id.categories == 'categ3'"><span class="text-right" t-field="o.amount_retention"/></t></td>
+                                    <td><t t-if="o.account_retention_id.categories == 'categ3'"><span class="text-right" t-field="o.amount_after_retention"/></t></td>
+                                </tr>
+                                <tr>
+                                	<td class="text-left">- Revenues des capitaux mobiliers</td>
+                                    <td><t t-if="o.account_retention_id.categories == 'categ4'"><span class="text-right" t-field="o.amount_base_retention"/></t></td>
+                                    <td><t t-if="o.account_retention_id.categories == 'categ4'"><span class="text-right" t-field="o.amount_retention"/></t></td>
+                                    <td><t t-if="o.account_retention_id.categories == 'categ4'"><span class="text-right" t-field="o.amount_after_retention"/></t></td>
+                                </tr>
+                                <tr>
+                                	<td class="text-left">- Revenues des bons de caisse au porteur</td>
+                                    <td><t t-if="o.account_retention_id.categories == 'categ5'"><span class="text-right" t-field="o.amount_base_retention"/></t></td>
+                                    <td><t t-if="o.account_retention_id.categories == 'categ5'"><span class="text-right" t-field="o.amount_retention"/></t></td>
+                                    <td><t t-if="o.account_retention_id.categories == 'categ5'"><span class="text-right" t-field="o.amount_after_retention"/></t></td>
+                                </tr>
+                                <tr>
+                                	<td class="text-left">- Jetons de présence</td>
+                                    <td><t t-if="o.account_retention_id.categories == 'categ6'"><span class="text-right" t-field="o.amount_base_retention"/></t></td>
+                                    <td><t t-if="o.account_retention_id.categories == 'categ6'"><span class="text-right" t-field="o.amount_retention"/></t></td>
+                                    <td><t t-if="o.account_retention_id.categories == 'categ6'"><span class="text-right" t-field="o.amount_after_retention"/></t></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p style="text-align:right;">
+                                            <strong>Total Général ...........</strong>
+                                        </p>
+                                    </td>
+                                    <td><span class="text-right" t-field="o.amount_base_retention"/></td>
+                                    <td><span class="text-right" t-field="o.amount_retention"/></td>
+                                    <td><span class="text-right" t-field="o.amount_after_retention"/></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="row" style="border: 1px solid black; background-color: #FFFFFF !important;">
+                        <div style="width:50%;text-align:left;padding:1%;">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <strong>C. _ BENEFICIAIRE</strong>
+                                    </td>
+                                    <td>
+                                        <span></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span>N° de la carte d'identité</span>
+                                        <span>ou</span>
+                                        <span>de séjour pour les étrangers</span>
+                                    </td>
+                                    <td>
+                                        <div style="width:92%;text-align:center;padding:1px;margin:0px;">
+                                            <table class="table table-vide">
+                                                <tr style="width: 80%;">
+                                                    <td>
+                                                        <p></p>
+                                                    </td>
+                                                    <td>
+                                                        <p></p>
+                                                    </td>
+                                                    <td>
+                                                        <p></p>
+                                                    </td>
+                                                    <td>
+                                                        <p></p>
+                                                    </td>
+                                                    <td>
+                                                        <p></p>
+                                                    </td>
+                                                    <td>
+                                                        <p></p>
+                                                    </td>
+                                                    <td>
+                                                        <p></p>
+                                                    </td>
+                                                    <td>
+                                                        <p></p>
+                                                    </td>
+
+
+                                                </tr>
+
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nom, prénoms ou raison sociale :</td>
+                                    <td><span t-esc="o.partner_id.name" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Adresse professionnelle :</td>
+                                    <td><span t-field="o.partner_id.street" /> <span t-field="o.partner_id.street2" /> <span t-field="o.partner_id.zip"/> <pan t-field="o.partner_id.city" /> <span t-field="o.partner_id.country_id.name" /></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Adresse de résidence :</td>
+                                    <td><span t-field="o.partner_id.country_id.name" /></td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+                        <div style="width:50%;text-align:left;padding:1%;">
+                            <div style="padding:1px;">
+                                <p>IDENTIFIANT</p>
+                            </div>
+                            <div style="width:90%;text-align:center;padding:1px;margin:0px;">
+                                <table class="table table-header">
+                                    <tr>
+                                        <td>
+                                            <p>Matricule fiscale</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span>
+                                                <t t-esc="o.partner_id.vat"/>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="border: 1px solid black; background-color: #FFFFFF !important;">
+                        <div style="width:90%;text-align:center;padding:1%;">
+                            <center>
+                                <p>Je soussigné, certifie exacts les renseignements figurant sur le présent
+                                    certificat et m'expose aux sanctions prévues par la loi pour toute
+                                    inexactitude.
+                                </p>
+                            </center>
+
+                            <span>
+                                <p>A Tunis le :
+                                    <span>
+                                        <span t-esc="datetime.datetime.now().strftime('%d/%m/%Y')"></span>
+                                    </span>
+                                </p>
+
+                                <p>Cachet et signature du payeur</p>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <small>
+                            (1) Le certificat est délivré ŕ l'occasion de chaque paiement. Toutefois, pour les
+                            opérations
+                            répétitives, le certificat peut ętre délivré trimestriellement.
+                        </small>
+                        <br/>
+                        <small>
+                            (2) Code catégorie : M. personnes morales - C. personnes physiques "industrie et commerce" -
+                            P.
+                            prefessions libérales - N. employeurs non soumis
+                        </small>
+                        <br/>
+                        <small>
+                            ŕ l'impôt sur le revenu ou sur les sociétés (administrations et établissements publics) - E.
+                            établissements secondaires.
+                        </small>
+                        <br/>
+                    </div>
+
+                </div>
+
+
+            </t>
+         </t>
+        </t>
+
+
+    </template>
+    <template id="ret_external_layout_standard">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+
+        <div class="header row"
+             style="font-size: 16px; min-height: auto; font-weight: bold;">
+            <div style="width:40%;text-align:center;">
+                <div>
+                    <span>REPUBLIQUE TUNSIENNE</span>
+                </div>
+                <div>
+                    <span>MINISTERE DU PLAN ET DES</span>
+                </div>
+                <div>
+                    <span>FINANCES</span>
+                </div>
+                <div>
+                    <span></span>
+                </div>
+                <div>
+                    <span>DIRECTION GENERALE DU</span>
+                </div>
+                <div>
+                    <span>CONTROLE FISCAL</span>
+                </div>
+
+
+            </div>
+
+            <div style="width:60%;text-align:center;">
+                <div>
+                    <h3>
+                        <strong>CERTIFICAT DE RETENUE D'IMPOT</strong>
+                    </h3>
+                </div>
+                <div>
+                    <h3>
+                        <strong>SUR LE REVENU</strong>
+                    </h3>
+                </div>
+                <div>
+                    <h3>
+                        <strong>OU D'IMPOT SUR LES SOCIETES</strong>
+                    </h3>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="article o_report_layout_standard">
+            <t t-call="web.address_layout"/>
+            <t t-raw="0"/>
+        </div>
+
+        <div class="footer o_standard_footer">
+            <center>
+
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page:
+                    <span class="page"/>
+                    /
+                    <span class="topage"/>
+                </div>
+            </center>
+
+        </div>
+    </template>
+    
+    <template id="certificat_retenue_templates">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.partner_id.lang"/>
+                <t t-call="asc_account_retention.certificat_retenue_templates_document" t-lang="lang"/>
+            </t>
+        </t>
+    </template>
+
+
+
+</odoo>

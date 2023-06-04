@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+   
+    <record model="ir.ui.view" id="view_account_asset_depreciation_line_form">
+        <field name="name">account.asset.depreciation.line.form</field>
+        <field name="model">account.asset.depreciation.line</field>
+        <field name="arch" type="xml">
+            <form create="0" delete="0" edit="0" string="Liste des amortissements">
+               <header>
+                    <field name="parent_state" widget="statusbar" />
+                    </header>
+                <sheet>
+                   
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                           
+                            
+                            
+                            <field name="asset_id" />
+                            <field name="depreciated_value" />
+                            <field name="depreciation_date" />
+                            <field name="value" />
+                            <field name="date" />
+                           <field name="date_acquisition" />
+                        </group>
+                        <group>
+                            <field name="amount" />
+                            <field name="remaining_value" />
+                            <field name="move_id" />
+                        </group>
+                   </group>
+                   
+                     
+                    
+                </sheet>
+               
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_account_asset_depreciation_line_tree">
+        <field name="name">account.asset.depreciation.line.tree</field>
+        <field name="model">account.asset.depreciation.line</field>
+        <field name="arch" type="xml">
+            <tree create="0" delete="0" edit="0" string="Liste des amortissements" >
+                <field name="name" />
+                 <field name="asset_id" string="Immobilisation"/>
+                 <field name="depreciated_value" />
+                <field name="depreciation_date" />
+                <field name="value" />
+               <field name="date" />
+                <field name="date_acquisition" />
+                <field name="amount" />
+                <field name="remaining_value" />
+                <field name="move_id" />
+                 <field name="parent_state" string="État"/>
+            </tree>
+        </field>
+    </record>
+
+    
+
+     <record model="ir.actions.act_window" id="action_account_asset_depreciation_line">
+        <field name="name">Liste des amortissements </field>
+        <field name="res_model">account.asset.depreciation.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_account_asset_depreciation_line_tree"/>
+        <field name="domain">[]</field>
+    </record>
+
+   
+
+   
+
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data  noupdate="1">
+		<record id="sequence_bureau_ordre_entrant" model="ir.sequence">
+			<field name="name">Default Agrement sequence</field>
+			<field name="code">bureau.ordre.seq.entrant</field>
+			<field name="prefix">CE/%(range_year)s/</field>
+			<field name="padding">5</field>
+            <field eval="1" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+		</record>
+		
+			<record id="sequence_bureau_ordre_sortant" model="ir.sequence">
+			<field name="name">Default Agrement sequence</field>
+			<field name="code">bureau.ordre.seq.sortant</field>
+			<field name="prefix">CS/%(range_year)s/</field>
+			<field name="padding">5</field>
+            <field eval="1" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+		</record>
+	</data>
+</odoo>

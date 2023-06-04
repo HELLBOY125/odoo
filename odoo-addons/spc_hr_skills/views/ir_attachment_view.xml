@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="update_view_attachment_form" model="ir.ui.view">
+            <field name="name">ir.attachment.inherited</field>
+            <field name="model">ir.attachment</field>
+            <field name="inherit_id" ref="base.view_attachment_form"/>
+            <field name="arch" type="xml">
+
+                <!-- Make name field not required  -->
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="required">False</attribute>
+                </xpath>
+
+                <!-- hide name field's label -->
+                <xpath expr="//sheet/label" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <!-- hide name field (The name is filled automatically by the name of file) -->
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <!-- Make file attachment field required -->
+                <xpath expr="//field[@name='datas']" position="attributes">
+                    <attribute name="required">True</attribute>
+                </xpath>
+
+
+
+                <!-- Hide type (it take the default value "File" -->
+                <xpath expr="//field[@name='type']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <!-- Add 3 fields (Language + translated document? + legalized document?) -->
+                <xpath expr="//field[@name='mimetype']" position="before">
+                    <field name="lang_id"/>
+                    <field name="translated_document"/>
+                    <field name="legalized_document"/>
+                </xpath>
+            </field>
+        </record>
+
+</odoo>

@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Add icon to leave's main menu -->
+        <menuitem
+                name="Time Off"
+                id="hr_holidays.menu_hr_holidays_root"
+                web_icon="spc_leaves,static/description/icon.png"/>
+
+        <!--Add checkbox filds to form view leaves-->
+        <record model="ir.ui.view" id="fields_form_view_leaves">
+            <field name="name">leave_view.form</field>
+            <field name="model">hr.leave</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
+            <field name="arch" type="xml">
+
+
+                <xpath expr="//button[@name='action_refuse']" position="attributes">
+                    <attribute name="groups">hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_responsible</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='holiday_status_id']" position="attributes">
+                    <attribute name="domain">[('id','!=', %(spc_leaves.holiday_status_outing_authorization)d)]</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field name="is_outgoing" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <label class="col-2 mr-0" for="document_certificate_id" attrs="{'invisible':[('holiday_status_id', '!=',  %(spc_leaves.holiday_status_sl_leave)d)]
+             }"/>
+                    <field  name="document_certificate_id"
+                            attrs="{'required':[('holiday_status_id', '=',  %(spc_leaves.holiday_status_sl_leave)d)]
+             ,'invisible':[('holiday_status_id', '!=',  %(spc_leaves.holiday_status_sl_leave)d)]
+             }" filename="document_certificate_file_name"
+                    />
+                    <field name="document_certificate_file_name" invisible="1"/>
+
+                </xpath>
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fields_form_manger_approve_view_leaves">
+            <field name="name">leave_view_approve_manager.form</field>
+            <field name="model">hr.leave</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
+            <field name="arch" type="xml">
+
+
+                <xpath expr="//field[@name='holiday_status_id']" position="attributes">
+                    <attribute name="domain">[('id','!=', %(spc_leaves.holiday_status_outing_authorization)d)]</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='name']" position="after">
+
+                    <field  name="document_certificate_id"
+                            attrs="{'required':[('holiday_status_id', '=',  %(spc_leaves.holiday_status_sl_leave)d)]
+             ,'invisible':[('holiday_status_id', '!=',  %(spc_leaves.holiday_status_sl_leave)d)]
+             }" filename="document_certificate_file_name"
+                    />
+                    <field name="document_certificate_file_name" invisible="1"/>
+
+                </xpath>
+			 <xpath expr="//div[@name='title']/h2" position="after">
+			 
+			 	<field name="solde_leave" readonly="1" nolabel="1"/>
+			
+			 </xpath>
+
+
+            </field>
+        </record>
+        <record model="ir.ui.view" id="fields_form_manger_approve_view_leaves2">
+            <field name="name">leave_view_approve_manager2.form</field>
+            <field name="model">hr.leave</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager_approve"/>
+            <field name="arch" type="xml">
+
+
+                <xpath expr="//field[@name='holiday_status_id']" position="attributes">
+                    <attribute name="domain">[('id','!=', %(spc_leaves.holiday_status_outing_authorization)d)]</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='name']" position="after">
+
+                    <field  name="document_certificate_id"
+                            attrs="{'required':[('holiday_status_id', '=',  %(spc_leaves.holiday_status_sl_leave)d)]
+             ,'invisible':[('holiday_status_id', '!=',  %(spc_leaves.holiday_status_sl_leave)d)]
+             }" filename="document_certificate_file_name"
+                    />
+                    <field name="document_certificate_file_name" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_hr_holidays_filter_outgoing" model="ir.ui.view">
+            <field name="name">hr.holidays.filter</field>
+            <field name="model">hr.leave</field>
+            <field name="arch" type="xml">
+                <search string="Search Leave">
+
+                    <field name="holiday_status_id"/>
+                    <field name="state"/>
+                    <filter domain="[('state','in',('confirm','validate1'))]" string="To Approve" name="approved"/>
+                    <separator/>
+                    <filter domain="[('holiday_status_id','=',%(spc_leaves.holiday_status_outing_authorization)d)]" string="Outgoing" name="outgoing"/>
+                    <separator/>
+                    <filter string="My Department Outgoing Authorization" name="departmentoutgoing" domain="[('department_id.member_ids.user_id', '=', uid)]" help="My Department Outgoing Authorization"/>
+                    <separator/>
+                    <filter string="Approved Outgoing Authorization" domain="[('state', '=', 'validate')]" name="validated"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="hr_leave_view_outgoing_authorization_manager_form" model="ir.ui.view">
+            <field name="name">outing.authorization.view.form.manager</field>
+            <field name="model">hr.leave</field>
+            <field name="arch" type="xml">
+                <form String="Outgoing Authorization">
+                    <field name="can_reset" invisible="1"/>
+                    <field name="can_approve" invisible="1"/>
+                    <header>
+                        <button string="Confirm" name="action_confirm" groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_responsible" states="draft" type="object" class="oe_highlight"/>
+                        <button string="Approve" name="action_approve" type="object" groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_responsible" class="oe_highlight" attrs="{'invisible': ['|', ('can_approve', '=', False), ('state', '!=', 'confirm')]}"/>
+                        <button string="Validate" name="action_validate" states="validate1" type="object" groups="hr_holidays.group_hr_holidays_manager" class="oe_highlight"/>
+                        <button string="Refuse" name="action_refuse"  type="object" groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_responsible" attrs="{'invisible': ['|', ('can_approve', '=', False), ('state', 'not in', ('confirm','validate','validate1'))]}"/>
+                        <button string="Reset to Draft" name="action_draft" type="object" groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_responsible"
+                                attrs="{'invisible': ['|', ('can_reset', '=', False), ('state', 'not in', ['confirm', 'refuse'])]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="confirm,validate"/>
+                    </header>
+                    <sheet>
+                        <field name="leave_type_request_unit" invisible="1"/>
+                        <group>
+                            <group>
+
+                                <field name="is_outgoing" invisible="1"/>
+                                <field name="holiday_status_id"  invisible="1" domain="[('id','=',%(spc_leaves.holiday_status_outing_authorization)d)]"  options="{'no_create': True, 'no_open': True}"
+                                />
+
+                                <field name="number_of_days" invisible="1"/>
+
+
+                                <label for="request_date_from"  string="Date"/>
+                                <div>
+                                    <field name="date_from" invisible="1"/>
+                                    <field name="date_to" invisible="1"/>
+                                    <div class="o_row o_row_readonly o_hr_holidays_dates">
+                                        <field name="request_date_from" class="oe_inline"
+                                               attrs="{'readonly': [('state', 'not in', ('draft', 'confirm'))]
+                                    
+                                    }" required="1" string="Date"/>
+
+                                        <field name="request_date_to" class="oe_inline"
+                                               attrs="{
+                                        'readonly': [('state', 'not in', ('draft', 'confirm'))],
+                                        'invisible': ['|',('holiday_status_id','=', %(spc_leaves.holiday_status_outing_authorization)d),('holiday_status_id','!=', %(spc_leaves.holiday_status_outing_authorization)d)]
+                                    }"/>
+                                        <field name="request_date_from_period" class="oe_inline"
+                                               string="In"
+                                               options="{'horizontal': True}"
+                                               attrs="{
+                                        'readonly': [('state', 'not in', ('draft', 'confirm'))],
+                                        'required': [('request_unit_half', '=', True)],
+                                        'invisible': [('request_unit_half', '=', False)]}"/>
+                                    </div>
+                                    <div class="o_row o_row_readonly">
+                                        <label for="request_unit_half"
+                                               attrs="{'readonly': [('state', 'not in', ('draft', 'confirm'))],
+                                           'invisible': ['|',('holiday_status_id','=', %(spc_leaves.holiday_status_outing_authorization)d),('holiday_status_id','!=', %(spc_leaves.holiday_status_outing_authorization)d)]
+                                    
+                                    }"/>
+                                        <field name="request_unit_half"
+                                               attrs="{'readonly': [('state', 'not in', ('draft', 'confirm'))],
+                                            'invisible': ['|',('holiday_status_id','=', %(spc_leaves.holiday_status_outing_authorization)d),('holiday_status_id','!=', %(spc_leaves.holiday_status_outing_authorization)d)]                                    
+                                    }"/>
+                                        <label for="request_unit_hours" attrs="{
+                                    'readonly': [('state', 'not in', ('draft', 'confirm'))],
+                                    'invisible': [('leave_type_request_unit', '!=', 'hour')]
+                                }"/>
+                                        <field name="request_unit_hours" invisible="1" readonly="1"/>
+                                        <label for="request_unit_custom" invisible="1" attrs="{
+                                    'readonly': [('state', 'not in', ('draft', 'confirm'))],
+                                }"/>
+                                        <field name="request_unit_custom" invisible="1" attrs="{
+                                    'readonly': [('state', 'not in', ('draft', 'confirm'))],
+                                }"/>
+                                    </div>
+                                    <div class="o_row o_row_readonly">
+                                        <label for="request_hour_from" string="From"
+                                               attrs="{'invisible': ['|',('holiday_status_id','!=', %(spc_leaves.holiday_status_outing_authorization)d),('request_unit_hours', '=', False)]}"/>
+                                        <field name="request_hour_from"
+                                               attrs="{
+                                        'readonly': [('state', '=', 'validate')],
+                                        'required': [('request_unit_hours', '=', True)],
+                                        'invisible': ['|',('holiday_status_id','!=', %(spc_leaves.holiday_status_outing_authorization)d),('request_unit_hours', '=', False)]}"/>
+                                        <label for="request_hour_to" string="To"
+                                               attrs="{'invisible': ['|',('holiday_status_id','!=', %(spc_leaves.holiday_status_outing_authorization)d),('request_unit_hours', '=', False)]}"/>
+                                        <field name="request_hour_to"
+                                               attrs="{
+                                        'readonly': [('state', '=', 'validate')],
+                                        'required': [('request_unit_hours', '=', True)],
+                                        'invisible': ['|',('holiday_status_id','!=', %(spc_leaves.holiday_status_outing_authorization)d),('request_unit_hours', '=', False)]}"/>
+                                    </div>
+                                </div>
+                                <label for="number_of_days_display" string="Duration" attrs="{'invisible': [('leave_type_request_unit', '!=', 'hour')]}"/>
+                                <div>
+
+                                    <div attrs="{'invisible': [('leave_type_request_unit', '!=', 'hour')]}">
+                                        <field name="number_of_hours_display" nolabel="1" class="oe_inline"/>
+                                        <span class="ml8">Hours</span>
+                                    </div>
+                                </div>
+                                <field name="name" attrs="{'readonly': [('state', 'not in', ('draft', 'confirm'))]}"/>
+                            </group>
+                            <group name="col_right">
+                                <field name="employee_id" groups="hr_holidays.group_hr_holidays_manager" invisible="1"/>
+                                <field name="department_id" groups="hr_holidays.group_hr_holidays_manager" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="hr_leave_view_outgoing_authorization_manager_approve_form" model="ir.ui.view">
+            <field name="name">outing.authorization.view.form.approve.manager</field>
+            <field name="model">hr.leave</field>
+            <field name="arch" type="xml">
+                <form String="Outgoing Authorization" create="false">
+                    <field name="can_reset" invisible="1"/>
+                    <field name="can_approve" invisible="1"/>
+                    <header>
+                        <button string="Confirm" name="action_confirm" groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_responsible" states="draft" type="object" class="oe_highlight"/>
+                        <button string="Approve" name="action_approve" type="object" groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_responsible" class="oe_highlight" attrs="{'invisible': ['|', ('can_approve', '=', False), ('state', '!=', 'confirm')]}"/>
+                        <button string="Validate" name="action_validate" states="validate1" type="object" groups="hr_holidays.group_hr_holidays_manager" class="oe_highlight"/>
+                        <button string="Refuse" name="action_refuse"  type="object" groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_responsible" attrs="{'invisible': ['|', ('can_approve', '=', False), ('state', 'not in', ('confirm','validate','validate1'))]}"/>
+                        <button string="Reset to Draft" name="action_draft" type="object" groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_responsible"
+                                attrs="{'invisible': ['|', ('can_reset', '=', False), ('state', 'not in', ['confirm', 'refuse'])]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="confirm,validate"/>
+                    </header>
+                    <sheet>
+                        <field name="leave_type_request_unit" invisible="1"/>
+                        <group>
+                            <group>
+
+                                <field name="is_outgoing" invisible="1"/>
+                                <field name="holiday_status_id"  invisible="1" domain="[('id','=',%(spc_leaves.holiday_status_outing_authorization)d)]"  options="{'no_create': True, 'no_open': True}"
+                                />
+
+                                <field name="number_of_days" invisible="1"/>
+
+
+                                <label for="request_date_from" string="Date" />
+                                <div>
+                                    <field name="date_from" invisible="1"/>
+                                    <field name="date_to" invisible="1"/>
+                                    <div class="o_row o_row_readonly o_hr_holidays_dates">
+                                        <field name="request_date_from" class="oe_inline"
+                                               attrs="{'readonly': [('state', 'not in', ('draft', 'confirm'))]
+                                    
+                                    }" required="1"/>
+
+                                        <field name="request_date_to" class="oe_inline"
+                                               attrs="{
+                                        'readonly': [('state', 'not in', ('draft', 'confirm'))],
+                                        'invisible': ['|',('holiday_status_id','=', %(spc_leaves.holiday_status_outing_authorization)d),('holiday_status_id','!=', %(spc_leaves.holiday_status_outing_authorization)d)]
+                                    }"/>
+                                        <field name="request_date_from_period" class="oe_inline"
+                                               string="In"
+                                               options="{'horizontal': True}"
+                                               attrs="{
+                                        'readonly': [('state', 'not in', ('draft', 'confirm'))],
+                                        'required': [('request_unit_half', '=', True)],
+                                        'invisible': [('request_unit_half', '=', False)]}"/>
+                                    </div>
+                                    <div class="o_row o_row_readonly">
+                                        <label for="request_unit_half"
+                                               attrs="{'readonly': [('state', 'not in', ('draft', 'confirm'))],
+                                           'invisible': ['|',('holiday_status_id','=', %(spc_leaves.holiday_status_outing_authorization)d),('holiday_status_id','!=', %(spc_leaves.holiday_status_outing_authorization)d)]
+                                    
+                                    }"/>
+                                        <field name="request_unit_half"
+                                               attrs="{'readonly': [('state', 'not in', ('draft', 'confirm'))],
+                                            'invisible': ['|',('holiday_status_id','=', %(spc_leaves.holiday_status_outing_authorization)d),('holiday_status_id','!=', %(spc_leaves.holiday_status_outing_authorization)d)]                                    
+                                    }"/>
+                                        <label for="request_unit_hours" attrs="{
+                                    'readonly': [('state', 'not in', ('draft', 'confirm'))],
+                                    'invisible': [('leave_type_request_unit', '!=', 'hour')]
+                                }"/>
+                                        <field name="request_unit_hours" invisible="1" readonly="1"/>
+                                        <label for="request_unit_custom" invisible="1" attrs="{
+                                    'readonly': [('state', 'not in', ('draft', 'confirm'))],
+                                }"/>
+                                        <field name="request_unit_custom" invisible="1" attrs="{
+                                    'readonly': [('state', 'not in', ('draft', 'confirm'))],
+                                }"/>
+                                    </div>
+                                    <div class="o_row o_row_readonly">
+                                        <label for="request_hour_from" string="From"
+                                               attrs="{'invisible': ['|',('holiday_status_id','!=', %(spc_leaves.holiday_status_outing_authorization)d),('request_unit_hours', '=', False)]}"/>
+                                        <field name="request_hour_from"
+                                               attrs="{
+                                        'readonly': [('state', '=', 'validate')],
+                                        'required': [('request_unit_hours', '=', True)],
+                                        'invisible': ['|',('holiday_status_id','!=', %(spc_leaves.holiday_status_outing_authorization)d),('request_unit_hours', '=', False)]}"/>
+                                        <label for="request_hour_to" string="To"
+                                               attrs="{'invisible': ['|',('holiday_status_id','!=', %(spc_leaves.holiday_status_outing_authorization)d),('request_unit_hours', '=', False)]}"/>
+                                        <field name="request_hour_to"
+                                               attrs="{
+                                        'readonly': [('state', '=', 'validate')],
+                                        'required': [('request_unit_hours', '=', True)],
+                                        'invisible': ['|',('holiday_status_id','!=', %(spc_leaves.holiday_status_outing_authorization)d),('request_unit_hours', '=', False)]}"/>
+                                    </div>
+                                </div>
+                                <label for="number_of_days_display" string="Duration" attrs="{'invisible': [('leave_type_request_unit', '!=', 'hour')]}"/>
+                                <div>
+
+                                    <div attrs="{'invisible': [('leave_type_request_unit', '!=', 'hour')]}">
+                                        <field name="number_of_hours_display" nolabel="1" class="oe_inline"/>
+                                        <span class="ml8">Hours</span>
+                                    </div>
+                                </div>
+                                <field name="name" attrs="{'readonly': [('state', 'not in', ('draft', 'confirm'))]}"/>
+                            </group>
+                            <group name="col_right">
+                                <field name="employee_id" groups="hr_holidays.group_hr_holidays_manager" invisible="1"/>
+                                <field name="department_id" groups="hr_holidays.group_hr_holidays_manager" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="outgoing_authorization_view_tree" model="ir.ui.view">
+            <field name="name">outgoing.authorization.view.tree</field>
+            <field name="model">hr.leave</field>
+            <field name="arch" type="xml">
+                <tree decoration-danger="state == 'refuse'" decoration-info="state == 'draft'" string="Leave Requests"
+                      decoration-bf="message_needaction == True">
+                    <field name="employee_id"/>
+                    <field name="holiday_type" string="Mode" groups="base.group_no_one" invisible="1"/>
+                    <field name="holiday_status_id" invisible="1"/>
+                    <field name="name"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="duration_display"/>
+                    <field name="state"/>
+                    <field name="payslip_status" widget="toggle_button" options='{"active": "Reported in last payslips", "inactive": "To Report in Payslip"}' groups="hr_holidays.group_hr_holidays_manager"/>
+                    <field name="category_id" invisible="1"/>
+                    <field name="department_id" invisible="1"/>
+                    <field name="manager_id" invisible="1"/>
+                    <field name="user_id" invisible="1"/>
+                    <field name="message_needaction" invisible="1"/>
+                    <button string="Approve" name="action_approve" type="object"
+                            icon="fa-check text-success"
+                            states="confirm"
+                            groups="hr_holidays.group_hr_holidays_user"/>
+                    <button string="Validate" name="action_validate" type="object"
+                            icon="fa-check text-success"
+                            states="validate1"
+                            groups="hr_holidays.group_hr_holidays_manager"/>
+                    <button string="Refuse" name="action_refuse" type="object"
+                            icon="fa-ban text-danger"
+                            states="confirm,validate,validate1"
+                            groups="hr_holidays.group_hr_holidays_manager"/>
+                </tree>
+            </field>
+        </record>
+        <record id="outgoing_authorization_view_approve_tree" model="ir.ui.view">
+            <field name="name">outgoing.authorization.view.tree</field>
+            <field name="model">hr.leave</field>
+            <field name="arch" type="xml">
+                <tree decoration-danger="state == 'refuse'" decoration-info="state == 'draft'" string="Leave Requests"
+                      decoration-bf="message_needaction == True" create="false">
+                    <field name="employee_id"/>
+                    <field name="holiday_type" string="Mode" groups="base.group_no_one" invisible="1"/>
+                    <field name="holiday_status_id" invisible="1"/>
+                    <field name="name"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="duration_display"/>
+                    <field name="state"/>
+                    <field name="payslip_status" widget="toggle_button" options='{"active": "Reported in last payslips", "inactive": "To Report in Payslip"}' groups="hr_holidays.group_hr_holidays_manager"/>
+                    <field name="category_id" invisible="1"/>
+                    <field name="department_id" invisible="1"/>
+                    <field name="manager_id" invisible="1"/>
+                    <field name="user_id" invisible="1"/>
+                    <field name="message_needaction" invisible="1"/>
+                    <button string="Approve" name="action_approve" type="object"
+                            icon="fa-check text-success"
+                            states="confirm"
+                            groups="hr_holidays.group_hr_holidays_user"/>
+                    <button string="Validate" name="action_validate" type="object"
+                            icon="fa-check text-success"
+                            states="validate1"
+                            groups="hr_holidays.group_hr_holidays_manager"/>
+                    <button string="Refuse" name="action_refuse" type="object"
+                            icon="fa-ban text-danger"
+                            states="confirm,validate,validate1"
+                            groups="hr_holidays.group_hr_holidays_manager"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_outgoing_to_request" model="ir.actions.act_window">
+            <field name="name">Outgoing Authorization</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.leave</field>
+
+            <field name="view_mode">tree,kanban,form,calendar,activity</field>
+            <field name="search_view_id" ref="view_hr_holidays_filter_outgoing"/>
+            <field name="view_ids" eval="[(5, 0, 0),
+		(0, 0, {'view_mode': 'tree', 'view_id': ref('spc_leaves.outgoing_authorization_view_tree')}),
+		(0, 0, {'view_mode': 'form', 'view_id': ref('spc_leaves.hr_leave_view_outgoing_authorization_manager_form')})]"
+            />
+            <field name="domain">[("is_outgoing","=",True)]</field>
+            <field name="context">
+                { 'default_is_outgoing':True}
+            </field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create a new outgoing authorization request
+                </p>
+            </field>
+        </record>
+        <record id="action_outgoing_to_approve" model="ir.actions.act_window">
+            <field name="name">Outgoing Authorization</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.leave</field>
+
+            <field name="view_mode">tree,kanban,form,calendar,activity</field>
+            <field name="search_view_id" ref="view_hr_holidays_filter_outgoing"/>
+            <field name="view_ids" eval="[(5, 0, 0),
+		(0, 0, {'view_mode': 'tree', 'view_id': ref('spc_leaves.outgoing_authorization_view_approve_tree')}),
+		(0, 0, {'view_mode': 'form', 'view_id': ref('spc_leaves.hr_leave_view_outgoing_authorization_manager_approve_form')})]"
+            />
+            <field name="domain">[("is_outgoing","=",True)]</field>
+            <field name="context">
+                { 'default_is_outgoing':True,
+                'search_default_approved':1
+                }
+            </field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    exit authorization requests to be approved
+                </p>
+            </field>
+        </record>
+        <record id="hr_holidays.hr_leave_action_my" model="ir.actions.act_window">
+            <field name="name">Time Off Requests</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.leave</field>
+            <field name="view_mode">tree,form,calendar,kanban,activity</field>
+            <field name="context">{}</field>
+            <field name="domain">[('is_outgoing','=',False),('user_id', '=', uid)]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new time off request
+                </p><p>
+                Once a time off request is posted, your manager is notified for validation.
+            </p>
+            </field>
+        </record>
+
+        <record id="hr_holidays.hr_leave_action_action_approve_department" model="ir.actions.act_window">
+            <field name="name">Time Off</field>
+            <field name="res_model">hr.leave</field>
+            <field name="view_mode">tree,kanban,form,calendar,activity</field>
+            <field name="context">{
+                'search_default_my_team_leaves':1,
+                'search_default_approve':1}
+            </field>
+            <field name="domain">[('is_outgoing','=',False)]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new time off request
+                </p>
+            </field>
+        </record>
+        <record id="hr_holidays.hr_leave_action_all" model="ir.actions.act_window">
+            <field name="name">Time Off</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.leave</field>
+            <field name="binding_model_id" eval="False"/>
+            <field name="view_mode">tree,kanban,form,calendar,activity</field>
+            <field name="domain">[('is_outgoing','=',False)]</field>
+            <field name="context">{}</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree'}),
+            (0, 0, {'view_mode': 'kanban'}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('hr_holidays.hr_leave_view_form_manager')}),
+            (0, 0, {'view_mode': 'calendar'}),
+            (0, 0, {'view_mode': 'activity'})]"/>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new time off request
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+                name="Outgoing Authorization"
+                id="hr_meunu_outgoing_authorization"
+
+                sequence="3"
+                parent="hr_holidays.menu_hr_holidays_root"
+        />
+
+        <menuitem
+                name="Exit authorization requests"
+                id="hr_meunu_exit_request_outgoing_authorization"
+
+                sequence="1"
+                parent="hr_meunu_outgoing_authorization"
+        />
+        <menuitem
+                name="New request"
+                id="hr_meunu_new_request_outing_authorization"
+                action="action_outgoing_to_request"
+                sequence="1"
+                parent="hr_meunu_exit_request_outgoing_authorization"
+        />
+        <menuitem
+                name="To approve"
+                id="hr_meunu_to_approve_outing_authorization"
+                groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_responsible"
+                sequence="2"
+                parent="hr_meunu_outgoing_authorization"
+        />
+        <menuitem
+                name="Exit authorizations"
+                id="hr_meunu_to_approve_outing_authorization_all"
+                action="action_outgoing_to_approve"
+                sequence="1"
+                parent="hr_meunu_to_approve_outing_authorization"
+        />
+
+        <menuitem
+                id="hr_holidays.menu_hr_holidays_configuration"
+                name="Configuration"
+                parent="hr_holidays.menu_hr_holidays_root"
+                groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_responsible"
+                sequence="5"/>
+
+        <menuitem
+                name="Leaves"
+                id="hr_holidays.menu_hr_holidays_root"
+                sequence="95"
+                groups="base.group_user"/>
+
+        <menuitem
+                id="hr_holidays.menu_hr_holidays_dashboard"
+                parent="hr_holidays.menu_hr_holidays_root"
+                sequence="2"
+                action="resource.action_resource_calendar_leave_tree"/>
+                
+                
+      <menuitem id="menu_view_resource_calendar_search_leaves"
+            action="resource.action_resource_calendar_form"
+            parent="hr_holidays.menu_hr_holidays_configuration"
+            groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_responsible"
+            name="Temps de travail"
+            sequence="50"/>        
+
+    </data>
+</odoo>

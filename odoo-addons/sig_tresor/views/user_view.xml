@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="user_inh_form_view">
+            <field name="name">res.users.form</field>
+            <field name="model">res.users</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <!--<field name="partner_id" position="after">
+                    <field name="is_chief"/>
+                </field>-->
+                <field name="name" position="after">
+                    <group>
+                        <field name="is_chief"/>
+                    </group>
+                </field>
+                <!-- <xpath expr="//field[@name='partner_id']" position="after">
+                    <field  name="is_chief"/>
+                </xpath>
+-->
+            </field>
+        </record>
+
+    </data>
+</odoo>

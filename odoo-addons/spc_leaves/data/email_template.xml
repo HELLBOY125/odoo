@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+
+
+
+         <record id="email_template_leave_for_approve" model="mail.template">
+            <field name="name">Demande de congé pour approbation</field>
+            <field name="subject">Demande de congé pour ${object.employee_id.display_name } </field>
+            <field name="email_to">${(object.employee_id.parent_id.work_email ) | safe}</field>
+           <field name="model_id" ref="spc_leaves.model_hr_leave"/>
+              <field name="lang">${object.employee_id.parent_id.lang}</field>
+           <field name="body_html"><![CDATA[
+           <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+                <table cellspacing="0" cellpadding="0" style="width:600px;border-collapse:collapse;background:inherit;color:inherit">
+                    <tbody><tr>
+                        <td valign="center" width="200" style="padding:10px 10px 10px 5px;font-size: 12px">
+                            <img src="/logo.png" style="padding: 0px; margin: 0px; height: auto; width: 80px;" alt="${user.company_id.name}">
+                        </td>
+                    </tr></tbody>
+                </table>
+            </div>
+            <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+            <p>Cher ${object.employee_id.parent_id.display_name},</p>
+                <p>
+                   Vous avez été affecté au congé <strong> ${object.display_name}</strong>. En attente d'approbation.
+                </p>
+                <p>
+                    Pour voir les détails, cliquez sur le lien suivant:
+                </p>
+                 % set url_detail = '/web#id=%s&view_type=form&model=hr.leave' % (object.id)
+
+                <div style="text-align: center; margin-top: 16px;">
+                     <a href="${url_detail}" style="padding: 5px 10px; font-size: 12px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B; border-radius:3px">Voir les détails</a>
+                </div>
+                <p>Meilleures salutations,</p>
+            </div>
+            <div style="padding:0px;width:600px;margin:auto; margin-top: 10px; background: #fff repeat top /100%;color:#777777">
+               
+                <p style="font-size: 11px; margin-top: 10px;">
+                    <strong>Envoyé par ${user.company_id.name}</strong>
+                </p>
+            </div>
+            ]]></field>
+                    
+
+         </record>
+
+
+        
+
+        <record id="email_template_leave_rejection" model="mail.template">
+           <field name="name">leave rejected</field>
+            <field name="subject">Leave Rejected - ${object.display_name}</field>
+             <field name="email_to">${(object.employee_id.work_email) | safe }</field>
+               <field name="model_id" ref="spc_leaves.model_hr_leave"/>
+             <field name="lang">${user.lang}</field>
+             <field name="body_html"><![CDATA[
+            <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+                <table cellspacing="0" cellpadding="0" style="width:600px;border-collapse:collapse;background:inherit;color:inherit">
+                    <tbody><tr>
+                        <td valign="center" width="200" style="padding:10px 10px 10px 5px;font-size: 12px">
+                            <img src="/logo.png" style="padding: 0px; margin: 0px; height: auto; width: 80px;" alt="${user.company_id.name}">
+                        </td>
+                    </tr></tbody>
+                </table>
+            </div>
+            <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+            <p>Cher ${object.employee_id.name},</p>
+                <p>
+                   Votre congé est <strong>refusé</strong>. Cordialement.
+                </p>
+                <p>
+                 Pour voir les détails, cliquez sur le lien suivant:
+                </p>
+                 % set url_detail = '/web#id=%s&view_type=form&model=hr.leave' % (object.id)
+
+                <div style="text-align: center; margin-top: 16px;">
+                     <a href="${url_detail}" style="padding: 5px 10px; font-size: 12px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B; border-radius:3px">View details</a>
+                </div>
+                <p>Meilleures salutations,</p>
+            </div>
+            <div style="padding:0px;width:600px;margin:auto; margin-top: 10px; background: #fff repeat top /100%;color:#777777">
+               
+                <p style="font-size: 11px; margin-top: 10px;">
+                    <strong>Envoyé par ${user.company_id.name}</strong>
+                </p>
+            </div>]]></field>
+                    
+             </record>
+             
+<record id="email_template_leave_approve" model="mail.template">
+            <field name="name">Congé approuvé</field>
+            <field name="subject">Congé approuvé - ${object.display_name}</field>
+           <field name="email_to">${(object.employee_id.work_email) | safe}</field>
+           <field name="model_id" ref="spc_leaves.model_hr_leave"/>
+            <field name="lang">${user.lang}</field>
+           <field name="body_html"><![CDATA[
+    <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+        <table cellspacing="0" cellpadding="0" style="width:600px;border-collapse:collapse;background:inherit;color:inherit">
+            <tbody><tr>
+                <td valign="center" width="200" style="padding:10px 10px 10px 5px;font-size: 12px">
+                    <img src="/logo.png" style="padding: 0px; margin: 0px; height: auto; width: 80px;" alt="${user.company_id.name}">
+                </td>
+            </tr></tbody>
+        </table>
+    </div>
+    <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+    <p>Cher ${object.employee_id.name},</p>
+        <p>
+           Votre congé est <strong>approuvé</strong>. On espère que vous reviendrez bientôt.</p>
+        <p>
+            Pour voir les détails, cliquez sur le lien suivant:
+        </p>
+         % set url_detail = '/web#id=%s&view_type=form&model=hr.leave' % (object.id)
+
+        <div style="text-align: center; margin-top: 16px;">
+             <a href="${url_detail}" style="padding: 5px 10px; font-size: 12px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B; border-radius:3px">View details</a>
+        </div>
+        <p>Meilleures salutations,</p>
+    </div>
+    <div style="padding:0px;width:600px;margin:auto; margin-top: 10px; background: #fff repeat top /100%;color:#777777">
+       
+        <p style="font-size: 11px; margin-top: 10px;">
+            <strong>Envoyé par ${user.company_id.name}</strong>
+        </p>
+    </div>]]></field>
+            
+
+
+
+         </record>
+
+    </data>
+</odoo>
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_courrier" name="Gestion des courriers"  sequence="0" web_icon="spc_bureau_ordre,static/description/courrier.png"/>
+        <menuitem id="courrier_configuration" name ='Configuration' parent="menu_courrier" sequence="50" groups="group_bo_manager"/>
+
+        <record id="urgence_template_form_view" model="ir.ui.view">
+            <field name="name">Urgence de courrier</field>
+            <field name="model">courrier.urgence</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="active"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+
+        </record>
+
+        <record id="urgence_template_tree_view" model="ir.ui.view">
+            <field name="name">urgence.template.urgence.tree</field>
+            <field name="model">courrier.urgence</field>
+            <field name="arch" type="xml">
+                <tree string="Urgence">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="urgence_template_action" model="ir.actions.act_window">
+            <field name="name">Urgence de courrier</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">courrier.urgence</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_id" ref="urgence_template_tree_view"/>
+
+        </record>
+        <menuitem action="urgence_template_action"  id="menu_urgence_template_action" parent="courrier_configuration" sequence="2" />
+
+    </data>
+</odoo>

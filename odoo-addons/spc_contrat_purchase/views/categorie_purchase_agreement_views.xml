@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+     <!-- Type de conventionné  -->
+
+    <record model="ir.ui.view" id="view_categorie_purchase_agreement_tree">
+        <field name="name">categorie.purchase.agreement.tree</field>
+        <field name="model">categorie.purchase.agreement</field>
+        <field name="arch" type="xml">
+            <tree string="Type de conventionné">
+                <field name="name"/>
+                <field name="type_conventionne"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_categorie_purchase_agreement_kanban" model="ir.ui.view">
+        <field name="name">categorie.purchase.agreement.kanban</field>
+        <field name="model">categorie.purchase.agreement</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="name"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="o_kanban_record_top ">
+                                <div class="o_kanban_record_headings mt4">
+                                    <strong class="o_kanban_record_title"><field name="name"/></strong>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="view_categorie_purchase_agreement_form">
+        <field name="name">categorie.purchase.agreement.form</field>
+        <field name="model">categorie.purchase.agreement</field>
+        <field name="arch" type="xml">
+            <form string="Type de conventionné">
+	            <sheet>
+	                <group>
+	                    <group>
+	                        <field name="type_conventionne" required="1" widget="radio" options="{'horizontal': true}"/>
+	                    </group>
+	                 </group>
+	                    <group>
+	                        <field name="name" required="1"/>
+	                        
+	                    </group>
+	                    
+	            </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="categorie_purchase_agreement_action" model="ir.actions.act_window">
+        <field name="name">Type de conventionné</field>
+        <field name="res_model">categorie.purchase.agreement</field>
+        <field name="context">{}</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+    
+   
+     
+
+    </data>
+</odoo>

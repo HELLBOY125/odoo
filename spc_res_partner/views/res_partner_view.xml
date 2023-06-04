@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Update private adress partner -->
+        <record model="ir.ui.view" id="update_res_partner_view_form_private">
+            <field name="name">res.partner.form.private</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.res_partner_view_form_private"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='phone']" position="after">
+                     <field name="employee_id" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='phone']" position="before">
+                    <field name="company_id" invisible="1"/>
+                    <field name="company_country_id" invisible="1"/>
+                </xpath>
+                <!-- Make bank account invisible for partner -->
+                <xpath expr="//form/sheet/group[2]" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <!-- Apply a widget for phone number -->
+                <xpath expr="//field[@name='phone']" position="replace">
+                    <field name="phone" widget="phone_intl"
+                           options="{'country_field': 'company_country_id', 'sync_country': True, 'allow_dropdown': True, 'separate_dial_code': True, 'initial_country_code': 'tn'}"/>
+                </xpath>
+
+                <!-- Apply a widget for phone number -->
+                <xpath expr="//field[@name='mobile']" position="replace">
+                    <field name="mobile" widget="phone_intl"
+                           options="{'country_field': 'company_country_id', 'sync_country': True, 'allow_dropdown': True, 'separate_dial_code': True, 'initial_country_code': 'tn'}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

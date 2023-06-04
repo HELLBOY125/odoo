@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Adding main menu for passports and visas -->
+        <menuitem id="passportsand_visas_menu_id" name="Passeports et visas" sequence="101" parent="hr.menu_human_resources_configuration"/>
+
+
+        <record model="ir.ui.view" id="passports_visas_hr_view_employee_form">
+            <field name="name">employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <!-- Hide "passport_id" field -->
+                <xpath expr="//field[@name='passport_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <!-- Add smart button to collect list of visa per employee -->
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" type="object" name="get_visas"
+                            icon="fa-cc-visa" context="{'default_employee_id': active_id, 'group_by': 'passport_id'}">
+                        <field string="Passeports et visas" name="visas_count" widget="statinfo"/>
+                    </button>
+                </div>
+
+                <!-- Add page passports and visas -->
+                <xpath expr="//page[@name='personal_information']" position="after">
+                    <page name="passports_visas" string="Passeports et visas">
+                        <separator string="Passeports et visas"/>
+                        <field name="visa_ids" context="{'default_employee_id': active_id}" string=" Visa">
+                            <form>
+                                <sheet>
+                                    <field name="show_state" invisible="1"/>
+                                    <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('show_state', '=', False), ('state', '=', 'valide')]}">
+                                        <field name="state"/>
+                                    </div>
+                                    <div class="badge-pill badge-success float-right" attrs="{'invisible': ['|', ('show_state', '=', False), ('state', '=', 'expired')]}">
+                                        <field name="state"/>
+                                    </div>
+                                    <group>
+                                        <field name="employee_id" readonly="True" force_save="1"/>
+                                        <field name="passport_id" string="Passeport" domain="[('state','=','valide'),('employee_id','=',employee_id)]"
+                                               options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                        <field name="name"/>
+                                        <field name="type_visa_id"/>
+                                        <field name="country_id"/>
+                                        <field name="date_debut" string="Date de début"/>
+                                        <field name="date_fin" string="Date de fin"/>
+                                        <field name="state" invisible="True"/>
+                                    </group>
+                                </sheet>
+                            </form>
+                            <tree editable="bottom" context="{'default_employee_id': active_id}">
+                                <field name="employee_id" readonly="True" force_save="1" invisible="1" width="5"/>
+                                <field name="passport_id" domain="[('state','=','valide'),('employee_id','=',employee_id)]"
+                                               options="{'no_create': True, 'no_create_edit':True, 'no_open': True}" width="22"/>
+                                <field name="name" width="15"/>
+                                <field name="country_id" width="15"/>
+                                <field name="type_visa_id" width="15"/>
+                                <field name="date_debut" string="Date de début" width="10"/>
+                                <field name="date_fin" string="Date de fin" width="10"/>
+                                <field name="state" widget="colored_state" width="8"/>
+                            </tree>
+                        </field>
+                        <button type="object"
+                                class="oe_highlight oe_right"
+                                name="open_passport_form"
+                                string="Créer un nouveau passeport"
+                                colspan="2"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

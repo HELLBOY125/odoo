@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record model="courrier.urgence" id="tres_urgent">
+            <field name="name">Très urgent</field>
+            <field name="active">True</field>
+        </record>
+
+        <record model="courrier.urgence" id="urgent">
+            <field name="name">Urgent</field>
+            <field name="active">True</field>
+        </record>
+
+        <record model="courrier.urgence" id="non_urgent">
+            <field name="name">Non Urgent</field>
+            <field name="active">True</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- commentaire form -->
+        <record id="commentaire_form_view" model="ir.ui.view">
+            <field name="name">sig.tresor.commentaire.form</field>
+            <field name="model">sig.tresor.commentaire</field>
+            <field name="arch" type="xml">
+                <form string="Commentaire">
+                    <sheet>
+                        <group>
+                            <field name="commentaire" nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
