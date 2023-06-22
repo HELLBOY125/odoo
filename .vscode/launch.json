@@ -1,25 +1,18 @@
 {
 "configurations": [
-    
-
-
-
         {
             "name": "Python: Remote Attach",
             "type": "python",
             "request": "attach",
-           
-            "connect": {
-                "host": "localhost",
-                "port": 3000
-            },
+            "host": "localhost",
+            "port": 3000,
             "pathMappings": [
                 {
                     "localRoot": "${workspaceFolder}",
-                    "remoteRoot": "."
+                    "remoteRoot": "/mnt/extra-addons/"
                 }
             ],
-            "justMyCode": false,
+            "justMyCode": true,
 	    
         }
     ]
