@@ -10,11 +10,11 @@ import re
 
 _logger = logging.getLogger(__name__)
 
-try:
+"""try:
     from SOAPpy import WSDL
 except :
     _logger.warning("ERROR IMPORTING SOAPpy, if not installed, please install it:"
-    " e.g.: apt-get install python-soappy")
+    " e.g.: apt-get install python-soappy")"""
 
 
 class PartnerSmsSend(models.Model):
@@ -43,41 +43,16 @@ class PartnerSmsSend(models.Model):
         """
             Update the following fields when the gateway is changed
         """
-        if self.gateway:
-            self.validity = self.gateway.validity
-            self.classes = self.gateway.classes
-            self.deferred = self.gateway.deferred
-            self.priority = self.gateway.priority
-            self.coding = self.gateway.coding
-            self.tag = self.gateway.tag
-            self.nostop = self.gateway.nostop
-
     mobile_to = fields.Char("To", size=256, default=_default_get_mobile, required=True, readonly=False)
     app_id = fields.Char('API ID', size=256, default=_default_get_gateway)
     user = fields.Char('Login', size=256)
     password = fields.Char('Password', size=256)
     text = fields.Text('SMS Message', required=True)
     gateway = fields.Many2one('sms.smsclient', 'SMS Gateway', required=True)
-    validity = fields.Integer('Validity', help='the maximum time -in minute(s)- before the message is dropped')
-    classes = fields.Selection([
-            ('0', 'Flash'),
-            ('1', 'Phone display'),
-            ('2', 'SIM'),
-            ('3', 'Toolkit')
-        ], 'Class', help='the sms class: flash(0), phone display(1), SIM(2), toolkit(3)')
-    deferred = fields.Integer('Deferred', help='the time -in minute(s)- to wait before sending the message')
-    priority = fields.Selection([
-            ('0','0'),
-            ('1','1'),
-            ('2','2'),
-            ('3','3')
-        ], 'Priority', help='The priority of the message')
     coding = fields.Selection([
             ('0', 'utf-8'),
             ('8', 'Unicode')
         ], 'Coding', help='The SMS coding: 0 for utf-8 or 8 for unicode')
-    tag = fields.Char('Tag', size=256, help='an optional tag')
-    nostop = fields.Boolean('NoStop', help='Do not display STOP clause in the message, this requires that this is not an advertising message')
 
     def sms_send(self):
         """
@@ -95,16 +70,13 @@ class PartnerSmsSend(models.Model):
 class SMSClient(models.Model):
     _name = 'sms.smsclient'
     _description = 'SMS Client'
-    name2 = {}
-
 
     name = fields.Char('Gateway Name', size=256, required=True)
     url = fields.Char('Gateway URL', size=256, required=True, help='Base url for message')
     property_ids = fields.One2many('sms.smsclient.parms', 'gateway_id', 'Parameters')
     history_line = fields.One2many('sms.smsclient.history', 'gateway_id', 'History')
     method = fields.Selection([
-            ('http', 'HTTP Method'),
-            ('smpp', 'SMPP Method')
+            ('http', 'HTTP Method')
         ], 'API Method', default='http')
     state = fields.Selection([
             ('new', 'Not Verified'),
@@ -114,26 +86,10 @@ class SMSClient(models.Model):
     users_id = fields.Many2many('res.users', string='Users Allowed')
     code = fields.Char('Verification Code', size=256)
     body = fields.Text('Message', help="The message text that will be send along with the email which is send through this server")
-    validity = fields.Integer('Validity', help='The maximum time -in minute(s)- before the message is dropped', default=10)
-    classes = fields.Selection([
-            ('0', 'Flash'),
-            ('1', 'Phone display'),
-            ('2', 'SIM'),
-            ('3', 'Toolkit')
-        ], 'Class', default='1' ,help='The SMS class: flash(0),phone display(1),SIM(2),toolkit(3)')
-    deferred = fields.Integer('Deferred', default=0 , help='The time -in minute(s)- to wait before sending the message')
-    priority = fields.Selection([
-            ('0', '0'),
-            ('1', '1'),
-            ('2', '2'),
-            ('3', '3')
-        ], 'Priority', default='3', help='The priority of the message ')
     coding = fields.Selection([
             ('0', 'utf-8'),
             ('8', 'Unicode')
         ],'Coding', default='8', help='The SMS coding: 0 for utf-8 or 8 for unicode')
-    tag = fields.Char('Tag', size=256, help='an optional tag')
-    nostop = fields.Boolean('NoStop', default=True, help='Do not display STOP clause in the message, this requires that this is not an advertising message')
     char_limit = fields.Boolean('Character Limit', default=True)
 
     def _check_permissions(self,gateway_id):
@@ -146,43 +102,7 @@ class SMSClient(models.Model):
             return False
         return True
 
-    def _prepare_smsclient_queue(self, data, name):
-        """
-            prepare sms client queue data
-        """
-        opid = {}
-        if data.mobile_to[3]=='5':
-            opid = 60501
-        elif data.mobile_to[3]=='9':
-            opid= 60502
-        elif data.mobile_to[3]=='2':
-            opid= 60503
-        """
-        return {
-            'name': name,
-            'gateway_id': data.gateway.id,
-            'state': 'draft',
-            'mobile': data.mobile_to,
-            'msg': data.text,
-            'validity': data.validity,
-            'classes': data.classes,
-            'deferred': data.deferred,
-            'priority': data.priority,
-            'coding': data.coding,
-            'tag': data.tag,
-            'nostop': data.nostop,
-        }
-        """
-        return {
-            'name': name,
-            'mobile': data.mobile_to,
-            'message': data.text,
-            'encode': data.coding,
-            'opid': opid,
-            'gateway_id': data.gateway.id,
-        }
-
-    def _prepare_smsclient_queue2(self, data):
+    def _prepare_smsclient_queue(self, data):
             """
                 prepare sms client queue data
             """
@@ -214,9 +134,8 @@ class SMSClient(models.Model):
             name = url
             if gateway.method == 'http':
                 prms = {}
-
                 for p in data.gateway.property_ids:
-                    if p.type == 'serverid':
+                    if p.type == 'serviceid':
                      prms[p.name] = p.value
                     elif p.type == 'prid':
                      prms[p.name] = p.value
@@ -226,23 +145,20 @@ class SMSClient(models.Model):
                      prms[p.name] = p.value
                     elif p.type == 'password':
                      prms[p.name] = p.value
-                    elif p.type == 'to':
-                     prms[p.name] = data.mobile_to
-                    elif p.type == 'sms':
-                     prms[p.name] = (data.text).encode('utf-8')#data.text
-                    elif p.type == 'extra':
-                     prms[p.name] = p.value
                     elif p.type == 'sender':
                      prms[p.name] = p.value
-                params = urllib.parse.urlencode(prms)
+                vals = self._prepare_smsclient_queue(data)
+                fullparams = {**prms,**vals}
+                params = urllib.parse.urlencode(fullparams)
                 name = url + "?" + params
+                vals['name']= name
+                vals['gateway_id']= data.gateway.id
             queue_obj = self.env['sms.smsclient.queue']
-            vals = self._prepare_smsclient_queue(data, name)
             queue_obj.create(vals)
-            vals2 = self._prepare_smsclient_queue2(data)
+            """vals2 = self._prepare_smsclient_queue2(data)
             params2 = urllib.parse.urlencode(vals2)
             name2 = name + "&"+ params2
-            urllib.request.urlopen(name2)
+            urllib.request.urlopen(name2)"""
 
         return True
 
@@ -260,7 +176,7 @@ class SMSClient(models.Model):
         sent_ids = []
         for sms in sids:
             if sms.gateway_id.char_limit:
-                if len(sms.message) > 160:
+                if len(sms.MESSAGE) > 160:
                     error_ids.append(sms.id)
                     continue
             if sms.gateway_id.method == 'http':
@@ -271,31 +187,7 @@ class SMSClient(models.Model):
                     raise UserError(_('Error %s') % (e,))
             ### New Send Process OVH Dedicated ###
             ## Parameter Fetch ##
-            if sms.gateway_id.method == 'smpp':
-                for p in sms.gateway_id.property_ids:
-                    if p.type == 'user':
-                        login = p.value
-                    elif p.type == 'password':
-                        pwd = p.value
-                    elif p.type == 'sender':
-                        sender = p.value
-                    elif p.type == 'sms':
-                        account = p.value
-                try:
-                    soap = WSDL.Proxy(sms.gateway_id.url)
-                    message = ''
-                    if sms.coding == '0':
-                        message = str(sms.message).decode('iso-8859-1').encode('utf8')
-                    if sms.coding == '8':
-                        message = str(sms.message)
-                    result = soap.telephonySmsUserSend(str(login), str(pwd),
-                        str(account), str(sender), str(sms.mobile), message,
-                        int(sms.validity), int(sms.classes), int(sms.deferred),
-                        int(sms.priority), int(sms.coding),str(sms.gateway_id.tag), int(sms.gateway_id.nostop))
-                    ### End of the new process ###
-                except Exception as e:
-                    raise UserError(_('Error %s') % (e,))
-            vals = { 'name': _('SMS Sent'), 'gateway_id': sms.gateway_id.id, 'sms': sms.message, 'to': sms.mobile}
+            vals = { 'name': _('SMS Sent'), 'gateway_id': sms.gateway_id.id, 'sms': sms.MESSAGE, 'to': sms.MOBILE}
             history_obj.create(vals)
             sent_ids.append(sms)
         for sent_id in sent_ids:
@@ -310,8 +202,8 @@ class SMSQueue(models.Model):
     _description = 'SMS Queue'
 
     name = fields.Text('SMS Request', size=256, required=True, readonly=True, states={'draft': [('readonly', False)]})
-    message = fields.Text('SMS Text', size=256, required=True, readonly=True, states={'draft': [('readonly', False)]})
-    mobile = fields.Char('Mobile No', size=256, required=True, readonly=True, states={'draft': [('readonly', False)]})
+    MESSAGE = fields.Text('SMS Text', size=256, required=True, readonly=True, states={'draft': [('readonly', False)]})
+    MOBILE = fields.Char('Mobile No', size=256, required=True, readonly=True, states={'draft': [('readonly', False)]})
     gateway_id = fields.Many2one('sms.smsclient', 'SMS Gateway', readonly=True, states={'draft': [('readonly', False)]})
     state = fields.Selection([
         ('draft', 'Queued'),
@@ -321,28 +213,11 @@ class SMSQueue(models.Model):
     ], 'Message Status', default='draft', readonly=True)
     error = fields.Text('Last Error', size=256, readonly=True, states={'draft': [('readonly', False)]})
     date_create = fields.Datetime('Date', default=lambda self: fields.Datetime.now(), readonly=True)
-    validity = fields.Integer('Validity', help='The maximum time -in minute(s)- before the message is dropped')
-    classes = fields.Selection([
-            ('0', 'Flash'),
-            ('1', 'Phone display'),
-            ('2', 'SIM'),
-            ('3', 'Toolkit')
-        ], 'Class', help='The sms class: flash(0), phone display(1), SIM(2), toolkit(3)')
-    deferred = fields.Integer('Deferred', help='The time -in minute(s)- to wait before sending the message')
-    priority = fields.Selection([
-            ('0', '0'),
-            ('1', '1'),
-            ('2', '2'),
-            ('3', '3')
-        ], 'Priority', help='The priority of the message ')
-    encode = fields.Selection([
+    ENCODE = fields.Selection([
             ('0', 'utf-8'),
             ('8', 'Unicode')
         ], 'Coding', help='The sms coding: 0 for utf-8 or 8 for unicode')
-    tag = fields.Char('Tag', size=256, help='An optional tag')
-    nostop = fields.Boolean('NoStop', help='Do not display STOP clause in the message, this requires that this is not an advertising message')
-    opid =  fields.Text('Operator ID', size=256,)
-
+    OPID =  fields.Char('Mobile No', size=256)
 
 
 class Properties(models.Model):
@@ -353,15 +228,12 @@ class Properties(models.Model):
     value = fields.Char('Property value', size=256, help='Value associate on the property for the URL')
     gateway_id = fields.Many2one('sms.smsclient', 'SMS Gateway')
     type = fields.Selection([
-            ('serverid','Server ID'),
-            ('prid','PRID'),
-            ('sc','SC'),
-            ('user', 'User'),
+            ('serviceid','Service ID'),
+            ('prid','Partner ID'),
+            ('sc','Short Code'),
+            ('user', 'Login'),
             ('password', 'Password'),
-            ('sender', 'Sender Name'),
-            ('to', 'Recipient No'),
-            ('sms', 'SMS Message'),
-            ('extra', 'Extra Info')
+            ('sender', 'Sender Name')
         ], 'API Method', help='If parameter concern a value to substitute, indicate it')
 
 

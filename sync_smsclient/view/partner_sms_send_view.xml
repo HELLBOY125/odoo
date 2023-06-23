@@ -25,7 +25,8 @@
                     </page>
                     <page string="Additional option">
                         <group>
-                            <group>
+                            <field name="coding"/>
+                        <!--    <group>
                                 <field name="validity"/>
                                 <field name="classes"/>
                                 <field name="deferred"/>
@@ -35,7 +36,7 @@
                                 <field name="priority"/>
                                 <field name="coding"/>
                                 <field name="tag"/>
-                            </group>
+                            </group> -->
                         </group>
                     </page>
                 </notebook>

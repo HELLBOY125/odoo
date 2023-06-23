@@ -49,7 +49,9 @@
                         <field name="users_id" select="1" colspan="4" nolabel="1" />
                     </page>
                     <page string="Additional option">
-                        <group>
+                        <field name="coding"/>
+
+                        <!-- <group>
                             <group>
                                 <field name="validity"/>
                                 <field name="classes"/>
@@ -61,8 +63,8 @@
                                 <field name="coding"/>
                                 <field name="tag"/>
                                 <field name="char_limit"/>
-                            </group>
-                        </group>
+                            </group> 
+                        </group> -->
                     </page>
                 </notebook>
             </form>
@@ -147,8 +149,8 @@
         <field name="arch" type="xml">
             <tree string="Message Queue">
                 <field name="date_create"/>
-                <field name="mobile"/>
-                <field name="message"/>
+                <field name="MOBILE"/>
+                <field name="MESSAGE"/>
                 <field name="state"/>
                 <field name="gateway_id"/>
             </tree>
@@ -163,11 +165,11 @@
                 <group>
                     <field name="date_create" select="1"/>
                     <field name="gateway_id" select="1"/>
-                    <field name="mobile" select="1"/>
+                    <field name="MOBILE" select="1"/>
                     <field name="state" select="1"/>
                 </group>
                 <separator string="SMS Message" colspan="4"/>
-                <field name="message" colspan="4" select="2" nolabel="1"/>
+                <field name="MESSAGE" colspan="4" select="2" nolabel="1"/>
                 <separator string="Last Error"  colspan="4"/>
                 <field name="error" colspan="4" select="2" nolabel="1"/>
             </form>
