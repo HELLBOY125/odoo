@@ -148,7 +148,7 @@
             <tree string="Message Queue">
                 <field name="date_create"/>
                 <field name="mobile"/>
-                <field name="msg"/>
+                <field name="message"/>
                 <field name="state"/>
                 <field name="gateway_id"/>
             </tree>
@@ -167,7 +167,7 @@
                     <field name="state" select="1"/>
                 </group>
                 <separator string="SMS Message" colspan="4"/>
-                <field name="msg" colspan="4" select="2" nolabel="1"/>
+                <field name="message" colspan="4" select="2" nolabel="1"/>
                 <separator string="Last Error"  colspan="4"/>
                 <field name="error" colspan="4" select="2" nolabel="1"/>
             </form>
