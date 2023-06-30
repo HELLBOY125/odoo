@@ -670,7 +670,6 @@ automatic ticket system
         "wizard/mass_sms_view.xml",
         "view/partner_sms_send_view.xml",
         "view/smstemplate_view.xml",
-        "view/res_partner_view.xml",
 
     ],
     "demo": [

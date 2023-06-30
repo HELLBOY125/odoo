@@ -127,8 +127,9 @@ class SMSClient(models.Model):
         """
             check permission after send message
         """
+        tel_num = {}
         gateway = data.gateway
-        tel_num = mobile_to
+        tel_num = data.mobile_to
         tel_num = re.search(r"\d{8}", tel_num)
         data.mobile_to = re.sub(r"\D", "",data.mobile_to)
 
