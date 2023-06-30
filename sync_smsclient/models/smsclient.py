@@ -102,6 +102,8 @@ class SMSClient(models.Model):
             return False
         return True
 
+
+
     def _prepare_smsclient_queue(self, data):
             """
                 prepare sms client queue data
@@ -126,7 +128,10 @@ class SMSClient(models.Model):
             check permission after send message
         """
         gateway = data.gateway
+        tel_num = mobile_to
+        tel_num = re.search(r"\d{8}", tel_num)
         data.mobile_to = re.sub(r"\D", "",data.mobile_to)
+
         if gateway:
             if not self._context.get('default_intake_demo_data') and not self._check_permissions(gateway.id) and self.env.uid != SUPERUSER_ID:
                 raise Warning(_('You have no permission to access %s ') % (gateway.name))
@@ -247,6 +252,8 @@ class HistoryLine(models.Model):
     gateway_id = fields.Many2one('sms.smsclient', 'SMS Gateway', ondelete='cascade', required=True)
     to = fields.Char('Mobile No', size=15, readonly=True)
     sms = fields.Text('SMS', size=160, readonly=True)
+    partner_id = fields.Many2one('res.partner', 'Partner')
+
 
     @api.model
     def create(self, vals):

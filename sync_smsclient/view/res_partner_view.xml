@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+       <record id="view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.private</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//header" position="inside">
+                        <button name="%(action_sms_smsclient_history_tree)d" string="SMS History" type="action" class="oe_stat_button" attrs="{'invisible': [('sms_count', '=', 0)]}">    
+                            <field name="sms_count" widget="statinfo"/>
+                            <field name="sms_count" invisible="1"/>
+                        </button>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>
