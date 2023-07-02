@@ -48,11 +48,11 @@ class PartnerSmsSend(models.Model):
     user = fields.Char('Login', size=256)
     password = fields.Char('Password', size=256)
     text = fields.Text('SMS Message', required=True)
-    gateway = fields.Many2one('sms.smsclient', 'SMS Gateway', required=True)
+    gateway = fields.Many2one('sms.smsclient', 'SMS Gateway', required=True, default=_default_get_gateway)
     coding = fields.Selection([
-            ('0', 'utf-8'),
-            ('8', 'Unicode')
-        ], 'Coding', help='The SMS coding: 0 for utf-8 or 8 for unicode')
+            ('0', 'FR'),
+            ('8', 'AR')
+        ], 'Language',default='0', required=True, help='The SMS coding: 0 for utf-8 or 8 for unicode')
 
     def sms_send(self):
         """
@@ -87,9 +87,9 @@ class SMSClient(models.Model):
     code = fields.Char('Verification Code', size=256)
     body = fields.Text('Message', help="The message text that will be send along with the email which is send through this server")
     coding = fields.Selection([
-            ('0', 'utf-8'),
-            ('8', 'Unicode')
-        ],'Coding', default='8', help='The SMS coding: 0 for utf-8 or 8 for unicode')
+            ('0', 'FR'),
+            ('8', 'AR')
+        ],'Language', default='0', required=True , help='The SMS coding: 0 for utf-8 or 8 for unicode')
     char_limit = fields.Boolean('Character Limit', default=True)
 
     def _check_permissions(self,gateway_id):
@@ -107,11 +107,11 @@ class SMSClient(models.Model):
                 prepare sms client queue data
             """
             opid = {}
-            if data.mobile_to[3]=='5':
+            if data.mobile_to[0]=='5':
                 opid = 60501
-            elif data.mobile_to[3]=='9':
+            elif data.mobile_to[0]=='9':
                 opid= 60502
-            elif data.mobile_to[3]=='2':
+            elif data.mobile_to[0]=='2':
                 opid= 60503
         
             return {
@@ -126,7 +126,7 @@ class SMSClient(models.Model):
             check permission after send message
         """
         gateway = data.gateway
-        data.mobile_to = re.sub(r"\D", "",data.mobile_to)
+        data.mobile_to = re.sub(r"\D", "",data.mobile_to)[-8:]
         if gateway:
             if not self._context.get('default_intake_demo_data') and not self._check_permissions(gateway.id) and self.env.uid != SUPERUSER_ID:
                 raise Warning(_('You have no permission to access %s ') % (gateway.name))
@@ -216,7 +216,7 @@ class SMSQueue(models.Model):
     ENCODE = fields.Selection([
             ('0', 'utf-8'),
             ('8', 'Unicode')
-        ], 'Coding', help='The sms coding: 0 for utf-8 or 8 for unicode')
+        ], 'Language',default='0' , required=True, help='The sms coding: 0 for utf-8 or 8 for unicode')
     OPID =  fields.Char('Mobile No', size=256)
 
 
