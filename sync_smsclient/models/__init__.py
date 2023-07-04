@@ -4,3 +4,4 @@
 from . import smsclient
 from . import serveraction
 from . import smstemplate
+from . import res_partner
