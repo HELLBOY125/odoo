@@ -101,7 +101,8 @@
         <field name="name">sms.smsclient.history.tree</field>
         <field name="model">sms.smsclient.history</field>
         <field name="arch" type="xml">
-            <tree string="Gateway History">
+            <tree string="Gateway History" create="0" edit="0">
+                <field name="partner_id"/>
                 <field name="date_create"/>
                 <field name="user_id"/>
                 <field name="name"/>
@@ -116,9 +117,10 @@
         <field name="name">sms.smsclient.history.form</field>
         <field name="model">sms.smsclient.history</field>
         <field name="arch" type="xml">
-            <form string="Gateway History">
+            <form string="Gateway History" create="0" edit="0" >
                 <group col="4">
                     <field name="gateway_id" select="1"/>
+                    <field name="partner_id" select="1"/>
                     <field name="date_create" select="1"/>
                     <field name="user_id" select="1"/>
                     <field name="name" select="1"/>
@@ -148,6 +150,8 @@
         <field name="model">sms.smsclient.queue</field>
         <field name="arch" type="xml">
             <tree string="Message Queue">
+    <!-- ** add Partner id ********************************************* -->
+                <field name="partner_id"/>
                 <field name="date_create"/>
                 <field name="MOBILE"/>
                 <field name="MESSAGE"/>
@@ -161,8 +165,9 @@
         <field name="name">sms.smsclient.history.form</field>
         <field name="model">sms.smsclient.queue</field>
         <field name="arch" type="xml">
-            <form string="Gateway History">
+            <form string="Gateway History" create="0" edit="0">
                 <group>
+                    <field name="partner_id"/>
                     <field name="date_create" select="1"/>
                     <field name="gateway_id" select="1"/>
                     <field name="MOBILE" select="1"/>
