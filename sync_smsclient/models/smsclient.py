@@ -207,7 +207,7 @@ class SMSQueue(models.Model):
         if self.partner_id:
             return self.partner_id.mobile
         return False    
-        
+
     def _default_get_gateway(self):
         sms_obj = self.env['sms.smsclient']
         gateway_ids = sms_obj.search([])
@@ -230,7 +230,7 @@ class SMSQueue(models.Model):
             ('0', 'utf-8'),
             ('8', 'Unicode')
         ], 'Language',default='0' , required=True, help='The sms coding: 0 for utf-8 or 8 for unicode')
-    OPID =  fields.Char('Operator ID', size=256)
+    OPID =  fields.Char('Operator ID', size=10)
 
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
