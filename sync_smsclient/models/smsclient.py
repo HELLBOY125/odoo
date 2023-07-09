@@ -7,6 +7,8 @@ import logging
 from odoo import fields, models, api, _, SUPERUSER_ID
 from odoo.exceptions import *
 import re
+import urllib.error
+
 
 _logger = logging.getLogger(__name__)
 
@@ -47,7 +49,7 @@ class PartnerSmsSend(models.Model):
     app_id = fields.Char('API ID', size=256, default=_default_get_gateway)
     user = fields.Char('Login', size=256)
     password = fields.Char('Password', size=256)
-    text = fields.Text('SMS Message', required=True)
+    text = fields.Text('SMS Message', required=True, default_focus="1")
     gateway = fields.Many2one('sms.smsclient', 'SMS Gateway', required=True, default=_default_get_gateway)
     coding = fields.Selection([
             ('0', 'FR'),
@@ -127,6 +129,7 @@ class SMSClient(models.Model):
         """
         gateway = data.gateway
         data.mobile_to = re.sub(r"\D", "",data.mobile_to)[-8:]
+        partner_id = self._context.get('active_ids')
         if gateway:
             if not self._context.get('default_intake_demo_data') and not self._check_permissions(gateway.id) and self.env.uid != SUPERUSER_ID:
                 raise Warning(_('You have no permission to access %s ') % (gateway.name))
@@ -153,6 +156,7 @@ class SMSClient(models.Model):
                 name = url + "?" + params
                 vals['name']= name
                 vals['gateway_id']= data.gateway.id
+                vals['partner_id']= partner_id[0]
             queue_obj = self.env['sms.smsclient.queue']
             queue_obj.create(vals)
             """vals2 = self._prepare_smsclient_queue2(data)
@@ -181,13 +185,33 @@ class SMSClient(models.Model):
                     continue
             if sms.gateway_id.method == 'http':
                 try:
-                    urllib.request.urlopen(sms.name)
+                    response = urllib.request.urlopen(sms.name)
+                    response_data = response.read().decode('utf-8')
+                    queue_id.write({'error': response_data})
+                
+                except urllib.error.HTTPError as e:
+                    # Handle HTTP errors
+                    error_message = str(e)
+                    # Update the error field of the queue object with the error message
+                    queue_id.write({'error': error_message})
+
+                except urllib.error.URLError as e:
+                    # Handle URL errors
+                    error_message = str(e)
+                    # Update the error field of the queue object with the error message
+                    queue_id.write({'error': error_message})
 
                 except Exception as e:
-                    raise UserError(_('Error %s') % (e,))
+                    #raise UserError(_('Error %s') % (e,))
+                      # Handle other exceptions
+                    doc = e.doc
+                    error_message = str(e)
+                    # Update the error field of the queue object with the error message
+                    queue_id.write({'error': error_message})
+
             ### New Send Process OVH Dedicated ###
             ## Parameter Fetch ##
-            vals = { 'name': _('SMS Sent'), 'gateway_id': sms.gateway_id.id, 'sms': sms.MESSAGE, 'to': sms.MOBILE}
+            vals = { 'name': _('SMS Sent'), 'partner_id': sms.partner_id.id, 'gateway_id': sms.gateway_id.id, 'sms': sms.MESSAGE, 'to': sms.MOBILE}
             history_obj.create(vals)
             sent_ids.append(sms)
         for sent_id in sent_ids:
@@ -201,10 +225,21 @@ class SMSQueue(models.Model):
     _name = 'sms.smsclient.queue'
     _description = 'SMS Queue'
 
+    def _default_partner_mobile(self):
+        if self.partner_id:
+            return self.partner_id.mobile
+        return False    
+
+    def _default_get_gateway(self):
+        sms_obj = self.env['sms.smsclient']
+        gateway_ids = sms_obj.search([])
+        return gateway_ids and gateway_ids[0] or False
+
     name = fields.Text('SMS Request', size=256, required=True, readonly=True, states={'draft': [('readonly', False)]})
     MESSAGE = fields.Text('SMS Text', size=256, required=True, readonly=True, states={'draft': [('readonly', False)]})
-    MOBILE = fields.Char('Mobile No', size=256, required=True, readonly=True, states={'draft': [('readonly', False)]})
-    gateway_id = fields.Many2one('sms.smsclient', 'SMS Gateway', readonly=True, states={'draft': [('readonly', False)]})
+    partner_id = fields.Many2one('res.partner', 'Partner', required=True, readonly=True, states={'draft': [('readonly', False)]})
+    MOBILE = fields.Char('Mobile No', default=_default_partner_mobile, size=256, required=True, readonly=True, states={'draft': [('readonly', False)]})
+    gateway_id = fields.Many2one('sms.smsclient', 'SMS Gateway', default=_default_get_gateway, readonly=True, states={'draft': [('readonly', False)]})
     state = fields.Selection([
         ('draft', 'Queued'),
         ('sending', 'Waiting'),
@@ -217,7 +252,14 @@ class SMSQueue(models.Model):
             ('0', 'utf-8'),
             ('8', 'Unicode')
         ], 'Language',default='0' , required=True, help='The sms coding: 0 for utf-8 or 8 for unicode')
-    OPID =  fields.Char('Mobile No', size=256)
+    OPID =  fields.Char('Operator ID', size=10)
+
+    @api.onchange('partner_id')
+    def _onchange_partner_id(self):
+        if self.partner_id:
+            self.MOBILE = self.partner_id.mobile
+        else:
+            self.MOBILE = False
 
 
 class Properties(models.Model):
@@ -242,9 +284,10 @@ class HistoryLine(models.Model):
     _description = 'SMS Client History'
 
     name = fields.Char('Description', size=160, required=True, readonly=True)
+    partner_id = fields.Many2one('res.partner', 'Partner', readonly=True)
     date_create = fields.Datetime('Date', default=lambda self: fields.Datetime.now(), readonly=True)
     user_id = fields.Many2one('res.users', 'Username', default=lambda self: self.env.user, readonly=True)
-    gateway_id = fields.Many2one('sms.smsclient', 'SMS Gateway', ondelete='cascade', required=True)
+    gateway_id = fields.Many2one('sms.smsclient', 'SMS Gateway', ondelete='cascade', required=True, readonly=True)
     to = fields.Char('Mobile No', size=15, readonly=True)
     sms = fields.Text('SMS', size=160, readonly=True)
 
