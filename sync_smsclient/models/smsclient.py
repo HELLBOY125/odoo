@@ -173,7 +173,7 @@ class SMSClient(models.Model):
         """
         queue_obj = self.env['sms.smsclient.queue']
         history_obj = self.env['sms.smsclient.history']
-        sids = queue_obj.search([('state', '!=', 'send'),('state', '!=', 'sending')], limit=30)
+        sids = queue_obj.search([('state', '!=', 'send'),('state', '!=', 'sending'),('state', '!=', 'unsent')], limit=30)
         for queue_id in sids:
             queue_id.write({'state': 'sending'})
         error_ids = []
@@ -187,33 +187,36 @@ class SMSClient(models.Model):
                 try:
                     response = urllib.request.urlopen(sms.name)
                     response_data = response.read().decode('utf-8')
-                    queue_id.write({'error': response_data})
+
+                    if response_data.startswith('ok'):
+                        queue_id.write({'external_id': re.sub(r"\D", "",response_data)})
+                        vals = { 'name': _('SMS Sent'), 'partner_id': sms.partner_id.id, 'gateway_id': sms.gateway_id.id, 'sms': sms.MESSAGE, 'to': sms.MOBILE, 'external_id': sms.external_id}
+                        history_obj.create(vals)
+                        sent_ids.append(sms)
+                    else:
+                        queue_id.write({'state': 'unsent','error': response_data})
                 
                 except urllib.error.HTTPError as e:
                     # Handle HTTP errors
                     error_message = str(e)
                     # Update the error field of the queue object with the error message
-                    queue_id.write({'error': error_message})
+                    queue_id.write({'state': 'unsent','error': error_message})
 
                 except urllib.error.URLError as e:
                     # Handle URL errors
                     error_message = str(e)
                     # Update the error field of the queue object with the error message
-                    queue_id.write({'error': error_message})
+                    queue_id.write({'state': 'error','error': error_message})
 
                 except Exception as e:
                     #raise UserError(_('Error %s') % (e,))
                       # Handle other exceptions
-                    doc = e.doc
                     error_message = str(e)
                     # Update the error field of the queue object with the error message
-                    queue_id.write({'error': error_message})
+                    queue_id.write({'state': 'error','error': error_message})
 
             ### New Send Process OVH Dedicated ###
             ## Parameter Fetch ##
-            vals = { 'name': _('SMS Sent'), 'partner_id': sms.partner_id.id, 'gateway_id': sms.gateway_id.id, 'sms': sms.MESSAGE, 'to': sms.MOBILE}
-            history_obj.create(vals)
-            sent_ids.append(sms)
         for sent_id in sent_ids:
             sent_id.write({'state': 'send'})
         for error_id in queue_obj.browse(error_ids):
@@ -245,8 +248,10 @@ class SMSQueue(models.Model):
         ('sending', 'Waiting'),
         ('send', 'Sent'),
         ('error', 'Error'),
+        ('unsent', 'Not sent'),
     ], 'Message Status', default='draft', readonly=True)
     error = fields.Text('Last Error', size=256, readonly=True, states={'draft': [('readonly', False)]})
+    external_id = fields.Char('External ID', size=50, readonly=True)
     date_create = fields.Datetime('Date', default=lambda self: fields.Datetime.now(), readonly=True)
     ENCODE = fields.Selection([
             ('0', 'utf-8'),
@@ -290,6 +295,7 @@ class HistoryLine(models.Model):
     gateway_id = fields.Many2one('sms.smsclient', 'SMS Gateway', ondelete='cascade', required=True, readonly=True)
     to = fields.Char('Mobile No', size=15, readonly=True)
     sms = fields.Text('SMS', size=160, readonly=True)
+    external_id = fields.Char('External ID', size=50, required=True, readonly=True)
 
     @api.model
     def create(self, vals):
